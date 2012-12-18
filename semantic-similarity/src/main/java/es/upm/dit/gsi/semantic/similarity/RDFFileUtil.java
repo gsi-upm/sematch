@@ -107,6 +107,7 @@ public class RDFFileUtil {
 			throw new IllegalArgumentException("File: " + fileName
 					+ " not found");
 		}
+		
 		model.read(in, "");
 		return model;
 	}

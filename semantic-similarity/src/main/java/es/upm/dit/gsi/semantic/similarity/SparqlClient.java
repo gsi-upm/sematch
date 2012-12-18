@@ -18,8 +18,9 @@ import com.hp.hpl.jena.sparql.engine.http.QueryEngineHTTP;
 
 /**
  * This is a simple client for sparql, note that this class is not thread safe.
+ * 
  * @author gzhu
- *
+ * 
  */
 
 public class SparqlClient {
@@ -76,14 +77,25 @@ public class SparqlClient {
 	public static void displayQuery(ResultSet results, Query query) {
 		ResultSetFormatter.out(System.out, results, query);
 	}
-	
-	public static void closeQuery(){
-		if(qexec!=null)
+
+	public static void closeQuery() {
+		if (qexec != null)
 			qexec.close();
-		if(hqexec!=null)
+		if (hqexec != null)
 			hqexec.close();
 		qexec = null;
 		hqexec = null;
+	}
+
+	//TODO:this is just for experiment
+	public static Resource asResource(ResultSet resultSet, String resource) {
+
+		Resource result = null;
+		while (resultSet.hasNext()) {
+			QuerySolution soln = resultSet.nextSolution();
+			result = soln.getResource(resource);
+		}
+		return result;
 	}
 
 	// return the query result as resource list.

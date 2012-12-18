@@ -1,57 +1,99 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
                       http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>es.upm.dit.gsi.semantic</groupId>
+	<artifactId>semantic-matching</artifactId>
+	<version>1.0</version>
+	<packaging>pom</packaging>
+	<name>Semantic Matching</name>
+	<url>www.gsi.dit.upm.es</url>
+
+	<modules>
+		<module>semantic-similarity</module>
+		<module>semantic-services</module>
+	</modules>
 
 
-  <groupId>es.upm.dit.gsi.semantics</groupId>
-  <artifactId>semantic-matching</artifactId>
-  <version>1.0</version>
-  <packaging>pom</packaging>
-  <name>Semantic Matching</name>
-  <url>www.gsi.dit.upm.es</url>
-
-  <modules>
-    <module>semantic-services</module>
-    <module>semantic-similarity</module>
-  </modules>
+	<developers>
+		<developer>
+			<email>zhuganggao@gmail.com</email>
+			<name>Ganggao Zhu</name>
+			<url>https://github.com/zhuganggao</url>
+			<id>zhuganggao</id>
+		</developer>
+	</developers>
 
 
-  <developers>
-    <developer>
-      <email>zhuganggao@gmail.com</email>
-      <name>Ganggao Zhu</name>
-      <url>https://github.com/zhuganggao</url>
-      <id>zhuganggao</id>
-    </developer>
-  </developers>
+	<repositories>
+		<repository>
+			<id>snapshot-repository.java.net</id>
+			<name>Java.net Snapshot Repository for Maven</name>
+			<url>https://maven.java.net/content/repositories/snapshots/</url>
+			<layout>default</layout>
+		</repository>
+	</repositories>
 
 
+	<build>
+		<pluginManagement>
+		<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<configuration>
+						<source>1.6</source>
+						<target>1.6</target>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.tomcat.maven</groupId>
+					<artifactId>tomcat6-maven-plugin</artifactId>
+					<version>2.0</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.tomcat.maven</groupId>
+					<artifactId>tomcat7-maven-plugin</artifactId>
+					<version>2.0</version>
+					<configuration>
+						<server>local_tomcat</server>
+						<url>http://localhost:8080/manager/text</url>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 
-  <build>
-   <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <configuration>
-                        <source>1.6</source>
-                        <target>1.6</target>
-                    </configuration>
-                </plugin>
-            </plugins>
-        </pluginManagement>
-    </build>
-  
+		<finalName>semantic-web-services</finalName>
+	</build>
 
-   <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.8.2</version>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.8.2</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>net.sf.json-lib</groupId>
+			<artifactId>json-lib</artifactId>
+			<version>2.2.3</version>
+			<classifier>jdk15</classifier>
+		</dependency>
+
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-client</artifactId>
+			<version>1.15</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.0</version>
+		</dependency>
+	</dependencies>
+
 </project>
 
