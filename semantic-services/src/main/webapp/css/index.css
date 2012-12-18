@@ -1,0 +1,81 @@
+@CHARSET "UTF-8";
+
+.node circle {
+  cursor: pointer;
+  fill: #fff;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+
+.node text {
+  font: 10px sans-serif;
+}
+
+.concpet_inputs{
+	text-align:center;
+}
+
+.results_display{
+	text-align:center;
+}
+
+path.link {
+  fill: none;
+  stroke: #ccc;
+  stroke-width: 1.5px;
+}
+
+hr{
+	color:steelblue;
+}
+
+h1 {
+        color:steelblue;
+        font: 40px;
+		text-align: center;
+}
+
+h2 {
+        color:steelblue;
+        font: 30px;
+		text-align: center;
+}
+
+#results
+{
+font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+width:100%;
+border-collapse:collapse;
+}
+
+#results caption
+{
+font-size:1.5em;
+text-align:center;
+padding-top:5px;
+padding-bottom:4px;
+color:steelblue;
+	
+}
+
+#results td, #results th 
+{
+font-size:1.2em;
+border:1px solid steelblue;
+padding:3px 7px 2px 7px;
+}
+
+#results th 
+{
+font-size:1.3em;
+text-align:left;
+padding-top:5px;
+padding-bottom:4px;
+background-color:steelblue;
+color:#fff;
+}
+#results tr.alt td 
+{
+color:#000;
+background-color:#EAF2D3;
+}

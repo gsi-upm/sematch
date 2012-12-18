@@ -3,5 +3,37 @@
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
+
   <display-name>Semantic Restful Web Services</display-name>
+  
+  <welcome-file-list>
+	<welcome-file>index.html</welcome-file>
+  </welcome-file-list>
+  
+    <servlet>
+
+        <servlet-name>Semantic Services</servlet-name>
+
+	    <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
+
+        	<init-param>
+
+          		<param-name>com.sun.jersey.config.property.packages</param-name>
+
+          		<param-value>es.upm.dit.gsi.semantic.webService</param-value>
+
+        	</init-param>
+
+        <load-on-startup>1</load-on-startup>
+
+    </servlet>
+    
+    <servlet-mapping>
+
+        <servlet-name>Semantic Services</servlet-name>
+
+        <url-pattern>/rest/*</url-pattern>
+
+    </servlet-mapping>
+    
 </web-app>
