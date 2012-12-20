@@ -104,7 +104,7 @@ public class SemanticSimilarity {
 	}
 
 	// Leacock & Chodorow
-	//TODO:The similarity value is not located between 0 and 1.
+	//TODO:The similarity value is not located between 0 and 1. Need to be 
 	private static double simLeacockandChodorow(int depth_1, int depth_2,
 			int depth_common) {
 

@@ -29,9 +29,8 @@ public class SimilarityTest {
 
 	public static String queryConcept = "Image search";
 	public static String[] resourceConcept = { "RAID", "Web services",
-			"Expert systems", "Data streams", "Online banking",
-			"Ontologies", "Video search", "Image search", "Mashups",
-			"Social networks" };
+			"Expert systems", "Data streams", "Online banking", "Ontologies",
+			"Video search", "Image search", "Mashups", "Social networks" };
 
 	@Ignore
 	public void testConceptResource() {
@@ -49,9 +48,50 @@ public class SimilarityTest {
 					SparqlClient.executeSelectQuery(query, model), query);
 		}
 	}
-	
 
 	@Test
+	public void pairSim() {
+		String[] left = { "Clustering", "Image search", "Web mining",
+				"Information systems", "Information retrieval" };
+		String[] right = {"Association rules","Video search", 
+				"Web services","Online banking","Social networks"};
+		Model model = RDFFileUtil.readRDFFromXML(acmInfo);
+		
+		
+		
+		for(int i=0;i<5;i++){
+		String l = queryStringPre+left[i]+queryStringBac;
+		String r = queryStringPre+right[i]+queryStringBac;
+		Query queryL =  QueryFactory.create(l);
+		Query queryR = QueryFactory.create(r);
+
+		String concept_1 = SparqlClient.asResource(
+				SparqlClient.executeSelectQuery(queryL, model),
+				"concept").getURI();
+		
+		String concept_2 = SparqlClient.asResource(
+				SparqlClient.executeSelectQuery(queryR, model),
+				"concept").getURI();
+		
+		System.out.print(SemanticSimilarity.computeSimilarity(
+				SimilarityMethod.CGM, concept_1,concept_2)+"\t");
+		
+		System.out.print(SemanticSimilarity.computeSimilarity(
+				SimilarityMethod.WuAndPalm, concept_1,concept_2)+"\t");
+		
+		System.out.print(SemanticSimilarity.computeSimilarity(
+				SimilarityMethod.Rada, concept_1,concept_2)+"\t");
+		
+		System.out.print(SemanticSimilarity.computeSimilarity(
+				SimilarityMethod.LeacockAndChodorow, concept_1,concept_2)+"\t");
+		
+		System.out.print(SemanticSimilarity.computeSimilarity(
+				SimilarityMethod.Li, concept_1,concept_2)+"\t");
+		System.out.println();
+		}
+	}
+
+	@Ignore
 	public void testSim() {
 
 		String[] simMileStones = new String[10];
@@ -69,8 +109,8 @@ public class SimilarityTest {
 		Resource uri = SparqlClient.asResource(
 				SparqlClient.executeSelectQuery(query, model), "concept");
 		queryURI = uri.getURI();
-		
-		System.out.println("Query concept is : "+queryConcept);
+
+		System.out.println("Query concept is : " + queryConcept);
 		System.out.println("Resource concepts are: ");
 		for (int i = 0; i < 10; i++) {
 
@@ -81,30 +121,33 @@ public class SimilarityTest {
 			resourceURI[i] = uri.getURI();
 			System.out.println(resourceConcept[i]);
 		}
-		
-		
-		System.out.println(SimilarityMethod.CGM+"\t"+SimilarityMethod.WuAndPalm
-				+"\t"+SimilarityMethod.Rada+"\t"+SimilarityMethod.LeacockAndChodorow+"\t"+SimilarityMethod.Li);
+
+		System.out.println(SimilarityMethod.CGM + "\t"
+				+ SimilarityMethod.WuAndPalm + "\t" + SimilarityMethod.Rada
+				+ "\t" + SimilarityMethod.LeacockAndChodorow + "\t"
+				+ SimilarityMethod.Li);
 
 		for (int i = 0; i < 10; i++) {
 
 			simMileStones[i] = SemanticSimilarity.computeSimilarity(
 					SimilarityMethod.CGM, queryURI, resourceURI[i]);
-			
+
 			simWuAndPalmer[i] = SemanticSimilarity.computeSimilarity(
 					SimilarityMethod.WuAndPalm, queryURI, resourceURI[i]);
-			
+
 			simRada[i] = SemanticSimilarity.computeSimilarity(
 					SimilarityMethod.Rada, queryURI, resourceURI[i]);
-			
+
 			simLandC[i] = SemanticSimilarity.computeSimilarity(
-					SimilarityMethod.LeacockAndChodorow, queryURI, resourceURI[i]);
-			
+					SimilarityMethod.LeacockAndChodorow, queryURI,
+					resourceURI[i]);
+
 			simLi[i] = SemanticSimilarity.computeSimilarity(
 					SimilarityMethod.Li, queryURI, resourceURI[i]);
 
 			System.out.println(simMileStones[i] + "\t" + simWuAndPalmer[i]
-					+"\t\t"+simRada[i]+"\t"+simLandC[i]+"\t\t\t"+simLi[i]);
+					+ "\t\t" + simRada[i] + "\t" + simLandC[i] + "\t\t\t"
+					+ simLi[i]);
 		}
 	}
 
