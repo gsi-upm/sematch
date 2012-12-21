@@ -19,31 +19,38 @@
 		<dependency>
 			<groupId>com.sun.jersey</groupId>
 			<artifactId>jersey-atom</artifactId>
-			<version>1.15</version>
+			<version>1.16</version>
 		</dependency>
 
 		<dependency>
 			<groupId>com.sun.jersey</groupId>
 			<artifactId>jersey-servlet</artifactId>
-			<version>1.15</version>
+			<version>1.16</version>
 		</dependency>
 
 		<dependency>
-			<groupId>com.sun.jersey</groupId>
-			<artifactId>jersey-json</artifactId>
-			<version>1.15</version>
+    		<groupId>com.sun.jersey</groupId>
+    		<artifactId>jersey-json</artifactId>
+    		<version>1.16</version>
 		</dependency>
+		
+		<dependency>
+    		<groupId>com.sun.jersey.contribs</groupId>
+   	 		<artifactId>jersey-multipart</artifactId>
+    		<version>1.16</version>
+		</dependency>
+     	
 
 		<dependency>
 			<groupId>com.sun.jersey</groupId>
 			<artifactId>jersey-server</artifactId>
-			<version>1.15</version>
+			<version>1.16</version>
 		</dependency>
 
 		<dependency>
 			<groupId>com.sun.jersey.contribs</groupId>
 			<artifactId>jersey-apache-client</artifactId>
-			<version>1.15</version>
+			<version>1.16</version>
 		</dependency>
 
 		<dependency>

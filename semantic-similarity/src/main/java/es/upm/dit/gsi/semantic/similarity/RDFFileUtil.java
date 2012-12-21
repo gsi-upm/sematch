@@ -111,6 +111,12 @@ public class RDFFileUtil {
 		model.read(in, "");
 		return model;
 	}
+	
+	public static Model readRDFFromXML(InputStream in){
+		Model model = ModelFactory.createDefaultModel();
+		model.read(in, "");
+		return model;
+	}
 
 	// store the json to persistent file.
 	public static void writeJSON(Map<String, Object> map, String jsonFileName) {

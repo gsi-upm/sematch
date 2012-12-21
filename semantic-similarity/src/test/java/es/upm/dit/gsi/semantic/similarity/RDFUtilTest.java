@@ -2,6 +2,7 @@ package es.upm.dit.gsi.semantic.similarity;
 
 import static org.junit.Assert.*;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class RDFUtilTest {
@@ -16,7 +17,7 @@ public class RDFUtilTest {
 	static final String acmOutFileName = "result/acm-information-system.rdf";
 	static final String NS = "http://gsi.dit.upm.es/gzhu/ontologies/2012/12/ACM#";
 
-	@Test
+	@Ignore
 	public void testSkosFormating() {
 		RDFFileUtil.writeRDFToXML(RDFFileUtil.formatSkosResourceURI(acm_clasification,
 				acmInfoRoot, NS), acmOutFileName);

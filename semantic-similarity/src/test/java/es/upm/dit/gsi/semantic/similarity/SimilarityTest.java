@@ -49,7 +49,7 @@ public class SimilarityTest {
 		}
 	}
 
-	@Test
+	@Ignore
 	public void pairSim() {
 		String[] left = { "Clustering", "Image search", "Web mining",
 				"Information systems", "Information retrieval" };

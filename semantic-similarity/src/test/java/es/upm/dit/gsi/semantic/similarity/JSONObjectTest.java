@@ -54,7 +54,7 @@ public class JSONObjectTest {
 		
 	}
 	
-	@Test
+	@Ignore
 	public void testJsonArray(){
 		JSONObject object1 = new JSONObject();
 		object1.element("value", "1");

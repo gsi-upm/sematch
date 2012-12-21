@@ -6,11 +6,12 @@ import java.util.Iterator;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class JSONUtilTest {
 
-	@Test
+	@Ignore
 	public void testWrite() {
 		JSONObject obj = new JSONObject();
 		obj.put("name", "Information Technology");
@@ -22,7 +23,7 @@ public class JSONUtilTest {
 		JSONUtil.write("result/test.json",obj);
 	}
 	
-	@Test
+	@Ignore
 	public void testRead() {
 		JSONObject object = JSONUtil.read("result/test.json");
 		String name = (String) object.get("name");

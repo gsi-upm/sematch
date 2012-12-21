@@ -1,5 +1,5 @@
 // The root uri for rest services
-var rootURL = "http://localhost:8080/semantic-services/rest/similarity";
+var rootURL = "http://lab.gsi.dit.upm.es/webapps/7/semantic-web-services/rest/similarity";
 
 $('#btnCompute').click(function() {
 	computeSimilarity();
@@ -36,11 +36,11 @@ function computeSimilarity() {
 
 //display the result.
 function renderDetails(data) {
-	$('#d1').html(data[0].value);
-	$('#d2').html(data[1].value);
-	$('#d3').html(data[2].value);
-	$('#d4').html(data[3].value);
-	$('#d5').html(data[4].value);
+	$('#d1').html(data.similarityResult[0].value);
+	$('#d2').html(data.similarityResult[1].value);
+	$('#d3').html(data.similarityResult[2].value);
+	$('#d4').html(data.similarityResult[3].value);
+	$('#d5').html(data.similarityResult[4].value);
 }
 
 // serialize all the data fields into a JSON string

@@ -19,7 +19,7 @@ public class SparqlClientTest {
 	static final String querySkos = "dataset/query/querySkos";
 	
 	
-	@Test
+	@Ignore
 	public void testSelectQuery(){
 		File file = new File(querySkos);
 		Query query = SparqlClient.getQueryFromFile(file);

@@ -4,36 +4,29 @@
 
 <web-app>
 
-  <display-name>Semantic Restful Web Services</display-name>
+	<display-name>Semantic Restful Web Services</display-name>
   
-  <welcome-file-list>
-	<welcome-file>index.html</welcome-file>
-  </welcome-file-list>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list>
   
-    <servlet>
-
-        <servlet-name>Semantic Services</servlet-name>
-
-	    <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
-
-        	<init-param>
-
-          		<param-name>com.sun.jersey.config.property.packages</param-name>
-
+	<servlet>
+		<servlet-name>Semantic Services</servlet-name>
+		<servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
+			<init-param>
+				<param-name>com.sun.jersey.config.property.packages</param-name>
           		<param-value>es.upm.dit.gsi.semantic.webService</param-value>
-
         	</init-param>
-
-        <load-on-startup>1</load-on-startup>
-
+        	<init-param>
+				<param-name>com.sun.jersey.spi.container.ContainerResponseFilters</param-name>
+				<param-value>es.upm.dit.gsi.semantic.webService.ResponseFilter</param-value>
+			</init-param>
+			<load-on-startup>1</load-on-startup>
     </servlet>
     
     <servlet-mapping>
-
         <servlet-name>Semantic Services</servlet-name>
-
         <url-pattern>/rest/*</url-pattern>
-
     </servlet-mapping>
     
 </web-app>
