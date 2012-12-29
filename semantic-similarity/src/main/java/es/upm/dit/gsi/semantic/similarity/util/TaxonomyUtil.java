@@ -1,8 +1,10 @@
-package es.upm.dit.gsi.semantic.similarity;
+package es.upm.dit.gsi.semantic.similarity.util;
 
 import com.hp.hpl.jena.rdf.model.*;
 import com.hp.hpl.jena.util.FileManager;
 import com.hp.hpl.jena.vocabulary.RDF;
+
+import es.upm.dit.gsi.semantic.similarity.SKOS;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -15,7 +17,7 @@ import java.util.Map;
 import java.util.Stack;
 import net.sf.json.JSONObject;
 
-public class RDFFileUtil {
+public class TaxonomyUtil {
 
 	public static char[] RESOURCE_CODE = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
 			'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W',

@@ -1,4 +1,4 @@
-package es.upm.dit.gsi.semantic.similarity;
+package es.upm.dit.gsi.semantic.similarity.util;
 
 import net.sf.json.*;
 

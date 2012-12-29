@@ -1,46 +1,56 @@
-package es.upm.dit.gsi.semantic.similarity;
+package es.upm.dit.gsi.semantic.similarity.compute;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.text.DecimalFormat;
+import com.hp.hpl.jena.rdf.model.Model;
 
-public class SemanticSimilarity {
+import es.upm.dit.gsi.semantic.similarity.type.SimilarityMethod;
+
+public class TaxonomySimilarityCompute {
+
+	private int maxDepth = 5;
+	private SimilarityMethod methodType;
+	private Model taxonomy;
 	
-	private static final DecimalFormat simFormat = new DecimalFormat("0.0000"); 
-
-	public enum SimilarityMethod {
-		CGM, WuAndPalm, Rada, LeacockAndChodorow, Li
+	public int getMaxDepth() {
+		return maxDepth;
 	}
 
-	private static int Max_Depth = 5;
-
-	public static void setMaxDepth(int depth) {
-		Max_Depth = depth;
+	public void setMaxDepth(int maxDepth) {
+		this.maxDepth = maxDepth;
 	}
 
-	public static int getMaxDepth() {
-		return Max_Depth;
+	public SimilarityMethod getMethodType() {
+		return methodType;
 	}
 
-	public static String computeSimilarity(SimilarityMethod method,
-			String concept_1, String concept_2) {
-
-		int depth_1 = getDepth(concept_1);
-		int depth_2 = getDepth(concept_2);
-		int depth_c = getCommonDepth(concept_1, concept_2);
-
-		double similarity = computeConceptSimilarity(method, depth_1, depth_2,
-				depth_c);
-		//return similarity;
-		return simFormat.format(similarity);
+	public void setMethodType(SimilarityMethod methodType) {
+		this.methodType = methodType;
 	}
 
-	public static double computeConceptSimilarity(SimilarityMethod method,
-			int depth_1, int depth_2, int depth_common) {
+	public Model getTaxonomy() {
+		return taxonomy;
+	}
+
+	public void setTaxonomy(Model taxonomy) {
+		this.taxonomy = taxonomy;
+	}
+
+
+	public double computeSimilarity(Object query, Object resource) {
+
+		int depth_1 = getDepth((String) query);
+		int depth_2 = getDepth((String) resource);
+		int depth_c = getCommonDepth((String) query, (String) resource);
+
+		return computeConceptSimilarity(depth_1, depth_2, depth_c);
+	}
+
+	public double computeConceptSimilarity(int depth_1, int depth_2, int depth_common) {
 
 		double similarity = 0;
 
-		switch (method) {
+		switch (methodType) {
 		case CGM:
 			similarity = simCGM(depth_1, depth_2, depth_common);
 			break;
@@ -56,12 +66,36 @@ public class SemanticSimilarity {
 		case Li:
 			similarity = simLi(depth_1, depth_2, depth_common);
 			break;
+		case GSI:
+			similarity = simGSI(depth_1, depth_2, depth_common);
+			break;
 		}
 		return similarity;
 	}
 
+	// Our proposed method based on commonality and differences without combine
+	// property similarity
+	private double simGSI(int depth_1, int depth_2, int depth_common) {
+
+		int distance1 = depth_1 - depth_common;
+		int distance2 = depth_2 - depth_common;
+		int path = distance1 + distance2;
+
+		double commonality = Math.log(depth_common);
+
+		double difference = 0;
+
+		if (path != 0)
+			difference = Math.log(path);
+
+		double similarity = commonality / (difference + commonality);
+
+		return similarity;
+
+	}
+
 	// milestone methods
-	private static double simCGM(int depth_1, int depth_2, int depth_common) {
+	private double simCGM(int depth_1, int depth_2, int depth_common) {
 
 		// information content values
 		double ic_1 = Math.exp(-depth_1);
@@ -76,70 +110,68 @@ public class SemanticSimilarity {
 	}
 
 	// Wu & Palm methods
-	private static double simWuAndPalmer(int depth_1, int depth_2,
-			int depth_common) {
+	private double simWuAndPalmer(int depth_1, int depth_2, int depth_common) {
 
 		int Na = depth_1 - depth_common;
 		int Nb = depth_2 - depth_common;
-		
-		double Nc = 2.0*depth_common;
-		double fraction_down = Na+Nb+Nc;
-		
+
+		double Nc = 2.0 * depth_common;
+		double fraction_down = Na + Nb + Nc;
+
 		double sim = Nc / fraction_down;
 
 		return sim;
 	}
 
 	// Rada & Resnik
-	private static double simRada(int depth_1, int depth_2,
-			int depth_common) {
+	private double simRada(int depth_1, int depth_2, int depth_common) {
 
 		int distance1 = depth_1 - depth_common;
 		int distance2 = depth_2 - depth_common;
 		int path = distance1 + distance2;
-		double distance = path/(2.0*Max_Depth);
+		double distance = path / (2.0 * maxDepth);
 		double sim = 1 - distance;
 
 		return sim;
 	}
 
 	// Leacock & Chodorow
-	//TODO:The similarity value is not located between 0 and 1. Need to be 
-	private static double simLeacockandChodorow(int depth_1, int depth_2,
+	// TODO:The similarity value is not located between 0 and 1. Need to be
+	private double simLeacockandChodorow(int depth_1, int depth_2,
 			int depth_common) {
 
 		int distance1 = depth_1 - depth_common;
 		int distance2 = depth_2 - depth_common;
 		int path = distance1 + distance2;
 
-		double sim = -Math.log(path / (2.0 * Max_Depth));
+		double sim = -Math.log(path / (2.0 * maxDepth));
 		return sim;
 
 	}
 
 	// Li
-	private static double simLi(int depth_1, int depth_2, int depth_common) {
+	private double simLi(int depth_1, int depth_2, int depth_common) {
 
 		int distance1 = depth_1 - depth_common;
 		int distance2 = depth_2 - depth_common;
 		int path = distance1 + distance2;
-		//System.out.println(depth_1+":"+depth_2+":"+depth_common);
-		//System.out.println(path);
+		// System.out.println(depth_1+":"+depth_2+":"+depth_common);
+		// System.out.println(path);
 		double simpath = Math.exp(-path);
-		//System.out.println(simpath);
+		// System.out.println(simpath);
 		double simdepth_up = (Math.exp(depth_common) - Math.exp(-depth_common));
 		double simdepth_down = (Math.exp(depth_common) + Math
 				.exp(-depth_common));
-		
+
 		double simdepth = simdepth_up * simdepth_down;
-		//System.out.println(simdepth);
+		// System.out.println(simdepth);
 		double result = simpath * simdepth;
-		//System.out.println(result);
+		// System.out.println(result);
 		return result;
 	}
 
 	// return the depth of the least common ancestor of two concepts
-	public static int getCommonDepth(String URI_1, String URI_2) {
+	public int getCommonDepth(String URI_1, String URI_2) {
 
 		char[] concept_1 = parseURI(URI_1).toCharArray();
 		char[] concept_2 = parseURI(URI_2).toCharArray();
@@ -171,12 +203,12 @@ public class SemanticSimilarity {
 	}
 
 	// return the depth of a node in the taxonomy
-	public static int getDepth(String uri) {
+	public int getDepth(String uri) {
 		return parseURI(uri).length();
 	}
 
 	// extract the fragment of a URI
-	public static String parseURI(String nURI) {
+	public String parseURI(String nURI) {
 		String fragment = null;
 		try {
 			URI uri = new URI(nURI);
@@ -187,6 +219,5 @@ public class SemanticSimilarity {
 		}
 		return fragment;
 	}
-	
 
 }

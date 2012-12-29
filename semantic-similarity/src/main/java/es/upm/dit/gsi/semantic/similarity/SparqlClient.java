@@ -16,6 +16,8 @@ import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.sparql.engine.http.QueryEngineHTTP;
 
+import es.upm.dit.gsi.semantic.similarity.util.TaxonomyUtil;
+
 /**
  * This is a simple client for sparql, note that this class is not thread safe.
  * 
@@ -30,7 +32,7 @@ public class SparqlClient {
 
 	// execute a select query in a rdf file.
 	public static ResultSet executeSelectQuery(String rdfFile, Query query) {
-		Model model = RDFFileUtil.readRDFFromXML(rdfFile);
+		Model model = TaxonomyUtil.readRDFFromXML(rdfFile);
 		return executeSelectQuery(query, model);
 	}
 
@@ -39,6 +41,12 @@ public class SparqlClient {
 		closeQuery();
 		qexec = QueryExecutionFactory.create(query, model);
 		return executeSelectQuery(qexec);
+	}
+	
+	public static Model executeConstructQuery(Query query, Model model){
+		closeQuery();
+		qexec = QueryExecutionFactory.create(query, model);
+		return qexec.execConstruct();
 	}
 
 	// execute select query from a remote sparql service.
@@ -78,14 +86,6 @@ public class SparqlClient {
 		ResultSetFormatter.out(System.out, results, query);
 	}
 
-	public static void closeQuery() {
-		if (qexec != null)
-			qexec.close();
-		if (hqexec != null)
-			hqexec.close();
-		qexec = null;
-		hqexec = null;
-	}
 
 	//TODO:this is just for experiment
 	public static Resource asResource(ResultSet resultSet, String resource) {
@@ -99,7 +99,7 @@ public class SparqlClient {
 	}
 
 	// return the query result as resource list.
-	public List<Resource> asResourceList(ResultSet resultSet, String resource) {
+	public static List<Resource> asResourceList(ResultSet resultSet, String resource) {
 
 		List<Resource> result = new ArrayList<Resource>();
 		while (resultSet.hasNext()) {
@@ -107,6 +107,15 @@ public class SparqlClient {
 			result.add(soln.getResource(resource));
 		}
 		return result;
+	}
+	
+	public static void closeQuery() {
+		if (qexec != null)
+			qexec.close();
+		if (hqexec != null)
+			hqexec.close();
+		qexec = null;
+		hqexec = null;
 	}
 
 }

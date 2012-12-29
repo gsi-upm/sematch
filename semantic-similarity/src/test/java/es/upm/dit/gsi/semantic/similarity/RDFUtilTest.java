@@ -5,6 +5,8 @@ import static org.junit.Assert.*;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import es.upm.dit.gsi.semantic.similarity.util.TaxonomyUtil;
+
 public class RDFUtilTest {
 
 	static final String ict_service = "dataset/ICT_Service.owl";
@@ -19,7 +21,7 @@ public class RDFUtilTest {
 
 	@Ignore
 	public void testSkosFormating() {
-		RDFFileUtil.writeRDFToXML(RDFFileUtil.formatSkosResourceURI(acm_clasification,
+		TaxonomyUtil.writeRDFToXML(TaxonomyUtil.formatSkosResourceURI(acm_clasification,
 				acmInfoRoot, NS), acmOutFileName);
 	}
 

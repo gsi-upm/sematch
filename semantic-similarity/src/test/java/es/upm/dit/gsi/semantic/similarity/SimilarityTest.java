@@ -12,7 +12,9 @@ import com.hp.hpl.jena.query.QueryFactory;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.Resource;
 
-import es.upm.dit.gsi.semantic.similarity.SemanticSimilarity.SimilarityMethod;
+import es.upm.dit.gsi.semantic.similarity.compute.TaxonomySimilarityCompute;
+import es.upm.dit.gsi.semantic.similarity.type.SimilarityMethod;
+import es.upm.dit.gsi.semantic.similarity.util.TaxonomyUtil;
 
 /**
  * Unit test for similarities.
@@ -34,7 +36,7 @@ public class SimilarityTest {
 
 	@Ignore
 	public void testConceptResource() {
-		Model model = RDFFileUtil.readRDFFromXML(acmInfo);
+		Model model = TaxonomyUtil.readRDFFromXML(acmInfo);
 		System.out.println(queryConcept);
 		Query query = QueryFactory.create(queryStringPre + queryConcept
 				+ queryStringBac);
@@ -49,13 +51,13 @@ public class SimilarityTest {
 		}
 	}
 
-	@Ignore
+	@Test
 	public void pairSim() {
 		String[] left = { "Clustering", "Image search", "Web mining",
-				"Information systems", "Information retrieval" };
+				"RAID", "Information retrieval" };
 		String[] right = {"Association rules","Video search", 
-				"Web services","Online banking","Social networks"};
-		Model model = RDFFileUtil.readRDFFromXML(acmInfo);
+				"Web services","RAID","Social networks"};
+		Model model = TaxonomyUtil.readRDFFromXML(acmInfo);
 		
 		
 		
@@ -72,22 +74,26 @@ public class SimilarityTest {
 		String concept_2 = SparqlClient.asResource(
 				SparqlClient.executeSelectQuery(queryR, model),
 				"concept").getURI();
-		
-		System.out.print(SemanticSimilarity.computeSimilarity(
-				SimilarityMethod.CGM, concept_1,concept_2)+"\t");
-		
-		System.out.print(SemanticSimilarity.computeSimilarity(
-				SimilarityMethod.WuAndPalm, concept_1,concept_2)+"\t");
-		
-		System.out.print(SemanticSimilarity.computeSimilarity(
-				SimilarityMethod.Rada, concept_1,concept_2)+"\t");
-		
-		System.out.print(SemanticSimilarity.computeSimilarity(
-				SimilarityMethod.LeacockAndChodorow, concept_1,concept_2)+"\t");
-		
-		System.out.print(SemanticSimilarity.computeSimilarity(
-				SimilarityMethod.Li, concept_1,concept_2)+"\t");
-		System.out.println();
+/*//		
+//		System.out.print(TaxonomySimCompute.computeSimilarity(
+//				SimilarityMethod.CGM, concept_1,concept_2)+"\t");
+//		
+//		System.out.print(TaxonomySimCompute.computeSimilarity(
+//				SimilarityMethod.WuAndPalm, concept_1,concept_2)+"\t");
+//		
+//		System.out.print(TaxonomySimCompute.computeSimilarity(
+//				SimilarityMethod.Rada, concept_1,concept_2)+"\t");
+//		
+//		System.out.print(TaxonomySimCompute.computeSimilarity(
+//				SimilarityMethod.LeacockAndChodorow, concept_1,concept_2)+"\t");
+//		
+//		System.out.print(TaxonomySimCompute.computeSimilarity(
+//				SimilarityMethod.Li, concept_1,concept_2)+"\t");
+//		
+//		System.out.print(TaxonomySimCompute.computeSimilarity(
+//				SimilarityMethod.GSI, concept_1,concept_2)+"\t");
+//		
+*/		System.out.println();
 		}
 	}
 
@@ -102,7 +108,7 @@ public class SimilarityTest {
 		String[] resourceURI = new String[10];
 		String queryURI = null;
 
-		Model model = RDFFileUtil.readRDFFromXML(acmInfo);
+		Model model = TaxonomyUtil.readRDFFromXML(acmInfo);
 
 		Query query = QueryFactory.create(queryStringPre + queryConcept
 				+ queryStringBac);
@@ -129,55 +135,55 @@ public class SimilarityTest {
 
 		for (int i = 0; i < 10; i++) {
 
-			simMileStones[i] = SemanticSimilarity.computeSimilarity(
+		/*	simMileStones[i] = TaxonomySimCompute.computeSimilarity(
 					SimilarityMethod.CGM, queryURI, resourceURI[i]);
 
-			simWuAndPalmer[i] = SemanticSimilarity.computeSimilarity(
+			simWuAndPalmer[i] = TaxonomySimCompute.computeSimilarity(
 					SimilarityMethod.WuAndPalm, queryURI, resourceURI[i]);
 
-			simRada[i] = SemanticSimilarity.computeSimilarity(
+			simRada[i] = TaxonomySimCompute.computeSimilarity(
 					SimilarityMethod.Rada, queryURI, resourceURI[i]);
 
-			simLandC[i] = SemanticSimilarity.computeSimilarity(
+			simLandC[i] = TaxonomySimCompute.computeSimilarity(
 					SimilarityMethod.LeacockAndChodorow, queryURI,
 					resourceURI[i]);
 
-			simLi[i] = SemanticSimilarity.computeSimilarity(
+			simLi[i] = TaxonomySimCompute.computeSimilarity(
 					SimilarityMethod.Li, queryURI, resourceURI[i]);
-
+*/
 			System.out.println(simMileStones[i] + "\t" + simWuAndPalmer[i]
 					+ "\t\t" + simRada[i] + "\t" + simLandC[i] + "\t\t\t"
 					+ simLi[i]);
 		}
 	}
-
+/*
 	@Ignore
 	public void testWuAndPalmer() {
 
-		System.out.println(SemanticSimilarity.computeSimilarity(
+		System.out.println(TaxonomySimCompute.computeSimilarity(
 				SimilarityMethod.WuAndPalm, concept_1, concept_2));
 	}
 
 	@Ignore
 	public void testSimilarityGanggao() {
 
-		String fragment_1 = SemanticSimilarity.parseURI(concept_1);
-		String fragment_2 = SemanticSimilarity.parseURI(concept_2);
+		String fragment_1 = TaxonomySimCompute.parseURI(concept_1);
+		String fragment_2 = TaxonomySimCompute.parseURI(concept_2);
 
 		assertEquals("1324", fragment_1);
 		assertEquals("1332", fragment_2);
 
-		int depth_1 = SemanticSimilarity.getDepth(concept_1);
-		int depth_2 = SemanticSimilarity.getDepth(concept_2);
-		int depth_c = SemanticSimilarity.getCommonDepth(concept_1, concept_2);
+		int depth_1 = TaxonomySimCompute.getDepth(concept_1);
+		int depth_2 = TaxonomySimCompute.getDepth(concept_2);
+		int depth_c = TaxonomySimCompute.getCommonDepth(concept_1, concept_2);
 
 		assertEquals(4, depth_1);
 		assertEquals(4, depth_2);
 		assertEquals(2, depth_c);
 
-		double similarity = SemanticSimilarity.computeConceptSimilarity(
+		double similarity = TaxonomySimCompute.computeConceptSimilarity(
 				SimilarityMethod.CGM, depth_1, depth_2, depth_c);
 		System.out.println("Similarity between 1324 and 1332 is " + similarity);
 
-	}
+	}*/
 }

@@ -6,6 +6,7 @@ import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.Resource;
 
 import es.upm.dit.gsi.semantic.similarity.*;
+import es.upm.dit.gsi.semantic.similarity.util.TaxonomyUtil;
 
 import com.hp.hpl.jena.query.Query;
 import com.hp.hpl.jena.query.QueryFactory;
@@ -21,17 +22,17 @@ public class SkosRdfDao {
 	public SkosRdfDao() {
 		InputStream in = this.getClass().getClassLoader().getResourceAsStream(rdf);
 		//System.out.println(this.getClass().getClassLoader().getResource(rdf));
-		model = RDFFileUtil.readRDFFromXML(in);
+		model = TaxonomyUtil.readRDFFromXML(in);
 	}
 	
 	public SkosRdfDao(InputStream in){
-		model = RDFFileUtil.readRDFFromXML(in);
+		model = TaxonomyUtil.readRDFFromXML(in);
 	}
 	
 	public SkosRdfDao(String filePath){
 		String file = filePath+"data/"+rdf;
 		System.out.println(file);
-		model = RDFFileUtil.readRDFFromXML(file);
+		model = TaxonomyUtil.readRDFFromXML(file);
 	}
 
 	public String getConceptURI(String concept) {

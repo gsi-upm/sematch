@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import es.upm.dit.gsi.semantic.dao.SkosRdfDao;
-import es.upm.dit.gsi.semantic.similarity.SemanticSimilarity;
-import es.upm.dit.gsi.semantic.similarity.SemanticSimilarity.SimilarityMethod;
+import es.upm.dit.gsi.semantic.similarity.compute.TaxonomySimilarityCompute;
+import es.upm.dit.gsi.semantic.similarity.type.SimilarityMethod;
 
 public class SimilarityEngine {
 
@@ -33,20 +33,20 @@ public class SimilarityEngine {
 		ArrayList<SimilarityResult> list = new ArrayList<SimilarityResult>();
 		String[] result = new String[5];
 
-		result[0] = SemanticSimilarity.computeSimilarity(SimilarityMethod.CGM,
+		/*result[0] = TaxonomySimCompute.computeSimilarity(SimilarityMethod.CGM,
 				uri_1, uri_2);
 
-		result[1] = SemanticSimilarity.computeSimilarity(
+		result[1] = TaxonomySimCompute.computeSimilarity(
 				SimilarityMethod.WuAndPalm, uri_1, uri_2);
 
-		result[2] = SemanticSimilarity.computeSimilarity(SimilarityMethod.Rada,
+		result[2] = TaxonomySimCompute.computeSimilarity(SimilarityMethod.Rada,
 				uri_1, uri_2);
 
-		result[3] = SemanticSimilarity.computeSimilarity(
+		result[3] = TaxonomySimCompute.computeSimilarity(
 				SimilarityMethod.LeacockAndChodorow, uri_1, uri_2);
 
-		result[4] = SemanticSimilarity.computeSimilarity(SimilarityMethod.Li,
-				uri_1, uri_2);
+		result[4] = TaxonomySimCompute.computeSimilarity(SimilarityMethod.Li,
+				uri_1, uri_2);*/
 
 		for (int i = 0; i < 5; i++) {
 			SimilarityResult value = new SimilarityResult();

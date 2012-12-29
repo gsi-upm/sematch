@@ -9,6 +9,8 @@ import net.sf.json.JSONObject;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import es.upm.dit.gsi.semantic.similarity.util.JSONUtil;
+
 public class JSONUtilTest {
 
 	@Ignore

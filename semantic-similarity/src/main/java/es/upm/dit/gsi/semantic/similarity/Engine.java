@@ -1,39 +1,42 @@
 package es.upm.dit.gsi.semantic.similarity;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import es.upm.dit.gsi.semantic.similarity.SemanticSimilarity.SimilarityMethod;
+import com.hp.hpl.jena.rdf.model.Resource;
 
 public class Engine {
-
-	// The concepts in a query
-	private Map<String, String> queryConcepts = null;
-
-	// The concepts of resources
-	private Map<String, String> resourceConcepts = null;
-
-	// initial the concepts
-	public void loadConcepts() {
-
-		queryConcepts = new HashMap<String, String>();
-		resourceConcepts = new HashMap<String, String>();
-
-	}
-
-	//assign the concepts
-	public void loadConcepts(Map<String, String> query,
-			Map<String, String> resource) {
-		this.queryConcepts = query;
-		this.resourceConcepts = resource;
+	
+	private SimilarityService similarityService;
+	private RepositoryService repositoryService;
+	
+	public Engine(){
 	}
 	
-	//calculate the similarity between query and resource
-	public List<Double> computeSimilarity(SimilarityMethod method){
-		
+	public void execute(){
+		for(Resource query : repositoryService.getQueryGraph().getResourceList()){
+			for(Resource resource : repositoryService.getResourceGraph().getResourceList()){
+				compute(query,resource);
+			}
+		}
+	}
+
+	public void compute(Resource query, Resource resource) {
+		similarityService.getSimilarity(query, resource);
+		similarityService.printResult(query, resource);
+	}
 	
-		return null;
+	public SimilarityService getSimilarityService() {
+		return similarityService;
+	}
+
+	public void setSimilarityService(SimilarityService similarityService) {
+		this.similarityService = similarityService;
+	}
+
+	public RepositoryService getRepositoryService() {
+		return repositoryService;
+	}
+
+	public void setRepositoryService(RepositoryService repositoryService) {
+		this.repositoryService = repositoryService;
 	}
 
 }
