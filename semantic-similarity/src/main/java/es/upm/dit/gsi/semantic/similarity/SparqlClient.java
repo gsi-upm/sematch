@@ -16,7 +16,6 @@ import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.sparql.engine.http.QueryEngineHTTP;
 
-import es.upm.dit.gsi.semantic.similarity.util.TaxonomyUtil;
 
 /**
  * This is a simple client for sparql, note that this class is not thread safe.
@@ -32,7 +31,7 @@ public class SparqlClient {
 
 	// execute a select query in a rdf file.
 	public static ResultSet executeSelectQuery(String rdfFile, Query query) {
-		Model model = TaxonomyUtil.readRDFFromXML(rdfFile);
+		Model model = SemanticRepository.readFromXML(rdfFile);
 		return executeSelectQuery(query, model);
 	}
 

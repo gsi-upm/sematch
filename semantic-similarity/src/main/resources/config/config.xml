@@ -7,10 +7,6 @@
 	   
 	<bean id="Engine" class="es.upm.dit.gsi.semantic.similarity.Engine">
 		<property name="similarityService" ref="similarityService"/>
-		<property name="repositoryService" ref="repositoryService"/>
-	</bean>
-	   
-	<bean id="repositoryService" class="es.upm.dit.gsi.semantic.similarity.RepositoryService">
 		<property name="queryGraph" ref="query"/>
 		<property name="resourceGraph" ref="resource"/>
 	</bean>
@@ -24,14 +20,14 @@
 		</property>
 	</bean>
 	
-	<bean id="query" class="es.upm.dit.gsi.semantic.similarity.Graph">
+	<bean id="query" class="es.upm.dit.gsi.semantic.similarity.SemanticGraph">
 		<property name="modelFile" value="dataset/jpp.rdf" />
 		<property name="constructQuery" value="dataset/query/constructQuery.sparql" />
 		<property name="resourceQuery" value="dataset/query/queryList.sparql" />
 		<property name="resourceName" value="jpp"/>
 	</bean>
 	
-	<bean id="resource" class="es.upm.dit.gsi.semantic.similarity.Graph">
+	<bean id="resource" class="es.upm.dit.gsi.semantic.similarity.SemanticGraph">
 		<property name="modelFile" value="dataset/jps.rdf" />
 		<property name="constructQuery" value="dataset/query/constructResource.sparql" />
 		<property name="resourceQuery" value="dataset/query/resourceList.sparql" />
@@ -78,8 +74,20 @@
 		<property name="resourceConcept" value="http://www.w3.org/1999/02/22-rdf-syntax-ns#type"/>
 		<property name="queryConceptProperty" value="http://example.org/it-skills.rdfs#competenceLevel"/>
 		<property name="resourceConceptProperty" value="http://example.org/it-skills.rdfs#competenceLevel"/>
-		<property name="conceptSimilarity" ref="stringSim"/>
+		<property name="conceptSimilarity" ref="taxonomySim"/>
 		<property name="conceptPropertySimilarity" ref="stringSim"/>
+	</bean>
+	
+	<bean id="taxonomySim" class="es.upm.dit.gsi.semantic.similarity.compute.TaxonomySimilarityCompute">
+		<property name="methodType" value="CGM"/>
+		<property name="taxonomyGraph" ref="taxonomy"/>
+		<property name="taxonomyNS" value="http://gsi.dit.upm.es/gzhu/ontologies/IT-SKILL#"/>
+		<property name="rootURI" value="http://example.org/it-skills.rdfs#IT_Skills"/>
+		<property name="taxonomyType" value="RDFS"/>
+	</bean>
+	
+	<bean id="taxonomy" class="es.upm.dit.gsi.semantic.similarity.SemanticGraph">
+		<property name="modelFile" value="dataset/it-skills.rdfs" />
 	</bean>
 	
 	<bean id="stringSim" class="es.upm.dit.gsi.semantic.similarity.compute.StringSimilarityCompute">
@@ -87,8 +95,8 @@
 	</bean>
 	
 	<bean id="numericSim" class="es.upm.dit.gsi.semantic.similarity.compute.NumericSimilarityCompute">
-		<property name="deviation" value="0.5"/>
-		<property name="downward" value="true"/>
+		<property name="deviation" value="0.25"/>
+		<property name="downward" value="false"/>
 	</bean>
 	
 </beans>

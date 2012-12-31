@@ -20,8 +20,6 @@ public class HybridPropertySimilarity implements Similarity {
 
 	private double weight;
 
-	private double similarity;
-
 	private String label;
 
 	private String queryPropertyURI;
@@ -105,16 +103,10 @@ public class HybridPropertySimilarity implements Similarity {
 				simList.add(sim);
 			}
 		}
-
-		similarity = Collections.max(simList).doubleValue() * getWeight();
-		return similarity;
-	}
-
-	@Override
-	public void printResult() {
-		logger.info(label + "	Weight: " + weight
-				+ "	Similarity: " + similarity);
-
+		
+		double similarity = Collections.max(simList).doubleValue();
+		logger.info(label + "	Weight: " + weight+ "	Similarity: " + similarity);
+		return similarity*getWeight();
 	}
 
 }

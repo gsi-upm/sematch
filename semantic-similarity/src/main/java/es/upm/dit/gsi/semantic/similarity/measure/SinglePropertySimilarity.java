@@ -15,8 +15,6 @@ public class SinglePropertySimilarity implements Similarity {
 
 	private double weight;
 
-	private double similarity;
-
 	private String label;
 
 	private String queryPropertyURI;
@@ -76,15 +74,9 @@ public class SinglePropertySimilarity implements Similarity {
 
 		RDFNode q = query.getRequiredProperty(pQuery).getObject();
 		RDFNode r = resource.getRequiredProperty(pResource).getObject();
-		similarity = getSimilarityCompute().computeSimilarity(q, r);
-
-		return similarity;
+		double similarity = getSimilarityCompute().computeSimilarity(q, r);
+		logger.info(label + "	Weight: " + weight+ "	Similarity: " + similarity);
+		return similarity*getWeight();
 	}
 
-	@Override
-	public void printResult() {
-		logger.info(label + "	Weight: " + weight
-				+ "	Similarity: " + similarity);
-
-	}
 }

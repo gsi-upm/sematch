@@ -24,15 +24,11 @@ public class SimilarityService {
 	}
 	
 	public double getSimilarity(Resource query, Resource resource) {
-		similarity = SimilarityUtil.getSimilarity(query, resource, getSimilarityList());
-		return similarity;
-	}
-	
-	public void printResult(Resource query, Resource resource){
 		logger.info("query: " + query.toString());
 		logger.info("resource: " + resource.toString());
+		similarity = SimilarityUtil.getSimilarity(query, resource, getSimilarityList());
 		logger.info("similarity: "+similarity);
-		SimilarityUtil.printResult(getSimilarityList());
+		return similarity;
 	}
 
 }

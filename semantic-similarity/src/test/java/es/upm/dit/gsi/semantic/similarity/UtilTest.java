@@ -1,21 +1,20 @@
 package es.upm.dit.gsi.semantic.similarity;
 
 
-
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
-
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
-
-import org.junit.Test;
 import org.junit.Ignore;
+import org.junit.Test;
 
-public class JSONObjectTest {
+public class UtilTest {
 
+	
 	@Ignore
 	public void testJsonMap() {
 		
@@ -47,9 +46,6 @@ public class JSONObjectTest {
 		
 		
 		JSONObject json = JSONObject.fromObject(root);
-
-	
-		
 		System.out.println(json);
 		
 	}
@@ -65,5 +61,6 @@ public class JSONObjectTest {
 		array.add(object2);
 		System.out.println(array);
 	}
+
 
 }

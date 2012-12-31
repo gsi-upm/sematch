@@ -19,7 +19,7 @@ import es.upm.dit.gsi.semantic.similarity.util.TaxonomyUtil;
 /**
  * Unit test for similarities.
  */
-public class SimilarityTest {
+public class SimilarityMethodTest {
 
 	public static String concept_1 = "http://gsi.dit.upm.es/gzhu/2012/12/Enterprise-Skills#1324";
 	public static String concept_2 = "http://gsi.dit.upm.es/gzhu/2012/12/Enterprise-Skills#1332";
@@ -36,7 +36,7 @@ public class SimilarityTest {
 
 	@Ignore
 	public void testConceptResource() {
-		Model model = TaxonomyUtil.readRDFFromXML(acmInfo);
+		Model model = SemanticRepository.readFromXML(acmInfo);
 		System.out.println(queryConcept);
 		Query query = QueryFactory.create(queryStringPre + queryConcept
 				+ queryStringBac);
@@ -57,7 +57,7 @@ public class SimilarityTest {
 				"RAID", "Information retrieval" };
 		String[] right = {"Association rules","Video search", 
 				"Web services","RAID","Social networks"};
-		Model model = TaxonomyUtil.readRDFFromXML(acmInfo);
+		Model model = SemanticRepository.readFromXML(acmInfo);
 		
 		
 		
@@ -108,7 +108,7 @@ public class SimilarityTest {
 		String[] resourceURI = new String[10];
 		String queryURI = null;
 
-		Model model = TaxonomyUtil.readRDFFromXML(acmInfo);
+		Model model = SemanticRepository.readFromXML(acmInfo);
 
 		Query query = QueryFactory.create(queryStringPre + queryConcept
 				+ queryStringBac);

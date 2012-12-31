@@ -17,8 +17,6 @@ public class ClusterSimilarity implements Similarity {
 
 	private String label;
 
-	private double similarity;
-
 	private List<Similarity> similarityList;
 
 	public void setLabel(String label) {
@@ -49,16 +47,11 @@ public class ClusterSimilarity implements Similarity {
 
 	@Override
 	public double getSimilarity(Resource query, Resource resource) {
-		similarity = SimilarityUtil.getSimilarity(query, resource,
+		double similarity = SimilarityUtil.getSimilarity(query, resource,
 				getSimilarityList());
-		return similarity;
-	}
-
-	@Override
-	public void printResult() {
 		logger.info(label + "	Weight: " + weight
 				+ "	Similarity: " + similarity);
-		SimilarityUtil.printResult(similarityList);
+		return similarity*getWeight();
 	}
 
 }
