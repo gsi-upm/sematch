@@ -9,23 +9,25 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class SemanticEngineTest {
 
-	@Test
-	public void test() {
+	@Ignore
+	public void testSemmfConfig() {
 
 		ApplicationContext context = new ClassPathXmlApplicationContext(
-				"config/config.xml");
+				"config/semmf-config.xml");
 		Engine engine = context.getBean("Engine", Engine.class);
 		engine.init();
 		engine.execute();
 		engine.print();
 	}
 	
-	@Ignore
-	public void testTaxonomy(){
+	@Test
+	public void testGSIConfig(){
 		ApplicationContext context = new ClassPathXmlApplicationContext(
-				"config/config.xml");
-		SemanticGraph graph = context.getBean("taxonomy",SemanticGraph.class);
-		graph.getModelFromLocal().write(System.out);
+				"config/gsi-config.xml");
+		Engine engine = context.getBean("Engine", Engine.class);
+		engine.init();
+		engine.execute();
+		engine.print();
 	}
 
 }

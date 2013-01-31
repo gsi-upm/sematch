@@ -82,8 +82,8 @@ public class TaxonomySimilarityCompute implements SimilarityCompute, Initializin
 		String queryConcept = query.toString();
 		String resourceConcept = resource.toString();
 		
-		queryConcept = taxonomy.parseURI(queryConcept);
-		resourceConcept = taxonomy.parseURI(resourceConcept);
+		queryConcept = Taxonomy.parseURI(queryConcept);
+		resourceConcept = Taxonomy.parseURI(resourceConcept);
 		
 		try {
 			queryConcept = taxonomy.getConceptURI(queryConcept);

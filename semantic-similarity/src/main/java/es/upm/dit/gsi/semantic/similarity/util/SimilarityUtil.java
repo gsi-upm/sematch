@@ -31,20 +31,15 @@ public class SimilarityUtil {
 
 	
 	public static double simGSI(int depth_1, int depth_2, int depth_common, double propertySim) {
+		
+		double similarity = 0;
 
-		int distance1 = depth_1 - depth_common;
-		int distance2 = depth_2 - depth_common;
-		int path = distance1 + distance2;
-
-		double commonality = Math.log(depth_common);
-
-		double difference = 0;
-
-		if (path != 0)
-			difference = Math.log(path);
-
-		double similarity = commonality / (difference + commonality);
-
+		double description = propertySim+depth_1+depth_2;
+		logger.info("description: "+description);
+			
+		double commonality = 2.0*depth_common;
+			similarity = commonality / description;
+		
 		return similarity;
 
 	}
@@ -53,27 +48,30 @@ public class SimilarityUtil {
 	public static double simCGM(int depth_1, int depth_2, int depth_common) {
 
 		// information content values
-		double ic_1 = Math.exp(-depth_1);
-		double ic_2 = Math.exp(-depth_2);
-		double ic_common = Math.exp(-depth_common);
+		
+		double ic_1 = 1/Math.pow(2, depth_1);
+		double ic_2 = 1/Math.pow(2, depth_2);
+		double ic_common = 1/Math.pow(2, depth_common);
 
 		double distance_1_c = ic_common - ic_1;
 		double distance_2_c = ic_common - ic_2;
-		double distance_1_2 = distance_1_c + distance_2_c;
+		
+		double distance = 0;
+		
+		//if the resource is subclass of the query, the distance is 0
+		if(depth_1 != depth_common)
+			distance = distance_1_c + distance_2_c;
 
-		return 1 - distance_1_2;
+		return 1 - distance;
 	}
 
 	// Wu & Palm methods
 	public static double simWuAndPalmer(int depth_1, int depth_2, int depth_common) {
 
-		int Na = depth_1 - depth_common;
-		int Nb = depth_2 - depth_common;
+		double common = 2.0 * depth_common;
+		double fraction = depth_1 + depth_2;
 
-		double Nc = 2.0 * depth_common;
-		double fraction_down = Na + Nb + Nc;
-
-		double sim = Nc / fraction_down;
+		double sim = common/fraction ;
 
 		return sim;
 	}

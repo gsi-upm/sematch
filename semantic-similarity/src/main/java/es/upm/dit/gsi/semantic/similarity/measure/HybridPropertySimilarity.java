@@ -95,16 +95,24 @@ public class HybridPropertySimilarity implements Similarity {
 			rList.add(node);
 		}
 
+		//TODO:need to be the average similarity for all the skills.
 		List<Double> simList = new ArrayList<Double>();
+		List<Double> tempList = new ArrayList<Double>();
 		for (RDFNode queryNode : qList) {
+			tempList.clear();
 			for (RDFNode resourceNode : rList) {
 				Double sim = new Double(getSimilarityCompute()
 						.computeSimilarity(queryNode, resourceNode));
-				simList.add(sim);
+				tempList.add(sim);
 			}
+			simList.add(Collections.max(tempList).doubleValue());
 		}
-		
-		double similarity = Collections.max(simList).doubleValue();
+		int totalNo = simList.size();
+		double sumSim = 0;
+		for(int i=0;i<totalNo;i++){
+			sumSim = sumSim + simList.get(i).doubleValue();
+		}
+		double similarity = sumSim/totalNo;
 		logger.info(label + "	Weight: " + weight+ "	Similarity: " + similarity);
 		return similarity*getWeight();
 	}

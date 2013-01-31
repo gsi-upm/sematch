@@ -75,7 +75,10 @@
 		<property name="queryConceptProperty" value="http://example.org/it-skills.rdfs#competenceLevel"/>
 		<property name="resourceConceptProperty" value="http://example.org/it-skills.rdfs#competenceLevel"/>
 		<property name="conceptSimilarity" ref="taxonomySim"/>
-		<property name="conceptPropertySimilarity" ref="stringSim"/>
+		<property name="conceptPropertySimilarity" ref="LevelSim"/>
+		<property name="weighted" value="true"/>
+		<property name="conceptWeight" value="0.8"/>
+		<property name="propertyWeight" value="0.2"/>
 	</bean>
 	
 	<bean id="taxonomySim" class="es.upm.dit.gsi.semantic.similarity.compute.TaxonomySimilarityCompute">
@@ -84,6 +87,18 @@
 		<property name="taxonomyNS" value="http://gsi.dit.upm.es/gzhu/ontologies/IT-SKILL#"/>
 		<property name="rootURI" value="http://example.org/it-skills.rdfs#IT_Skills"/>
 		<property name="taxonomyType" value="RDFS"/>
+	</bean>
+	
+	<bean id="LevelSim" class="es.upm.dit.gsi.semantic.similarity.compute.LevelSimilarityCompute">
+		<property name="levels">
+			<map>
+				<entry key="Beginner" value="1"/>
+				<entry key="Intermediate" value="2"/>
+				<entry key="Advanced" value="3"/>
+				<entry key="Expert" value="4"/>
+			</map>
+		</property>
+		<property name="simType" value="Semmf"/>
 	</bean>
 	
 	<bean id="taxonomy" class="es.upm.dit.gsi.semantic.similarity.SemanticGraph">
