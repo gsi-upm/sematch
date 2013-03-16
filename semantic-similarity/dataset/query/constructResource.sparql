@@ -5,19 +5,13 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 CONSTRUCT {
 	?jps rdf:type jps:JobPositionSeeker .
-	?jps jps:desiredSalaryBase ?salary .
-	?jps jps:travelDesired ?travel .
 	?jps jps:hasSkill ?z .
 	?z rdf:type ?skill .
 	?z skills:competenceLevel ?level
-	
 } WHERE {
 
 ?jps rdf:type jps:JobPositionSeeker .
-?jps jps:desiredSalaryBase ?salary .
-?jps jps:travelDesired ?travel .
 ?jps jps:hasSkill ?z .
 ?z rdf:type ?skill .
 ?z skills:competenceLevel ?level
-
 }

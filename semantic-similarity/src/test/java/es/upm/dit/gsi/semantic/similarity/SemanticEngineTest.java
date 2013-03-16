@@ -7,6 +7,8 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.hp.hpl.jena.rdf.model.Resource;
+
 public class SemanticEngineTest {
 
 	@Ignore
@@ -20,10 +22,20 @@ public class SemanticEngineTest {
 		engine.print();
 	}
 	
-	@Test
+	@Ignore
 	public void testGSIConfig(){
 		ApplicationContext context = new ClassPathXmlApplicationContext(
 				"config/gsi-config.xml");
+		Engine engine = context.getBean("Engine", Engine.class);
+		engine.init();
+		engine.execute();
+		engine.print();
+	}
+	
+	@Test
+	public void testEmployConfig(){
+		ApplicationContext context = new ClassPathXmlApplicationContext(
+				"config/employ-config.xml");
 		Engine engine = context.getBean("Engine", Engine.class);
 		engine.init();
 		engine.execute();

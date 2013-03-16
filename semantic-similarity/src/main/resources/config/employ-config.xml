@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	   http://www.springframework.org/schema/beans/spring-beans-2.0.xsd" 
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	   
+	<bean id="Engine" class="es.upm.dit.gsi.semantic.similarity.Engine">
+		<property name="similarityService" ref="similarityService"/>
+		<property name="queryGraph" ref="query"/>
+		<property name="resourceGraph" ref="resource"/>
+	</bean>
+	   
+	<bean id="similarityService" class="es.upm.dit.gsi.semantic.similarity.SimilarityService">
+		<property name="similarityList">
+			<list>
+				<ref bean="skills"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="query" class="es.upm.dit.gsi.semantic.similarity.SemanticGraph">
+		<property name="modelFile" value="dataset/jpp.rdf" />
+		<property name="constructQuery" value="dataset/query/constructQuery.sparql" />
+		<property name="resourceQuery" value="dataset/query/queryList.sparql" />
+		<property name="resourceName" value="jpp"/>
+	</bean>
+	
+	<bean id="resource" class="es.upm.dit.gsi.semantic.similarity.SemanticGraph">
+		<property name="modelFile" value="dataset/jps.rdf" />
+		<property name="constructQuery" value="dataset/query/constructResource.sparql" />
+		<property name="resourceQuery" value="dataset/query/resourceList.sparql" />
+		<property name="resourceName" value="jps"/>
+	</bean>
+	
+	<bean id="skills" class="es.upm.dit.gsi.semantic.similarity.measure.HybridPropertySimilarity">
+		<property name="weight" value="1"/>
+		<property name="label" value="skills"/>
+		<property name="queryPropertyURI" value="http://example.org/JobPositionPosting.rdfs#requiredCompetence" />
+		<property name="resourcePropertyURI" value="http://example.org/JobPositionSeeker.rdfs#hasSkill" />
+		<property name="similarityCompute" ref="conceptualSim" />
+	</bean>
+	
+	<bean id="conceptualSim" class="es.upm.dit.gsi.semantic.similarity.compute.ConceptualSimilarityCompute">
+		<property name="queryConcept" value="http://www.w3.org/1999/02/22-rdf-syntax-ns#type"/>
+		<property name="resourceConcept" value="http://www.w3.org/1999/02/22-rdf-syntax-ns#type"/>
+		<property name="queryConceptProperty" value="http://example.org/it-skills.rdfs#competenceLevel"/>
+		<property name="resourceConceptProperty" value="http://example.org/it-skills.rdfs#competenceLevel"/>
+		<property name="conceptSimilarity" ref="taxonomySim"/>
+		<property name="conceptPropertySimilarity" ref="LevelSim"/>
+		<property name="weighted" value="false"/>
+	</bean>
+	
+	<bean id="taxonomySim" class="es.upm.dit.gsi.semantic.similarity.compute.TaxonomySimilarityCompute">
+		<property name="methodType" value="GSI"/>
+		<property name="taxonomyGraph" ref="taxonomy"/>
+		<property name="taxonomyNS" value="http://gsi.dit.upm.es/gzhu/ontologies/IT-SKILL#"/>
+		<property name="rootURI" value="http://example.org/it-skills.rdfs#IT_Skills"/>
+		<property name="taxonomyType" value="RDFS"/>
+	</bean>
+	
+	<bean id="LevelSim" class="es.upm.dit.gsi.semantic.similarity.compute.LevelSimilarityCompute">
+		<property name="levels">
+			<map>
+				<entry key="Beginner" value="1"/>
+				<entry key="Intermediate" value="2"/>
+				<entry key="Advanced" value="3"/>
+				<entry key="Expert" value="4"/>
+			</map>
+		</property>
+		<property name="mode" value="Related"/>
+		<property name="direction" value="Narrow"/>
+		<property name="deviation" value="0.25" />
+	</bean>
+	
+	<bean id="taxonomy" class="es.upm.dit.gsi.semantic.similarity.SemanticGraph">
+		<property name="modelFile" value="dataset/it-skills.rdfs" />
+	</bean>
+	
+</beans>

@@ -2,8 +2,12 @@ package es.upm.dit.gsi.semantic.similarity;
 
 import com.hp.hpl.jena.rdf.model.Resource;
 
+import es.upm.dit.gsi.semantic.similarity.taxonomy.Taxonomy;
+
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 import org.apache.log4j.Logger;
 
@@ -15,6 +19,7 @@ public class Engine {
 	private SemanticGraph queryGraph;
 	private SemanticGraph resourceGraph;
 	private Map<String,Map<String,Double>> result;
+	
  
 	
 	public Engine(){
@@ -31,9 +36,9 @@ public class Engine {
 		logger.info("Executing...");
 		for(Resource query : getQueryGraph().getResourceList()){
 			
-			if(!result.containsKey(query.toString())){
+			if(!result.containsKey(Taxonomy.parseURI(query.toString()))){
 				Map<String,Double> resourceMap = new HashMap<String,Double>();
-				result.put(query.toString(), resourceMap);
+				result.put(Taxonomy.parseURI(query.toString()), resourceMap);
 			}
 			
 			for(Resource resource : getResourceGraph().getResourceList()){
@@ -42,13 +47,20 @@ public class Engine {
 		}
 	}
 	
+	public void compute(Resource query, Resource resource) {
+		double similarity = similarityService.getSimilarity(query, resource);
+		result.get(Taxonomy.parseURI(query.toString())).
+		put(Taxonomy.parseURI(resource.toString()), new Double(similarity));
+	}
+	
 	public void print(){
+		
 		for(String query : result.keySet()){
 			logger.info("Query: "+query);
-			for(String resource : result.get(query).keySet()){
-				logger.info("Resource: "+resource);
-				logger.info("Similarity: "+result.get(query).get(resource).doubleValue());
-			}
+			SimilarityComparator comparator =  new SimilarityComparator(result.get(query));
+		    TreeMap<String,Double> sorted = new TreeMap<String,Double>(comparator);
+		    sorted.putAll(result.get(query));
+		    System.out.println(sorted);
 		}
 	}
 	
@@ -68,17 +80,29 @@ public class Engine {
 		this.resourceGraph = resourceGraph;
 	}
 
-	public void compute(Resource query, Resource resource) {
-		double similarity = similarityService.getSimilarity(query, resource);
-		result.get(query.toString()).put(resource.toString(), new Double(similarity));
-	}
-	
 	public SimilarityService getSimilarityService() {
 		return similarityService;
 	}
 
 	public void setSimilarityService(SimilarityService similarityService) {
 		this.similarityService = similarityService;
+	}
+	
+	class SimilarityComparator implements Comparator<String> {
+
+	    Map<String, Double> base;
+	    public SimilarityComparator(Map<String, Double> base) {
+	        this.base = base;
+	    }
+
+	    // Descending order 
+	    public int compare(String a, String b) {
+	        if (base.get(a) >= base.get(b)) {
+	            return -1;
+	        } else {
+	            return 1;
+	        } 
+	    }
 	}
 
 }

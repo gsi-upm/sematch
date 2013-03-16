@@ -24,7 +24,7 @@ public class SimilarityUtil {
 		for (Similarity sim : list) {
 			double childSim = sim.getSimilarity(query, resource);
 			similarity = similarity + childSim ;
-			logger.info(similarity);
+			//logger.info(similarity);
 		}
 		return similarity;
 	}
@@ -35,7 +35,8 @@ public class SimilarityUtil {
 		double similarity = 0;
 
 		double description = propertySim+depth_1+depth_2;
-		logger.info("description: "+description);
+		//logger.info("depth_1: "+depth_1+"depth_2: "+depth_2+"depth_c: "+
+		//depth_common+"propertySim: "+propertySim+"description: "+description);
 			
 		double commonality = 2.0*depth_common;
 			similarity = commonality / description;
@@ -49,9 +50,9 @@ public class SimilarityUtil {
 
 		// information content values
 		
-		double ic_1 = 1/Math.pow(2, depth_1);
-		double ic_2 = 1/Math.pow(2, depth_2);
-		double ic_common = 1/Math.pow(2, depth_common);
+		double ic_1 = 0.5/Math.pow(2, depth_1);
+		double ic_2 = 0.5/Math.pow(2, depth_2);
+		double ic_common = 0.5/Math.pow(2, depth_common);
 
 		double distance_1_c = ic_common - ic_1;
 		double distance_2_c = ic_common - ic_2;
@@ -59,7 +60,11 @@ public class SimilarityUtil {
 		double distance = 0;
 		
 		//if the resource is subclass of the query, the distance is 0
-		if(depth_1 != depth_common)
+		if(depth_1 == depth_common || depth_2 == depth_common ){
+			int diff = Math.abs(depth_1-depth_2);
+			if(diff > 1)
+				distance = distance_1_c + distance_2_c;
+		}else
 			distance = distance_1_c + distance_2_c;
 
 		return 1 - distance;
@@ -95,10 +100,10 @@ public class SimilarityUtil {
 
 		int distance1 = depth_1 - depth_common;
 		int distance2 = depth_2 - depth_common;
-		int path = distance1 + distance2;
-
+		int path = distance1 + distance2 + 1;
+		double denominator = -Math.log(1 / (2.0 * maxDepth));
 		double sim = -Math.log(path / (2.0 * maxDepth));
-		return sim;
+		return sim/denominator;
 
 	}
 
@@ -108,18 +113,23 @@ public class SimilarityUtil {
 		int distance1 = depth_1 - depth_common;
 		int distance2 = depth_2 - depth_common;
 		int path = distance1 + distance2;
-		// System.out.println(depth_1+":"+depth_2+":"+depth_common);
-		// System.out.println(path);
-		double simpath = Math.exp(-path);
-		// System.out.println(simpath);
-		double simdepth_up = (Math.exp(depth_common) - Math.exp(-depth_common));
-		double simdepth_down = (Math.exp(depth_common) + Math
-				.exp(-depth_common));
+		double l = 0.2*path;
+		//System.out.println(depth_1+":"+depth_2+":"+depth_common);
+		//System.out.println(l);
+		double simpath = Math.exp(-l);
+		//System.out.println(simpath);
+		double D = 0.6*depth_common;
+		//System.out.println(D);
+		//System.out.println(Math.exp(D));
+		//System.out.println(Math.exp(-D));
+		double simdepth_up = (Math.exp(D) - Math.exp(-D));
+		double simdepth_down = (Math.exp(D) + Math
+				.exp(-D));
 
-		double simdepth = simdepth_up * simdepth_down;
-		// System.out.println(simdepth);
+		double simdepth = simdepth_up / simdepth_down;
+		//System.out.println(simdepth);
 		double result = simpath * simdepth;
-		// System.out.println(result);
+		//System.out.println(result);
 		return result;
 	}
 

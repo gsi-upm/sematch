@@ -113,7 +113,7 @@ public class HybridPropertySimilarity implements Similarity {
 			sumSim = sumSim + simList.get(i).doubleValue();
 		}
 		double similarity = sumSim/totalNo;
-		logger.info(label + "	Weight: " + weight+ "	Similarity: " + similarity);
+		//logger.info(label + "	Weight: " + weight+ "	Similarity: " + similarity);
 		return similarity*getWeight();
 	}
 

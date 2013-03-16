@@ -13,6 +13,7 @@ public class SimilarityService {
 	public Logger logger = Logger.getLogger(this.getClass());
 	
 	private double similarity;
+	
 	private List<Similarity> similarityList;
 
 	public List<Similarity> getSimilarityList() {
@@ -24,10 +25,10 @@ public class SimilarityService {
 	}
 	
 	public double getSimilarity(Resource query, Resource resource) {
-		logger.info("query: " + query.toString());
-		logger.info("resource: " + resource.toString());
+		//logger.info("query: " + query.toString());
+		//logger.info("resource: " + resource.toString());
 		similarity = SimilarityUtil.getSimilarity(query, resource, getSimilarityList());
-		logger.info("similarity: "+similarity);
+		//logger.info("similarity: "+similarity);
 		return similarity;
 	}
 

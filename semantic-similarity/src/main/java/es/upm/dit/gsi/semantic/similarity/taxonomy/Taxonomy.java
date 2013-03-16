@@ -144,9 +144,14 @@ public abstract class Taxonomy {
 	// return the depth of the least common ancestor of two concepts
 	public static int getCommonDepth(String URI_1, String URI_2) {
 
-		char[] concept_1 = parseURI(URI_1).toCharArray();
-		char[] concept_2 = parseURI(URI_2).toCharArray();
-
+		return getCommon(parseURI(URI_1),parseURI(URI_2));
+	}
+	
+	public static int getCommon(String s1, String s2){
+		
+		char[] concept_1 = s1.toCharArray();
+		char[] concept_2 = s2.toCharArray();
+		
 		int depth_1 = concept_1.length;
 		int depth_2 = concept_2.length;
 

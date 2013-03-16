@@ -119,15 +119,16 @@ public class ConceptualSimilarityCompute implements SimilarityCompute {
 		RDFNode qConceptPropertyNode = q.getRequiredProperty(qConceptProperty)
 				.getObject();
 
-		logger.info("Concept: " + qConceptNode + " Property: "
-				+ qConceptPropertyNode);
+		//logger.info("Query Concept: " + qConceptNode + " Property: "
+			//	+ qConceptPropertyNode);
 
 		RDFNode rConceptNode = r.getRequiredProperty(rConcept).getObject();
 		RDFNode rConceptPropertyNode = r.getRequiredProperty(rConceptProperty)
 				.getObject();
 
-		logger.info("Concept: " + rConceptNode + " Property: "
-				+ rConceptPropertyNode);
+		//logger.info("Resource Concept: " + rConceptNode + " Property: "
+				//+ rConceptPropertyNode);
+		
 		if (isWeighted()) {
 			propertySim = getConceptPropertySimilarity().computeSimilarity(
 					qConceptPropertyNode, rConceptPropertyNode);
@@ -144,7 +145,7 @@ public class ConceptualSimilarityCompute implements SimilarityCompute {
 			similarity = getConceptSimilarity().computeSimilarity(qConceptNode, rConceptNode, propertyDistance);
 		}
 
-		logger.info("Similarity: " + similarity);
+		//logger.info("Similarity: " + similarity);
 
 		return similarity;
 	}
