@@ -1,3 +1,4 @@
+
 package es.upm.dit.gsi.semantic.similarity.taxonomy;
 
 import java.net.URI;
@@ -15,7 +16,6 @@ import com.hp.hpl.jena.rdf.model.ResIterator;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.StmtIterator;
 
-import es.upm.dit.gsi.semantic.similarity.SKOS;
 import es.upm.dit.gsi.semantic.similarity.exceptions.TaxonomyException;
 
 public abstract class Taxonomy {

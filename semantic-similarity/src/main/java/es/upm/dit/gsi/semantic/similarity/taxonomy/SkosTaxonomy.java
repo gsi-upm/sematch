@@ -8,7 +8,6 @@ import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.StmtIterator;
 import com.hp.hpl.jena.vocabulary.RDF;
 
-import es.upm.dit.gsi.semantic.similarity.SKOS;
 
 public class SkosTaxonomy extends Taxonomy {
 

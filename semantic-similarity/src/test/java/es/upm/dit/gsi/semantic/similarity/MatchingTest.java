@@ -4,12 +4,12 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import es.upm.dit.gsi.semantic.similarity.compute.LevelSimilarityCompute;
+import es.upm.dit.gsi.semantic.similarity.compute.LevelSimCompute;
 import es.upm.dit.gsi.semantic.similarity.type.MatchingMode;
 
 public class MatchingTest {
 	
-	LevelSimilarityCompute simCompute = new LevelSimilarityCompute();
+	LevelSimCompute simCompute = new LevelSimCompute();
 
 	@Test
 	public void test() {

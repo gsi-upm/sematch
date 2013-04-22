@@ -12,9 +12,9 @@ import com.hp.hpl.jena.query.QueryFactory;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.Resource;
 
-import es.upm.dit.gsi.semantic.similarity.compute.TaxonomySimilarityCompute;
+import es.upm.dit.gsi.semantic.similarity.compute.ConceptSimCompute;
 import es.upm.dit.gsi.semantic.similarity.type.SimilarityMethod;
-import es.upm.dit.gsi.semantic.similarity.util.TaxonomyUtil;
+
 
 /**
  * Unit test for similarities.

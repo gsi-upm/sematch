@@ -6,7 +6,9 @@ import java.util.List;
 
 public class Node {
 
-	int rankValue;
+	int up;
+	int down;
+	double rank;
 	int depth;
 	String label;
 	boolean isRoot;
@@ -57,13 +59,23 @@ public class Node {
 	public void setChildren(List<Node> children) {
 		this.children = children;
 	}
-	public int getRankValue() {
-		return rankValue;
+	
+	public int getUp() {
+		return up;
 	}
 
-	public void setRankValue(int rankValue) {
-		this.rankValue = rankValue;
+	public void setUp(int up) {
+		this.up = up;
 	}
+
+	public int getDown() {
+		return down;
+	}
+
+	public void setDown(int down) {
+		this.down = down;
+	}
+
 
 	public int getDepth() {
 		return depth;

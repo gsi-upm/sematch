@@ -13,9 +13,8 @@ import es.upm.dit.gsi.semantic.similarity.type.SimilarityMethod;
 import es.upm.dit.gsi.semantic.similarity.type.TaxonomyType;
 import es.upm.dit.gsi.semantic.similarity.util.SimilarityUtil;
 import es.upm.dit.gsi.semantic.similarity.SemanticGraph;
-import es.upm.dit.gsi.semantic.similarity.SimilarityCompute;
 
-public class TaxonomySimilarityCompute implements SimilarityCompute, InitializingBean{
+public class ConceptSimCompute implements SimCompute, InitializingBean{
 	
 	private Logger logger = Logger.getLogger(this.getClass());
 
@@ -26,7 +25,7 @@ public class TaxonomySimilarityCompute implements SimilarityCompute, Initializin
 	private TaxonomyType taxonomyType;
 	private Taxonomy taxonomy;
 
-	public TaxonomySimilarityCompute() {
+	public ConceptSimCompute() {
 	}
 
 	public SimilarityMethod getMethodType() {
@@ -71,7 +70,7 @@ public class TaxonomySimilarityCompute implements SimilarityCompute, Initializin
 
 
 	@Override
-	public double computeSimilarity(RDFNode query, RDFNode resource) {
+	public double compute(RDFNode query, RDFNode resource) {
 
 		return computeSimilarity(query, resource, 0);
 	}

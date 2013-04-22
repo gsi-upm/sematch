@@ -58,14 +58,14 @@ public class SimilarityUtil {
 		double distance_2_c = ic_common - ic_2;
 		
 		double distance = 0;
-		
+		distance = distance_1_c + distance_2_c;
 		//if the resource is subclass of the query, the distance is 0
-		if(depth_1 == depth_common || depth_2 == depth_common ){
+		/*if(depth_1 == depth_common || depth_2 == depth_common ){
 			int diff = Math.abs(depth_1-depth_2);
 			if(diff > 1)
 				distance = distance_1_c + distance_2_c;
 		}else
-			distance = distance_1_c + distance_2_c;
+			distance = distance_1_c + distance_2_c;*/
 
 		return 1 - distance;
 	}

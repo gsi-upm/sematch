@@ -2,22 +2,13 @@ package es.upm.dit.gsi.semantic.similarity.compute;
 
 import com.hp.hpl.jena.rdf.model.RDFNode;
 
-import es.upm.dit.gsi.semantic.similarity.SimilarityCompute;
 
-public class StringSimilarityCompute implements SimilarityCompute {
+public class StringSimCompute implements SimCompute {
 
-	private boolean caseSensitive;
-
-	public boolean isCaseSensitive() {
-		return caseSensitive;
-	}
-
-	public void setCaseSensitive(boolean caseSensitive) {
-		this.caseSensitive = caseSensitive;
-	}
+	private boolean caseSensitive = false;
 
 	@Override
-	public double computeSimilarity(RDFNode query, RDFNode resource) {
+	public double compute(RDFNode query, RDFNode resource) {
 		return stringSimilarity(query.toString(), resource.toString());
 	}
 
@@ -36,6 +27,14 @@ public class StringSimilarityCompute implements SimilarityCompute {
 		} else {
 			return 0;
 		}
+	}
+	
+	public boolean isCaseSensitive() {
+		return caseSensitive;
+	}
+
+	public void setCaseSensitive(boolean caseSensitive) {
+		this.caseSensitive = caseSensitive;
 	}
 
 }

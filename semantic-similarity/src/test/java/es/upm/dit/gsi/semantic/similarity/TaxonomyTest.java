@@ -119,7 +119,8 @@ public class TaxonomyTest {
 		tree.printTree(tree.buildBinaryTree());
 		System.out.println("\n"+"The results \n"+"concepts"+"\t"+"Rank"+"\t"+
 		"W&P"+"\t"+"Li"+"\t"+"L&C"+"\t"+"Rada"+"\t"+"CGM");
-		tree.rankNode(tree.getNodebyLabel("1111"));
+		tree.travel(tree.getNodebyLabel("112"));
+		
 	}
 	
 

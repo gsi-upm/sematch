@@ -6,9 +6,8 @@ import com.hp.hpl.jena.rdf.model.Property;
 import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.rdf.model.Resource;
 
-import es.upm.dit.gsi.semantic.similarity.SimilarityCompute;
 
-public class ConceptualSimilarityCompute implements SimilarityCompute {
+public class HybridSimCompute implements SimCompute {
 
 	private Logger logger = Logger.getLogger(this.getClass());
 
@@ -19,8 +18,8 @@ public class ConceptualSimilarityCompute implements SimilarityCompute {
 	private boolean weighted = false;
 	private double conceptWeight;
 	private double propertyWeight;
-	private TaxonomySimilarityCompute conceptSimilarity;
-	private SimilarityCompute conceptPropertySimilarity;
+	private ConceptSimCompute conceptSimilarity;
+	private SimCompute conceptPropertySimilarity;
 
 	public boolean isWeighted() {
 		return weighted;
@@ -78,25 +77,25 @@ public class ConceptualSimilarityCompute implements SimilarityCompute {
 		this.resourceConceptProperty = resourceConceptProperty;
 	}
 
-	public SimilarityCompute getConceptPropertySimilarity() {
+	public SimCompute getConceptPropertySimilarity() {
 		return conceptPropertySimilarity;
 	}
 
 	public void setConceptPropertySimilarity(
-			SimilarityCompute conceptPropertySimilarity) {
+			SimCompute conceptPropertySimilarity) {
 		this.conceptPropertySimilarity = conceptPropertySimilarity;
 	}
 
-	public TaxonomySimilarityCompute getConceptSimilarity() {
+	public ConceptSimCompute getConceptSimilarity() {
 		return conceptSimilarity;
 	}
 
-	public void setConceptSimilarity(TaxonomySimilarityCompute conceptSimilarity) {
+	public void setConceptSimilarity(ConceptSimCompute conceptSimilarity) {
 		this.conceptSimilarity = conceptSimilarity;
 	}
 
 	@Override
-	public double computeSimilarity(RDFNode query, RDFNode resource) {
+	public double compute(RDFNode query, RDFNode resource) {
 
 		double similarity = 0;
 		double propertySim = 0;
@@ -130,16 +129,16 @@ public class ConceptualSimilarityCompute implements SimilarityCompute {
 				//+ rConceptPropertyNode);
 		
 		if (isWeighted()) {
-			propertySim = getConceptPropertySimilarity().computeSimilarity(
+			propertySim = getConceptPropertySimilarity().compute(
 					qConceptPropertyNode, rConceptPropertyNode);
 			logger.debug("Property sim: "+propertySim);
-			conceptSim = getConceptSimilarity().computeSimilarity(qConceptNode,
+			conceptSim = getConceptSimilarity().compute(qConceptNode,
 					rConceptNode);
 			logger.debug("Concept sim: "+conceptSim);
 			similarity = getConceptWeight()*conceptSim;
 			similarity = getPropertyWeight()*propertySim + similarity;
 		} else {
-			propertySim = getConceptPropertySimilarity().computeSimilarity(
+			propertySim = getConceptPropertySimilarity().compute(
 					qConceptPropertyNode, rConceptPropertyNode);
 			double propertyDistance = 1 - propertySim;
 			similarity = getConceptSimilarity().computeSimilarity(qConceptNode, rConceptNode, propertyDistance);

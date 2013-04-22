@@ -9,14 +9,14 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.hp.hpl.jena.rdf.model.Resource;
 
-public class SemanticEngineTest {
+public class MatchEngineTest {
 
 	@Ignore
 	public void testSemmfConfig() {
 
 		ApplicationContext context = new ClassPathXmlApplicationContext(
 				"config/semmf-config.xml");
-		Engine engine = context.getBean("Engine", Engine.class);
+		MatchEngine engine = context.getBean("Engine", MatchEngine.class);
 		engine.init();
 		engine.execute();
 		engine.print();
@@ -26,7 +26,7 @@ public class SemanticEngineTest {
 	public void testGSIConfig(){
 		ApplicationContext context = new ClassPathXmlApplicationContext(
 				"config/gsi-config.xml");
-		Engine engine = context.getBean("Engine", Engine.class);
+		MatchEngine engine = context.getBean("Engine", MatchEngine.class);
 		engine.init();
 		engine.execute();
 		engine.print();
@@ -36,7 +36,7 @@ public class SemanticEngineTest {
 	public void testEmployConfig(){
 		ApplicationContext context = new ClassPathXmlApplicationContext(
 				"config/employ-config.xml");
-		Engine engine = context.getBean("Engine", Engine.class);
+		MatchEngine engine = context.getBean("Engine", MatchEngine.class);
 		engine.init();
 		engine.execute();
 		engine.print();

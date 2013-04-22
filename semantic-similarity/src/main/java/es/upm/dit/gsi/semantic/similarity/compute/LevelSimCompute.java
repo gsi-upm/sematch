@@ -4,16 +4,25 @@ import java.util.Map;
 
 import com.hp.hpl.jena.rdf.model.RDFNode;
 
-import es.upm.dit.gsi.semantic.similarity.SimilarityCompute;
 import es.upm.dit.gsi.semantic.similarity.taxonomy.Taxonomy;
 import es.upm.dit.gsi.semantic.similarity.type.MatchingMode;
 
-public class LevelSimilarityCompute implements SimilarityCompute {
+public class LevelSimCompute implements SimCompute {
 	
 	private Map<Object, Object> levels;
 	private MatchingMode mode;
 	private MatchingMode direction;
+	private boolean norm = true;
+
 	private double deviation = 0;
+	
+	public boolean isNorm() {
+		return norm;
+	}
+
+	public void setNorm(boolean norm) {
+		this.norm = norm;
+	}
 	
 	public MatchingMode getDirection() {
 		return direction;
@@ -48,7 +57,7 @@ public class LevelSimilarityCompute implements SimilarityCompute {
 	}
 
 	@Override
-	public double computeSimilarity(RDFNode query, RDFNode resource) {
+	public double compute(RDFNode query, RDFNode resource) {
 
 		double similarity = 0;
 
@@ -85,13 +94,14 @@ public class LevelSimilarityCompute implements SimilarityCompute {
 			similarity = simRelated(query,resource);
 			break;
 		}
-		return similarity;
+		return norm(similarity);
 	}
 	
 	double simExact(int query,int resource){
 		if(query == resource)
 			return 1;
 		else return 0;
+		
 	}
 	
 	double simClose(int query,int resource){
@@ -102,10 +112,11 @@ public class LevelSimilarityCompute implements SimilarityCompute {
 		else
 			distance = resource - query;
 		
-		return (1-distance*deviation);
+		return 1-distance*deviation;
 	}
 	
 	double simBroad(int query, int resource){
+	
 		if(query <= resource)
 			return 1;
 		else{
@@ -115,15 +126,17 @@ public class LevelSimilarityCompute implements SimilarityCompute {
 	}
 	
 	double simNarrow(int query, int resource){
+		
 		if(query >= resource)
 			return 1;
 		else{
 			int distance = resource - query;
 			return 1-distance*deviation;
 		}
+		
 	}
 	
-	double simRelated(int query, int resource){
+	/*double simRelated(int query, int resource){
 		
 		int distance = 0;
 		double similarity = 0;
@@ -152,6 +165,18 @@ public class LevelSimilarityCompute implements SimilarityCompute {
 		
 		return 0.5*similarity;
 	}
+	*/
+	//TODO:add the direction check.
+	public double simRelated(int query, int resource){
+		return sigmoid(query,resource);
+	}
+	
+	public double sigmoid(int query, int resource){
+		
+		double sim = deviation * (query - resource);
+		sim = Math.exp(sim)+1;
+		return 1/sim;
+	}
 	
 
 	public double simSemmf(int queryLevel, int resourceLevel, int maxDepth) {
@@ -174,6 +199,101 @@ public class LevelSimilarityCompute implements SimilarityCompute {
 			similarity = 1.0;
 		}	
 		return similarity;
+	}
+	
+	public double norm(double v){
+		if(isNorm()){
+			double nv = v+1.0;
+			return Math.log(nv)/Math.log(2);
+		}else
+			return v;
+		
+	}
+	
+
+	private double alpha;
+	private double[] distribution;
+	private int maxLevel;
+
+	public int getMaxLevel() {
+		return maxLevel;
+	}
+
+	public void setMaxLevel(int maxLevel) {
+		this.maxLevel = maxLevel;
+	}
+
+	public double getAlpha() {
+		return alpha;
+	}
+
+	public void setAlpha(double alpha) {
+		this.alpha = alpha;
+	}
+
+	public double[] getDistribution() {
+		return distribution;
+	}
+
+	public void setDistribution(double[] distribution) {
+		this.distribution = distribution;
+	}
+
+	public double computeSemmf(int x, int y) {
+
+		if (x < y) {
+			return 1;
+		} else {
+			double sim = x * 1.0 - y * 1.0;
+			sim = alpha * sim;
+			return 1 - sim;
+		}
+	}
+
+	public double computeLin(int x, int y) {
+
+		double common = 0;
+		double description = 0;
+		
+		if (x > y) {
+			for (int i = y; i <= x; i++) {
+				common = common + distribution[i - 1];
+			}
+		} else {
+			for(int i = x; i <=y; i++){
+				common = common + distribution[i - 1];
+			}
+		}
+	
+		if (common == 1.0)
+			return 0;
+		else {
+			common = 2 * Math.log(common);
+
+			description = description + Math.log(distribution[x - 1]);
+			description = description + Math.log(distribution[y - 1]);
+
+			return common / description;
+		}
+	}
+	
+	public double computeGSI(int x, int y){
+		
+		double sim = y*1.0;
+		sim = sim/(x*1.0);
+		double normalise = 1.0/getMaxLevel();
+		return sim*normalise;
+		
+	}
+	
+	public double computeSigmoid(int x, int y){
+		
+		int distance = x-y;
+		double sim = distance*(1.0);
+		sim = Math.exp(sim);
+		sim = 1 + sim;
+		return 1/sim;
+		
 	}
 
 }

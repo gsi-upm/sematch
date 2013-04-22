@@ -3,9 +3,8 @@ package es.upm.dit.gsi.semantic.similarity.compute;
 import com.hp.hpl.jena.rdf.model.Literal;
 import com.hp.hpl.jena.rdf.model.RDFNode;
 
-import es.upm.dit.gsi.semantic.similarity.SimilarityCompute;
 
-public class NumericSimilarityCompute implements SimilarityCompute {
+public class NumSimCompute implements SimCompute {
 
 	private double deviation;
 	private boolean downward;
@@ -27,7 +26,7 @@ public class NumericSimilarityCompute implements SimilarityCompute {
 	}
 
 	@Override
-	public double computeSimilarity(RDFNode query, RDFNode resource) {
+	public double compute(RDFNode query, RDFNode resource) {
 		Literal q = (Literal) query;
 		Literal r = (Literal) resource;
 		return numericSimilarity(q.getDouble(), r.getDouble());

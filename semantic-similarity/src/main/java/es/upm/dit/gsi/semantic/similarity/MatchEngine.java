@@ -11,7 +11,7 @@ import java.util.TreeMap;
 
 import org.apache.log4j.Logger;
 
-public class Engine {
+public class MatchEngine {
 	
 	private Logger logger = Logger.getLogger(this.getClass());
 	
@@ -22,7 +22,7 @@ public class Engine {
 	
  
 	
-	public Engine(){
+	public MatchEngine(){
 		result = new HashMap<String,Map<String,Double>>();
 	}
 	

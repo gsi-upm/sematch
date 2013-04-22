@@ -1,4 +1,4 @@
-package es.upm.dit.gsi.semantic.similarity;
+package es.upm.dit.gsi.semantic.similarity.taxonomy;
 
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
@@ -7,26 +7,33 @@ import com.hp.hpl.jena.rdf.model.Resource;
 
 /**
  * Simple Knowledge Organization System model is implemented here.
+ * 
  * @author gzhu
- *
+ * 
  */
 
 public class SKOS {
 
-	
 	/** The RDF model that holds the vocabulary terms. */
 	private static Model model = ModelFactory.createDefaultModel();
-	
+
 	/** Default Namespace */
 	public static final String NS = "http://www.w3.org/2004/02/skos/core#";
 
-	public static String getURI() {return NS;}
-	    
-	    /** <p>The namespace of the vocabulary as a resource</p> */
-	public static final Resource NAMESPACE = model.createResource( NS );
-	
+	public static String getURI() {
+		return NS;
+	}
+
+	/**
+	 * <p>
+	 * The namespace of the vocabulary as a resource
+	 * </p>
+	 */
+	public static final Resource NAMESPACE = model.createResource(NS);
+
 	/** Vocabulary concepts */
-	public static final Resource ConceptScheme = model.createResource(NS+ "ConceptScheme");
+	public static final Resource ConceptScheme = model.createResource(NS
+			+ "ConceptScheme");
 	public static final Resource Concept = model.createResource(NS + "Concept");
 	public static final Resource Collection = model.createResource(NS
 			+ "Collection");

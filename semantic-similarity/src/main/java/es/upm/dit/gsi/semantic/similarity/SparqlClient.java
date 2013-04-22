@@ -18,7 +18,7 @@ import com.hp.hpl.jena.sparql.engine.http.QueryEngineHTTP;
 
 
 /**
- * This is a simple client for sparql, note that this class is not thread safe.
+ * This is client for sparql, notice here that this class is not thread safe.
  * 
  * @author gzhu
  * 

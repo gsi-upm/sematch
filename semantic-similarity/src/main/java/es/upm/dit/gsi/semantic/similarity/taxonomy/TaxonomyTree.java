@@ -13,71 +13,64 @@ public class TaxonomyTree {
 	private int maxDepth = 4;
 	private Map<String,Node> index = null;
 	private Queue<Node> queue = null;
+	private Stack<Node> visited = null;
+	private double upwards = 0.9;
+	private double downwards = 0.9;
 	
 	
 	public TaxonomyTree(){
 		this.index = new HashMap<String,Node>();
 		queue = new LinkedList<Node>();
+		visited = new Stack<Node>();
 	}
 	
 	
-	public void rankNode(Node node){
-		Stack<Node> visited = new Stack<Node>();	
-		int rank = 1;
+	public void travel(Node node){
 		int d1 = node.getLabel().length();
 		queue.add(node);
+		visited.add(node);
+		node.setUp(0);
+		node.setDown(0);
+		node.rank = 1;
+		
 		while(!queue.isEmpty()){
 			
 			Node concept = queue.poll();
+			//rankNode(concept,node,false);
 			
-			if (!visited.contains(concept)) {
-				
-				if(!visited.isEmpty() && visited.peek().getDepth()!=concept.getDepth()){
-					rank++;
-				}
-				int d2 = concept.getLabel().length();
-				int dc = Taxonomy.getCommon(node.getLabel(), concept.getLabel());
-				String result = computeSimilarity(d1,d2,dc);
-				System.out.println(concept.getLabel() + "\t\t" + rank + result);
-				visited.add(concept);
-				
-			}
+			int d2 = concept.getLabel().length();
+			int dc = Taxonomy.getCommon(node.getLabel(), concept.getLabel());
+			String result = computeSimilarity(d1,d2,dc);
+			System.out.println(concept.getLabel() + "\t\t" + computeSimilarity(concept) + result);
 			
 			if (!concept.isLeaf()) {
 				for (Node child : concept.getChildren()) {
-					if (!visited.contains(child)) {
-						if(!visited.isEmpty() && visited.peek().getDepth()!= child.getDepth() ){
-							rank++;
-						}
-						int d2 = child.getLabel().length();
-						int dc = Taxonomy.getCommon(node.getLabel(), child.getLabel());
-						String result = computeSimilarity(d1,d2,dc);
-						System.out.println(child.getLabel() + "\t\t"
-								+ rank +result);
-						queue.add(child);
-						visited.add(child);
-					}
+					path(concept, child, downwards);
 				}
 			}
-			
 			if(!concept.isRoot()){
 				Node father = concept.getFather();
-				if(!visited.contains(father)){
-					if(!visited.isEmpty() && visited.peek().getDepth()!= father.getDepth() ){
-						rank++;
-					}
-					int d2 = father.getLabel().length();
-					int dc = Taxonomy.getCommon(node.getLabel(), father.getLabel());
-					String result = computeSimilarity(d1,d2,dc);
-					System.out.println(father.getLabel() + "\t\t"+ rank+result);
-					queue.add(father);
-					visited.add(father);
-				}
+				path(concept, father, upwards);
 			}
 			
 		}
+	}
+	
+	public double computeSimilarity(Node node){
+		double sim = node.rank;
+		sim = sim + 1;
+		return Math.log(sim)/Math.log(2);
+	}
+	
+	public void path(Node previous, Node current, double factor){
 		
-		
+		if (!visited.contains(current)) {
+			
+			current.rank = previous.rank*factor;
+			visited.add(current);
+			queue.add(current);
+			
+		}
 	}
 	
 	public String computeSimilarity(int depth_1, int depth_2, int depnt_c){
