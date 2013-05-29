@@ -18,7 +18,8 @@ import com.hp.hpl.jena.sparql.engine.http.QueryEngineHTTP;
 
 
 /**
- * This is client for sparql, notice here that this class is not thread safe.
+ * This is client for sparql, notice here that this 
+ * class is not thread safe.
  * 
  * @author gzhu
  * 
@@ -26,36 +27,40 @@ import com.hp.hpl.jena.sparql.engine.http.QueryEngineHTTP;
 
 public class SparqlClient {
 
-	private static QueryExecution qexec = null;
-	private static QueryEngineHTTP hqexec = null;
-
-	// execute a select query in a rdf file.
-	public static ResultSet executeSelectQuery(String rdfFile, Query query) {
-		Model model = SemanticRepository.readFromXML(rdfFile);
-		return executeSelectQuery(query, model);
+	private QueryExecution qexec = null;
+	private QueryEngineHTTP hqexec = null;
+	
+	private static SparqlClient client = null;
+	
+	public static SparqlClient getSparqlClient(){
+		if(client == null)
+			return new SparqlClient();
+		else return client;
 	}
 
-	// execute select query inside a model
-	public static ResultSet executeSelectQuery(Query query, Model model) {
+	// execute select query in a model
+	public ResultSet executeSelectQuery(Query query, Model model) {
 		closeQuery();
 		qexec = QueryExecutionFactory.create(query, model);
 		return executeSelectQuery(qexec);
 	}
 	
-	public static Model executeConstructQuery(Query query, Model model){
+	//execute construct query in a model
+	public Model executeConstructQuery(Query query, Model model){
 		closeQuery();
 		qexec = QueryExecutionFactory.create(query, model);
 		return qexec.execConstruct();
 	}
 
 	// execute select query from a remote sparql service.
-	public static ResultSet executeSelectQuery(Query query, String sparqlService) {
+	public ResultSet executeSelectQuery(Query query, String sparqlService) {
 		closeQuery();
 		qexec = QueryExecutionFactory.sparqlService(sparqlService, query);
 		return executeSelectQuery(qexec);
 	}
 
-	public static ResultSet executeSelectQuery(Query query,
+	//execute select query from a remote sparql service with parameters.
+	public ResultSet executeSelectQuery(Query query,
 			String sparqlService, Map<String, String> paramMap) {
 		closeQuery();
 		hqexec = QueryExecutionFactory.createServiceRequest(sparqlService,
@@ -68,26 +73,26 @@ public class SparqlClient {
 	}
 
 	// execute select query
-	public static ResultSet executeSelectQuery(QueryExecution qexec) {
+	public ResultSet executeSelectQuery(QueryExecution qexec) {
 
 		ResultSet result = null;
 		result = qexec.execSelect();
 		return result;
 	}
 
-	// read the query string from a file and execute the query in a rdf file
-	public static Query getQueryFromFile(File file) {
+	// read the query string from a file
+	public Query getQueryFromFile(File file) {
 		return QueryFactory.read(file.getAbsolutePath());
 	}
 
 	// display the query result in console.
-	public static void displayQuery(ResultSet results, Query query) {
+	public void displayQuery(ResultSet results, Query query) {
 		ResultSetFormatter.out(System.out, results, query);
 	}
 
 
 	//TODO:this is just for experiment
-	public static Resource asResource(ResultSet resultSet, String resource) {
+	public Resource asResource(ResultSet resultSet, String resource) {
 
 		Resource result = null;
 		while (resultSet.hasNext()) {
@@ -98,7 +103,7 @@ public class SparqlClient {
 	}
 
 	// return the query result as resource list.
-	public static List<Resource> asResourceList(ResultSet resultSet, String resource) {
+	public List<Resource> asResourceList(ResultSet resultSet, String resource) {
 
 		List<Resource> result = new ArrayList<Resource>();
 		while (resultSet.hasNext()) {
@@ -108,7 +113,7 @@ public class SparqlClient {
 		return result;
 	}
 	
-	public static void closeQuery() {
+	public void closeQuery() {
 		if (qexec != null)
 			qexec.close();
 		if (hqexec != null)

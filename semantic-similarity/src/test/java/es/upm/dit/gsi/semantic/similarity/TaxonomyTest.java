@@ -19,8 +19,6 @@ import es.upm.dit.gsi.semantic.similarity.taxonomy.SkosTaxonomy;
 import es.upm.dit.gsi.semantic.similarity.taxonomy.Taxonomy;
 import es.upm.dit.gsi.semantic.similarity.taxonomy.TaxonomyTree;
 
-import es.upm.dit.gsi.semantic.similarity.util.SimilarityUtil;
-
 public class TaxonomyTest {
 
 	private Logger logger = Logger.getLogger(this.getClass());
@@ -33,7 +31,7 @@ public class TaxonomyTest {
 
 	@Ignore
 	public void testSkosFormating() {
-		Model acm = SemanticRepository.readFromXML(acm_clasification);
+		Model acm = Repository.readFromXML(acm_clasification);
 		String acm_ns = NS + "ACM#";
 		String root = "#10003120";
 		SkosTaxonomy taxonomy = new SkosTaxonomy(acm, root, acm_ns);
@@ -44,7 +42,7 @@ public class TaxonomyTest {
 
 	@Ignore
 	public void testRdfsFormating() {
-		Model skills = SemanticRepository.readFromXML(itSkills);
+		Model skills = Repository.readFromXML(itSkills);
 		String skill_ns = NS + "IT-SKILL#";
 		String root = "http://example.org/it-skills.rdfs#IT_Skills";
 		RdfsTaxonomy taxonomy = new RdfsTaxonomy(skills, root, skill_ns);
@@ -76,7 +74,7 @@ public class TaxonomyTest {
 		taxonomy.put("i", "1221");
 		taxonomy.put("j", "1222");
 
-		for (int i = 0; i < 10; i++) {
+		/*for (int i = 0; i < 10; i++) {
 			for (int j = i; j < 10; j++) {
 				String t1 = concepts[i];
 				String t2 = concepts[j];
@@ -90,25 +88,25 @@ public class TaxonomyTest {
 						+ ","
 						+ t2
 						+ ")= "
-						+ SimilarityUtil.format(SimilarityUtil.simWuAndPalmer(
+						+ Taxonomy.format(Taxonomy.simWuAndPalmer(
 								d1, d2, dc)));
 				// System.out.print(SimilarityUtil.format(SimilarityUtil.simWuAndPalmer(d1,
 				// d2, dc)));
 				System.out.print("\t"
-						+ SimilarityUtil.format(SimilarityUtil
+						+ Taxonomy.format(Taxonomy
 								.simLi(d1, d2, dc)));
 				System.out.print("\t"
-						+ SimilarityUtil.format(SimilarityUtil
+						+ Taxonomy.format(Taxonomy
 								.simLeacockandChodorow(d1, d2, dc, 4)));
 				System.out.print("\t"
-						+ SimilarityUtil.format(SimilarityUtil.simRada(d1, d2,
+						+ Taxonomy.format(Taxonomy.simRada(d1, d2,
 								dc, 4)));
 				System.out.println("\t"
-						+ SimilarityUtil.format(SimilarityUtil.simCGM(d1, d2,
+						+ Taxonomy.format(Taxonomy.simCGM(d1, d2,
 								dc)));
 
-			}
-		}
+			}*/
+	//	}
 
 	}
 	

@@ -1,9 +1,5 @@
 package es.upm.dit.gsi.semantic.similarity.compute;
 
-import com.hp.hpl.jena.rdf.model.Literal;
-import com.hp.hpl.jena.rdf.model.RDFNode;
-
-
 public class NumSimCompute implements SimCompute {
 
 	private double deviation;
@@ -26,10 +22,10 @@ public class NumSimCompute implements SimCompute {
 	}
 
 	@Override
-	public double compute(RDFNode query, RDFNode resource) {
-		Literal q = (Literal) query;
-		Literal r = (Literal) resource;
-		return numericSimilarity(q.getDouble(), r.getDouble());
+	public double compute(String query, String resource) {
+		double q = Double.parseDouble(query);
+		double r = Double.parseDouble(resource);
+		return numericSimilarity(q, r);
 	}
 
 	private double numericSimilarity(double value_1, double value_2) {

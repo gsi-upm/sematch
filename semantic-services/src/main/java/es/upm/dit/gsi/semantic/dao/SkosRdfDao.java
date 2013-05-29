@@ -21,17 +21,17 @@ public class SkosRdfDao {
 	public SkosRdfDao() {
 		InputStream in = this.getClass().getClassLoader().getResourceAsStream(rdf);
 		//System.out.println(this.getClass().getClassLoader().getResource(rdf));
-		model = SemanticRepository.readFromXML(in);
+		model = Repository.readFromXML(in);
 	}
 	
 	public SkosRdfDao(InputStream in){
-		model = SemanticRepository.readFromXML(in);
+		model = Repository.readFromXML(in);
 	}
 	
 	public SkosRdfDao(String filePath){
 		String file = filePath+"data/"+rdf;
 		System.out.println(file);
-		model = SemanticRepository.readFromXML(file);
+		model = Repository.readFromXML(file);
 	}
 
 	public String getConceptURI(String concept) {
@@ -39,9 +39,9 @@ public class SkosRdfDao {
 		String queryString = queryStringPre + concept + queryStringBac;
 		Query query = QueryFactory.create(queryString);
 
-		Resource uri = SparqlClient.asResource(
-				SparqlClient.executeSelectQuery(query, model), "concept");
-		return uri.getURI();
+		/*Resource uri = SparqlClient.asResource(
+				SparqlClient.executeSelectQuery(query, model), "concept");*/
+		return null;
 	}
 
 }

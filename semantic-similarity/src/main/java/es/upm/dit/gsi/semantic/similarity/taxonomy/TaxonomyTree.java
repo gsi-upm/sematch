@@ -6,8 +6,6 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.Stack;
 
-import es.upm.dit.gsi.semantic.similarity.util.SimilarityUtil;
-
 public class TaxonomyTree {
 	
 	private int maxDepth = 4;
@@ -15,7 +13,7 @@ public class TaxonomyTree {
 	private Queue<Node> queue = null;
 	private Stack<Node> visited = null;
 	private double upwards = 0.9;
-	private double downwards = 0.9;
+	private double downwards = 0.8;
 	
 	
 	public TaxonomyTree(){
@@ -41,7 +39,7 @@ public class TaxonomyTree {
 			int d2 = concept.getLabel().length();
 			int dc = Taxonomy.getCommon(node.getLabel(), concept.getLabel());
 			String result = computeSimilarity(d1,d2,dc);
-			System.out.println(concept.getLabel() + "\t\t" + computeSimilarity(concept) + result);
+			System.out.println(concept.getLabel() + "\t\t" + Taxonomy.format(computeSimilarity(concept)) + result);
 			
 			if (!concept.isLeaf()) {
 				for (Node child : concept.getChildren()) {
@@ -75,11 +73,11 @@ public class TaxonomyTree {
 	
 	public String computeSimilarity(int depth_1, int depth_2, int depnt_c){
 		
-		String simWuPalm = SimilarityUtil.format(SimilarityUtil.simWuAndPalmer(depth_1, depth_2, depnt_c));
-		String simLi = SimilarityUtil.format(SimilarityUtil.simLi(depth_1, depth_2, depnt_c));
-		String simLC = SimilarityUtil.format(SimilarityUtil.simLeacockandChodorow(depth_1, depth_2, depnt_c, maxDepth));
-		String simRada = SimilarityUtil.format(SimilarityUtil.simRada(depth_1, depth_2, depnt_c, maxDepth));
-		String simCGM = SimilarityUtil.format(SimilarityUtil.simCGM(depth_1, depth_2, depnt_c));
+		String simWuPalm = Taxonomy.format(Taxonomy.simWuAndPalmer(depth_1, depth_2, depnt_c));
+		String simLi = Taxonomy.format(Taxonomy.simLi(depth_1, depth_2, depnt_c));
+		String simLC = Taxonomy.format(Taxonomy.simLeacockandChodorow(depth_1, depth_2, depnt_c, maxDepth));
+		String simRada = Taxonomy.format(Taxonomy.simRada(depth_1, depth_2, depnt_c, maxDepth));
+		String simCGM = Taxonomy.format(Taxonomy.simCGM(depth_1, depth_2, depnt_c));
 		String result = "\t"+simWuPalm+"\t"+simLi+"\t"+simLC+"\t"+simRada+"\t"+simCGM+"\n";
 		return result;
 	}

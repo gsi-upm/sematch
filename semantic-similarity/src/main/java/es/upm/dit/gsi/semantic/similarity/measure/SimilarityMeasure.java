@@ -1,5 +1,7 @@
 package es.upm.dit.gsi.semantic.similarity.measure;
 
+import java.text.DecimalFormat;
+
 import es.upm.dit.gsi.semantic.similarity.Similarity;
 
 public abstract class SimilarityMeasure implements Similarity{

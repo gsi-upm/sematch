@@ -7,7 +7,8 @@ import java.util.ArrayList;
 import org.junit.Test;
 
 import es.upm.dit.gsi.semantic.similarity.taxonomy.HybridNode;
-import es.upm.dit.gsi.semantic.similarity.util.SimilarityUtil;
+import es.upm.dit.gsi.semantic.similarity.taxonomy.Taxonomy;
+
 
 public class TestHybridNode {
 
@@ -43,9 +44,9 @@ public class TestHybridNode {
 			System.out.println(node.getLabel()+
 					//"\t"+SimilarityUtil.format(node.getConceptSim())+
 					//"\t"+SimilarityUtil.format(node.getPropertySim())+
-					"\t"+SimilarityUtil.format(node.combineSimilarity(0.2))+
-					"\t"+SimilarityUtil.format(node.combineSimilarity(0.4))+
-					"\t"+SimilarityUtil.format(node.combineSimilarity(0.7)));
+					"\t"+Taxonomy.format(node.combineSimilarity(0.2))+
+					"\t"+Taxonomy.format(node.combineSimilarity(0.4))+
+					"\t"+Taxonomy.format(node.combineSimilarity(0.7)));
 		}
 	}
 

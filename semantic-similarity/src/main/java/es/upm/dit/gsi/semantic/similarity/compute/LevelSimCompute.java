@@ -2,82 +2,43 @@ package es.upm.dit.gsi.semantic.similarity.compute;
 
 import java.util.Map;
 
-import com.hp.hpl.jena.rdf.model.RDFNode;
-
-import es.upm.dit.gsi.semantic.similarity.taxonomy.Taxonomy;
-import es.upm.dit.gsi.semantic.similarity.type.MatchingMode;
-
 public class LevelSimCompute implements SimCompute {
 	
+	public enum MatchingMode {
+		Exact,Close,Broad,Narrow,Related
+	}
+	
 	private Map<Object, Object> levels;
-	private MatchingMode mode;
+	private boolean mapingLevel = true;
+	private MatchingMode matchModel;
 	private MatchingMode direction;
-	private boolean norm = true;
-
 	private double deviation = 0;
+	private double log2 = Math.log(2);
 	
-	public boolean isNorm() {
-		return norm;
-	}
-
-	public void setNorm(boolean norm) {
-		this.norm = norm;
-	}
-	
-	public MatchingMode getDirection() {
-		return direction;
-	}
-
-	public void setDirection(MatchingMode direction) {
-		this.direction = direction;
-	}
-
-	public MatchingMode getMode() {
-		return mode;
-	}
-
-	public void setMode(MatchingMode mode) {
-		this.mode = mode;
-	}
-
-	public double getDeviation() {
-		return deviation;
-	}
-
-	public void setDeviation(double deviation) {
-		this.deviation = deviation;
-	}
-	
-	public Map<Object, Object> getLevels() {
-		return levels;
-	}
-
-	public void setLevels(Map<Object, Object> levels) {
-		this.levels = levels;
-	}
-
 	@Override
-	public double compute(RDFNode query, RDFNode resource) {
+	public double compute(String query, String resource) {
 
 		double similarity = 0;
-
-		String queryLevel = query.toString();
-		String resourceLevel = resource.toString();
-
-		queryLevel = Taxonomy.parseURI(queryLevel);
-		resourceLevel = Taxonomy.parseURI(resourceLevel);
-
-		int queryValue = Integer.valueOf((String)levels.get(queryLevel));
-		int resourceValue = Integer.valueOf((String)levels.get(resourceLevel));
-
-		similarity = computeSimilarity(queryValue,resourceValue);
 		
-		return similarity;
+		int queryLevel;
+		int resourceLevel;
+		
+		if(isMapingLevel()){
+			queryLevel = Integer.valueOf((String)levels.get(query));
+			resourceLevel = Integer.valueOf((String)levels.get(resource));
+		}else{
+			queryLevel = Integer.valueOf(query);
+			resourceLevel = Integer.valueOf(resource);
+		}
+
+		similarity = computeSimilarity(queryLevel,resourceLevel);
+		System.out.println(queryLevel + " "+ resourceLevel+ " sim: "+similarity);
+		return norm(similarity);
 	}
 	
 	public double computeSimilarity(int query,int resource){
 		double similarity = 0;
-		switch(mode){
+		switch(matchModel){
 		case Exact:
 			similarity = simExact(query,resource);
 			break;
@@ -166,6 +127,7 @@ public class LevelSimCompute implements SimCompute {
 		return 0.5*similarity;
 	}
 	*/
+	
 	//TODO:add the direction check.
 	public double simRelated(int query, int resource){
 		return sigmoid(query,resource);
@@ -201,16 +163,11 @@ public class LevelSimCompute implements SimCompute {
 		return similarity;
 	}
 	
-	public double norm(double v){
-		if(isNorm()){
-			double nv = v+1.0;
-			return Math.log(nv)/Math.log(2);
-		}else
-			return v;
-		
+	public double norm(double v) {
+		double nv = v + 1.0;
+		return Math.log(nv) / log2;
 	}
 	
-
 	private double alpha;
 	private double[] distribution;
 	private int maxLevel;
@@ -277,15 +234,6 @@ public class LevelSimCompute implements SimCompute {
 		}
 	}
 	
-	public double computeGSI(int x, int y){
-		
-		double sim = y*1.0;
-		sim = sim/(x*1.0);
-		double normalise = 1.0/getMaxLevel();
-		return sim*normalise;
-		
-	}
-	
 	public double computeSigmoid(int x, int y){
 		
 		int distance = x-y;
@@ -294,6 +242,46 @@ public class LevelSimCompute implements SimCompute {
 		sim = 1 + sim;
 		return 1/sim;
 		
+	}
+	
+	public boolean isMapingLevel() {
+		return mapingLevel;
+	}
+
+	public void setMapingLevel(boolean mapingLevel) {
+		this.mapingLevel = mapingLevel;
+	}
+
+	public MatchingMode getDirection() {
+		return direction;
+	}
+
+	public void setDirection(MatchingMode direction) {
+		this.direction = direction;
+	}
+
+	public MatchingMode getMatchModel() {
+		return matchModel;
+	}
+
+	public void setMatchModel(MatchingMode model) {
+		this.matchModel = model;
+	}
+
+	public double getDeviation() {
+		return deviation;
+	}
+
+	public void setDeviation(double deviation) {
+		this.deviation = deviation;
+	}
+	
+	public Map<Object, Object> getLevels() {
+		return levels;
+	}
+
+	public void setLevels(Map<Object, Object> levels) {
+		this.levels = levels;
 	}
 
 }

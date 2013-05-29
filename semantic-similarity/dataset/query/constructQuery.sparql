@@ -4,13 +4,13 @@ PREFIX skills: <http://example.org/it-skills.rdfs#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 construct{
-	?jpp rdf:type jpp:JobPositionPosting .
+	?jpp rdf:about jpp:JobPositionPosting .
 	?jpp jpp:requiredCompetence ?skill .
 	?skill rdf:type ?competence .
 	?skill skills:competenceLevel ?level .
 }
 WHERE {
-	?jpp rdf:type jpp:JobPositionPosting . 
+	?jpp rdf:about jpp:JobPositionPosting . 
 	?jpp jpp:requiredCompetence ?skill .
 	?skill rdf:type ?competence .
 	?skill skills:competenceLevel ?level .

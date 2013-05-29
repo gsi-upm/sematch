@@ -95,9 +95,9 @@ public class HybridSimCompute implements SimCompute {
 	}
 
 	@Override
-	public double compute(RDFNode query, RDFNode resource) {
+	public double compute(String query, String resource) {
 
-		double similarity = 0;
+		/*double similarity = 0;
 		double propertySim = 0;
 		double conceptSim = 0;
 
@@ -145,8 +145,8 @@ public class HybridSimCompute implements SimCompute {
 		}
 
 		//logger.info("Similarity: " + similarity);
-
-		return similarity;
+*/
+		return 0;
 	}
 
 }

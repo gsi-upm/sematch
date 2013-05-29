@@ -5,8 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import es.upm.dit.gsi.semantic.dao.SkosRdfDao;
-import es.upm.dit.gsi.semantic.similarity.compute.ConceptSimCompute;
-import es.upm.dit.gsi.semantic.similarity.type.SimilarityMethod;
+
 
 public class SimilarityEngine {
 

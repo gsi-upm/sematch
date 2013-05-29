@@ -1,8 +1,5 @@
 package es.upm.dit.gsi.semantic.similarity.taxonomy;
 
-
-
-import com.hp.hpl.jena.rdf.model.Literal;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.StmtIterator;
@@ -10,6 +7,10 @@ import com.hp.hpl.jena.vocabulary.RDF;
 
 
 public class SkosTaxonomy extends Taxonomy {
+	
+	public SkosTaxonomy(){
+		super();
+	}
 
 	public SkosTaxonomy(Model model, String rootURI, String NS) {
 		super(model, rootURI, NS);

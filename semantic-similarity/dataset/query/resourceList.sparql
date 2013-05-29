@@ -3,8 +3,9 @@ PREFIX jps: <http://example.org/JobPositionSeeker.rdfs#>
 PREFIX skills: <http://example.org/it-skills.rdfs#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
-SELECT ?jps WHERE {
+SELECT ?candidate WHERE {
 
-?jps rdf:type jps:JobPositionSeeker .
+?candidate jps:level ?y .
+?candidate jps:skill ?z
 
 }

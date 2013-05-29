@@ -72,11 +72,13 @@
 			<artifactId>semantic-similarity</artifactId>
 			<version>1.0</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>es.upm.dit.gsi.semantic</groupId>
+			<artifactId>semantic-search</artifactId>
+			<version>1.0</version>
+		</dependency>
 
 	</dependencies>
-
-
-	
-
 
 </project>

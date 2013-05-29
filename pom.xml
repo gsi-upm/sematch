@@ -13,6 +13,7 @@
 	<modules>
 		<module>semantic-similarity</module>
 		<module>semantic-services</module>
+		<module>semantic-search</module>
 	</modules>
 
 
