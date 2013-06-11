@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<system-configuration>
+    
+	<indexing>
+	    <repository>
+	        <local>
+	            <file>"dataset/employees.rdf" </file>
+	        </local>
+	        <remote>
+	            <url></url>
+	            <query></query>
+	        </remote>
+	    </repository> 
+		<fields>
+			<field>
+				<label>skill</label>
+				<resource>http://www.gsi.dit.upm.es/gzhu/ontology/employment.rdfs#skill</resource>
+			</field>
+			<field>
+				<label>level</label>
+				<resource>http://www.gsi.dit.upm.es/gzhu/ontology/employment.rdfs#level</resource>
+			</field>
+		</fields>
+	</indexing>
+	
+	<similarity>
+	    <config>similarity-config.xml</config>
+	    <bean>simService</bean>
+	</similarity>
+	
+	<searching>
+	    <results>
+	        <numbers></numbers>
+	    </results>
+	</searching>
+	
+	<service>
+	    <request></request>
+	    <response></response>
+	</service>
+	
+</system-configuration>

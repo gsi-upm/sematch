@@ -10,25 +10,20 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
-import es.upm.dit.gsi.semantic.engine.SimilarityEngine;
-import es.upm.dit.gsi.semantic.engine.SimilarityResult;
-
 @Path("/similarity")
 public class SimilarityServices {
 
 	@Context
 	ServletContext context;
-
-	SimilarityEngine engine;
 	
 	public SimilarityServices(){
-		engine = new SimilarityEngine();
+		
 	}
 
-	@GET
-	@Path("{c1}/{c2}")
-	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public List<SimilarityResult> similarity(@PathParam("c1") String concept_1,
+	//@GET
+	//@Path("{c1}/{c2}")
+	//@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	/*public List<SimilarityResult> similarity(@PathParam("c1") String concept_1,
 			@PathParam("c2") String concept_2) {
 		
 		//System.out.println(context.getRealPath("/"));
@@ -36,7 +31,7 @@ public class SimilarityServices {
 		//return null;
 		//response.s
 		return engine.pairwiseSimilarity(concept_1, concept_2);
-	}
+	}*/
 	
 
 }

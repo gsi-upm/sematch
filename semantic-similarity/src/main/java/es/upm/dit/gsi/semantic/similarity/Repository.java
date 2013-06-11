@@ -1,5 +1,7 @@
 package es.upm.dit.gsi.semantic.similarity;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -10,7 +12,6 @@ import java.io.InputStream;
 import java.util.List;
 
 import net.sf.json.JSONObject;
-import org.apache.commons.io.IOUtils;
 
 import com.hp.hpl.jena.query.Query;
 import com.hp.hpl.jena.query.ResultSet;
@@ -48,6 +49,11 @@ public class Repository {
 	public void setModel(Model model) {
 		this.model = model;
 	}
+	
+	public Model getModelFromTriple(){
+		setModel(readFromTriple(fileName));
+		return getModel();
+	}
 
 	// read model from local file
 	public Model getModelFromLocal() {
@@ -78,6 +84,120 @@ public class Repository {
 		return resList;
 	}
 
+	// writing the RDF model to XML file
+	public static void writeToXML(Model model, String fileName) {
+
+		File file = null;
+		FileOutputStream out = null;
+		try {
+			file = new File(fileName);
+			out = new FileOutputStream(file);
+			if (!file.exists()) {
+				file.createNewFile();
+			}
+			model.write(out);
+			out.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static Model readFromTriple(String fileName){
+		Model model = ModelFactory.createDefaultModel();
+		InputStream in = FileManager.get().open(fileName);
+		if (in == null) {
+			throw new IllegalArgumentException("File: " + fileName
+					+ " not found");
+		}
+		
+		model.read(in, null, "N-TRIPLE");
+		return model;
+	}
+
+	// reading the RDF model from the XML file
+	public static Model readFromXML(String fileName) {
+		Model model = ModelFactory.createDefaultModel();
+		InputStream in = FileManager.get().open(fileName);
+		if (in == null) {
+			throw new IllegalArgumentException("File: " + fileName
+					+ " not found");
+		}
+		
+		model.read(in, "");
+		return model;
+	}
+
+	public static Model readFromXML(InputStream in) {
+		Model model = ModelFactory.createDefaultModel();
+		model.read(in, "");
+		return model;
+	}
+
+	// writing the json to the file for generating taxonomy graph
+	public static void writeJSON(String fileName, JSONObject json) {
+
+		writeTextFile(fileName,json.toString());
+
+	}
+
+	// read json from the file
+	public static JSONObject readJSON(String fileName) {
+		String jsonString = readTextFile(fileName);
+		return JSONObject.fromObject(jsonString);
+	}
+	
+	//read from text file
+	public static String readTextFile(String fileName) {
+		
+		FileReader file = null;
+		String line = "";
+		BufferedReader reader = null;
+		StringBuffer buffer = new StringBuffer();
+		try {
+			file = new FileReader(fileName);
+			reader = new BufferedReader(file);
+			while ((line = reader.readLine()) != null) {
+				buffer.append(line);
+				buffer.append("\n");
+			}
+		} catch (FileNotFoundException e) {
+			throw new RuntimeException("File not found");
+		} catch (IOException e) {
+			throw new RuntimeException("IO Error occured");
+		} finally {
+			if (file != null) {
+				try {
+					file.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return buffer.toString();
+	}
+
+	//write to text file
+	public static void writeTextFile(String fileName, String str) {
+		BufferedWriter writer = null;
+		try {
+			writer = new BufferedWriter(new FileWriter(fileName));
+			writer.write(str);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (writer != null) {
+				try {
+					writer.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+	}
+	
 	public void setResList(List<Resource> resourceList) {
 		this.resList = resourceList;
 	}
@@ -128,75 +248,6 @@ public class Repository {
 
 	public void setResName(String resName) {
 		this.resName = resName;
-	}
-
-	// writing the RDF model to XML file
-	public static void writeToXML(Model model, String fileName) {
-
-		File file = null;
-		FileOutputStream out = null;
-		try {
-			file = new File(fileName);
-			out = new FileOutputStream(file);
-			if (!file.exists()) {
-				file.createNewFile();
-			}
-			model.write(out);
-			out.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	// reading the RDF model from the XML file
-	public static Model readFromXML(String fileName) {
-		Model model = ModelFactory.createDefaultModel();
-		InputStream in = FileManager.get().open(fileName);
-		if (in == null) {
-			throw new IllegalArgumentException("File: " + fileName
-					+ " not found");
-		}
-
-		model.read(in, "");
-		return model;
-	}
-
-	public static Model readFromXML(InputStream in) {
-		Model model = ModelFactory.createDefaultModel();
-		model.read(in, "");
-		return model;
-	}
-
-	// writing the json to the file for generating taxonomy graph
-	public static void writeJSON(String fileName, JSONObject json) {
-
-		try {
-			FileWriter file = new FileWriter(fileName);
-			file.write(json.toString());
-			file.flush();
-			file.close();
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	// read json from the file
-	public static JSONObject readJSON(String fileName) {
-		JSONObject jsonObject = null;
-		try {
-			FileReader reader = new FileReader(fileName);
-			String jsonString = IOUtils.toString(reader);
-			jsonObject = JSONObject.fromObject(jsonString);
-			reader.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return jsonObject;
 	}
 
 }

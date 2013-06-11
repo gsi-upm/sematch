@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	   http://www.springframework.org/schema/beans/spring-beans-2.0.xsd" 
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	
+	<bean id="simService" class="es.upm.dit.gsi.semantic.similarity.SimilarityService">
+	    <property name="simMeasures">
+			<list>
+				<ref bean="competency"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="competency" class="es.upm.dit.gsi.semantic.similarity.measure.HybridMeasure">
+	    <property name="concept" ref="skill" />
+		<property name="property" ref="level" />
+		<property name="weight" value="1" />
+	</bean>
+	
+	<bean id="skill" class="es.upm.dit.gsi.semantic.similarity.measure.AtomicMeasure">
+	 	<property name="label" value="skill" />
+	 	<property name="weight" value="0.8" />
+	 	<property name="simCompute" ref="conceptSimCompute" />
+	</bean>
+	
+	<bean id="level" class="es.upm.dit.gsi.semantic.similarity.measure.AtomicMeasure">
+	    <property name="label" value="level" />
+	    <property name="weight" value="0.2" />
+	    <property name="simCompute" ref="levelSimCompute" />
+	</bean>
+	
+	<bean id="levelSimCompute" class="es.upm.dit.gsi.semantic.similarity.compute.LevelSimCompute">
+	    <property name="levels">
+			<map>
+				<entry key="Beginner" value="1"/>
+				<entry key="Intermediate" value="2"/>
+				<entry key="Advanced" value="3"/>
+				<entry key="Expert" value="4"/>
+			</map>
+		</property>
+		<property name="matchModel" value="Broad"/>
+		<property name="deviation" value="0.25" />
+	</bean>
+	
+	<bean id="conceptSimCompute" class="es.upm.dit.gsi.semantic.similarity.compute.ConceptSimCompute">
+	    <property name="taxonomy" ref="taxonomy" />
+	    <property name="methodType" value="WuAndPalm" />
+	</bean>
+	
+	<bean id="taxonomy" class="es.upm.dit.gsi.semantic.similarity.taxonomy.RdfsTaxonomy">
+		<property name="taxFile" value="dataset/it-skills.rdfs"/>
+		<property name="NS" value="http://gsi.dit.upm.es/gzhu/ontologies/IT-SKILL#"/>
+		<property name="rootURI" value="http://example.org/it-skills.rdfs#IT_Skills"/>
+	</bean>	
+	
+</beans>
