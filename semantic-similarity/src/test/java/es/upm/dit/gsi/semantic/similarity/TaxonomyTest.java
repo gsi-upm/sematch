@@ -31,7 +31,7 @@ public class TaxonomyTest {
 
 	@Ignore
 	public void testSkosFormating() {
-		Model acm = Repository.readFromXML(acm_clasification);
+		Model acm = Repository.readModelRDF(acm_clasification);
 		String acm_ns = NS + "ACM#";
 		String root = "#10003120";
 		SkosTaxonomy taxonomy = new SkosTaxonomy(acm, root, acm_ns);
@@ -42,7 +42,7 @@ public class TaxonomyTest {
 
 	@Ignore
 	public void testRdfsFormating() {
-		Model skills = Repository.readFromXML(itSkills);
+		Model skills = Repository.readModelRDF(itSkills);
 		String skill_ns = NS + "IT-SKILL#";
 		String root = "http://example.org/it-skills.rdfs#IT_Skills";
 		RdfsTaxonomy taxonomy = new RdfsTaxonomy(skills, root, skill_ns);

@@ -67,7 +67,7 @@ public abstract class Taxonomy {
 	
 	public void initializing(){
 		
-		this.originModel = Repository.readFromXML(taxFile);
+		this.originModel = Repository.readModelRDF(taxFile);
 		init();
 	}
 
@@ -248,6 +248,21 @@ public abstract class Taxonomy {
 
 		return sim;
 	}
+	
+	//gsi methods
+	public static double simGSI(int depth_1, int depth_2, int depth_common,double upwards,double downwards){
+		int path_up = depth_1 - depth_common;
+		int path_down = depth_2 - depth_common;
+		if(path_up == 0){
+			return 1;
+		}else{
+			
+			double sim = Math.pow(upwards, path_up);
+			sim = sim * Math.pow(downwards,path_down);
+			sim = sim + 1;
+			return Math.log(sim)/Math.log(2);
+		}
+	}
 
 	// Rada & Resnik
 	public static double simRada(int depth_1, int depth_2, int depth_common,int maxDepth) {
@@ -262,7 +277,6 @@ public abstract class Taxonomy {
 	}
 
 	// Leacock & Chodorow
-	// TODO:The similarity value is not located between 0 and 1. Need to be
 	public static double simLeacockandChodorow(int depth_1, int depth_2,int depth_common,int maxDepth) {
 
 		int distance1 = depth_1 - depth_common;

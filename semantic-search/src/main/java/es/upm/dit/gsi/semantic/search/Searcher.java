@@ -1,6 +1,9 @@
 package es.upm.dit.gsi.semantic.search;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.CorruptIndexException;
@@ -14,40 +17,46 @@ public class Searcher {
 
 	private IndexSearcher searcher = null;
 	private IndexReader reader = null;
-	private int resultNumber= 0;
+	private int resultSize = 0;
 
-	public IndexSearcher getIndexSearcher(Directory directory) {
-
-		if (searcher == null) {
-			try {
-				reader = IndexReader.open(directory);
-				searcher = new IndexSearcher(reader);
-			} catch (CorruptIndexException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		return searcher;
-	}
-	
-	public void search(Query query){
+	public Searcher(Directory directory) {
 		try {
-			ScoreDoc[] docs = searcher.search(query, 100).scoreDocs;
-			Document hitDoc = null;
-			for(int i=0;i<docs.length;i++){
-				hitDoc = searcher.doc(docs[i].doc);
-				System.out.println(hitDoc.get("resURI")+ ": skill" +
-						hitDoc.get("skill") +
-						" : level" +hitDoc.get("level") +
-						" score= " + docs[i].score);
-			}
+			reader = IndexReader.open(directory);
+			searcher = new IndexSearcher(reader);
+		} catch (CorruptIndexException e) {
+			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
-	public void closeSemanticSearcher() {
+	public ArrayList<Map<String,String>> search(Query query, IndexConfig indexConfig) {
+		
+		ArrayList<Map<String,String>> results = new ArrayList<Map<String,String>>();
+		
+		try {
+			ScoreDoc[] docs = searcher.search(query, resultSize).scoreDocs;
+			Document hitDoc = null;
+			for (int i = 0; i < docs.length; i++) {
+				
+				hitDoc = searcher.doc(docs[i].doc);
+				Map<String,String> result = new HashMap<String,String>();
+				result.put("uri",hitDoc.get("uri"));
+				result.put("sim", ""+docs[i].score);
+				
+				for(String field:indexConfig.getFields()){
+					result.put(field, hitDoc.get(field));
+				}
+				results.add(result);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return results;
+	}
+
+	public void close() {
 		if (searcher != null) {
 			try {
 				searcher.close();
@@ -56,6 +65,14 @@ public class Searcher {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	public int getResultSize() {
+		return resultSize;
+	}
+
+	public void setResultSize(int resultSize) {
+		this.resultSize = resultSize;
 	}
 
 }

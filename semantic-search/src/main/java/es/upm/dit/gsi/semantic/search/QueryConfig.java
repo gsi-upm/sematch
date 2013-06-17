@@ -1,38 +1,42 @@
 package es.upm.dit.gsi.semantic.search;
 
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 public class QueryConfig {
 	
-	private Map<String,String> queryMap = null;
-	private Map<String,String[]> cacheMap = null;
+	private int resultSize;
+	private ArrayList<String> fields = null;
+	private Map<String,String> query = null;
 	
 	public QueryConfig(){
-		queryMap = new HashMap<String,String>();
-		cacheMap = new HashMap<String,String[]>();
+		fields = new ArrayList<String>();
 	}
 
 	public Map<String,String> getQuery(){
-		return this.queryMap;
+		return this.query;
 	}
 
-	public Set<String> getQueryFileds() {
-		return queryMap.keySet();
+	public List<String> getQueryFileds() {
+		return fields;
+	}
+	
+	public void addField(String field){
+		fields.add(field);
 	}
 
-	public void setQuery(String key,String value) {
-		this.queryMap.put(key, value);
+	public void setQuery(Map<String,String> query) {
+		this.query = query;
+	}
+	
+	public int getResultSize() {
+		return resultSize;
 	}
 
-	//TODO:add fieldCache not find exception
-	public String[] getFieldCache(String key) {
-		return cacheMap.get(key);
+	public void setResultSize(int resultSize) {
+		this.resultSize = resultSize;
 	}
 
-	public void setCache(String field, String[] cache) {
-		this.cacheMap.put(field, cache);
-	}
 
 }

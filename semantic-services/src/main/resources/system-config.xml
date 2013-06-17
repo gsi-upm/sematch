@@ -3,15 +3,20 @@
     
 	<indexing>
 	    <repository>
+	    	<type>local</type>
 	        <local>
-	            <file>"dataset/employees.rdf" </file>
+	            <file>employees.rdf</file>
 	        </local>
-	        <remote>
-	            <url></url>
-	            <query></query>
-	        </remote>
 	    </repository> 
 		<fields>
+			<field>
+				<label>city</label>
+				<resource>http://www.gsi.dit.upm.es/gzhu/ontology/employment.rdfs#city</resource>
+			</field>
+			<field>
+				<label>salary</label>
+				<resource>http://www.gsi.dit.upm.es/gzhu/ontology/employment.rdfs#salary</resource>
+			</field>
 			<field>
 				<label>skill</label>
 				<resource>http://www.gsi.dit.upm.es/gzhu/ontology/employment.rdfs#skill</resource>
@@ -29,14 +34,23 @@
 	</similarity>
 	
 	<searching>
+		<query>
+			<field>
+				<label>skill</label>
+			</field>
+			<field>
+				<label>level</label>
+			</field>
+			<field>
+				<label>city</label>
+			</field>
+			<field>
+				<label>salary</label>
+			</field>
+		</query>
 	    <results>
-	        <numbers></numbers>
+	        <size>12</size>
 	    </results>
 	</searching>
-	
-	<service>
-	    <request></request>
-	    <response></response>
-	</service>
 	
 </system-configuration>

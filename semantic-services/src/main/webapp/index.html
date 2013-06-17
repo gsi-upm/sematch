@@ -1,61 +1,53 @@
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 <html>
+
 <head>
-<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-<script type="text/javascript" src="js/d3.v2.js"></script>
-<script type="text/javascript" src="js/jquery-1.8.3.js"></script>
-<link type="text/css" rel="stylesheet" href="css/index.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Semantic Job Matching Demo</title>
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400"
+	rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="css/index.css" />
+<script
+	src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+<script type="text/javascript" src="js/search.js"></script>
+
 </head>
+
 <body>
-	<h1>Semantic Similarity Service</h1>
-	<hr>
-	<br>
-	<div class="concpet_inputs">
 
-		<label>Concept_1:</label> <input type="text" id="Concept_1"> <label>Concept_2:</label>
-		<input type="text" id="Concept_2"> <select name='select'>
-			<option value='shortestPath' selected>ShortestPath</option>
-			<option value='wuAndPalmer'>Wu and Palmer</option>
-			<option value='leacokChodorow'>Leacock-Chodorow</option>
-			<option value='weightedLinks'>Weighted Links</option>
-			<option value='liEtAl'>Li et al.</option>
-			<option value='lin'>Lin</option>
-			<option value='jiangEtAl'>Jiang et al.</option>
-			<option value='resnik'>Resnik</option>
-			<option value='tversky'>Tversky</option>
-		</select>
-		<button id="btnCompute">Compute</button>
-		<button id="btnReset">Reset</button>
-		<button id="btnRandom">Random</button>
+	<div class="main_container">
+
+		<div id="title">
+			<h1 id="main_title">Semantic Job Matching Demo</h1>
+		</div>
+
+		<div id="search_button_div">
+			<button id="search_button" onclick="search()"></button>
+		</div>
+
+		<div id="city_salary">
+
+			<p id="city_label">City:</p>
+			<input type="text" id="city" />
+			<p id="salary_label">Salary:</p>
+			<input type="text" id="salary"/>
+
+		</div>
 		
+		<div id="skill_level">
+
+			<p id="skill_label">Skill:</p>
+			<input type="text" id="skill" />
+			<p id="level_label">Level:</p>
+			<input type="text" id="level"/>
+
+		</div>
+
+		<div id="result_div"></div>
 
 	</div>
-	<br>
-	<div class="results_display">
-		<table border="1" id="results">
-		<caption>Similarity Results</caption>
-		<tr>
-		<th>CGM</th>
-		<th>Wu&Palm</th>
-		<th>Rada</th>
-		<th>Leacock&Chodorow</th>
-		<th>Li</th>
-		</tr>
-		<tr>
-		<td id="d1">0</td>
-		<td id="d2">0</td>
-		<td id="d3">0</td>
-		<td id="d4">0</td>
-		<td id="d5">0</td>
-		</tr>
-		</table>
-	</div>
-	<br>
-	<br>
-	<h2>Information System Tree</h2>
-	<hr>
-	<div id="chart"></div>
-	<script type="text/javascript" src="js/dtree.js"></script>
-	<script type="text/javascript" src="js/similarity.js"></script>
+	<!-- end of main_container -->
+
 </body>
 </html>

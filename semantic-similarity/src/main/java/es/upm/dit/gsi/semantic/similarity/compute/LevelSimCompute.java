@@ -32,7 +32,6 @@ public class LevelSimCompute implements SimCompute {
 		}
 
 		similarity = computeSimilarity(queryLevel,resourceLevel);
-		System.out.println(queryLevel + " "+ resourceLevel+ " sim: "+similarity);
 		return norm(similarity);
 	}
 	

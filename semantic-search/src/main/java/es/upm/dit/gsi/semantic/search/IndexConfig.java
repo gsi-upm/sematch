@@ -1,15 +1,26 @@
 package es.upm.dit.gsi.semantic.search;
 
+import java.util.List;
 import java.util.Map;
 
 public class IndexConfig {
 
-	private String localFile;
-	private String remoteUrl;
-	private String query;
-	private Map<String,String> fieldMap;
+	private String type = null;
+	private String localFile = null;
+	private String remoteUrl = null;
+	private String query = null;
+	private List<String> fields = null;
+	private Map<String,String> fieldMap = null;
 	
 	public IndexConfig(){}
+	
+	public List<String> getFields() {
+		return fields;
+	}
+
+	public void setFields(List<String> fields) {
+		this.fields = fields;
+	}
 
 	public Map<String, String> getFieldMap() {
 		return fieldMap;
@@ -45,6 +56,13 @@ public class IndexConfig {
 
 	public void setQuery(String query) {
 		this.query = query;
+	}
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 }

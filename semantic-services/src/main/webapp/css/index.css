@@ -1,81 +1,236 @@
-@CHARSET "UTF-8";
 
-.node circle {
-  cursor: pointer;
-  fill: #fff;
-  stroke: steelblue;
-  stroke-width: 1.5px;
+body{
+	background:rgba(255, 255, 255, 0.7);
 }
 
-.node text {
-  font: 10px sans-serif;
+
+.main_container {
+	position:absolute;
+	left:10px;
+	width: 1200px;
+	height: 600px;
+	padding:10px;
+	margin: 10px;
+ /* 	border-style:solid;
+	border-width:1px;  */
 }
 
-.concpet_inputs{
-	text-align:center;
+
+
+#title {
+	position:relative;
+	left:100px;
+	width: 250px;
+	height: 100px;
+	float: left;
+	margin: 10px;
+	background: #AC193D;
 }
 
-.results_display{
-	text-align:center;
+#main_title {
+	
+	width: 250px;
+	height: 100px;
+	font: 400 25px 'open sans', san-serif;
+	color:white;
+	text-align: center;
 }
 
-path.link {
-  fill: none;
-  stroke: #ccc;
-  stroke-width: 1.5px;
+#city_salary{
+	position:relative;
+	left:120px;
+	width: 250px;
+	height: 100px;
+	float: left;
+	margin: 10px;
+	background: #8C0095;
 }
 
-hr{
-	color:steelblue;
+#skill_level{
+	position:relative;
+	left:140px;
+	width: 250px;
+	height: 100px;
+	float: left;
+	margin: 10px;
+	background: #008299;
 }
 
-h1 {
-        color:steelblue;
-        font: 40px;
-		text-align: center;
+
+#search_button_div{
+	position:relative;
+	top:10px;
+	left:-120px;
+	width: 100px;
+	height: 100px;
+	float: right;
+	background: #2672EC;
 }
 
-h2 {
-        color:steelblue;
-        font: 30px;
-		text-align: center;
+#search_button {
+	position:relative;
+	top:20px;
+	left:20px;
+   	width: 60px;
+	height: 60px;
+    border: 0;
+    border-radius: 1px; 
+    /*  background: #5193fb url('search.png') no-repeat center; */
+    background: #2672EC url('search.png') no-repeat center;
+	outline: none;
 }
 
-#results
-{
-font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
-width:100%;
-border-collapse:collapse;
+#city_label{
+	font: 16px 'open sans', sans-serif;
+	color:white;
+	position:relative;
+	top:9px;
+	left:1px;
+	width:50px;
+	padding:5px;
+	margin:5px;
+	text-align:left;
 }
 
-#results caption
-{
-font-size:1.5em;
-text-align:center;
-padding-top:5px;
-padding-bottom:4px;
-color:steelblue;
+#salary_label{
+	font: 16px 'open sans', sans-serif;
+	color:white;
+	position:relative;
+	top:-32px;
+	left:1px;
+	width:50px;
+	padding:5px;
+	margin:5px;
+	text-align:left;
+}
+
+#city{
+	
+	position:relative;
+	top:-35px;
+	left:70px;
+	width:150px;
+	padding:5px;
+	margin:5px;
+	font: 16px 'open sans', sans-serif;
+	border: 1px solid #e2e2e2;
+	border-radius: 0;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+    box-shadow: none; 
+	outline: 0;
+	color: #444;
 	
 }
 
-#results td, #results th 
-{
-font-size:1.2em;
-border:1px solid steelblue;
-padding:3px 7px 2px 7px;
+#salary{
+	position:relative;
+	top:-75px;
+	left:70px;
+	width:150px;
+	padding:5px;
+	margin:5px;
+	font: 16px 'open sans', sans-serif;
+	border: 1px solid #e2e2e2;
+	border-radius: 0;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+    box-shadow: none; 
+	outline: 0;
+	color: #444;
+
 }
 
-#results th 
-{
-font-size:1.3em;
-text-align:left;
-padding-top:5px;
-padding-bottom:4px;
-background-color:steelblue;
-color:#fff;
+#skill_label{
+	font: 16px 'open sans', sans-serif;
+	color:white;
+	position:relative;
+	top:9px;
+	left:1px;
+	width:50px;
+	padding:5px;
+	margin:5px;
+	text-align:left;
 }
-#results tr.alt td 
-{
-color:#000;
-background-color:#EAF2D3;
+
+#level_label{
+	font: 16px 'open sans', sans-serif;
+	color:white;
+	position:relative;
+	top:-32px;
+	left:1px;
+	width:50px;
+	padding:5px;
+	margin:5px;
+	text-align:left;
+}
+
+#skill{
+	
+	position:relative;
+	top:-35px;
+	left:70px;
+	width:150px;
+	padding:5px;
+	margin:5px;
+	font: 16px 'open sans', sans-serif;
+	border: 1px solid #e2e2e2;
+	border-radius: 0;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+    box-shadow: none; 
+	outline: 0;
+	color: #444;
+	
+}
+
+#level{
+	position:relative;
+	top:-75px;
+	left:70px;
+	width:150px;
+	padding:5px;
+	margin:5px;
+	font: 16px 'open sans', sans-serif;
+	border: 1px solid #e2e2e2;
+	border-radius: 0;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+    box-shadow: none; 
+	outline: 0;
+	color: #444;
+}
+
+
+#result_div {
+	position:relative;
+	left:80px;
+	top:120px;
+	width:1000px;
+	height:450px;
+	padding:10px;
+	padding: 10px;
+	margin: 10px;
+}
+
+.result_box {
+	position:relative;
+	left:12px;
+	top:-80px;
+	width: 200px;
+	height: 100px;
+	float:left;
+	padding: 10px;
+	margin:10px;
+	background: #569CE3;
+}
+
+.result_box_data{
+	
+	width:70px;
+	font: 15px 'open sans', sans-serif;
+	color: white ;
+	padding: 2px;
+	margin: 5px;
+	float: left;
 }

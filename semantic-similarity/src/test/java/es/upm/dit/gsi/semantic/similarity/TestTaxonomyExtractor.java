@@ -26,7 +26,7 @@ import es.upm.dit.gsi.semantic.similarity.taxonomy.extraction.TaxonomyExtraction
 
 public class TestTaxonomyExtractor {
 
-	@Test
+	@Ignore
 	public void test() {
 		
 		String sampleFile = "dataset/sample-triple.nt";
@@ -53,7 +53,7 @@ public class TestTaxonomyExtractor {
 		extraction.buildSubTaxonomy(buffer.toString());
 		extraction.getNewTaxonomy().write(System.out);
 		
-		Repository.writeToXML(extraction.getNewTaxonomy(), "programming-language.rdf");
+		Repository.writeModelFile(extraction.getNewTaxonomy(), "programming-language.rdf");
 		
 		
 	}

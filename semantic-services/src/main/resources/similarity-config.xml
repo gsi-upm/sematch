@@ -9,20 +9,34 @@
 	    <property name="simMeasures">
 			<list>
 				<ref bean="competency"/>
+				<ref bean="city"/>
+				<ref bean="salary"/>
 			</list>
 		</property>
+	</bean>
+	
+	<bean id="city" class="es.upm.dit.gsi.semantic.similarity.measure.AtomicMeasure">
+	    <property name="label" value="city" />
+	 	<property name="weight" value="0.2" />
+	 	<property name="simCompute" ref="citySimCompute" />
+	</bean>
+	
+	<bean id="salary" class="es.upm.dit.gsi.semantic.similarity.measure.AtomicMeasure">
+	    <property name="label" value="salary" />
+	 	<property name="weight" value="0.2" />
+	 	<property name="simCompute" ref="salarySimCompute" />
 	</bean>
 	
 	<bean id="competency" class="es.upm.dit.gsi.semantic.similarity.measure.HybridMeasure">
 	    <property name="concept" ref="skill" />
 		<property name="property" ref="level" />
-		<property name="weight" value="1" />
+		<property name="weight" value="0.6" />
 	</bean>
 	
 	<bean id="skill" class="es.upm.dit.gsi.semantic.similarity.measure.AtomicMeasure">
 	 	<property name="label" value="skill" />
 	 	<property name="weight" value="0.8" />
-	 	<property name="simCompute" ref="conceptSimCompute" />
+	 	<property name="simCompute" ref="skillSimCompute" />
 	</bean>
 	
 	<bean id="level" class="es.upm.dit.gsi.semantic.similarity.measure.AtomicMeasure">
@@ -44,15 +58,25 @@
 		<property name="deviation" value="0.25" />
 	</bean>
 	
-	<bean id="conceptSimCompute" class="es.upm.dit.gsi.semantic.similarity.compute.ConceptSimCompute">
+	<bean id="skillSimCompute" class="es.upm.dit.gsi.semantic.similarity.compute.ConceptSimCompute">
 	    <property name="taxonomy" ref="taxonomy" />
-	    <property name="methodType" value="WuAndPalm" />
+	    <property name="methodType" value="GSI" />
+	    <property name="upwards" value="0.6" />
+	    <property name="downwards" value="0.8"/>
 	</bean>
 	
 	<bean id="taxonomy" class="es.upm.dit.gsi.semantic.similarity.taxonomy.RdfsTaxonomy">
-		<property name="taxFile" value="dataset/it-skills.rdfs"/>
+		<property name="taxFile" value="it-skills.rdfs"/>
 		<property name="NS" value="http://gsi.dit.upm.es/gzhu/ontologies/IT-SKILL#"/>
 		<property name="rootURI" value="http://example.org/it-skills.rdfs#IT_Skills"/>
 	</bean>	
+	
+	<bean id="salarySimCompute" class="es.upm.dit.gsi.semantic.similarity.compute.NumSimCompute">
+	    <property name="deviation" value="0.2"/>
+		<property name="downward" value="true"/>
+	</bean>
+	
+	<bean id="citySimCompute" class="es.upm.dit.gsi.semantic.similarity.compute.StringSimCompute">
+	</bean>
 	
 </beans>

@@ -50,14 +50,14 @@ public class Repository {
 		this.model = model;
 	}
 	
-	public Model getModelFromTriple(){
-		setModel(readFromTriple(fileName));
+	public Model getModelNTriple(){
+		setModel(readModelNTriple(fileName));
 		return getModel();
 	}
 
 	// read model from local file
-	public Model getModelFromLocal() {
-		setModel(readFromXML(fileName));
+	public Model getModelRDF() {
+		setModel(readModelRDF(fileName));
 		return getModel();
 	}
 
@@ -85,7 +85,7 @@ public class Repository {
 	}
 
 	// writing the RDF model to XML file
-	public static void writeToXML(Model model, String fileName) {
+	public static void writeModelFile(Model model, String fileName) {
 
 		File file = null;
 		FileOutputStream out = null;
@@ -104,34 +104,34 @@ public class Repository {
 		}
 	}
 	
-	public static Model readFromTriple(String fileName){
-		Model model = ModelFactory.createDefaultModel();
-		InputStream in = FileManager.get().open(fileName);
-		if (in == null) {
-			throw new IllegalArgumentException("File: " + fileName
-					+ " not found");
-		}
+	public static Model readModelNTriple(String fileName){
 		
-		model.read(in, null, "N-TRIPLE");
-		return model;
+		return readModelFile(fileName,"N-TRIPLE");
+		
 	}
 
 	// reading the RDF model from the XML file
-	public static Model readFromXML(String fileName) {
-		Model model = ModelFactory.createDefaultModel();
+	public static Model readModelRDF(String fileName) {
+		
+		return readModelFile(fileName,"");
+		
+	}
+	
+	private static Model readModelFile(String fileName, String type){
+		
 		InputStream in = FileManager.get().open(fileName);
+		
 		if (in == null) {
 			throw new IllegalArgumentException("File: " + fileName
 					+ " not found");
 		}
 		
-		model.read(in, "");
-		return model;
+		return readModel(in,type);
 	}
 
-	public static Model readFromXML(InputStream in) {
-		Model model = ModelFactory.createDefaultModel();
-		model.read(in, "");
+	public static Model readModel(InputStream in, String type) {
+		Model model = ModelFactory.createDefaultModel();	
+		model.read(in, type);
 		return model;
 	}
 

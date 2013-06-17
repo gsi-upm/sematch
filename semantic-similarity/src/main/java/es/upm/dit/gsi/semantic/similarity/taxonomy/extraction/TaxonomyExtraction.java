@@ -24,7 +24,7 @@ public class TaxonomyExtraction {
 	}
 	
 	public void initTaxonomy(String fileName){
-		rawTaxonomy = Repository.readFromTriple(fileName);
+		rawTaxonomy = Repository.readModelNTriple(fileName);
 		rawTaxonomy.setNsPrefix("skos", SKOS.getURI());
 		newTaxonomy = ModelFactory.createDefaultModel();
 		newTaxonomy.setNsPrefix("skos", SKOS.getURI());

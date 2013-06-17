@@ -14,6 +14,8 @@ public class ConceptSimCompute implements SimCompute, InitializingBean {
 	private MethodType methodType;
 	private Taxonomy taxonomy;
 	private int maxDepth = 1;
+	private double upwards = 0.6;
+	private double downwards = 0.9;
 
 	public ConceptSimCompute() {
 
@@ -59,6 +61,7 @@ public class ConceptSimCompute implements SimCompute, InitializingBean {
 			similarity = Taxonomy.simLi(depth_1, depth_2, depth_c);
 			break;
 		case GSI:
+			similarity = Taxonomy.simGSI(depth_1, depth_2, depth_c, upwards, downwards);
 			break;
 		}
 		return similarity;
@@ -87,11 +90,27 @@ public class ConceptSimCompute implements SimCompute, InitializingBean {
 	public void setTaxonomy(Taxonomy taxonomy) {
 		this.taxonomy = taxonomy;
 	}
+	
+	public double getUpwards() {
+		return upwards;
+	}
+
+	public void setUpwards(double upwards) {
+		this.upwards = upwards;
+	}
+
+	public double getDownwards() {
+		return downwards;
+	}
+
+	public void setDownwards(double downwards) {
+		this.downwards = downwards;
+	}
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		taxonomy.initializing();
-		taxonomy.formatModel().write(System.out);
+		taxonomy.formatModel();
 	}
 
 }
