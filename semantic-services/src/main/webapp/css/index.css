@@ -64,7 +64,7 @@ body{
 	width: 100px;
 	height: 100px;
 	float: right;
-	background: #2672EC;
+	background: #094AB2;
 }
 
 #search_button {
@@ -76,7 +76,7 @@ body{
     border: 0;
     border-radius: 1px; 
     /*  background: #5193fb url('search.png') no-repeat center; */
-    background: #2672EC url('search.png') no-repeat center;
+    background: url('search.png') no-repeat center;
 	outline: none;
 }
 

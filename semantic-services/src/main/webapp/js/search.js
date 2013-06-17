@@ -3,6 +3,13 @@ var rootURL = "http://localhost:8080/semantic-services/rest/search";
 
 $(document).ready(function() {
 	
+	$('#search_button_div').mouseenter(function() {
+		$('#search_button_div').css("background","#5193fb");
+	});
+
+	$('#search_button_div').mouseleave(function() {
+		$('#search_button_div').css("background","#094AB2");
+	});
 	
 	$('#skill_level').mouseenter(function() {
 		$('#skill_level').css("background","#00A0B1");
