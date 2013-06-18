@@ -4,8 +4,9 @@
 
 Introduction
 ---------------------
+
 Semantic matching provide a possible way to match the data that user really want
-even thought there are no common phrases between user query and the data. 
+even though there are no common phrases between user query and the data. 
 We implemented three modules, including semantic service, semantic similarity and 
 semantic search. The matching result would vary according to user's preference by
 changing the configurations of the system. The matching framework is very easy to
