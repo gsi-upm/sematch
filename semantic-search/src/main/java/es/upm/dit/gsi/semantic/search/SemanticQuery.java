@@ -17,9 +17,12 @@ public class SemanticQuery extends CustomScoreQuery {
 	private QueryConfig queryConfig = null;
 	private SimilarityService simService = null;
 	
+	public SemanticQuery(){
+		super(null);
+	}
+	
 	public SemanticQuery(Query subQuery) {
 		super(subQuery);
-	
 	}
 
 	@Override

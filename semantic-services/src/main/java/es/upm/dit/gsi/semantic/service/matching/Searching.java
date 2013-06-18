@@ -3,9 +3,8 @@ package es.upm.dit.gsi.semantic.service.matching;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.lucene.index.Term;
+import org.apache.lucene.search.MatchAllDocsQuery;
 import org.apache.lucene.search.Query;
-import org.apache.lucene.search.TermQuery;
 import org.apache.lucene.store.Directory;
 
 import es.upm.dit.gsi.semantic.search.IndexConfig;
@@ -24,8 +23,8 @@ public class Searching {
 
 	public Searching(Directory directory){
 		searcher = new Searcher(directory);
-		Term t = new Term("category", "it");
-		Query q = new TermQuery(t);
+		//sub query must not be null
+		Query q = new MatchAllDocsQuery();
 		query = new SemanticQuery(q);
 	}
 	

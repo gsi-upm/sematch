@@ -13,8 +13,19 @@ public class Matching {
 	private Indexing indexing = null;
 	private Searching searching = null;
 	
+	private static Matching matching = null;
+	
+	//singleton pattern
+	public static Matching getMatching(){
+		if(matching == null){
+			matching = new Matching();
+			matching.setConfig(Configuration.getConfiguration());
+			matching.initializing();
+		}
+		return matching;
+	}
+	
 	public Matching(){
-		
 	}
 	
 	public void initializing(){
@@ -31,6 +42,7 @@ public class Matching {
 		SimilarityService simService = simContext.getBean(config.getSimBean(),SimilarityService.class);
 		searching.setQueryConfig(config.getQueryConfig());
 		searching.setSimService(simService);
+		
 	}
 	
 	public List<Map<String,String>> search(Map<String,String> query){

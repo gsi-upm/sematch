@@ -23,15 +23,8 @@ public class SemanticSearchService {
 
 	@Context
 	ServletContext context;
-	Matching matching;
-	Configuration config;
 	
-	public SemanticSearchService(){
-		matching = new Matching();
-		config = new Configuration();
-		matching.setConfig(config);
-		matching.initializing();
-	}
+	public SemanticSearchService(){}
 
 	@GET
 	@Path("/query")
@@ -39,13 +32,14 @@ public class SemanticSearchService {
 	public List<Candidate> getCandidateJSON(@Context UriInfo info) {
 		
 		HashMap<String,String> query = new HashMap<String,String>();
-		QueryConfig queryConfig = config.getQueryConfig();
+		QueryConfig queryConfig = Configuration.getConfiguration().getQueryConfig();
 		
 		for(String field : queryConfig.getQueryFileds()){
 			query.put(field, info.getQueryParameters().getFirst(field));
 		}
 		
-		List<Map<String,String>> results = matching.search(query);
+		List<Map<String,String>> results = Matching.getMatching().search(query);
+		
 		List<Candidate> candidates = new ArrayList<Candidate>();
 		
 		for(Map<String,String> result : results){

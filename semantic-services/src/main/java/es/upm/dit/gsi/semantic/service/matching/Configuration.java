@@ -24,6 +24,17 @@ public class Configuration {
 	private IndexConfig indexConfig = null;
 	private QueryConfig queryConfig = null;
 	private XMLConfiguration config = null;
+	private static Configuration configuration = null;
+	
+	
+	//singleton pattern
+	public static Configuration getConfiguration(){
+		if(configuration == null){
+			System.out.println("init configuration");
+			configuration = new Configuration();
+		}
+		return configuration;
+	}
 
 	public Configuration() {
 		

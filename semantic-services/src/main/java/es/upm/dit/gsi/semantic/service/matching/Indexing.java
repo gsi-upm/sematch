@@ -59,8 +59,6 @@ public class Indexing {
 			Document doc = new Document();
 			doc.add(new Field("uri", res.getURI(), Field.Store.YES, 
 					Field.Index.NOT_ANALYZED_NO_NORMS));
-			doc.add(new Field("category","it",Field.Store.YES,
-					Field.Index.NOT_ANALYZED_NO_NORMS));
 			
 			for(String field : properties.keySet()){
 				String object = res.getProperty(properties.get(field)).getObject().toString();

@@ -47,6 +47,8 @@ $(document).ready(function() {
 		$(this).css("padding","10px");
 	});
 	
+	$('#result_div').sortable();
+	
 });
 
 function search() {
