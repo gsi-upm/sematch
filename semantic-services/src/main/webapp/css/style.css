@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400italic,700italic,400,700');
+
+body{
+	font-family: 'Open Sans', sans-serif;
+	color: #666;
+	font-size: 15px;
+	line-height: 25px;
+	font-weight: 400;
+	margin: auto;
+}
+
+h1,h2,h3,h4,h5,h6{
+	font-family: 'Open Sans', sans-serif;
+	font-weight: normal !important;
+	margin: 2px 0px 5px 0px;
+	padding: 2px 0px;
+	color: #666;
+}
+
+h1,h2{
+	font-weight: 300 !important;
+}
+
+h3,h4,h5,h6{
+	font-weight: 400 !important;
+	color: #666;
+}
+
+h2{
+	font-size: 40px;
+	line-height: 45px;
+}
+
+h3{
+	font-size: 30px;
+	line-height: 35px;
+}
+
+h4{
+	font-size: 25px;
+	line-height: 30px;
+}
+
+h5{
+	font-size: 20px;
+	line-height: 25px;
+}
+
+h6{
+	font-size: 16px;
+	line-height: 24px;
+}
+
+p{
+	margin: 2px 0px;
+}
+
+
+hr{
+	margin: 20px 0px;
+}
+
+.navbar .nav>li>a{
+	color:#fff;
+	text-shadow: 0 0px 0 #ffffff;
+}
+
+.navbar .nav > li > a:hover{
+	color:#1ba1e2;
+}
+
+.navbar-inner{
+	background: #666;
+	background-image:none;
+}
+
+/* Header */
+
+header{
+	background: #fff;
+}
+
+header #title{
+	padding: 15px 0px;
+}
+
+header #title h1{
+	font-size: 40px;
+	line-height: 45px;
+	margin-bottom: 5px;
+}
+
+header img{
+	float: right;
+	padding-top: 20px;
+}
+
+.container{
+	margin: auto
+}

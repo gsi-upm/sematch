@@ -3,48 +3,12 @@ var rootURL = "http://localhost:8080/semantic-services/rest/search";
 
 $(document).ready(function() {
 	
-	$('#search_button_div').mouseenter(function() {
-		$('#search_button_div').css("background","#5193fb");
-	});
-
-	$('#search_button_div').mouseleave(function() {
-		$('#search_button_div').css("background","#094AB2");
-	});
-	
-	$('#skill_level').mouseenter(function() {
-		$('#skill_level').css("background","#00A0B1");
-	});
-
-	$('#skill_level').mouseleave(function() {
-		$('#skill_level').css("background","#008299");
-	});
-	
-	$('#city_salary').mouseenter(function() {
-		$('#city_salary').css("background","#A700AE");
-	});
-
-	$('#city_salary').mouseleave(function() {
-		$('#city_salary').css("background","#8C0095");
-	});
-	
-	$('#title').mouseenter(function() {
-		$('#title').css("background","#BF1E4B");
-	});
-
-	$('#title').mouseleave(function() {
-		$('#title').css("background","#AC193D");
-	});
-	
 	$(document).on('mouseenter','.result_box',function(){
-		$(this).css("padding","7px");
-		$(this).css("border-style","solid");
-		$(this).css("border-width","3px");
-		$(this).css("border-color","#094AB2");
+		$(this).css("border-color","#1ba1e2");
 	});
 	
 	$(document).on('mouseleave','.result_box',function(){
-		$(this).css("border-style","none");
-		$(this).css("padding","10px");
+		$(this).css("border-color","#dceaf4");
 	});
 	
 	$('#result_div').sortable();
@@ -57,7 +21,6 @@ function search() {
 	URI = URI + '/'+'query?city='+$('#city').val()+'&salary='+$('#salary').val();
 	//URI = URI + '/'+'query?';
 	URI = URI + '&skill=' + $('#skill').val() + '&level=' + $('#level').val();
-	
 	$.ajax({
 		type: 'GET',
 		contentType: 'application/json',
@@ -77,39 +40,63 @@ function display(candidates){
 	
 	var resultDiv = document.getElementById("result_div");
 	resultDiv.innerHTML = '';
-	for ( var i = 0; i < candidates.length; i++) {
-		rendering(candidates[i]);
+	for(var i = 0;i < candidates.length;i=i+3){
+		var cans = new Array();
+		for(var j=0;j<3;j++){
+			cans[j] = candidates[i+j];
+		}
+		$("#result_div").append(rendering(cans));
 	}
-}
-
-
-function rendering(candidate) {
-
-	//declare the attributes.
-	var attBox = document.createAttribute("class");
-	attBox.value = "result_box";
-
-	//result box
-	var box = document.createElement("div");
-	box.setAttributeNode(attBox);
-	//box.appendChild(renderResultBoxData(candidate.uri));
-	box.appendChild(renderResultBoxData(candidate.city));
-	box.appendChild(renderResultBoxData(candidate.salary));
-	box.appendChild(renderResultBoxData(candidate.skill));
-	box.appendChild(renderResultBoxData(candidate.level));
-	box.appendChild(renderResultBoxData(candidate.sim));
-
-	var resultDiv = document.getElementById("result_div");
-	resultDiv.appendChild(box);
-}
-
-function renderResultBoxData(data){
 	
-	var element = document.createElement("p");
-	var aElement = document.createAttribute("class");
-	aElement.value = "result_box_data";
-	element.setAttributeNode(aElement);
-	element.innerHTML = data;
-	return element;
+}
+
+
+function rendering(candidates) {
+	
+	var $row = $("<div>",{class:"row-fluid"});
+	var $ul = $("<ul>",{class:"thumbnails"});
+	for(var i=0;i<candidates.length;i++){
+		$ul.append(renderData(candidates[i]));
+	}
+	$row.append($ul);
+	
+	return $row;	
+}
+
+function renderData(candidate){
+	
+	var $li=$("<li>",{class:"span4"});
+	var $divThumbnail = $("<div>", {class: "thumbnail"});
+	var $divResultBox = $("<div>", {class: "result_box"});
+	
+	var $divRow1 = $("<div>", {class: "row-fluid"});
+	var $divRow11 = $("<div>", {class: "span5 offset1"});
+	$divRow11.append($("<p class='data'></p>").text("City: "+candidate.city));
+	var $divRow12 = $("<div>", {class: "span6"});
+	$divRow12.append($("<p class='data'></p>").text("Salary: "+candidate.salary));
+	$divRow1.append($divRow11);
+	$divRow1.append($divRow12);
+	$divResultBox.append($divRow1);
+	
+	
+	var $divRow2 = $("<div>", {class: "row-fluid"});
+	var $divRow21 = $("<div>", {class: "span5 offset1"});
+	$divRow21.append($("<p class='data'></p>").text("Skill: "+candidate.skill));
+	var $divRow22 = $("<div>", {class: "span6"});
+	$divRow22.append($("<p class='data'></p>").text("Level: "+candidate.level));
+	$divRow2.append($divRow21);
+	$divRow2.append($divRow22);
+	$divResultBox.append($divRow2);
+	
+	var $divRow3 = $("<div>", {class: "row-fluid"});
+	var $divRow31 = $("<div>", {class: "span11 offset1"});
+	$divRow31.append($("<p class='data'></p>").text("Similarity: "+candidate.sim));
+	$divRow3.append($divRow31);
+	$divResultBox.append($divRow3);
+	
+	$divThumbnail.append($divResultBox);
+	$li.append($divThumbnail);
+	
+	return $li;
 	
 }

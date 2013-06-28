@@ -31,6 +31,7 @@ public class SemanticSearchService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Candidate> getCandidateJSON(@Context UriInfo info) {
 		
+		
 		HashMap<String,String> query = new HashMap<String,String>();
 		QueryConfig queryConfig = Configuration.getConfiguration().getQueryConfig();
 		
