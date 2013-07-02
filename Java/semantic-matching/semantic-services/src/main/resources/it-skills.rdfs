@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="ISO-8859-1"?> 
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xml:base="http://example.org/it-skills.rdfs#">
+
+  <rdfs:Class rdf:ID="CorelDraw">
+    <rdfs:subClassOf>
+      <rdfs:Class rdf:ID="Graphic_applications"/>
+    </rdfs:subClassOf>
+  </rdfs:Class>
+  <rdfs:Class rdf:ID="Imperative_procedural">
+    <rdfs:subClassOf>
+      <rdfs:Class rdf:ID="High_level_programming_langages"/>
+    </rdfs:subClassOf>
+  </rdfs:Class>
+  <rdfs:Class rdf:ID="Java">
+    <rdfs:subClassOf>
+      <rdfs:Class rdf:ID="Object_oriented"/>
+    </rdfs:subClassOf>
+  </rdfs:Class>
+  <rdfs:Class rdf:ID="MS_Office_competence">
+    <rdfs:subClassOf>
+      <rdfs:Class rdf:ID="Office_applications"/>
+    </rdfs:subClassOf>
+  </rdfs:Class>
+  <rdfs:Class rdf:ID="Programming_languages">
+    <rdfs:subClassOf>
+      <rdfs:Class rdf:ID="Computer_languages"/>
+    </rdfs:subClassOf>
+  </rdfs:Class>
+  <rdfs:Class rdf:ID="Internet_competence">
+    <rdfs:subClassOf>
+      <rdfs:Class rdf:ID="IT_Skills"/>
+    </rdfs:subClassOf>
+  </rdfs:Class>
+  <rdfs:Class rdf:ID="MS_Excel">
+    <rdfs:subClassOf rdf:resource="#MS_Office_competence"/>
+  </rdfs:Class>
+  <rdfs:Class rdf:ID="Datenbases">
+    <rdfs:subClassOf>
+      <rdfs:Class rdf:ID="Information_management_competence"/>
+    </rdfs:subClassOf>
+  </rdfs:Class>
+  <rdfs:Class rdf:ID="Oracle">
+    <rdfs:subClassOf>
+      <rdfs:Class rdf:ID="Relational_databases"/>
+    </rdfs:subClassOf>
+  </rdfs:Class>
+  <rdfs:Class rdf:ID="SAP_general">
+    <rdfs:subClassOf>
+      <rdfs:Class rdf:ID="SAP_competence"/>
+    </rdfs:subClassOf>
+  </rdfs:Class>
+  <rdfs:Class rdf:ID="SAP_HR">
+    <rdfs:subClassOf>
+      <rdfs:Class rdf:ID="SAP_Module"/>
+    </rdfs:subClassOf>
+  </rdfs:Class>
+  <rdfs:Class rdf:ID="VBScript">
+    <rdfs:subClassOf>
+      <rdfs:Class rdf:ID="Web_programming"/>
+    </rdfs:subClassOf>
+  </rdfs:Class>
+  <rdfs:Class rdf:ID="SAP_R3">
+    <rdfs:subClassOf rdf:resource="#SAP_general"/>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="#Web_programming">
+    <rdfs:subClassOf rdf:resource="#Internet_competence"/>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="#Relational_databases">
+    <rdfs:subClassOf rdf:resource="#Datenbases"/>
+  </rdfs:Class>
+  <rdfs:Class rdf:ID="Fortran">
+    <rdfs:subClassOf rdf:resource="#Imperative_procedural"/>
+  </rdfs:Class>
+  <rdfs:Class rdf:ID="Application_competence">
+    <rdfs:subClassOf rdf:resource="#IT_Skills"/>
+  </rdfs:Class>
+  <rdfs:Class rdf:ID="JavaScript">
+    <rdfs:subClassOf rdf:resource="#Web_programming"/>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="#Graphic_applications">
+    <rdfs:subClassOf rdf:resource="#Application_competence"/>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="#SAP_Module">
+    <rdfs:subClassOf>
+      <rdfs:Class rdf:about="#SAP_competence"/>
+    </rdfs:subClassOf>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="#Object_oriented">
+    <rdfs:subClassOf>
+      <rdfs:Class rdf:about="#High_level_programming_langages"/>
+    </rdfs:subClassOf>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="#Information_management_competence">
+    <rdfs:subClassOf rdf:resource="#IT_Skills"/>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="#High_level_programming_langages">
+    <rdfs:subClassOf rdf:resource="#Programming_languages"/>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="#SAP_competence">
+    <rdfs:subClassOf rdf:resource="#Application_competence"/>
+  </rdfs:Class>
+  <rdfs:Class rdf:ID="PHP">
+    <rdfs:subClassOf rdf:resource="#Web_programming"/>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="#Office_applications">
+    <rdfs:subClassOf rdf:resource="#Application_competence"/>
+  </rdfs:Class>
+  <rdfs:Class rdf:ID="VisualBasic">
+    <rdfs:subClassOf rdf:resource="#Object_oriented"/>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="#Computer_languages">
+    <rdfs:subClassOf rdf:resource="#IT_Skills"/>
+  </rdfs:Class>
+  <rdfs:Class rdf:ID="Photoshop">
+    <rdfs:subClassOf rdf:resource="#Graphic_applications"/>
+  </rdfs:Class>
+
+  <rdfs:Property rdf:ID="competenceLevel">
+    <rdfs:range rdf:resource="#Skill_level"/>
+  </rdfs:Property>
+
+  <rdfs:Class rdf:about="#Beginner">
+    <rdfs:subClassOf rdf:resource="#Skill_level"/>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="#Intermediate">
+    <rdfs:subClassOf rdf:resource="#Beginner"/>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="#Advanced">
+    <rdfs:subClassOf rdf:resource="#Intermediate"/>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="#Expert">
+    <rdfs:subClassOf rdf:resource="#Advanced"/>
+  </rdfs:Class>
+
+</rdf:RDF>
