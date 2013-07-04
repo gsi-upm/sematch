@@ -70,7 +70,7 @@
 			</plugins>
 		</pluginManagement>
 
-		<finalName>semantic-web-services</finalName>
+		<finalName>gsimatch</finalName>
 	</build>
 
 	<dependencies>
