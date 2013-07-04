@@ -31,9 +31,9 @@ public class ConfigurationTest {
 			System.out.println(str);
 		}
 		
-		assertEquals("size",20,queryConfig.getResultSize());
+		assertEquals("size",12,queryConfig.getResultSize());
 		assertEquals("type","local",type);
-		assertEquals("localfile","dataset/employees.rdf",localFile);
+		assertEquals("localfile","employees.rdf",localFile);
 		assertEquals("remoteURL",null,remoteURL);
 		assertEquals("query",null,query);
 		assertEquals("field",r1,skill);
