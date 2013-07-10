@@ -1,7 +1,6 @@
 package es.upm.dit.gsi.semantic.webService;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,12 +12,12 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriInfo;
 
-import es.upm.dit.gsi.semantic.search.QueryConfig;
-import es.upm.dit.gsi.semantic.service.matching.Configuration;
+import net.sf.json.JSONObject;
+
 import es.upm.dit.gsi.semantic.service.matching.Matching;
 import es.upm.dit.gsi.semantic.similarity.taxonomy.Taxonomy;
 
-@Path("/search")
+@Path("/semantic")
 public class SemanticSearchService {
 
 	@Context
@@ -27,17 +26,13 @@ public class SemanticSearchService {
 	public SemanticSearchService(){}
 
 	@GET
-	@Path("/query")
+	@Path("/search")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Candidate> getCandidateJSON(@Context UriInfo info) {
 		
-		
-		HashMap<String,String> query = new HashMap<String,String>();
-		QueryConfig queryConfig = Configuration.getConfiguration().getQueryConfig();
-		
-		for(String field : queryConfig.getQueryFileds()){
-			query.put(field, info.getQueryParameters().getFirst(field));
-		}
+		String queryString = info.getQueryParameters().getFirst("q");
+		JSONObject json = JSONObject.fromObject(queryString);
+		Map<String,Object> query = (Map<String,Object>) json;
 		
 		List<Map<String,String>> results = Matching.getMatching().search(query);
 		
@@ -55,7 +50,6 @@ public class SemanticSearchService {
 		}
 		
 		return candidates;
-		
 	}
 	
 

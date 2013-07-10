@@ -14,8 +14,8 @@ public class AtomicMeasure extends SimilarityMeasure {
 	@Override
 	public double getSimilarity(SimilarityConfig config) {
 
-		String query = config.getQuery(label);
-		String resource = config.getResource(label);
+		String query = config.getQuery(label).toString();
+		String resource = config.getResource(label).toString();
 		double similarity = simCompute.compute(query, resource);
 		//logger.info(label + " Weight: " + weight+ "	Sim: " + similarity);
 		return similarity*getWeight();

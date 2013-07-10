@@ -8,13 +8,13 @@ public class QueryConfig {
 	
 	private int resultSize;
 	private ArrayList<String> fields = null;
-	private Map<String,String> query = null;
+	private Map<String,Object> query = null;
 	
 	public QueryConfig(){
 		fields = new ArrayList<String>();
 	}
 
-	public Map<String,String> getQuery(){
+	public Map<String,Object> getQuery(){
 		return this.query;
 	}
 
@@ -26,7 +26,7 @@ public class QueryConfig {
 		fields.add(field);
 	}
 
-	public void setQuery(Map<String,String> query) {
+	public void setQuery(Map<String,Object> query) {
 		this.query = query;
 	}
 	

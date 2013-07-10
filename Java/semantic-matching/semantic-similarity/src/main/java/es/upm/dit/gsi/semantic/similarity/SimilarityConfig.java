@@ -4,32 +4,32 @@ import java.util.Map;
 
 public class SimilarityConfig {
 	
-	private Map<String,String> query = null;
-	private Map<String,String> resource = null;
+	private Map<String,Object> query = null;
+	private Map<String,Object> resource = null;
 	
 	public SimilarityConfig(){}
 	
-	public String getQuery(String label){
+	public Object getQuery(String label){
 		return this.query.get(label);
 	}
 	
-	public String getResource(String label){
+	public Object getResource(String label){
 		return this.resource.get(label);
 	}
 	
-	public Map<String, String> getQuery() {
+	public Map<String, Object> getQuery() {
 		return query;
 	}
 
-	public void setQuery(Map<String, String> query) {
+	public void setQuery(Map<String, Object> query) {
 		this.query = query;
 	}
 
-	public Map<String, String> getResource() {
+	public Map<String, Object> getResource() {
 		return resource;
 	}
 
-	public void setResource(Map<String, String> resource) {
+	public void setResource(Map<String, Object> resource) {
 		this.resource = resource;
 	}
 }

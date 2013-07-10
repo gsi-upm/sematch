@@ -17,7 +17,7 @@ public class SimilarityService {
 		config = new SimilarityConfig();
 	}
 
-	public float getSimilarity(Map<String,String> query, Map<String,String> resource){
+	public float getSimilarity(Map<String,Object> query, Map<String,Object> resource){
 		config.setQuery(query);
 		config.setResource(resource);
 		Double sim = getSimilarity(config);

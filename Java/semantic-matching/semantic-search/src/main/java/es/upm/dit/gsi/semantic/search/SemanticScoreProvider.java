@@ -37,8 +37,8 @@ class SemanticScoreProvider extends CustomScoreProvider{
 	@Override
 	public float customScore(int doc, float subQueryScore, float valSrcScore) throws IOException {
 		
-		Map<String,String> resource = new HashMap<String,String>();
-		Map<String,String> query = config.getQuery();
+		Map<String,Object> resource = new HashMap<String,Object>();
+		Map<String,Object> query = config.getQuery();
 		
 		for(String field : config.getQueryFileds()){
 			String fieldValue = fieldCache.get(field)[doc];

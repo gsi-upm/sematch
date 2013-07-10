@@ -30,7 +30,7 @@ public class Searching {
 		query = new SemanticQuery(q);
 	}
 	
-	public List<Map<String,String>> search(Map<String,String> queryData){
+	public List<Map<String,String>> search(Map<String,Object> queryData){
 		
 		queryConfig.setQuery(queryData);
 		query.setQueryConfig(queryConfig);

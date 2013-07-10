@@ -45,7 +45,7 @@ public class Matching {
 		
 	}
 	
-	public List<Map<String,String>> search(Map<String,String> query){
+	public List<Map<String,String>> search(Map<String,Object> query){
 	
 		return searching.search(query);
 		
