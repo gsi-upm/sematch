@@ -79,6 +79,12 @@ public class SparqlClient {
 		result = qexec.execSelect();
 		return result;
 	}
+	
+	public static String getSparql(String fileName){
+		File file = new File(fileName);
+		Query query = QueryFactory.read(file.getAbsolutePath());
+		return query.toString();
+	}
 
 	// read the query string from a file
 	public Query getQueryFromFile(File file) {

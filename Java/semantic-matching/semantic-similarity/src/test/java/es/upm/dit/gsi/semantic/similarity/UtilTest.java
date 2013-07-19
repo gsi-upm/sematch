@@ -1,6 +1,12 @@
 package es.upm.dit.gsi.semantic.similarity;
 
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -60,6 +66,46 @@ public class UtilTest {
 		array.add(object1);
 		array.add(object2);
 		System.out.println(array);
+	}
+	
+	@Test
+	public void testSparql(){
+		String query = SparqlClient.getSparql("query.sparql");
+		String sparqlUri = "http://demos.gsi.dit.upm.es/lmf/sparql/select?query=";
+		try {
+			query = URLEncoder.encode(query, "UTF-8");
+		} catch (UnsupportedEncodingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		query = sparqlUri + query + "&output=json";
+		
+		URL url;
+		HttpURLConnection conn;
+		BufferedReader rd;
+		String line;
+		String result = "";
+		try {
+			url = new URL(query);
+			conn = (HttpURLConnection) url.openConnection();
+			conn.setRequestMethod("GET");
+			rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+			while ((line = rd.readLine()) != null) {
+				result += line;
+			}
+			rd.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		JSONObject json = JSONObject.fromObject(result);
+		JSONArray array = json.getJSONObject("results").getJSONArray("bindings");
+		for (int i = 0; i < array.size(); i++) {
+			JSONObject people = array.getJSONObject(i);
+
+			System.out.println(people.toString());
+			
+		}
+		
 	}
 
 
