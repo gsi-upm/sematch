@@ -26,7 +26,7 @@ class SemanticScoreProvider extends CustomScoreProvider{
 	private void initFieldCache(IndexReader reader){
 		fieldCache = new HashMap<String,String[]>();
 		try {
-			for(String filed : config.getQueryFileds()){
+			for(String filed : config.getFileds()){
 				fieldCache.put(filed, FieldCache.DEFAULT.getStrings(reader,filed));
 			}
 		} catch (IOException e) {
@@ -40,7 +40,7 @@ class SemanticScoreProvider extends CustomScoreProvider{
 		Map<String,Object> resource = new HashMap<String,Object>();
 		Map<String,Object> query = config.getQuery();
 		
-		for(String field : config.getQueryFileds()){
+		for(String field : config.getFileds()){
 			String fieldValue = fieldCache.get(field)[doc];
 			resource.put(field, fieldValue);
 		}

@@ -32,12 +32,10 @@ public class Matching {
 		
 		//indexing initialization
 		indexing = new Indexing();
-		indexing.setConfig(config.getIndexConfig());
-		indexing.createIndex();
+		indexing.createIndexFromLMF();
 		
 		//searching initialization
 		searching = new Searching(indexing.getIndexDirecotry());
-		searching.setIndexConfig(config.getIndexConfig());
 		ApplicationContext simContext = new ClassPathXmlApplicationContext(config.getSimConfig());
 		SimilarityService simService = simContext.getBean(config.getSimBean(),SimilarityService.class);
 		searching.setQueryConfig(config.getQueryConfig());
@@ -46,9 +44,7 @@ public class Matching {
 	}
 	
 	public List<Map<String,String>> search(Map<String,Object> query){
-	
 		return searching.search(query);
-		
 	}
 	
 	public void finalization(){

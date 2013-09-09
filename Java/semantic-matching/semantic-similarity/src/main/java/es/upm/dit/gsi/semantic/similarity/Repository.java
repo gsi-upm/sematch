@@ -9,6 +9,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.List;
 
 import net.sf.json.JSONObject;
@@ -156,8 +158,8 @@ public class Repository {
 		BufferedReader reader = null;
 		StringBuffer buffer = new StringBuffer();
 		try {
-			file = new FileReader(fileName);
-			reader = new BufferedReader(file);
+			InputStream in = ClassLoader.getSystemResourceAsStream(fileName);
+			reader = new BufferedReader(new InputStreamReader(in));
 			while ((line = reader.readLine()) != null) {
 				buffer.append(line);
 				buffer.append("\n");

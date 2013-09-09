@@ -22,10 +22,9 @@ public class LevelSimCompute implements SimCompute {
 		
 		int queryLevel;
 		int resourceLevel;
-		
 		if(isMapingLevel()){
-			queryLevel = Integer.valueOf((String)levels.get(query));
-			resourceLevel = Integer.valueOf((String)levels.get(resource));
+			queryLevel = Integer.valueOf((String)levels.get(query.toUpperCase()));
+			resourceLevel = Integer.valueOf((String)levels.get(resource.toUpperCase()));
 		}else{
 			queryLevel = Integer.valueOf(query);
 			resourceLevel = Integer.valueOf(resource);

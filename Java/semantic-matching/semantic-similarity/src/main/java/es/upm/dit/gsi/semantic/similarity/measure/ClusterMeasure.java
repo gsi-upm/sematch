@@ -31,7 +31,7 @@ public class ClusterMeasure extends SimilarityMeasure {
 			childSim = sim.getSimilarity(config);
 			similarity = similarity + childSim ;
 		}
-		logger.info(label + " Weight: " + weight+ "	Sim: " + similarity);
+		//logger.info(label + " Weight: " + weight+ "	Sim: " + similarity);
 		return similarity*getWeight();
 	}
 

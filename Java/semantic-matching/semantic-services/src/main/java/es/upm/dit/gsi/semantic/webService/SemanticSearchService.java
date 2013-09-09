@@ -30,7 +30,7 @@ public class SemanticSearchService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Candidate> getCandidateJSON(@Context UriInfo info) {
 		
-		String queryString = info.getQueryParameters().getFirst("q");
+		/*String queryString = info.getQueryParameters().getFirst("q");
 		JSONObject json = JSONObject.fromObject(queryString);
 		Map<String,Object> query = (Map<String,Object>) json;
 		
@@ -48,8 +48,8 @@ public class SemanticSearchService {
 			candidate.setLevel(result.get("level"));
 			candidates.add(candidate);
 		}
-		
-		return candidates;
+		*/
+		return null;
 	}
 	
 

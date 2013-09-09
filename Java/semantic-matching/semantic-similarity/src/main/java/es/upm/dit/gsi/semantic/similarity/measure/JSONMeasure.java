@@ -53,9 +53,7 @@ public class JSONMeasure extends SimilarityMeasure {
 		for(Double sim : simArray){
 			sum += sim;
 		}
-		System.out.println(sum/simL);
-		
-		return 0;
+		return sum/simL;
 	}
 
 

@@ -18,7 +18,7 @@ public class QueryConfig {
 		return this.query;
 	}
 
-	public List<String> getQueryFileds() {
+	public List<String> getFileds() {
 		return fields;
 	}
 	

@@ -15,6 +15,7 @@ public class SemanticQuery extends CustomScoreQuery {
 	private static final long serialVersionUID = 1L;
 	
 	private QueryConfig queryConfig = null;
+	
 	private SimilarityService simService = null;
 	
 	public SemanticQuery(){
@@ -36,6 +37,10 @@ public class SemanticQuery extends CustomScoreQuery {
 
 	public void setQueryConfig(QueryConfig queryConfig) {
 		this.queryConfig = queryConfig;
+	}
+	
+	public QueryConfig getQueryConfig() {
+		return queryConfig;
 	}
 
 

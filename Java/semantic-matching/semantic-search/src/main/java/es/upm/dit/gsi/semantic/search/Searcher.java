@@ -9,7 +9,6 @@ import org.apache.lucene.document.Document;
 import org.apache.lucene.index.CorruptIndexException;
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.search.IndexSearcher;
-import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.store.Directory;
 
@@ -30,7 +29,7 @@ public class Searcher {
 		}
 	}
 
-	public ArrayList<Map<String,String>> search(Query query, IndexConfig indexConfig) {
+	public ArrayList<Map<String,String>> search(SemanticQuery query) {
 		
 		ArrayList<Map<String,String>> results = new ArrayList<Map<String,String>>();
 		
@@ -44,7 +43,7 @@ public class Searcher {
 				result.put("uri",hitDoc.get("uri"));
 				result.put("sim", ""+docs[i].score);
 				
-				for(String field:indexConfig.getFields()){
+				for(String field: query.getQueryConfig().getFileds()){
 					result.put(field, hitDoc.get(field));
 				}
 				results.add(result);

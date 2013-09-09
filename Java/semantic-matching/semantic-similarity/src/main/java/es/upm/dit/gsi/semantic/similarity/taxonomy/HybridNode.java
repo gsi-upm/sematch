@@ -1,79 +1,48 @@
 package es.upm.dit.gsi.semantic.similarity.taxonomy;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class HybridNode {
-	
-	private String label;
-	private double conceptSim;
-	private double propertySim;
 	
 	public HybridNode(){}
 	
-	public String getLabel() {
-		return label;
-	}
-	public void setLabel(String label) {
-		this.label = label;
-	}
-	public double getConceptSim() {
-		return norm(conceptSim);
-	}
-	public void setConceptSim(double conceptSim) {
-		this.conceptSim = conceptSim;
-	}
-	public double getPropertySim() {
-		return propertySim;
-	}
-	public void setPropertySim(double propertySim) {
-		this.propertySim = propertySim;
+	public static List<Double> generateAlphas(double start, double end, double step){
+		List<Double> alphas = new ArrayList<Double>();
+		double alpha = start;
+		while(alpha<=end){
+			alpha = Math.round(alpha*100.0)/100.0;
+			alphas.add(alpha);
+			alpha = alpha+step;
+		}
+		return alphas;
 	}
 	
-	public double combineSimilarity(double alpha){
-		double sim1 = getConceptSim();
-		double sim2 = getPropertySim();
-		sim1 = alpha*sim1;
+	public static double weightedSum(double sim1, double sim2, double alpha){
+		sim1 = sim1*alpha;
 		sim2 = (1-alpha)*sim2;
 		return sim1+sim2;
 	}
 	
 	
-	public double average(){
-		double sum = this.getConceptSim()+ this.getPropertySim();
-		return sum/2;
+	public static double weightedProduct(double sim1, double sim2, double alpha){
+		sim1 = Math.pow(sim1,alpha);
+		sim2 = Math.pow(sim2, 1-alpha);
+		return sim1*sim2;
 	}
 	
-	public double weightedNorm(){
-		double c = norm(getConceptSim());
-		double p = norm(getPropertySim());
-		double sum = 0.8*p+0.2*c;
-		return sum;
+	public static double weightedF(double sim1, double sim2, double alpha){
+		double up = alpha*alpha;
+		double down = up;
+		up = 1 + up;
+		up = up*sim1*sim2;
+		down = down*sim1;
+		down = down+sim2;
+		return up / down;
 	}
 	
-	public double weighted(){
-		double c = getConceptSim();
-		double p = getPropertySim();
-		c = c*0.8;
-		p = p*0.2;
-		double h = p+c;
-		return h;
-	}
 	
-	public double times(){
-		double c = conceptSim;
-		double p = propertySim;
-		
-		c = Math.pow(c, 2);
-		return p*c;
-	}
-	
-	public double getConceptSimNorm(){
-		return norm(conceptSim);
-	}
-	
-	public double getPropertySimNorm(){
-		return norm(propertySim);
-	}
-	
-	public double norm(double v){
+	public static double norm(double v){
 		double nv = v+1.0;
 		return Math.log(nv)/Math.log(2);
 	}

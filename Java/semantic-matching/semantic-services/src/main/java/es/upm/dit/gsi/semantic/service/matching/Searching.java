@@ -9,7 +9,6 @@ import org.apache.lucene.search.MatchAllDocsQuery;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.store.Directory;
 
-import es.upm.dit.gsi.semantic.search.IndexConfig;
 import es.upm.dit.gsi.semantic.search.QueryConfig;
 import es.upm.dit.gsi.semantic.search.Searcher;
 import es.upm.dit.gsi.semantic.search.SemanticQuery;
@@ -18,7 +17,6 @@ import es.upm.dit.gsi.semantic.similarity.SimilarityService;
 public class Searching {
 	
 	private QueryConfig queryConfig = null;
-	private IndexConfig indexConfig = null;
 	private SimilarityService simService = null;
 	private Searcher searcher = null;
 	private SemanticQuery query = null;
@@ -35,7 +33,7 @@ public class Searching {
 		queryConfig.setQuery(queryData);
 		query.setQueryConfig(queryConfig);
 		query.setSimService(simService);
-		return searcher.search(query,indexConfig);
+		return searcher.search(query);
 	}
 
 	public void setQueryConfig(QueryConfig queryConfig) {
@@ -47,9 +45,6 @@ public class Searching {
 		this.simService = simService;
 	}
 	
-	public void setIndexConfig(IndexConfig indexConfig) {
-		this.indexConfig = indexConfig;
-	}
 	
 	public void close(){
 		searcher.close();
