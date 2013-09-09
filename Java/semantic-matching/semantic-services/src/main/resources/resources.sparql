@@ -1,0 +1,21 @@
+PREFIX mao: <http://www.w3.org/ns/ma-ont#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX lmftypes: <http://www.newmedialab.at/lmf/types/1.0/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX yt: <http://gdata.youtube.com/schemas/2007#>
+PREFIX ldp: <http://www.w3.org/ns/ldp#>
+PREFIX cv: <http://kaste.lv/~captsolo/semweb/resume/cv.rdfs#>
+PREFIX sioc: <http://rdfs.org/sioc/ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX dcat: <http://www.w3.org/ns/dcat#>
+PREFIX vcard: <http://www.w3.org/2006/vcard/ns#>
+PREFIX context: <http://demos.gsi.dit.upm.es/lmf/context/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX local: <http://demos.gsi.dit.upm.es/lmf/resource/>
+SELECT ?people WHERE {
+  ?people rdf:type foaf:Person
+}
