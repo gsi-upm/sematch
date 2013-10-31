@@ -1,29 +1,30 @@
 ![GSI Logo](http://gsi.dit.upm.es/templates/jgsi/images/logo.png)
-[Semantic Matching](http://gsi.dit.upm.es)
+[Sematch](http://gsi.dit.upm.es)
 ==================================
 
 Introduction
 ---------------------
 
-Semantic matching provide a possible way to match the data that user really want
-even though there are no common phrases between user query and the data. 
-We implemented three modules, including semantic service, semantic similarity and 
-semantic search. The matching result would vary according to user's preference by
-changing the configurations of the system. The matching framework is very easy to
-configure and extend. 
+Sematch is a simple restful semantic matching server used for matching structured data, including
+database records, rdf intances. The queries and the data are all structured according to the configuration.
+The matching process is not just the key word matching. We have implemented a semantic similarity package
+for calculating the similarity between the query and data semantically.
 
-## Semantic Similarity
+We implemented three modules, including semantic service, semantic similarity and semantic search. The matching
+result would vary according to user's preference by changing the configurations of the system. The matching 
+framework is very easy to configure and extend. 
 
-In semantic similarity, we implement a extensible framework for calculating the 
-semantic similarities between data. The data are represented as plain Strings so that
-the users can easily implemente their own functions for calculating semantic similarity
-between different types of data. We have implemented several semantic similarity algorithms
-such as ontolgoy based concept similarity, level similarity, numerical similarity, and String
-similarity. We implement several state of the art of structure based algorithms for 
-ontology based methods and we propose a new one too. Those ontolgy or taxonomy based
-semantic similarity algorithms are used to calculate the similarities between concepts
-in the same hierarchical taxonomy built with Simple Knowledge Organization System(SKOS). 
-The algorithms that have been implemented include Rada, Wu&Palm, L&C, CGM, Li. 
+## Construct the similarity configuration
+
+We use spring dependency injection to construct the similarity configuration. You can either use the
+implemented similarity modules or implement your own similarity module, and then use simple xml
+configuration file to configure the similarity.
+
+The implemented semantic similarity algorithms include ontolgoy based conceptual similarity such as
+Rada, Wu&Palm, L&C, CGM, Li, meaningful level similarity, numerical similarity, string
+similarity and set similarity. Those ontolgy or taxonomy based semantic similarity algorithms are used 
+to calculate the similarities between concepts in the same hierarchical taxonomy built with Simple Knowledge 
+Organization System(SKOS). 
 
 Users are free to extend the semantic similarity algorithms by extending two classes,
 SimilarityMeasure and SimCompute.
