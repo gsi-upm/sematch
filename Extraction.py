@@ -1,6 +1,6 @@
-#Use the multiprocessing to extract the interested rdfs from the raw
-#geodata.
+#Use the multiprocessing to extract the interested rdfs from the raw geodata.
 from bs4 import BeautifulSoup
+from collections import deque
 import bs4
 import urllib2
 import json
@@ -11,8 +11,8 @@ import re
 import gc
 
 
-#city name scraping from geonames
-def extract_cities_from_geonames_web():
+#city name scraping from geonames web site
+def geo_scraping():
 	geoname = "http://www.geonames.org"
 	path = "/search.html?q=&country=ES"
 	count = 1
@@ -72,55 +72,34 @@ def extract_cities_from_geonames_web():
 			json.dump(city, outfile)
 			outfile.write("\n")
 
-def createCityIndex():
-	index = []
-	pattern = ".org/(\d+)/"
-	with open('index.txt', 'r') as f:
-		for line in f:
-			city = json.loads(line)
-			number = re.search(pattern,city['url']).group(1)
-			index.append(number)
-	with open('ids.txt', 'w') as f:
-	    for i in index:
-	    	f.write(i)
-	    	f.write('\n')
-
-def extractCityInfo():
-	print "start extracting.."
-	extracted = []
-	pattern = ".org/(\d+)/"
-	with open('extracted.txt', 'r') as f:
-		for line in f:
-			number = re.search(pattern,line).group(1)
-			extracted.append(number)
-	print "Number of extracted cities: ","\t",len(extracted)
-	path = "http://sws.geonames.org/%s/about.rdf"
-	count = 1
-	cities_rdf = ""
-	with open('ids.txt', 'r') as f:
-		for line in f:
-			line = line.strip()
-			if line not in extracted:
-				url = path % line
-				about = urllib2.urlopen(url).read()
-				print count, '\t', url
-				count += 1
-				begin = about.find("<gn:Feature")
-				end = about.find("<foaf:Document")
-				cities_rdf = cities_rdf + about[begin:end]
-		
-	with open("cities.rdf", "a") as myfile:
-	    myfile.write(cities_rdf)
-
-#save file
-def save_file(name, data):
+#save list to file
+def save_list_file(name, data):
 	with open(name,'w') as f:
 		for d in data:
 			f.write(d)
 			f.write('\n')
 
+#save dict to file
+def save_dict_file(name, data):
+	with open(name,'w') as f:
+		for key, value in data.iteritems():
+			f.write(key)
+			f.write("\t")
+			f.write(value)
+			f.write("\n")
+
+#read file to dict
+def read_dict_file(name):
+	with open(name,'r') as f:
+		data = {}
+		for line in f:
+			line = line.strip()
+			key, value = line.split()
+			data[key] = value
+	return data
+
 #read small size file, load into meomery at onece.
-def read_file(name):
+def read_list_file(name):
 	with open(name,'r') as f:
 		data = [line.strip() for line in f]
 	return data
@@ -264,13 +243,242 @@ def boss():
 	print "Finished..."
 	print "num active children:", multiprocessing.active_children()
 
-def create_total_city_index():
+#build the index of the city entity from the geo entitys.
+def filter_city():
 	filter_class = ["A","P"] #A means country, state, region, and P means city village....
-	index = read_file("feature_index.txt")	
+	index = read_list_file("geo_data/es_geo_index_feature_map.txt")	
 	index = [line.split()[0] for line in index if line.split()[1] in filter_class]
 	index.sort()
-	save_file("city_index_es.txt", index)
+	save_list_file("geo_data/es_city_index_all.txt", index)
+	
+#scraping the missing city entity from the geoname.org
+def scraping_missing_city():
+	city_all = read_list_file("geo_data/es_city_index_all.txt")
+	city_ex = read_list_file("geo_data/city_ex_index.txt")
+	lost = [line for line in all_index if line not in ex_index]
+	print "start scraping.."
+	print "Need to extract %s city entities from geoname.org" % len(lost)
+	rdf = scraping_geo_rdf(lost)
+	save_list_file("geo_data/ex_web_rdf.txt",rdf)
+
+def scraping_geo_rdf(scraping_list):
+	path = "http://www.geonames.org/%s/about.rdf"
+	count = 1
+	rdf = []
+	for geo_id in scraping_list:
+		url = path % geo_id
+		about_rdf = urllib2.urlopen(url).read()
+		print count, '\t', url
+		count += 1
+		begin = about_rdf.find("<gn:Feature")
+		end = about_rdf.find("<foaf:Document")
+		about_rdf = about_rdf[begin:end]
+		about_rdf = about_rdf.replace("\n","")
+		if not about_rdf:
+			break
+		rdf.append(about_rdf)
+	return rdf
+
+#remove the unnecesaary info in the rdf entity.				
+def clean_rdf():
+	data = read_list_file("geo_data/city_extracted_rdf.txt")
+	newData = []
+	for d in data:
+		begin = d.find("<gn:Feature")
+		end = d.find("</rdf:")
+		newData.append(d[begin:end])
+	save_list_file("geo_data/city_ex_rdf_clean.txt",newData)
+
+def dbpedia_links(index):
+	links_dbpedia = read_list_file("geo_data/geonames_links.nt")
+	if not index:
+		index = read_list_file("geo_data/city_index_all.txt")
+	pattern = re.compile(".org/(\d+)/")
+	geo_db_map = {}
+	for line in links_dbpedia:
+		line = line.rstrip(".\n")
+		dbpedia, p, geoname = line.split()
+		geo_id = re.search(pattern, geoname)
+		if geo_id:
+			geo_id = geo_id.group(1)
+			if geo_id in index:
+				dbpedia = dbpedia.lstrip("<")
+				dbpedia = dbpedia.rstrip(">")
+				geo_db_map[geo_id] = dbpedia
+	save_dict_file("geo_data/dbpedia_link_map.txt",geo_db_map)
+	print "total number of dbpeida links is %d" % len(geo_db_map)
+	return geo_db_map
+
+#build the index of the entities.
+def indexing_rdf(inName, outName):
+	rdf_list = read_list_file(inName)
+	pattern = re.compile(".org/(\d+)/")
+	index_list = []
+	for rdf in rdf_list:
+		start = rdf.find("<gn:Feature")
+		end = rdf.find("<rdfs")
+		g_id = re.search(pattern, rdf[start:end]).group(1)
+		index_list.append(g_id)
+	save_list_file(outName, index_list)
+
+def build_child_parent_map(inName, outName):
+	rdf_list = read_list_file(inName)
+	pattern = re.compile(".org/(\d+)/")
+	child_parent_map = {}
+	for rdf in rdf_list:
+		id_s = rdf.find("<gn:Feature")
+		id_e = rdf.find("<rdfs")
+		rdf_id = re.search(pattern, rdf[id_s:id_e]).group(1)
+		p_s = rdf.find("<gn:parentFeature")
+		p_e = rdf.find("<gn:parentCountry")
+		p_id = re.search(pattern, rdf[p_s:p_e]).group(1)
+		child_parent_map[rdf_id] = p_id
+	save_dict_file(outName, child_parent_map)
+
+#build the index of rdf. child_parent_map id parent: id. id_entity_map id:entity
+def get_id_rdf_map(fileName):
+	rdf_list = read_list_file(fileName)
+	pattern = re.compile(".org/(\d+)/")
+	id_rdf_map = {}
+	for rdf in rdf_list:
+		id_s = rdf.find("<gn:Feature")
+		id_e = rdf.find("<rdfs")
+		rdf_id = re.search(pattern, rdf[id_s:id_e]).group(1)
+		id_rdf_map[rdf_id] = rdf
+	return id_rdf_map
+
+#build the parent children map. geoname:[children]
+def indexing_reverse(child_parent_map):
+	children_map = {}
+	for key, value in child_parent_map.iteritems():
+		if children_map.get(value):
+			children_map.get(value).append(key)
+		else:
+			children = []
+			children.append(key)
+			children_map[value] = children
+	keys = list(children_map)
+	children_lengths = map(lambda x:len(children_map[x]), keys)
+	print "total number of items are %d" % sum(children_lengths)
+	print "max length is %d" % max(children_lengths)
+	print "min length is %d" % min(children_lengths)
+	return children_map
+
+
+def tree_traverse(index_list, children_map, child_parent_map):
+	queue = deque(["6255148"])
+	keys = list(children_map)
+	traversed = []
+	while queue:
+		item = queue.popleft()
+		traversed.append(item)
+		if item in keys:
+			children = children_map[item]
+			for child in children:
+				queue.append(child)
+	print "Traversed item number is %d" % len(traversed)
+	not_traversed = [key for key in keys if key not in traversed]
+	wrong = [n for n in not_traversed if n not in index_list]
+	miss_items = []
+	for w in wrong:
+		miss_items += children_map[w]
+	# rdf = scraping_geo_rdf(miss_items)
+	# save_list_file("geo_data/miss_item_list.txt",rdf)
+	miss_child_parent = {m:child_parent_map[m] for m in miss_items}
+	save_dict_file("geo_data/miss_child_parent.txt", miss_child_parent)
+	build_child_parent_map("geo_data/miss_item_list.txt", "geo_data/miss_child_parent_new.txt")
 	
 
+def patch_child_parent_map():
+	child_parent_map = read_dict_file("geo_data/child_parent_map.txt")
+	correct = read_dict_file("geo_data/miss_child_parent_new.txt")
+	print "total number of child parent map is %d" % len(child_parent_map)
+	print "total number of correct is %d" % len(correct)
+	erros = ["6324921","6325087","6325210","6325249"]
+	for e in erros:
+		del child_parent_map[e]
+		del correct[e]
+	print "total number of child parent map is %d after removing errors" % len(child_parent_map)
+	print "total number of correct is %d after removing errors" % len(correct)
+	for key in correct:
+		child_parent_map[key] = correct[key]
+	save_dict_file("geo_data/child_parent_map.txt", child_parent_map)
+
+#identifier coding in resource url
+#001001001 stands for a branch. every thousand represents a level.
+#001001002 stands for the brothers of the first entity.
+#001001 stands for the parent entity.
+def build_identifier_map(children_map):
+	format = "%0*d"
+	id_code_map = {}
+	keys = list(children_map)
+	queue = deque(["6255148"]) #Europe
+	id_code_map["6255148"] = "001"
+	traversed = []
+	while queue:
+		item = queue.popleft()
+		traversed.append(item)
+		if item in keys:
+			count = 1
+			code_parent = id_code_map[item]
+			children = children_map[item]
+			for child in children:
+				queue.append(child)
+				code = format % (3, count)
+				code = code_parent + code
+				id_code_map[child] = code
+				count += 1
+	print "Traversed item number is %d" % len(traversed)
+	print "Identifers length is %d" % len(id_code_map)
+	save_dict_file("geo_data/id_code_map.txt", id_code_map)
+
+def build_taxonomy():
+	# id_rdf_map= get_id_rdf_map("geo_data/city_ex_rdf.txt")
+	# indexing_rdf("geo_data/city_ex_rdf", "geo_data/city_ex_index.txt")
+	#index_list = read_list_file("geo_data/city_ex_index.txt")
+	#print "total number of cities is %d" % len(index_list)
+	# build_child_parent_map("geo_data/city_ex_rdf.txt", "geo_data/child_parent_map.txt")
+	child_parent_map = read_dict_file("geo_data/child_parent_map.txt")
+	children_map = indexing_reverse(child_parent_map)
+	#print "total number of children_map is %d" % len(children_map)
+	#tree_traverse(index_list, children_map, child_parent_map)
+	#patch_child_parent_map()
+	build_identifier_map(children_map)
+	# print "total number of identifers %d" % len(identifers)
+	# save_dict_file("identifer.txt",identifers)
+	#dbpedia_map = dbpedia_links(index)
+	# dbpedia_map = read_dict_file("geo_data/dbpedia_link_map.txt")
+	
+	# print "total number of dbpeida links is %d" % len(dbpedia_map)
+	# queue = deque(["6255148"])
+	# taxonomy = {}
+	# rdf_pre =  '<rdf:Description rdf:about="http://www.gsi.dit.upm.es/geo/#%s">'
+	# rdf_post = '</rdf:Description>'
+	# same_as = '<owl:sameAs rdf:resource="http://sws.geonames.org/%s/"/>'
+	# broader = '<skos:broader rdf:resource="http://www.gsi.dit.upm.es/geo/#%s"/>'
+	# narrower = '<skos:narrower rdf:resource="http://www.gsi.dit.upm.es/geo/#%s"/>'
+	# related = '<skos:related rdf:resource="%s"/>'
+	# while queue:
+	# 	entity = queue.popleft()
+	# 	children = hierarchy.get(entity)
+	# 	geo_rdf = entities.get(entity)
+	# 	new_rdf = ""
+	# 	f_start = geo_rdf.find("<gn:Feature")
+	# 	f_end = geo_rdf.find("<rdfs:isDefinedBy")
+	# 	geo_url = geo_rdf[f_start:f_end]
+	# 	url_start = geo_url.find('http:')
+	# 	url_end = geo_url.find('">')
+	# 	geo_url = geo_url[url_start:url_end]
+	# 	geo_url = same_as % geo_url
+	# 	name_start = geo_rdf.find("<gn:name>")
+	# 	name_end = geo_rdf.find("</gn:name>") + 10
+	# 	geo_name = geo_rdf[name_start:name_end]
+	# 	if taxonomy.get(entity):
+	# 		new_rdf = taxonomy.get(entity)
+
+
+
 if __name__ == '__main__':
-	boss()
+	#boss()
+	build_taxonomy()
+	#dbpedia_links([])
