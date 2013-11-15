@@ -1,7 +1,5 @@
-#Use the multiprocessing to extract the interested rdfs from the raw geodata.
-from bs4 import BeautifulSoup
 from collections import deque
-import bs4
+from SPARQLWrapper import SPARQLWrapper, JSON
 import urllib2
 import json
 import re
@@ -10,74 +8,20 @@ import multiprocessing
 import re
 import gc
 
+#read json file
+def read_json_file(name):
+	data = []
+	with open(name,'r') as f:
+		for line in f:
+			data.append(json.loads(line))
+	return data
 
-#city name scraping from geonames web site
-def geo_scraping():
-	geoname = "http://www.geonames.org"
-	path = "/search.html?q=&country=ES"
-	count = 1
-	cities = []
-	while count < 102:
-		print str(count) + geoname + path
-		page = urllib2.urlopen(geoname+path).read()
-		soup = BeautifulSoup(page)
-		table = soup.find("table",{"class":"restable"})
-		for row in table.findAll("tr"):
-			cells = row.findAll("td")
-			if len(cells) == 6:
-				geoURL = cells[0].a["href"]
-				links = cells[1].findAll("a")
-				name = links[0].text
-				if len(links) == 2:
-					wikiURL = links[1]["href"]
-				else:
-					wikiURL = None
-				latitude = cells[1].find("span",{"class":"latitude"}).text
-				longitude =  cells[1].find("span",{"class":"longitude"}).text
-				hierarchy = cells[2].contents
-				if len(hierarchy) == 5:
-					automous = hierarchy[1].replace(", ","").encode('utf-8')
-					province = hierarchy[3].text.encode('utf-8')
-					hierarchy = automous+" > "+province
-					hierarchy = hierarchy.decode('utf-8')
-				else:
-					hierarchy = None
-				feature = cells[3].text
-				city = {"name":name, "geoURL":geoURL,
-				 "wikiURL":wikiURL,"lat":latitude,"lon":longitude,
-				 "hierarchy":hierarchy,"feature":feature}
-				cities.append(city)
-		links = table.next_siblings
-		aNull = False
-		nextPage = -1
-		while not aNull:
-			try:
-				item = links.next()
-				if type(item) is not bs4.element.Tag:
-					continue
-				else:
-					nextPage = item.text.find("next")
-				if nextPage >= 0:
-					break
-			except StopIteration:
-				aNull = True
-		if nextPage >= 0:
-			path = item["href"]
-		else:
-			break
-		count += 1
-
-	with open('cities.txt', 'w') as outfile:
-		for city in cities:
-			json.dump(city, outfile)
-			outfile.write("\n")
-
-#save list to file
-def save_list_file(name, data):
-	with open(name,'w') as f:
+#save json file
+def save_json_file(name,data):
+	with open(name, 'w') as f:
 		for d in data:
-			f.write(d)
-			f.write('\n')
+			json.dump(d, f)
+			f.write("\n")
 
 #save dict to file
 def save_dict_file(name, data):
@@ -97,6 +41,13 @@ def read_dict_file(name):
 			key, value = line.split()
 			data[key] = value
 	return data
+
+#save list to file
+def save_list_file(name, data):
+	with open(name,'w') as f:
+		for d in data:
+			f.write(d)
+			f.write('\n')
 
 #read small size file, load into meomery at onece.
 def read_list_file(name):
@@ -279,6 +230,38 @@ def scraping_geo_rdf(scraping_list):
 		rdf.append(about_rdf)
 	return rdf
 
+def scraping_dbpedia(scraping_map):
+	sparql = SPARQLWrapper("http://dbpedia.org/sparql")
+	sparql.setReturnFormat(JSON)
+	dbpedia = []
+	count = 1
+	for key in scraping_map:
+		#city = "http://dbpedia.org/resource/La_Matilla"
+		city = scraping_map[key]
+		sparql.setQuery("""
+			SELECT *
+    WHERE {<"""+city+"""> <http://dbpedia.org/ontology/abstract> ?abstract .
+FILTER(lang(?abstract) = "en").
+optional{<"""+city+"""> <http://dbpedia.org/ontology/PopulatedPlace/areaTotal> ?area} .
+optional{<"""+city+"""> <http://dbpedia.org/ontology/populationTotal> ?population} .}
+""")
+		results = sparql.query().convert()
+		if results["results"]["bindings"]:
+			print count
+			count += 1
+			result = results["results"]["bindings"][0]
+			entity = {}
+			entity['key'] = key
+			entity['uri'] = city
+			entity['abstract'] = result["abstract"]["value"]
+			if result.get('area'):
+				entity['area'] = result["area"]["value"]
+			if result.get('population'):
+				entity['population'] = result["population"]["value"]
+		 	dbpedia.append(entity)
+	return dbpedia
+
+
 #remove the unnecesaary info in the rdf entity.				
 def clean_rdf():
 	data = read_list_file("geo_data/city_extracted_rdf.txt")
@@ -348,7 +331,7 @@ def get_id_rdf_map(fileName):
 	return id_rdf_map
 
 #build the parent children map. geoname:[children]
-def indexing_reverse(child_parent_map):
+def build_reverse_index(child_parent_map):
 	children_map = {}
 	for key, value in child_parent_map.iteritems():
 		if children_map.get(value):
@@ -364,8 +347,8 @@ def indexing_reverse(child_parent_map):
 	print "min length is %d" % min(children_lengths)
 	return children_map
 
-
-def tree_traverse(index_list, children_map, child_parent_map):
+#check the rdf dump consistency, scrape from the geonmae.org with latest updates.
+def consistency_check(index_list, children_map, child_parent_map):
 	queue = deque(["6255148"])
 	keys = list(children_map)
 	traversed = []
@@ -433,52 +416,112 @@ def build_identifier_map(children_map):
 	save_dict_file("geo_data/id_code_map.txt", id_code_map)
 
 def build_taxonomy():
-	# id_rdf_map= get_id_rdf_map("geo_data/city_ex_rdf.txt")
+	id_rdf_map= get_id_rdf_map("geo_data/city_ex_rdf.txt")
 	# indexing_rdf("geo_data/city_ex_rdf", "geo_data/city_ex_index.txt")
-	#index_list = read_list_file("geo_data/city_ex_index.txt")
-	#print "total number of cities is %d" % len(index_list)
+	index_list = read_list_file("geo_data/city_ex_index.txt")
+	erros = ["6324921","6325087","6325210","6325249"]
+	for e in erros:
+		index_list.remove(e)
+	print "total number of cities is %d" % len(index_list)
 	# build_child_parent_map("geo_data/city_ex_rdf.txt", "geo_data/child_parent_map.txt")
 	child_parent_map = read_dict_file("geo_data/child_parent_map.txt")
-	children_map = indexing_reverse(child_parent_map)
-	#print "total number of children_map is %d" % len(children_map)
-	#tree_traverse(index_list, children_map, child_parent_map)
-	#patch_child_parent_map()
-	build_identifier_map(children_map)
-	# print "total number of identifers %d" % len(identifers)
-	# save_dict_file("identifer.txt",identifers)
+	children_map = build_reverse_index(child_parent_map)
+	print "total number of children_map is %d" % len(children_map)
+	# consistency_check(index_list, children_map, child_parent_map)
+	# patch_child_parent_map()
+	# build_identifier_map(children_map)
+	id_code_map = read_dict_file("geo_data/id_code_map.txt")
+	print "total number of identifers %d" % len(id_code_map)
 	#dbpedia_map = dbpedia_links(index)
-	# dbpedia_map = read_dict_file("geo_data/dbpedia_link_map.txt")
-	
-	# print "total number of dbpeida links is %d" % len(dbpedia_map)
-	# queue = deque(["6255148"])
-	# taxonomy = {}
-	# rdf_pre =  '<rdf:Description rdf:about="http://www.gsi.dit.upm.es/geo/#%s">'
-	# rdf_post = '</rdf:Description>'
-	# same_as = '<owl:sameAs rdf:resource="http://sws.geonames.org/%s/"/>'
-	# broader = '<skos:broader rdf:resource="http://www.gsi.dit.upm.es/geo/#%s"/>'
-	# narrower = '<skos:narrower rdf:resource="http://www.gsi.dit.upm.es/geo/#%s"/>'
-	# related = '<skos:related rdf:resource="%s"/>'
-	# while queue:
-	# 	entity = queue.popleft()
-	# 	children = hierarchy.get(entity)
-	# 	geo_rdf = entities.get(entity)
-	# 	new_rdf = ""
-	# 	f_start = geo_rdf.find("<gn:Feature")
-	# 	f_end = geo_rdf.find("<rdfs:isDefinedBy")
-	# 	geo_url = geo_rdf[f_start:f_end]
-	# 	url_start = geo_url.find('http:')
-	# 	url_end = geo_url.find('">')
-	# 	geo_url = geo_url[url_start:url_end]
-	# 	geo_url = same_as % geo_url
-	# 	name_start = geo_rdf.find("<gn:name>")
-	# 	name_end = geo_rdf.find("</gn:name>") + 10
-	# 	geo_name = geo_rdf[name_start:name_end]
-	# 	if taxonomy.get(entity):
-	# 		new_rdf = taxonomy.get(entity)
+	dbpedia_map = read_dict_file("geo_data/dbpedia_link_map.txt")
+	print "total number of dbpeida links is %d" % len(dbpedia_map)
+	dbpedia_data_map = scraping_dbpedia(dbpedia_map)
 
-
+	queue = deque(["2510769"])
+	keys = list(children_map)
+	taxonomy = {}
+	rdf_pre =  '<rdf:Description rdf:about="http://www.gsi.dit.upm.es/geo/#%s">'
+	rdf_post = '</rdf:Description>'
+	same_as = '<owl:sameAs rdf:resource="http://sws.geonames.org/%s/"/>'
+	broader = '<skos:broader rdf:resource="http://www.gsi.dit.upm.es/geo/#%s"/>'
+	narrower = '<skos:narrower rdf:resource="http://www.gsi.dit.upm.es/geo/#%s"/>'
+	related = '<skos:related rdf:resource="%s"/>'
+	area = '<dbpedia-owl:PopulatedPlace/areaTotal>%s</dbpedia-owl:PopulatedPlace/areaTotal>'
+	population = '<dbpedia-owl:populationTotal>%s</dbpedia-owl:populationTotal>'
+	abstract = '<dbpedia-owl:abstract>%s</dbpedia-owl:abstract>'
+	while queue:
+		item = queue.popleft()
+		geo_rdf = id_rdf_map[item]
+		name_start = geo_rdf.find("<gn:name>")
+		name_end = geo_rdf.find("</gn:name>") + 10
+		geo_name = geo_rdf[name_start:name_end]
+		lat_s = geo_rdf.find("<wgs84_pos:lat")
+		lat_e = geo_rdf.find("</wgs84_pos:lat") + 16
+		geo_lat = geo_rdf[lat_s:lat_e]
+		lon_s = geo_rdf.find("<wgs84_pos:long")
+		lon_e = geo_rdf.find("</wgs84_pos:long") + 17
+		geo_lon = geo_rdf[lon_s:lon_e]
+		new_rdf = taxonomy.get(item)
+		if not new_rdf:
+			new_rdf = ""
+			taxonomy[item] = new_rdf
+		new_rdf = geo_lon + new_rdf
+		new_rdf = geo_lat + new_rdf
+		if item in dbpedia_map:
+			new_rdf = related % dbpedia_map[item] + new_rdf
+			db_data = dbpedia_data_map[item]
+			new_rdf = abstract % db_data['abstract'].encode('utf-8') + new_rdf
+			if db_data.get('area'):
+				new_rdf = area % db_data['area'].encode('utf-8') + new_rdf
+			if db_data.get('population'):
+				new_rdf = population % db_data['population'].encode('utf-8') + new_rdf
+		new_rdf = same_as % item + new_rdf
+		new_rdf = geo_name + new_rdf
+		print new_rdf
+		if item in keys:
+			code_parent = id_code_map[item]
+			children = children_map[item]
+			for child in children:
+				queue.append(child)
+				code_child = id_code_map[child]
+				child_rdf = broader % code_parent
+				taxonomy[child] = child_rdf
+				new_rdf = new_rdf + narrower % code_child
+		new_rdf = rdf_pre % id_code_map[item] + new_rdf
+		new_rdf = new_rdf + rdf_post
+		print new_rdf
+		taxonomy[item] = new_rdf
+	save_dict_file("geo_data/es_city_skos_taxonomy.txt",taxonomy)
 
 if __name__ == '__main__':
 	#boss()
-	build_taxonomy()
+	#build_taxonomy()
+	dbpedia_map = read_dict_file("geo_data/dbpedia_link_map.txt")
+	keys = list(dbpedia_map)
+	#json_data = scraping_dbpedia(dbpedia_map)
+	#save_json_file("geo_data/dbpedia_data.txt",json_data)
+	json_data = read_json_file("geo_data/dbpedia_data.txt")
+	print "total number of scrapped entity is %d" % len(json_data)
+	c_pop = 0
+	c_area = 0
+	c_abstract = 0
+	miss_abstract = []
+	for data in json_data:
+		if data.get('population'):
+			c_pop += 1
+		if data.get('area'):
+			c_area += 1
+		if data.get('abstract'):
+			c_abstract += 1
+		if not data.get('abstract'):
+			miss_abstract.append(data)
+	print "total number of population is %d" % c_pop
+	print "total number of area is %d" % c_area
+	print "total number of abstract is %d" % c_abstract
+	print miss_abstract
+	scrapped = [data['key'] for data in json_data]
+	missed = [key for key in keys if key not in scrapped]
+	print "total number of missed entities are %d" % len(missed)
+	missed_map = {key:dbpedia_map[key] for key in missed}
+	#save_dict_file("geo_data/missed_dbpedia_data.txt", missed_map)
 	#dbpedia_links([])

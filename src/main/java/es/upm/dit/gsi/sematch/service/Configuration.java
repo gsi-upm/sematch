@@ -10,7 +10,6 @@ import org.apache.commons.configuration.XMLConfiguration;
 import es.upm.dit.gsi.sematch.search.QueryConfig;
 
 
-
 /**
  * Configuration class, used to parse the configuration xml file.
  * @author gzhu
@@ -65,8 +64,5 @@ public class Configuration {
 	public String getSimBean(){
 		return config.getString("similarity.bean");
 	}
-	
-
-
 	
 }
