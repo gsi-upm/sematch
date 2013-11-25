@@ -21,28 +21,18 @@ public class Indexer {
 	private IndexWriterConfig config = null;
 
 	public Indexer() {
-	}
-
-	public IndexWriter getIndexWriter() {
-
-		if (writer == null) {
-			directory = new RAMDirectory();
-			analyzer = new StandardAnalyzer(Version.LUCENE_36);
-			config = new IndexWriterConfig(Version.LUCENE_36, analyzer);
-			try {
-				writer = new IndexWriter(directory, config);
-			} catch (CorruptIndexException e) {
-				e.printStackTrace();
-				return null;
-			} catch (LockObtainFailedException e) {
-				e.printStackTrace();
-				return null;
-			} catch (IOException e) {
-				e.printStackTrace();
-				return null;
-			}
+		directory = new RAMDirectory();
+		analyzer = new StandardAnalyzer(Version.LUCENE_36);
+		config = new IndexWriterConfig(Version.LUCENE_36, analyzer);
+		try {
+			writer = new IndexWriter(directory, config);
+		} catch (CorruptIndexException e) {
+			e.printStackTrace();
+		} catch (LockObtainFailedException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
-		return writer;
 	}
 
 	public void closeDirectory() {

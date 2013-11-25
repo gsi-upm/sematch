@@ -12,6 +12,21 @@
 				<label>skill</label>
 			</field>
 		</query>
+		<index>
+			<file>/data.json</file>		
+			<field>
+				<label>area</label>
+			</field>
+			<field>
+				<label>abstract</label>
+			</field>
+			<field>
+				<label>population</label>
+			</field>
+			<field>
+				<label>key</label>
+			</field>
+		</index>
 	    <results>
 	        <size>100</size>
 	    </results>

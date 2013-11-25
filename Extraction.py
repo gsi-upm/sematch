@@ -415,6 +415,7 @@ def build_identifier_map(children_map):
 	print "Identifers length is %d" % len(id_code_map)
 	save_dict_file("geo_data/id_code_map.txt", id_code_map)
 
+#To generate the skos taxonomy
 def build_taxonomy():
 	id_rdf_map= get_id_rdf_map("geo_data/city_ex_rdf.txt")
 	# indexing_rdf("geo_data/city_ex_rdf", "geo_data/city_ex_index.txt")
@@ -518,10 +519,49 @@ if __name__ == '__main__':
 	print "total number of population is %d" % c_pop
 	print "total number of area is %d" % c_area
 	print "total number of abstract is %d" % c_abstract
-	print miss_abstract
-	scrapped = [data['key'] for data in json_data]
-	missed = [key for key in keys if key not in scrapped]
-	print "total number of missed entities are %d" % len(missed)
-	missed_map = {key:dbpedia_map[key] for key in missed}
+	#print miss_abstract
+	# scrapped = [data['key'] for data in json_data]
+	# missed = [key for key in keys if key not in scrapped]
+	# print "total number of missed entities are %d" % len(missed)
+	# missed_map = {key:dbpedia_map[key] for key in missed}
 	#save_dict_file("geo_data/missed_dbpedia_data.txt", missed_map)
 	#dbpedia_links([])
+	data_set = [data for data in json_data if data.get('population') and data.get('area') and data.get('abstract')]
+	print "total number of entity in data set is %d" % len(data_set)
+	skos_f = open("geo_data/es_city_skos_taxonomy.txt")
+	skos_data = {}
+	for line in skos_f:
+		key,value = line.split('\t')
+		skos_data[key] = value
+	skos_f.close()
+	pattern = re.compile("geo/#(\d+)")
+	for data in data_set:
+		key = data['key']
+		skos = skos_data[key]
+		g_s = skos.find("<rdf:Description")
+		g_e = skos.find("<gn:name")
+		geograph = re.search(pattern, skos[g_s:g_e]).group(1)
+		n_s = g_e + 9
+		n_e = skos.find("</gn:name")
+		name = skos[n_s:n_e]
+		lat_s = skos.find("<wgs84_pos:lat") + 15
+		lat_e = skos.find("</wgs84_pos:lat")
+		lat = skos[lat_s:lat_e]
+		lon_s = skos.find("<wgs84_pos:long") + 16
+		lon_e = skos.find("</wgs84_pos:long")
+		lon = skos[lon_s:lon_e]
+		data['geograph'] = geograph
+		data['name'] = name
+		data['lat'] = lat
+		data['lon'] = lon
+
+	
+
+		
+
+
+
+
+
+
+
