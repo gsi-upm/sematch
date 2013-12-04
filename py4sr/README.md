@@ -1,46 +1,38 @@
 ![GSI Logo](http://gsi.dit.upm.es/templates/jgsi/images/logo.png)
-[Sematch](http://gsi.dit.upm.es)
+[simrec](http://gsi.dit.upm.es)
 ==================================
 
-Introduction
----------------------
+##Introduction
 
-Sematch is a simple restful semantic matching server used for matching structured data, including
-database records, rdf intances. The queries and the data are all structured according to the configuration.
-The matching process is not just the key word matching. We have implemented a semantic similarity package
-for calculating the similarity between the query and data semantically.
+simrec implements a case-based recommendation system which mainly use similarity as core for
+recommendation. The case-based recommendation system is a kind of content-based recommendation system which
+mainly use the item content for recommending similar items. Different from the conventional 
+content-based recommendation system where the item descriptions are modeled as Vector Space of 
+word frequency. The case-based recommendation system constructs the item description in a structured
+way, where each feature represents an attribute and has a corresponding type. The items are recommended 
+according to the similarities between them. The similarities are computed based on specific similarity metric 
+defined by user.
 
-We implemented three modules, including semantic service, semantic similarity and semantic search. The matching
-result would vary according to user's preference by changing the configurations of the system. The matching 
-framework is very easy to configure and extend. 
+##Similarity Config
+
+To start a recommender, you need to create a similarity config first according to your data
+structure. In simrec, several similarity metrics have been implemented, you need to assign them to the specific field.
+Suppose your item description has four fields which are name, area, population, and geo, you can define them in config
+like below. Also, you are able to config the weight together with each field as well in order to
+differ the different contribution of each feature.
+```
+config = []
+config.append({'sim':'string','weight':0.25, 'field':'name'})
+config.append({'sim':'numeric','weight':0.25, 'field':'area'})
+config.append({'sim':'numeric','weight':0.25, 'field':'population'})
+config.append({'sim':'taxonomy','weight':0.25, 'field':'geo'})
+```
+
 
 ## Construct the similarity configuration
 
-We use spring dependency injection to construct the similarity configuration. You can either use the
-implemented similarity modules or implement your own similarity module, and then use simple xml
-configuration file to configure the similarity.
 
-The implemented semantic similarity algorithms include ontolgoy based conceptual similarity such as
-Rada, Wu&Palm, L&C, CGM, Li, meaningful level similarity, numerical similarity, string
-similarity and set similarity. Those ontolgy or taxonomy based semantic similarity algorithms are used 
-to calculate the similarities between concepts in the same hierarchical taxonomy built with Simple Knowledge 
-Organization System(SKOS). 
-
-Users are free to extend the semantic similarity algorithms by extending two classes,
-SimilarityMeasure and SimCompute.
-
-## Semantic Service
-In semantic service, we implement the configurable restful service for semantic 
-matching. Including a restful server and ajax client. 
-
-
-## Semantic Search
-In semantic search, we use lucene to index the data. Different with the lucene's
-default matching and scoring funcionality, we implement our scoring functionality
-by calling the semantic similarity algorithms. Therefore, the data are retrieval and
-ranked according to their semantic similarity socres.
 
 About this repository
 ------------------------------
-This is the root github repository of the Semantic Matching project.
 For more information, contact us through: http://gsi.dit.upm.es

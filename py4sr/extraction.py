@@ -1,6 +1,6 @@
 from collections import deque
 from SPARQLWrapper import SPARQLWrapper, JSON
-from sematch import Recommender
+from simrec import Recommender
 import urllib2
 import json
 import re
@@ -499,11 +499,11 @@ def build_taxonomy():
 if __name__ == '__main__':
     #boss()
     #build_taxonomy()
-    dbpedia_map = read_dict_file("geo_data/dbpedia_link_map.txt")
+    dbpedia_map = read_dict_file("../geo_data/dbpedia_link_map.txt")
     keys = list(dbpedia_map)
     #json_data = scraping_dbpedia(dbpedia_map)
     #save_json_file("geo_data/dbpedia_data.txt",json_data)
-    json_data = read_json_file("geo_data/dbpedia_data.txt")
+    json_data = read_json_file("../geo_data/dbpedia_data.txt")
     print "total number of scrapped entity is %d" % len(json_data)
     c_pop = 0
     c_area = 0
@@ -530,7 +530,7 @@ if __name__ == '__main__':
     #dbpedia_links([])
     data_set = [data for data in json_data if data.get('population') and data.get('area') and data.get('abstract')]
     print "total number of entity in data set is %d" % len(data_set)
-    skos_f = open("geo_data/es_city_skos_taxonomy.txt")
+    skos_f = open("../geo_data/es_city_skos_taxonomy.txt")
     skos_data = {}
     for line in skos_f:
         key,value = line.split('\t')
@@ -557,13 +557,13 @@ if __name__ == '__main__':
         data['lat'] = lat
         data['lon'] = lon
     config = []
-    config.append({'sim':'string','weight':0.25, 'field':'name'})
-    config.append({'sim':'numeric','weight':0.25, 'field':'area'})
-    config.append({'sim':'numeric','weight':0.25, 'field':'population'})
-    config.append({'sim':'taxonomy','weight':0.25, 'field':'geo'})
+    #config.append({'sim':'string','weight':0.05, 'field':'name'})
+    #config.append({'sim':'numeric','weight':0.15, 'field':'area'})
+    config.append({'sim':'numeric','weight':1, 'field':'population'})
+    #config.append({'sim':'taxonomy','weight':1, 'field':'geo'})
     data_dict = {data['key']:data for data in data_set}
     rec = Recommender(data_set, config)
-    print rec.recommend(data_set[100])
+    print rec.recommend(data_dict['3117735'])
     
 
         

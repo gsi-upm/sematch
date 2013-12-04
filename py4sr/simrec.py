@@ -56,7 +56,7 @@ class Similarity:
 
     #Numerical similarity
 
-    def numeric(self, X, Y, scale=100):
+    def numeric(self, X, Y, scale=1000000):
         X = float(X)
         Y = float(Y)
         diff = X - Y 
@@ -110,11 +110,9 @@ class Recommender:
     """
     Simple similarity-based recommendation system
     """
-
-    def __init__(self, data_set, config):
+    def __init__(self, data_set):
         self.data_set = data_set
         self.sim = Similarity()
-        self.config = config
         self.sim_map = {}
         self.sim_map['numeric'] = self.sim.numeric
         self.sim_map['string'] = self.sim.string
@@ -122,7 +120,7 @@ class Recommender:
     
     def create_tasks(self, query, resource):
         tasks = []
-        for conf in self.config:
+        for conf in query['config']:
             s = self.sim_map[conf['sim']]
             w = conf['weight']
             q = query[conf['field']]
@@ -144,5 +142,4 @@ class Recommender:
             results.append((data['key'], sum(self.compute(query, data))))
         results = sorted(results, key=itemgetter(1), reverse=True)
         return results[:top_n]
-
-
+    
