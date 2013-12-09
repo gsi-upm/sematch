@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <style>
+      html, body, #map-canvas {
+	width:500px;
+	height:380px;
+        margin: 20px;
+        padding: 20px
+      }
+    </style>
+    <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDY0kkJiTPVd2U7aTOAwhc9ySH6oHxOIYM&sensor=false"></script>
+   
+  </head>
+  <body>
+    <div id="map-canvas"></div>
+ <script>
+        function initialize() {
+            var myCenter = new google.maps.LatLng(-3, 150.644);
+            var mapOptions = {
+                zoom: 8,
+                center:myCenter 
+            };
+            var map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
+            var marker=new google.maps.Marker({position:myCenter});
+            marker.setMap(map);
+        }
+        google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+  </body>
+</html>
+
+
+

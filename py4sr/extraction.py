@@ -1,6 +1,6 @@
 from collections import deque
 from SPARQLWrapper import SPARQLWrapper, JSON
-from simrec import Recommender
+from pymongo import MongoClient
 import urllib2
 import json
 import re
@@ -537,7 +537,10 @@ if __name__ == '__main__':
         skos_data[key] = value
     skos_f.close()
     pattern = re.compile("geo/#(\d+)")
+    count = 1
     for data in data_set:
+        data['id'] = count
+        count += 1
         key = data['key']
         skos = skos_data[key]
         g_s = skos.find("<rdf:Description")
@@ -556,14 +559,21 @@ if __name__ == '__main__':
         data['name'] = name
         data['lat'] = lat
         data['lon'] = lon
-    config = []
+    #config = []
     #config.append({'sim':'string','weight':0.05, 'field':'name'})
     #config.append({'sim':'numeric','weight':0.15, 'field':'area'})
-    config.append({'sim':'numeric','weight':1, 'field':'population'})
+    #config.append({'sim':'numeric','weight':1, 'field':'population'})
     #config.append({'sim':'taxonomy','weight':1, 'field':'geo'})
-    data_dict = {data['key']:data for data in data_set}
-    rec = Recommender(data_set, config)
-    print rec.recommend(data_dict['3117735'])
+    #data_dict = {data['key']:data for data in data_set}
+    #rec = Recommender(data_set, config)
+    #print rec.recommend(data_dict['3117735'])
+    
+    #insert the data into mongodb
+    client = MongoClient('localhost',27017)
+    db = client.geo
+    collection = db.es_cities
+    for data in data_set:
+        collection.insert(data)
     
 
         
