@@ -4,17 +4,20 @@
 
 ## Introduction
 
-Sematch is a simple restful semantic matching framework used for matching structured data, including
-database records, rdf intances. Sematch includes both Java and Python implementations. The Java part
-integrates the lucene indexing module in order to achieve the high performance. The python parts
-allows you to quick test your data and have a simple demo easily. 
+The name of Sematch is combined based on Spanish "se" and English "match". It is also the abbreviation of semantic matching. 
 
-It is very easy to use sematch to implement your similarity-based searching or similarity-based
-recommendation modules. The data and queries are all structured attributes and values so you can use our
-implemented similarity metrics to measure similarity for each attributes, then use the aggregated
-similarity for searching and recommending data given a structured query. 
+The project will provide several flexible tools to ease users in using Semantic Web Data, including
+entity retrieving from DBpedia based on automatic SPARQL expansion and generation, entity indexing
+based on Lucene and semantic similarity.
 
+This project is still under development. 
+
+The project is mainly matained by Ganggao Zhu. 
+
+You can contact me via gzhu@dit.upm.es
+
+ 
 About this repository
 ------------------------------
-This is the root github repository of the Semantic Matching project.
+This is the root github repository of the Sematch project.
 For more information, contact us through: http://gsi.dit.upm.es
