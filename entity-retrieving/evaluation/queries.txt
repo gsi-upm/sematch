@@ -1,0 +1,52 @@
+INEX_LD-20120121    vietnam food recipes
+INEX_LD-20120131    vietnam travel national park
+INEX_LD-20120132    vietnam travel airports
+INEX_LD-20120311    tango culture movies
+INEX_LD-20120312    tango culture countries
+INEX_LD-20120321    tango music  composers
+INEX_LD-20120322    tango music instruments
+INEX_LD-20120331    tango dance styles
+INEX_LD-20120332    tango dance history
+INEX_LD-20120511    female rock singers
+INEX_LD-20120512    south korean girl groups
+INEX_LD-2009022 Szechwan dish food cuisine
+INEX_LD-2009039 roman architecture
+INEX_LD-2009115 virtual museums
+INEX_LD-2010004 Indian food
+INEX_LD-2010043 List of films from the surrealist category
+INEX_XER-62 Neil Gaiman novels
+INEX_XER-72 films shot in Venice
+INEX_XER-79 Works by Charles Rennie Mackintosh
+INEX_XER-86 List of countries in World War Two
+INEX_XER-91 Paul Auster novels
+INEX_XER-94 Hybrid cars sold in Europe
+INEX_XER-100    Operating systems to which Steve Jobs related
+INEX_XER-108    State capitals of the United States of America
+INEX_XER-116    Italian nobel prize winners
+INEX_XER-124    Novels that won the Booker Prize
+INEX_XER-125    countries which have won the FIFA world cup
+INEX_XER-133    EU countries
+INEX_XER-139    Films directed by Akira Kurosawa
+INEX_XER-140    Airports in Germany
+INEX_XER-141    Universities in Catalunya
+QALD2_te-6  Give me all professional skateboarders from Sweden.
+QALD2_te-17 Give me all cars that are produced in Germany.
+QALD2_te-28 Give me all movies directed by Francis Ford Coppola.
+QALD2_te-33 Give me all Australian nonprofit organizations.
+QALD2_te-39 Give me all companies in Munich.
+QALD2_te-40 List all boardgames by GMT.
+QALD2_te-51 Give me all Frisian islands that belong to the Netherlands.
+QALD2_te-60 Give me a list of all lakes in Denmark.
+QALD2_te-63 Give me all Argentine films.
+QALD2_te-76 List the children of Margaret Thatcher.
+QALD2_te-82 Give me a list of all American inventions.
+QALD2_tr-16 Give me the capitals of all countries in Africa.
+QALD2_tr-41 Give me all soccer clubs in Spain.
+QALD2_tr-53 Give me all presidents of the United States.
+QALD2_tr-63 Give me all actors starring in Batman Begins.
+QALD2_tr-68 Which actors were born in Germany?
+QALD2_tr-70 Give me all films produced by Hal Roach.
+QALD2_tr-71 Give me all video games published by Mean Hamster Software.
+QALD2_tr-78 Give me all books written by Danielle Steel.
+QALD2_tr-84 Give me all movies with Tom Cruise.
+QALD2_tr-89 Give me all soccer clubs in the Premier League.

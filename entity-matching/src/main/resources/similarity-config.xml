@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	   http://www.springframework.org/schema/beans/spring-beans-2.0.xsd" 
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	
+	<bean id="multiSkill" class="es.upm.dit.gsi.semantic.similarity.measure.JSONMeasure">
+	    <property name="label" value="skill" />
+	 	<property name="weight" value="1.0" />
+	 	<property name="measure" ref="competency" />
+	</bean>
+	
+	<bean id="competency" class="es.upm.dit.gsi.semantic.similarity.measure.HybridMeasure">
+	    <property name="concept" ref="skill" />
+		<property name="property" ref="level" />
+		<property name="weight" value="1.0" />
+	</bean>
+	
+	<bean id="skill" class="es.upm.dit.gsi.semantic.similarity.measure.AtomicMeasure">
+	 	<property name="label" value="skill" />
+	 	<property name="weight" value="0.5" />
+	 	<property name="simCompute" ref="skillSimCompute" />
+	</bean>
+	
+	<bean id="level" class="es.upm.dit.gsi.semantic.similarity.measure.AtomicMeasure">
+	    <property name="label" value="level" />
+	    <property name="weight" value="0.5" />
+	    <property name="simCompute" ref="levelSimCompute" />
+	</bean>
+	
+	<bean id="levelSimCompute" class="es.upm.dit.gsi.semantic.similarity.compute.LevelSimCompute">
+	    <property name="levels">
+			<map>
+				<entry key="Beginner" value="1"/>
+				<entry key="Intermediate" value="2"/>
+				<entry key="Advanced" value="3"/>
+				<entry key="Expert" value="4"/>
+			</map>
+		</property>
+		<property name="matchModel" value="Broad"/>
+		<property name="deviation" value="0.25" />
+	</bean>
+	
+	<bean id="skillSimCompute" class="es.upm.dit.gsi.semantic.similarity.compute.StringSimCompute">
+	</bean>
+	
+</beans>
