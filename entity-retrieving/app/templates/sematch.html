@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:og="http://ogp.me/ns#"
+      xmlns:fb="https://www.facebook.com/2008/fbml">
+    <head>
+
+        <title>Sematch</title>
+         <!-- Using the latest rendering mode for IE -->
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- CDN for bootstrap font_awesome -->
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="/static/style.css" type="text/css"/>
+        <link href="/static/favicon.ico" rel="shortcut icon" type="image/x-icon">
+        <!-- JavaScript plugins (requires jQuery) -->
+        <script src="http://code.jquery.com/jquery.js"></script>
+        <script src="/static/FileSaver.js"></script>
+        <script src="/static/Blob.js"></script>
+        <!-- use CDN for boostrap js -->
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+        <!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+        <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.3.0/respond.js"></script>
+        <script src="http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js"></script>
+    </head>
+    <body>
+
+        <div class="container">
+            <div class="row" style="margin-top:30px">
+                <div class="col-md-3">
+                    <h1>Sematch</h1>
+                </div>
+            </div>
+            <div class="row" style="margin-top:30px">
+                <div id="wizard" class="wizard clearfix">
+                    <div class="steps clearfix">
+                        <ul data-bind="foreach: stepModels">
+                            <li data-bind="attr:{class:state}"><a style="text-align:center" data-bind="text:name"></a>
+                            </li>
+                           <!--  <li class="done">
+                                <a ><span class="number">2.</span> Type Selection</a>
+                            </li>
+                            <li class="disabled"><a><span class="number">3.</span> Relation Selection</a>
+                            </li>
+                            <li class="disabled"><a><span class="number">4.</span> Download Dataset</a>
+                            </li> -->
+                        </ul>
+                    </div>
+                <div class="content clearfix">
+                
+                 <div data-bind="template: { name: 'currentTmpl', data: currentStep }"></div> 
+
+                </div>
+                <div class="actions clearfix">
+                    <button style="width:100px" class="btn btn-primary" data-bind="click: goPrevious, enable: canGoPrevious">Previous</button>
+                    <button style="width:100px" class="btn btn-primary" data-bind="click: goNext, enable: canGoNext, visible:showNext">Next</button>
+                    <button style="width:100px" class="btn btn-primary" data-bind="click: save, enable: resourceLen() > 0, visible:showDownload">Download</button>
+                </div>
+                    <!-- <ul role="menu" aria-label="Pagination">
+                        <li class="disabled" aria-disabled="true"><a href="#previous" role="menuitem">Previous</a></li>
+                        <li aria-hidden="false" aria-disabled="false"><a href="#next" role="menuitem">Next</a></li>
+                        <li aria-hidden="true" style="display: none;"><a href="#finish" role="menuitem">Finish</a></li>
+                    </ul> -->
+                </div>
+            </div>
+        </div>
+
+        <script id="currentTmpl" type="text/html">
+            <div data-bind="template: { name: getTemplate, data: model }"></div> 
+        </script>
+
+        <script id="queryInput" type="text/html">
+            <section  class="body current">
+                <div class="row" style="margin-top:30px">
+                    <div class="col-md-offset-4 col-md-4">
+                        <input data-bind="value: feature"  class="form-control" type="text" placeholder="Feature">
+                    </div>
+               </div>
+               <div class="row" style="margin-top:30px">
+                    <div class="col-md-offset-4 col-md-4">
+                        <select  class="form-control" data-bind="value: country">
+                            {% for country in countries %}
+                            <option value="{{country.link}}">{{country.name}}</option>
+                            {% endfor %}
+                        </select>
+                   </div>
+               </div>
+               <div class="row" style="margin-top:30px">
+                    <div class="col-md-offset-4 col-md-4">
+                       <select  class="form-control" data-bind="value:simType">
+                            <option value="1">Wu-Palmer</option>
+                            <option value="2">Rada</option>
+                            <option value="3">Leacock-Chodorow</option>
+                            <option value="4">Resnik</option>
+                            <option value="5">Jiang-Conrath</option>
+                            <option value="6">Lin</option>
+                        </select>
+                   </div>
+               </div>
+               <div class="row" style="margin-top:30px">
+                    <div class="col-md-offset-4 col-md-4">
+                        <input data-bind="value: threshold" class="form-control" type="text" placeholder="Threshold">
+                    </div>
+               </div>
+            </section>
+        </script>
+
+        <script id="typeSelect" type="text/html">
+            <section class="body current">
+                <div class="row" style="margin-top:30px;margin-bottom:30px">
+                    <div class="col-md-offset-1 col-md-10">
+                        <ul class="list-group" data-bind="foreach: types, visible: types().length > 0">
+                            <li class="list-group-item" style="color:#428bca">
+                                <input type="checkbox" data-bind="checked: selected" />
+                                <span data-bind="text: synset()">&nbsp;</span>
+                                <span data-bind="text: sim()" style="font-weight:bold"></span>
+                                <span data-bind="text: definition()">&nbsp;</span>
+                                <ul data-bind="foreach: links">
+                                    <li><span data-bind="text: $data"></span></li>
+                                </ul>
+                            </li> 
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </script>
+
+        <script id="relationSelect" type="text/html">
+            <section class="body current">
+                <div class="row" style="margin-top:30px">
+                    <div class="col-md-offset-1 col-md-10">
+                        <span class="result-count"><b data-bind="text: resourceLen">&nbsp;</b> results are retrieved</span>
+                    </div>
+                </div>
+                <div class="row" style="margin-top:30px">
+                    <div class="col-md-offset-1 col-md-4">
+                        <ul  style="background-color:white" data-bind="foreach: results, visible: results().length > 0">
+                            <li>
+                                <input type="checkbox" data-bind="checked: selected" />
+                                <span data-bind="text: relation()">&nbsp;</span>
+                            </li> 
+                        </ul>  
+                    </div>
+                    <div class="col-md-6">
+                        <ul  style="background-color:white" data-bind="foreach: results, visible: results().length > 0">
+                            <li>
+                                <!-- ko if: selected() === true -->
+                                <ul data-bind="foreach: resources">
+                                    <li><span data-bind="text: $data"></span></li>
+                                </ul>
+                                 <!-- /ko -->
+                            </li> 
+                        </ul>  
+                    </div>
+                </div>
+            </section>
+        </script>
+
+        <script id="dataset" type="text/html">
+            <section class="body current">
+                <div class="row" style="margin-top:30px;margin-bottom:30px">
+                    <div class="col-md-offset-4 col-md-4">
+                        <h1>Congratulations!</h1>
+                    </div>
+                </div>
+                <div class="row" style="margin-top:30px;margin-bottom:30px">
+                    <div class="col-md-offset-3 col-md-6">
+                        <span style="font-size:28px">There are in total </span> <span style="font-weight:bold;font-size:38px" data-bind="text: resourceLen">&nbsp;</span><span style="font-size:28px"> resources you can download by pressing the donwload button</span>
+                    </div>
+                </div>
+            </section>
+        </script>
+
+        
+
+        <script type="text/javascript">
+
+            function Step(number, name, state, template, model) {
+                var self = this;
+                self.number = ko.observable(number);
+                self.name = ko.observable(name);
+                self.state = ko.observable(state);
+                self.template = template;
+                self.model = ko.observable(model);
+                
+                self.getTemplate = function() {
+                   return self.template;   
+                }
+            }
+
+            function Result(data) {
+                this.relation = ko.observable(data.relation);
+                this.resources = ko.observableArray(data.resources);
+                this.selected = ko.observable(true);
+            }
+
+            function Type(data) {
+                this.links = ko.observableArray(data.links);
+                this.synset = ko.observable(data.synset);
+                this.definition = ko.observable(data.definition);
+                this.sim = ko.observable(data.sim);
+                this.selected = ko.observable(true);
+            }
+
+            function QueryViewModel() {
+
+                var self = this;
+                self.types = ko.observableArray([]);
+                self.results = ko.observableArray([]);
+                self.pageSize = ko.observable(10);
+                self.pageIndex = ko.observable(0);
+                self.feature = ko.observable();
+                self.threshold = ko.observable();
+                self.country = ko.observable();
+                self.simType = ko.observable();
+                self.showNext = ko.observable(true);
+                self.showDownload = ko.observable(false);
+                self.resourceLen = ko.computed(function(){
+                    var total = 0;
+                    ko.utils.arrayForEach(self.results(), function(result) {
+                        if(result.selected() == true){
+                            total += result.resources().length;
+                        }
+                    });
+                    return total;
+                });
+
+                self.stepModels = ko.observableArray([
+                    new Step("1", "Query Input", "current", "queryInput", {feature:self.feature,
+                        threshold:self.threshold,country:self.country, simType:self.simType}),
+                    new Step("2", "Types Selection", "disabled", "typeSelect", { types:self.types}),
+                    new Step("3", "Relation Selection", "disabled", "relationSelect", {resourceLen:self.resourceLen,results:self.results}),
+                    new Step("4", "Download Dataset", "disabled", "dataset", {resourceLen:self.resourceLen, save:self.save})
+                ]);
+
+                self.currentStep = ko.observable(self.stepModels()[0]);
+    
+                self.currentIndex = ko.dependentObservable(function() {
+                    return self.stepModels.indexOf(self.currentStep());    
+                });
+
+                self.getTemplate = function(data) {
+                   return self.currentStep().template();   
+               };
+
+               self.canGoNext = ko.dependentObservable(function() {
+                return self.currentIndex() < self.stepModels().length - 1;
+                });
+
+               self.goNext = function() {
+                    if (self.canGoNext()) {
+                        if(self.currentIndex() == 0){
+                            self.typeExpand();
+                        }
+                        if(self.currentIndex() == 1){
+                            self.match();
+                        }
+                        if(self.currentIndex() == 2){
+                            self.showNext(false);
+                            self.showDownload(true);
+                        }
+                        self.currentStep().state("done");
+                        self.stepModels()[self.currentIndex() + 1].state("current");
+                        self.currentStep(self.stepModels()[self.currentIndex() + 1]);   
+                   }
+                };
+
+               self.canGoPrevious = ko.dependentObservable(function() {
+                return self.currentIndex() > 0;
+                });
+
+               self.goPrevious = function() {
+                    if (self.canGoPrevious()) {
+                        if(self.currentIndex() == 3){
+                            self.showNext(true);
+                            self.showDownload(false);
+                        }
+                        self.currentStep().state("done");
+                        self.stepModels()[self.currentIndex() - 1].state("current");
+                        self.currentStep(self.stepModels()[self.currentIndex() - 1]);   
+                   }   
+                };
+
+                self.ajax = function(uri, method, data) {
+                    var request = {
+                        url: uri,
+                        type: method,
+                        contentType: "application/json",
+                        accepts: "application/json",
+                        cache: false,
+                        dataType: 'json',
+                        data: data,
+                        error: function(jqXHR) {
+                            console.log("ajax error " + jqXHR.status);
+                        }
+                    };
+                    return $.ajax(request);
+                }
+
+                // self.pagedList = ko.computed(function(){
+                //     var size = self.pageSize();
+                //     var start = self.pageIndex() * size;
+                //     return self.places.slice(start, start + size);
+                // });
+
+                // self.maxPageIndex = ko.computed(function(){
+                //     return Math.ceil(self.places().length/self.pageSize()) -1;
+                // });
+
+                // self.allPages = ko.computed(function(){
+                //     var pages = [];
+                //     for (i = 0; i <= self.maxPageIndex(); i++){
+                //         pages.push({pageNumber: (i+1)});
+                //     }
+                //     return pages;
+                // });
+
+                // self.moveToPage = function(index) {
+                //     self.pageIndex(index);
+                // };
+
+                self.typeExpand = function() {
+                    var requestData = {
+                        feature:self.feature(),
+                        country:self.country(),
+                        sim:self.simType(),
+                        threshold:self.threshold()
+                    };
+                    self.ajax('http://localhost:5000/sematch/api/types','GET',requestData).success(function(data){
+                        var types = $.map(data, function(type) { return new Type({links:type['link'],
+                            synset:type['simbol'], definition:type['definition'], sim:parseFloat(Math.round(type['sim'] * 100) / 100).toFixed(2)})});
+                        self.types(types);
+                    });
+                }
+
+                self.match = function() {
+                    var requestData = {
+                        feature:self.feature(),
+                        country:self.country(),
+                        sim:self.simType(),
+                        threshold:self.threshold()
+                    };
+                    self.ajax('http://localhost:5000/sematch/api/match','GET',requestData).success(function(data){
+                        var results = $.map(data, function(result) { return new Result({relation:result['relation'],resources:result['resources']})});
+                        self.results(results);
+                    });
+                }
+
+                self.save = function() {
+                    var download = [];
+                    ko.utils.arrayForEach(self.results(), function(result) {
+                        if(result.selected() == true){
+                            for(var i=0; i< result.resources().length; i++){
+                                download.push(result.resources()[i]);
+                                download.push('\n');
+                            }
+                        }
+                    });
+                    var blob = new Blob(download, {type:"text/json;charset=utf-8"});
+                    saveAs(blob, "resources.txt");
+                }
+            }
+
+            vm = new QueryViewModel();
+            ko.applyBindings(vm);
+
+        </script>
+    </body>
+</html>

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:og="http://ogp.me/ns#"
+      xmlns:fb="https://www.facebook.com/2008/fbml">
+    <head>
+        <title>Sematch</title>
+         <!-- Using the latest rendering mode for IE -->
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- CDN for bootstrap font_awesome -->
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="/static/style.css" type="text/css"/>
+        <link href="/static/favicon.ico" rel="shortcut icon" type="image/x-icon">
+        <!-- JavaScript plugins (requires jQuery) -->
+        <script src="http://code.jquery.com/jquery.js"></script>
+        <!-- use CDN for boostrap js -->
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+        <!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+        <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.3.0/respond.js"></script>
+        <script src="http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js"></script>
+        <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDY0kkJiTPVd2U7aTOAwhc9ySH6oHxOIYM&sensor=false"></script>
+    </head>
+    <body>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="search-area">
+                            <div class="row" id="input-context">
+                                 <div class="col-md-12">
+                                     <input data-bind="value: context" class="form-control" type="text" placeholder="Country">
+                                </div>
+                            </div>
+                            <div class="row" id="input-feature">
+                                <div class="col-md-12">
+                                    <input data-bind="value: feature" class="form-control" type="text" placeholder="Feature">
+                                </div>
+                            </div>
+                            <div class="row" id="search-button">
+                                <div class="col-md-offset-8 col-md-2">
+                                    <button class="btn btn-primary" data-bind="click: search">search</button>
+                                </div>
+                            </div>
+                            <div class="row" id="place-list">
+                                <div class="col-md-12">
+                                    <table class="table table-condensed">
+                                        <thead>
+                                            <tr>
+                                                <th class="col-md-12">Places</th>
+                                                <!-- <th class="col-md-9">Feature</th> -->
+                                            </tr>
+                                        </thead>
+                                        <tbody data-bind="foreach: pagedList">
+                                            <tr>
+                                                <td><a data-bind="text: a_name, attr: {href: dbpedia}" target="_new"></a></td>
+                                                <!-- <td data-bind="text: feature"></td> -->
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <ul class="pagination" data-bind="foreach: allPages">
+                                        <li data-bind="css: { active: $data.pageNumber === ($root.pageIndex() + 1) }"><a href="#" data-bind="text: $data.pageNumber, click: function() { $root.moveToPage($data.pageNumber-1); }"></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="result-area">
+                        <div class="col-md-12">
+                            <div id="map-canvas"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+
+            var cm = {};
+            cm.fullBounds = new google.maps.LatLngBounds();
+
+            function Place(data) {
+                var self = this;
+                self.a_name = ko.observable(data['name']);
+                self.feature = ko.observable(data['abstract']);
+                self.lng = ko.observable(data['lon']);
+                self.lat = ko.observable(data['lat']);
+                self.dbpedia = ko.observable(data['dbpedia']);
+                self.onMap = ko.observable(true);
+                self.hover = ko.observable(false);
+
+                var currentLatLng = new google.maps.LatLng(self.lat(), self.lng());
+
+                self.marker = new google.maps.Marker({
+                    position:currentLatLng,
+                    title: self.a_name(),
+                    map:cm.map,
+                    //visible: true,
+                    animation: google.maps.Animation.DROP
+                });
+
+                var contentString = '<div id="content">'+'<div id="siteNotice">'+'</div>'+'<h1 id="firstHeading" class="firstHeading">'+'<a target="_new" href="'+self.dbpedia()+'">'+
+                    self.a_name()+'</a></h1>'+'<div id="bodyContent">'+'<p>'+self.feature()+'</p>'+'</div>'+'</div>';
+
+                var infowindow = new google.maps.InfoWindow({
+                    content: contentString
+                });
+        
+                google.maps.event.addListener(self.marker, 'click', function() {
+                   infowindow.open(cm.map,self.marker);
+                });
+
+                google.maps.event.addListener(self.marker, 'mouseover', function(){
+                    self.hoverPlace();
+                });
+
+                google.maps.event.addListener(self.marker, 'mouseout', function(){
+                    self.hoverPlace();
+                });
+
+                cm.fullBounds.extend(currentLatLng);
+                cm.map.fitBounds(cm.fullBounds);
+
+                self.hoverPlace = function(){
+                    if(self.hover()){
+                        self.hover(false);
+                    }else{
+                        self.hover(true);
+                    }
+                }
+            }
+
+            function PlacesViewModel() {
+
+                var self = this;
+                self.searchURI = 'http://localhost:5000/sematch/api/semantic/search';
+                self.placeURI = 'http://localhost:5000/sematch/api/';
+                self.places = ko.observableArray([]);
+                self.context = ko.observable();
+                self.feature = ko.observable();
+                self.pageSize = ko.observable(10);
+                self.pageIndex = ko.observable(0);
+
+                self.ajax = function(uri, method, data) {
+                    var request = {
+                        url: uri,
+                        type: method,
+                        contentType: "application/json",
+                        accepts: "application/json",
+                        cache: false,
+                        dataType: 'json',
+                        data: ko.toJSON(data),
+                        beforeSend: function (xhr) {
+                            xhr.setRequestHeader("Authorization", 
+                                "Basic " + btoa(self.username + ":" + self.password));
+                        },
+                        error: function(jqXHR) {
+                            console.log("ajax error " + jqXHR.status);
+                        }
+                    };
+                    return $.ajax(request);
+                }
+
+                self.query = ko.computed(function(){
+                    return self.searchURI + '?context='+self.context() + '&&feature='+self.feature();
+                });
+
+                self.pagedList = ko.computed(function(){
+                    var size = self.pageSize();
+                    var start = self.pageIndex() * size;
+                    return self.places.slice(start, start + size);
+                });
+
+                self.maxPageIndex = ko.computed(function(){
+                    return Math.ceil(self.places().length/self.pageSize()) -1;
+                });
+
+                self.allPages = ko.computed(function(){
+                    var pages = [];
+                    for (i = 0; i <= self.maxPageIndex(); i++){
+                        pages.push({pageNumber: (i+1)});
+                    }
+                    return pages;
+                });
+
+                self.moveToPage = function(index) {
+                    self.pageIndex(index);
+                };
+
+                self.search = function() {
+                    $.getJSON(self.query(), function(allData) {
+                        var mappedPlaces = $.map(allData, function(place) { return new Place(place) });
+                        for (var i = 0; i < self.places().length; i++){
+                            self.places()[i].marker.setMap(null);
+                        }
+                        self.places(mappedPlaces);
+                    });   
+                }
+            }
+
+            createMap = function() {
+
+                var mapOptions = {
+                    zoom: 1,
+                    center: new google.maps.LatLng(0,0)
+                };
+
+                cm.map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+            }
+
+            vm = new PlacesViewModel();
+            createMap();
+            ko.applyBindings(vm);
+
+        </script>
+        
+    </body>
+</html>
