@@ -1,28 +1,21 @@
-from indexer import Index
-from searcher import Searcher
+import sematch
 
-index = Index()
-searcher = Searcher()
+wordnet = sematch.WordNetLD()
+autoQuery = sematch.AutoQuery()
+dataset = sematch.read_json_file("test.txt")
 
-#es = id_code_map['2510769']
-#madrid = id_code_map['3117732']
-#es_list = sub_taxonomy(es, code_all)
-#madrid_list = sub_taxonomy(madrid, es_list, depth=1)
-
-sub_places = index.sub_areas('2510769', index.admin1)
-print sub_places
-#sub_keys = list(sub_places)
-#print sub_places[sub_keys[1]]
-#sub_places2 = index.sub_areas(sub_keys[1], index.admin2)
-#print sub_places2
-
-config = []
-config.append({'sim':'string','weight':1.0, 'field':'name'})
-query = {'config':config, 'name':'madrid'}
-results = searcher.search(query, index.dataset[:100],'gid')
-print results
-
-
-
-
-
+for data in dataset:
+    query = data['query']
+    entity = data['entity']
+    result = data['result']
+    types = wordnet.type_links(query[0], 1, 0.5)
+    retrieved = autoQuery.query(types, entity)
+    a = len(result)
+    b = len(retrieved)
+    a_b = 0
+    for re in retrieved:
+        if re in result:
+            a_b += 1
+    recall = float(a_b) / float(a)
+    precision = float(a_b) / float(b)
+    print recall, precision
