@@ -12,7 +12,7 @@ based on Lucene and semantic similarity.
 
 This project is still under development. 
 
-The project is mainly matained by Ganggao Zhu. 
+The project is mainly maintained by Ganggao Zhu. 
 
 You can contact me via gzhu@dit.upm.es
 
