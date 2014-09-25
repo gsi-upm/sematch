@@ -1,15 +1,31 @@
 from SPARQLWrapper import SPARQLWrapper, SPARQLExceptions, JSON
-import json
 from nltk.corpus import wordnet as wn
 from nltk.corpus import wordnet_ic
+import argparse
+import json
 
-
-#read json file
 def read_json_file(name):
     data = []
     with open(name,'r') as f:
         for line in f:
             data.append(json.loads(line))
+    return data
+
+def save_json_file(name, data):
+    with open(name, 'w') as f:
+        for d in data:
+            json.dump(d, f)
+            f.write("\n")
+
+def save_list_file(name, data):
+    with open(name,'w') as f:
+        for d in data:
+            f.write(d)
+            f.write('\n')
+
+def read_list_file(name):
+    with open(name,'r') as f:
+        data = [line.strip() for line in f]
     return data
 
 class WordNetLD:
@@ -95,32 +111,12 @@ class AutoQuery:
         self.sparql.setReturnFormat(JSON)
         self.type = """{?subject rdf:type <%s>}"""
         self.tpl_1 = """
-    PREFIX owl: <http://www.w3.org/2002/07/owl#>
-    PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-    PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-    PREFIX dc: <http://purl.org/dc/elements/1.1/>
-    PREFIX dbpedia2: <http://dbpedia.org/property/>
-    PREFIX dbpedia: <http://dbpedia.org/>
-    PREFIX skos: <http://www.w3.org/2004/02/skos/core#>  
-    PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>
     SELECT DISTINCT ?subject ?relation WHERE {
     %s.
     ?subject ?relation <%s>.
     } GROUP BY ?subject
     """
         self.tpl_2 = """
-    PREFIX owl: <http://www.w3.org/2002/07/owl#>
-    PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-    PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-    PREFIX dc: <http://purl.org/dc/elements/1.1/>
-    PREFIX dbpedia2: <http://dbpedia.org/property/>
-    PREFIX dbpedia: <http://dbpedia.org/>
-    PREFIX skos: <http://www.w3.org/2004/02/skos/core#>  
-    PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>
     SELECT DISTINCT ?subject ?relation WHERE {
     %s.
     ?subject ?relation ?someObject.
@@ -128,32 +124,12 @@ class AutoQuery:
     } GROUP BY ?subject
     """
         self.tpl_3 = """
-    PREFIX owl: <http://www.w3.org/2002/07/owl#>
-    PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-    PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-    PREFIX dc: <http://purl.org/dc/elements/1.1/>
-    PREFIX dbpedia2: <http://dbpedia.org/property/>
-    PREFIX dbpedia: <http://dbpedia.org/>
-    PREFIX skos: <http://www.w3.org/2004/02/skos/core#>  
-    PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>
     SELECT DISTINCT ?subject ?relation WHERE {
     %s.
     <%s> ?relation ?subject.
     } GROUP BY ?subject
     """
         self.tpl_4 = """
-    PREFIX owl: <http://www.w3.org/2002/07/owl#>
-    PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-    PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-    PREFIX dc: <http://purl.org/dc/elements/1.1/>
-    PREFIX dbpedia2: <http://dbpedia.org/property/>
-    PREFIX dbpedia: <http://dbpedia.org/>
-    PREFIX skos: <http://www.w3.org/2004/02/skos/core#>  
-    PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>
     SELECT DISTINCT ?subject ?relation WHERE {
     %s.
     <%s> ?relation ?someObject.
@@ -216,3 +192,15 @@ class AutoQuery:
             resources += res['resources']
         return list(set(resources))
 
+
+if __name__ == "__main__":
+    wordnet = WordNetLD()
+    autoQuery = AutoQuery()
+    parser = argparse.ArgumentParser(description="Retrieving entities of given entity type based on another entity\
+     which has some relation with the required entities")
+    parser.add_argument("feature", help="entity type")
+    parser.add_argument("entity", help="some entity such as country author")
+    args = parser.parse_args()
+    types = wordnet.type_links(args.feature, 1, 0.5)
+    retrieved = autoQuery.query(types, args.entity)
+    save_list_file("resource.dat", retrieved)

@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, json, request, render_template as template
 from pymongo import MongoClient
 import sematch
+import os
 
 client = MongoClient('localhost', 27017)
 db = client.geoname_database
@@ -47,10 +48,9 @@ def home():
         country_list.append(country)
     return template('sematch.html', countries=country_list)
 
+def runserver():
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='localhost', port=port)
 
-
-
-
-
-
-
+if __name__ == '__main__':
+    runserver()
