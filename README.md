@@ -21,3 +21,11 @@ About this repository
 ------------------------------
 This is the root github repository of the Sematch project.
 For more information, contact us through: http://gsi.dit.upm.es
+
+
+To convert the notebook into html use the following command
+
+```
+ipython nbconvert name.ipynb --to html
+```
+

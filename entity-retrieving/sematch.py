@@ -1,6 +1,7 @@
 from SPARQLWrapper import SPARQLWrapper, SPARQLExceptions, JSON
 from nltk.corpus import wordnet as wn
 from nltk.corpus import wordnet_ic
+from collections import deque
 import argparse
 import json
 
@@ -13,6 +14,12 @@ def read_json_file(name):
 
 def save_json_file(name, data):
     with open(name, 'w') as f:
+        for d in data:
+            json.dump(d, f)
+            f.write("\n")
+
+def append_json_file(name, data):
+    with open(name, 'a') as f:
         for d in data:
             json.dump(d, f)
             f.write("\n")
@@ -59,6 +66,12 @@ class WordNetLD:
         if simType == '6':
             return syn1.lin_similarity(syn2, self.brown_ic)
 
+    def synset_expand(self, queue, synset):
+        for h in synset.hyponyms():
+            queue.append(h)
+        for h in synset.hypernyms():
+            queue.append(h)
+
     #use wn built in search to get synsets using lemma search,
     #and expand the synsets with its children and parent and siblings.
     def search_synsets(self, query, simType):
@@ -86,11 +99,12 @@ class WordNetLD:
             synsets_map[synset['offset']] = synset
         for key, value in synsets_map.iteritems():
             value['link'] = []
-            feature = self.sem_hub[key]
-            if feature.get('dbpedia'):
-                value['link'].append(feature['dbpedia'])
-            if feature.get('yago_dbpedia'):
-                value['link'].append(feature['yago_dbpedia'])
+            if self.sem_hub.get(key):
+                feature = self.sem_hub[key]
+                if feature.get('dbpedia'):
+                    value['link'].append(feature['dbpedia'])
+                if feature.get('yago_dbpedia'):
+                    value['link'].append(feature['yago_dbpedia'])
         synsets = [value for key, value in synsets_map.iteritems() if value['link']]
         return synsets
 
@@ -101,8 +115,6 @@ class WordNetLD:
             type_links += t['link']
         return type_links
 
-
-
 class AutoQuery:
     """Automatically construct the SPARQL queries"""
 
@@ -111,32 +123,78 @@ class AutoQuery:
         self.sparql.setReturnFormat(JSON)
         self.type = """{?subject rdf:type <%s>}"""
         self.tpl_1 = """
-    SELECT DISTINCT ?subject ?relation WHERE {
-    %s.
-    ?subject ?relation <%s>.
-    } GROUP BY ?subject
-    """
+            SELECT DISTINCT ?subject ?relation WHERE {
+            {
+                %s.
+                ?subject ?relation <%s>.
+            }
+            UNION
+            {
+                %s.
+                <%s> ?relation ?subject.
+            }
+            } GROUP BY ?subject
+        """
         self.tpl_2 = """
-    SELECT DISTINCT ?subject ?relation WHERE {
-    %s.
-    ?subject ?relation ?someObject.
-    ?someObject ?relation2 <%s>.
-    } GROUP BY ?subject
-    """
+            SELECT DISTINCT ?subject ?relation WHERE {
+            {
+                %s.
+                ?subject ?relation ?someObject.
+                ?someObject ?relation2 <%s>.
+            }
+            UNION
+            {
+                %s.
+                <%s> ?relation ?someObject.
+                ?someObject ?relation2 ?subject.
+            }
+            } GROUP BY ?subject
+        """
         self.tpl_3 = """
-    SELECT DISTINCT ?subject ?relation WHERE {
-    %s.
-    <%s> ?relation ?subject.
-    } GROUP BY ?subject
-    """
-        self.tpl_4 = """
-    SELECT DISTINCT ?subject ?relation WHERE {
-    %s.
-    <%s> ?relation ?someObject.
-    ?someObject ?relation2 ?subject.
-    } GROUP BY ?subject
-    """
-        
+            SELECT DISTINCT ?relation ?subject WHERE {
+            {
+                <%s> ?relation ?subject.
+            }
+            UNION
+            {
+                ?subject ?relation <%s>.
+            }
+            } GROUP BY ?subject
+        """
+        self.tpl_5 = """
+            SELECT DISTINCT ?subject ?relation WHERE {
+            {
+                %s.
+                ?subject ?relation ?someObject.
+                ?someObject ?relation2 <%s>.
+            }
+            UNION
+            {
+                %s.
+                ?subject ?relation ?someObject.
+                <%s> ?relation2 ?someObject.
+            }
+            UNION
+            {
+                %s.
+                <%s> ?relation ?someObject.
+                ?someObject ?relation2 ?subject.
+            }
+            UNION
+            {
+                %s.
+                <%s> ?relation ?someObject.
+                ?subject ?relation2 ?someObject.
+            }
+            } GROUP BY ?subject
+        """
+
+    def chunks(self, l, n):
+        """ Yield successive n-sized chunks from l.
+        """
+        for i in xrange(0, len(l), n):
+            yield l[i:i+n]
+
     def execute_query(self, query, sim, type):
         self.sparql.setQuery(query)
         results = self.sparql.query().convert()
@@ -153,16 +211,34 @@ class AutoQuery:
         return resources
 
 
-    def auto_query(self, types, entity, tpl):
-        type_query = ""
-        for i in range(len(types)-1):
-            s = self.type % types[i]
-            s += " UNION "
+    def retrieve_entity_obj(self, resource):
+        query = self.tpl_3 % (resource, resource)
+        print query
+        self.sparql.setQuery(query)
+        results = self.sparql.query().convert()
+        entity = {}
+        entity['resource'] = resource
+        entity['data'] = []
+        for result in results["results"]["bindings"]:
+            entity['data'].append((result['relation']['value'], \
+                result['subject']['value']))
+        return entity
+
+    def auto_types(self, types):
+        if len(types) == 1:
+            return """?subject rdf:type <%s>""" % types[0]
+        else:
+            type_query = ""
+            for i in range(len(types)-1):
+                s = self.type % types[i]
+                s += " UNION "
+                type_query += s
+            s = self.type % types[len(types)-1]
             type_query += s
-        s = self.type % types[len(types)-1]
-        type_query += s
-        query = tpl % (type_query, entity)
-        #print query
+            return type_query
+
+    def auto_query(self, query):
+        print query
         self.sparql.setQuery(query)
         results = self.sparql.query().convert()
         response = {}
@@ -178,19 +254,25 @@ class AutoQuery:
             response_json.append(obj)
         return response_json
 
-    def query(self, types, entity):
-        results_1 = self.auto_query(types, entity, self.tpl_1)
-        results_2 = self.auto_query(types, entity, self.tpl_2)
-        results_3 = self.auto_query(types, entity, self.tpl_3)
-        results_4 = self.auto_query(types, entity, self.tpl_4)
-        results = [] + results_1
-        results += results_2
-        results += results_3
-        results += results_4
+    def resources(self, results):
         resources = []
         for res in results:
             resources += res['resources']
         return list(set(resources))
+
+    def query(self, types, entity, level):
+        results = []
+        if level == 1:
+            for types_splited in self.chunks(types, 10):
+                type_query = self.auto_types(types_splited)
+                query = self.tpl_1 % (type_query, entity, type_query, entity)
+                results += self.auto_query(query)
+        elif level == 2:
+            for types_splited in self.chunks(types, 10):
+                type_query = self.auto_types(types_splited)
+                query = self.tpl_2 % (type_query, entity, type_query, entity)
+                results += self.auto_query(query)
+        return self.resources(results)
 
 
 if __name__ == "__main__":
