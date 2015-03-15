@@ -1,5 +1,16 @@
 from nltk.corpus import wordnet as wn
 from nltk.corpus import wordnet_ic
+from LODLinkers import SynsetLinker
+
+class TypeExpansion:
+
+    def __init__(self):
+        self.synsetExpansion = SynsetExpansion()
+        self.synsetLinker = SynsetLinker()
+
+    def expandType(self, typeQuery, sim, th):
+        synsets = self.synsetExpansion.synsets(typeQuery, sim, th)
+        return self.synsetLinker.type_linking(synsets)
 
 class SynsetExpansion:
 

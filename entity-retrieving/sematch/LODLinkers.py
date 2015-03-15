@@ -1,16 +1,29 @@
 from Utility import FileIO
+import spotlight
+
+class DBpediaSpotlight:
+
+    def __init__(self):
+        self.uri = 'http://spotlight.dbpedia.org/rest/annotate'
+        self.confidence = 0.3
+        self.support = 20
+
+    def annotate(self, query):
+        annotations = spotlight.annotate(self.uri,query,confidence=self.confidence, support=self.support)
+        annotations = [a['URI'] for a in annotations]
+        return annotations
+
 
 class SynsetLinker:
 
     def __init__(self):
-        self.links = FileIO.read_json_file("type-linkings.txt")
+        self.links = FileIO.read_json_file("sematch/db/type-linkings.txt")
         self.links = {data['offset']:data for data in self.links}
 
     def offset(self, synset):
         return str(synset.offset + 100000000)
 
     def link_append(self, typeLinks, lst):
-        print typeLinks
         if typeLinks.get('dbpedia'):
             lst.append(typeLinks['dbpedia'])
 
