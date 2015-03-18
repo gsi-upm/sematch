@@ -1,1 +1,0 @@
-No  wup(0.7,1,r)    wup(0.7,1,p)    wup(0.7,1,f)    wup(0.7,2,r)    wup(0.7,2,p)    wup(0.7,2,f)    wup(0.8,1,r)    wup(0.8,1,p)    wup(0.8,1,f)    wup(0.7,1,r)    wup(0.7,1,p)    wup(0.7,1,f)
