@@ -81,7 +81,7 @@ class Engine:
 
     def __init__(self):
         self.sparql = QueryExecution()
-        self.split_n = 20
+        self.split_n = 3
         self.gps = GPS()
 
     @staticmethod

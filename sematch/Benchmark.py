@@ -7,12 +7,13 @@ class Experiment:
 
     def __init__(self):
         self.dataset = FileIO.read_json_file("sematch/benchmark-data/data.txt")
+        self.results = FileIO.read_list_file("sematch/benchmark-data/result.txt")
         self.queries = [(d['query'],d['entity']) for d in self.dataset]
         self.relevants = [d['result'] for d in self.dataset]
         self.typeExpansion = TypeExpansion()
         self.engine = Engine()
         self.sims = ['wup', 'lch', 'res','jcn', 'lin']
-        self.thresholds = [0.7, 0.8, 0.9, 1]
+        self.thresholds = [0.9,1]
         self.gpcs = ['gpc1', 'gpc2', 'gpc3', 'gpc4', 'gpc5', 'gpc6']
 
     @staticmethod
@@ -28,7 +29,10 @@ class Experiment:
             precision = 0
         else:
             precision = float(ab) / float(b)
-        f = 2 * (precision * recall) / (precision + recall)
+        if precision + recall == 0:
+            f = 0
+        else:
+            f = 2 * (precision * recall) / (precision + recall)
         return recall, precision , f
 
     def query_info(self, id):
@@ -52,10 +56,33 @@ class Experiment:
         relevant_data = self.relevants[id]
         tURIs = self.typeExpansion.expandType(tQ, sim, th)
         result = self.engine.run(gpcs,tURIs, eURI)
-        print sim, th, gpcs
-        print "N(type uris)=",len(tURIs)
-        print 'N(returned)=', len(result)
-        print 'recall is %f, precison is %f, f measure is %f' % Experiment.measure(relevant_data,result)
+        #print sim, th, gpcs
+        #print "N(type uris)=",len(tURIs)
+        #print 'N(returned)=', len(result)
+        #print 'recall is %f, precison is %f, f measure is %f' % Experiment.measure(relevant_data,result)
+        print Experiment.measure(relevant_data,result)
+
+    def analysis(self):
+        data = self.results
+        data = [d.lstrip('(') for d in data]
+        data = [d.rstrip(')') for d in data]
+        data = [d.split(',') for d in data]
+        data = [map(float, d) for d in data]
+        data = [data[i:i+20] for i in range(0,len(data),20)]
+        sum_data = data[0]
+        for d in data[1:]:
+            for i in range(20):
+                sum_data[i][0] += d[i][0]
+                sum_data[i][1] += d[i][1]
+                sum_data[i][2] += d[i][2]
+
+        for i in range(20):
+            print i+1, '***************'
+            print sum_data[i][0] / 22.0
+            print sum_data[i][1] / 22.0
+            print '***************'
+
+
 
 # def experiment():
 #     wordnet = sematch.WordNetLD()
