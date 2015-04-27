@@ -1,5 +1,4 @@
 
-[Sematch](http://gsi.dit.upm.es)
 
 ## Introduction
 
@@ -8,7 +7,7 @@ The name of Sematch is composed based on Spanish "se" and English "match". It is
 Sematch is a semantic entity search framework aiming to provide a framework combining the natural language processing techniques and linked of data techniques. Sematch is especially used for retrieving a list of entities from knowledge base using natural language queries. In the current prototype of sumach, you can try the following examples in your project. The results of executing each natural language query are a list of entities. The current prototype is using DBpedia SPARQL endpoint. The Sematch framework is designed to fit in different knowledge graph and different endpoints. We are still implementing more features of Sematch.
 
 ```
-	from sumach import QueryEngine
+	from sematch import QueryEngine
 	
 	engine = Engine()
 	print engine.query('university Spain')
