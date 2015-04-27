@@ -1,4 +1,15 @@
 import json
+import ConfigParser
+
+class Configuration:
+
+    def __init__(self):
+        self.config = ConfigParser.RawConfigParser()
+        self.config.read('settings.cfg')
+
+    def getConfig(self,section,variable):
+        return self.config.get(section,variable)
+
 
 class FileIO:
 
@@ -45,3 +56,9 @@ def trace(f):
         print 'return', repr(value)
         return value
     return g
+
+
+# config = Configuration()
+# print type(config.getConfig('expansion','sim'))
+# print type(config.getConfig('expansion', 'th'))
+# print config.getConfig('expansion','gpcs')

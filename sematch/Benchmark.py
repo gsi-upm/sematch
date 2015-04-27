@@ -1,7 +1,6 @@
 from Utility import FileIO
-from Expansion import TypeExpansion
+from Expansion import SynsetExpansion
 from QueryEngine import Engine
-import requests
 
 class Experiment:
 
@@ -10,7 +9,7 @@ class Experiment:
         self.results = FileIO.read_list_file("sematch/benchmark-data/result.txt")
         self.queries = [(d['query'],d['entity']) for d in self.dataset]
         self.relevants = [d['result'] for d in self.dataset]
-        self.typeExpansion = TypeExpansion()
+        self.synsetExpansion = SynsetExpansion()
         self.engine = Engine()
         self.sims = ['wup', 'lch', 'res','jcn', 'lin']
         self.thresholds = [0.9,1]

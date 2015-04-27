@@ -1,49 +1,17 @@
 from nltk.corpus import wordnet as wn
-from nltk.corpus import wordnet_ic
-from LODLinkers import SynsetLinker
-
-class TypeExpansion:
-
-    def __init__(self):
-        self.synsetExpansion = SynsetExpansion()
-        self.synsetLinker = SynsetLinker()
-
-    def expandType(self, typeQuery, sim, th):
-        synsets = self.synsetExpansion.synsets(typeQuery, sim, th)
-        return self.synsetLinker.type_linking(synsets)
+from Similarity import SemanticSimilarity
 
 class SynsetExpansion:
 
-    def __init__(self):
-        self.ic_corpus = wordnet_ic.ic('ic-brown.dat')
+    def __init__(self, th, sim):
+        self.semsim = SemanticSimilarity()
+        self.th = th
+        self.sim = sim
 
-    def path(self, syn1, syn2):
-        return syn1.wup_similarity(syn2)
-
-    def wup(self, syn1, syn2):
-        return syn1.wup_similarity(syn2)
-
-    def lch(self, syn1, syn2):
-        return syn1.lch_similarity(syn2,) / syn1.lch_similarity(syn1)
-
-    def res(self, syn1,syn2):
-        return syn1.res_similarity(syn2, self.ic_corpus) / syn1.res_similarity(syn1, self.ic_corpus)
-
-    def jcn(self, syn1,syn2):
-        return syn1.jcn_similarity(syn2, self.ic_corpus)
-
-    def lin(self, syn1,syn2):
-        return syn1.lin_similarity(syn2, self.ic_corpus)
-
-    def sim(self, name):
-        def function(syn1, syn2):
-            return getattr(self, name)(syn1,syn2)
-        return function
-
-    def expansion(self, seeds, th, sim):
+    def expansion(self, seeds):
         result = []
         for s in seeds:
-             self.expander(s, s, th, sim, result)
+             self.expander(s, s, self.th, self.semsim.sim(self.sim), result)
         return result
 
     def expander(self, c, s, th, sim, lst):
@@ -55,10 +23,9 @@ class SynsetExpansion:
             if y not in lst and sim(s,y) >= th:
                 self.expander(y, s, th, sim, lst)
 
-    def synsets(self, term, sim, th):
+    def synsets(self, term):
         seeds = wn.synsets(term, pos=wn.NOUN)
-        expanding = self.expansion(seeds, th, self.sim(sim))
-        return expanding
+        return self.expansion(seeds)
 
-    def explain(self, lst):
-        return [{'name':str(s),'definition':s.definition} for s in lst]
+
+

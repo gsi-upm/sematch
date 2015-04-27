@@ -19,8 +19,13 @@ class Query:
     def pos(self, tokens):
         return nltk.pos_tag(tokens)
 
-    def ner(self, query):
-        tokens = self.tokenization(query)
-        tokens = self.stopword_remove(tokens)
+    def ner(self, tokens):
         tagged = self.pos(tokens)
         return nltk.chunk.ne_chunk(tagged)
+
+    def wsd(self, tokens, word):
+        return nltk.wsd.lesk(tokens, word,'n')
+
+    def processing(self, query):
+        tokens = self.tokenization(query)
+        tokens = self.stopword_remove(tokens)

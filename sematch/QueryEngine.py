@@ -1,11 +1,14 @@
 from SPARQLWrapper import SPARQLWrapper, SPARQLExceptions, JSON
+from QueryProcessing import Query
+from LODLinkers import EntityLinkers
+from LODLinkers import TypeLinkers
+from Utility import Configuration
 import requests
 
 class QueryExecution:
 
-    """Automatically construct the SPARQL queries"""
-
     def __init__(self, url="http://dbpedia.org/sparql"):
+        self.url = url
         self.sparql = SPARQLWrapper(url)
         self.sparql.setReturnFormat(JSON)
 
@@ -22,8 +25,7 @@ class QueryExecution:
                 "format": "application/json",
                 "timeout": 30000,
             }
-        result = requests.get('http://dbpedia.org/sparql',params=params)
-        print result.url
+        result = requests.get(self.url, params=params)
         return result.text
 
 class GPS:
@@ -81,7 +83,12 @@ class Engine:
 
     def __init__(self):
         self.sparql = QueryExecution()
-        self.split_n = 3
+        self.entityLinker = EntityLinkers('sparqllinker')
+        self.typeLinker = TypeLinkers('synsetLinker')
+        self.query_processor = Query()
+        self.config = Configuration()
+        self.gpcs = ['gpc1','gpc2']
+        self.split_n = 5
         self.gps = GPS()
 
     @staticmethod
@@ -95,19 +102,39 @@ class Engine:
     def remove_duplicates(lst):
         return list(set(lst))
 
-    def query(self, gpc, t, e):
+    def sparql_query(self, gpc, t, e):
         return self.gps.query(gpc,t,e)
 
-    def run_gpc(self, gpc, types, e):
+    def sparql_construction(self, query):
+        type_links = self.types(query)
+        entity_links = self.entities(query)
+        queries = []
+        for e in entity_links:
+            for gpc in self.gpcs:
+                for t in Engine.chunks(type_links, self.split_n):
+                    queries.append(self.sparql_query(gpc,t,e))
+        return queries
+
+    def sparql_execution(self, queries):
         results = []
-        for t in Engine.chunks(types, self.split_n):
-            results += self.sparql.execute(self.query(gpc,t,e))
+        for q in queries:
+             results += self.sparql.execute(q)
         return Engine.remove_duplicates(results)
 
-    def run(self, gpcs, types, e):
-        results = []
-        for gpc in gpcs:
-            results += self.run_gpc(gpc, types, e)
-        return Engine.remove_duplicates(results)
+    def types(self, query):
+        return self.typeLinker.linking(query)
+
+    def entities(self, query):
+        return self.entityLinker.linking(query)
+
+    def query(self, query):
+        queries = self.sparql_construction(query)
+        return self.sparql_execution(queries)
+#
+# engine = Engine()
+# print engine.query('university Spain')
+# print engine.query('lakes China')
+# print engine.query('mountains Italy')
+# print engine.query('lakes United States')
 
 
