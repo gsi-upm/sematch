@@ -1,4 +1,4 @@
-![Logo](https://dl.dropboxusercontent.com/u/74428083/logo.jpg)
+![Logo](https://dl.dropboxusercontent.com/u/74428083/logo-sematch.png)
 
 ## Introduction
 
