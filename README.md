@@ -1,13 +1,20 @@
-![Logo](https://dl.dropboxusercontent.com/u/74428083/logo-sematch.png)
+![Logo](https://dl.dropboxusercontent.com/u/74428083/sematch/logo.png)
 
 ## Introduction
 
 The name of Sematch is composed based on Spanish "se" and English "match". It is also the abbreviation of semantic matching.
 
-Sematch is a semantic entity search framework aiming to provide a framework combining the natural language processing techniques and linked of data techniques. Sematch is especially used for retrieving a list of entities from knowledge base using natural language queries. In the current prototype of sumach, you can try the following examples in your project. The results of executing each natural language query are a list of entities. The current prototype is using DBpedia SPARQL endpoint. The Sematch framework is designed to fit in different knowledge graph and different endpoints. We are still implementing more features of Sematch.
+The logo of Sematch is based on the Chinese [Yin and Yang](http://en.wikipedia.org/wiki/Yin_and_yang) which is written in [I Ching](http://en.wikipedia.org/wiki/I_Ching). Somehow, it correlates to 0 and 1 in computer science.
+
+Sematch is a semantic entity search framework aiming to provide a framework combining the natural language processing techniques and linked of data techniques. The system overview is shown as below.
+![overview](https://dl.dropboxusercontent.com/u/74428083/sematch/overview.png)
+
+Sematch is especially used for retrieving a list of entities from knowledge base using natural language queries. The results of executing each natural language query are a list of entities. The current prototype is using DBpedia SPARQL endpoint. The Sematch framework is designed to fit in different knowledge graph and different endpoints. We are still implementing more features of Sematch.
+
+In the current prototype of sematch, you can try the following examples in your project.
 
 ```
-	from sematch import QueryEngine
+	from sematch.QueryEngine import Engine
 	
 	engine = Engine()
 	print engine.query('university Spain')
