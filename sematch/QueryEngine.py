@@ -4,6 +4,7 @@ from LODLinkers import EntityLinkers
 from LODLinkers import TypeLinkers
 from Utility import Configuration
 import requests
+import rdflib
 
 class QueryExecution:
 
@@ -131,8 +132,12 @@ class Engine:
         queries = self.sparql_construction(query)
         return self.sparql_execution(queries)
 #
-# engine = Engine()
-# print engine.query('university Spain')
+engine = Engine()
+universities = engine.query('countries Europe')
+graph = rdflib.Graph()
+graph.parse(universities[1])
+print len(graph)
+print list(graph)[:]
 # print engine.query('lakes China')
 # print engine.query('mountains Italy')
 # print engine.query('lakes United States')
