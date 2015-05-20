@@ -131,7 +131,7 @@ class Engine:
     def query(self, query):
         queries = self.sparql_construction(query)
         return self.sparql_execution(queries)
-# 
+#
 # engine = Engine()
 # universities = engine.query('countries Europe')
 # graph = rdflib.Graph()
