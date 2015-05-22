@@ -243,7 +243,7 @@
                 self.entities = ko.observableArray([]);
                 self.sparqls = ko.observableArray([]);
                 self.query = ko.observable();
-                self.service = 'http://localhost:5000/api/'
+                self.service = 'http://demos.gsi.dit.upm.es/sematch/api/'
                 self.search_results_len = ko.computed(function(){
                     var total = 0;
                     ko.utils.arrayForEach(self.search_results(), function(relation){
