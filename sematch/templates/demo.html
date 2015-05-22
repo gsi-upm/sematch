@@ -27,82 +27,232 @@
     </head>
     <body>
 
-
+<a href="https://github.com/gsi-upm/sematch"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
 
         <div class="container">
-            <div class="row" style="margin-top:30px">
-                <div class="col-md-6 col-md-offset-2">
-                    <img src="/static/logo.png" style="max-width:700px" class="img-responsive" alt="Responsive image">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3">
+                    <img src="/static/logo.png" style="max-width:450px" class="img-responsive" alt="Responsive image">
                 </div>
             </div>
-            <div class="row" style="margin-top:30px">
-                <div class="col-md-7 col-md-offset-2"><input data-bind="value: query" type="text" class="form-control" placeholder="Example: university Spain"></div>
-                <div class="col-md-3"><button data-bind="click: search" class="btn btn-default">search</button></div>
+            <div class="row">
+                <div class="col-md-offset-4 col-md-6">
+                    <ul class="nav nav-tabs" role="tablist" id="myTab" style="border:none">
+                        <li role="presentation" class="active">
+                            <a href="#entity" aria-controls="Entity" role="tab" data-toggle="tab">Entity</a>
+                        </li>
+                        <li role="presentation">
+                            <a href="#type" aria-controls="type" role="tab" data-toggle="tab">Type</a>
+                        </li>
+                        <li role="presentation">
+                            <a href="#question" aria-controls="question" role="tab" data-toggle="tab">Question</a>
+                        </li>
+                        <li role="presentation">
+                            <a href="#similarity" aria-controls="similarity" role="tab" data-toggle="tab">Similarity</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <div class="row" style="margin-top:30px">
-                <div class="col-md-8 col-md-offset-2">
-                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                        <div class="panel panel-default">
-                            <div class="panel-heading" role="tab" id="headingOne">
-                                <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Query Interpretation</a>
-                                </h4>
+                 
+            <div class="row" style="margin-bottom:100px">
+                <div class="col-md-12">
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="entity">
+                            <div class="row" style="margin-top:30px">
+                                <div class="col-md-7 col-md-offset-2">
+                                    <input data-bind="value: query" type="text" class="form-control" placeholder="Example: university Spain">
+                                </div>
+                                <div class="col-md-3">
+                                    <button data-bind="click: search" class="btn btn-default">search</button>
+                                </div>
                             </div>
-                            <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-                                <div class="panel-body">
-                                    <ul data-bind="foreach: types, visible: types().length > 0">
+                            <div class="row" style="margin-top:30px">
+                                <div class="col-md-4">
+                                    <div class="row" style="margin-top:10px">
+                                         <span class="result-count"><b data-bind="text: search_results_len, visible:search_results().length > 0">&nbsp;</b></span>
+                                    </div>
+                                    <div class="row" style="margin-top:10px">
+                                        <div class="col-md-12">
+                                            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                                                <div data-bind="visible: types().length > 0" class="panel panel-default">
+                                                    <div class="panel-heading" role="tab" id="headingOne">
+                                                        <h4 class="panel-title">
+                                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Type</a>
+                                                        </h4>
+                                                    </div>
+                                                    <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                                                        <div class="panel-body">
+                                                            <ul style="list-style:none;padding-left:0;" data-bind="foreach: types, visible: types().length > 0">
+                                                                <li>
+                                                                    <span data-bind="text: $data">&nbsp;</span>
+                                                                </li> 
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div data-bind="visible: entities().length > 0" class="panel panel-default">
+                                                    <div class="panel-heading" role="tab" id="headingTwo">
+                                                        <h4 class="panel-title">
+                                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">Entity</a>
+                                                        </h4>
+                                                    </div>
+                                                    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                                                        <div class="panel-body">
+                                                            <ul style="list-style:none;padding-left:0;" data-bind="foreach: entities, visible: entities().length > 0">
+                                                                <li>
+                                                                    <span data-bind="text: $data">&nbsp;</span>
+                                                                </li> 
+                                                            </ul>     
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div data-bind="visible: search_results().length > 0" class="panel panel-default">
+                                                    <div class="panel-heading" role="tab" id="headingThree">
+                                                        <h4 class="panel-title">
+                                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">Property</a>
+                                                        </h4>
+                                                    </div>
+                                                    <div id="collapseThree" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingThree">
+                                                        <div class="panel-body">
+                                                            <ul style="list-style:none;padding-left:0;" data-bind="foreach: search_results, visible: search_results().length > 0">
+                                                                <li>
+                                                                    <input type="checkbox" data-bind="checked: selected" />
+                                                                    <span data-bind="text: relation()">&nbsp;</span>
+                                                                </li> 
+                                                            </ul>     
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div data-bind="visible: sparqls().length > 0" class="panel panel-default">
+                                                    <div class="panel-heading" role="tab" id="headingFour">
+                                                        <h4 class="panel-title">
+                                                            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">SPARQL</a>
+                                                        </h4>
+                                                    </div>
+                                                    <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+                                                        <div class="panel-body">
+                                                            <ul style="list-style:none;padding-left:0;" data-bind="foreach: sparqls, visible: sparqls().length > 0">
+                                                                <li>
+                                                                    <span data-bind="text: $data">&nbsp;</span>
+                                                                </li> 
+                                                            </ul>  
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <ul  style="list-style:none" data-bind="foreach: search_results, visible: search_results().length > 0">
                                         <li>
-                                            <span data-bind="text: $data">&nbsp;</span>
+                                            <!-- ko if: selected() === true -->
+                                            <ul style="list-style:none" data-bind="foreach: entities">
+                                                <li>
+                                                    <a data-bind="attr: {href: uri, tilte:label}"><h3 data-bind="text: label()"></h3></a>
+                                                    <p data-bind="text: comments()"></p>
+                                                </li>
+                                            </ul>
+                                             <!-- /ko -->
+                                        </li> 
+                                    </ul>  
+                                </div>
+                            </div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="type">
+                            <!-- <div class="row" style="margin-top:30px">
+                                <div class="col-md-4">
+                                    <input data-bind="value: feature"  class="form-control" type="text" placeholder="type">
+                                </div>
+                                <div class="col-md-4">
+                                   <select  class="form-control" data-bind="value:simType">
+                                        <option value="1">Wu-Palmer</option>
+                                        <option value="2">Path</option>
+                                        <option value="3">Leacock-Chodorow</option>
+                                        <option value="4">Resnik</option>
+                                        <option value="5">Jiang-Conrath</option>
+                                        <option value="6">Lin</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <input data-bind="value: threshold" class="form-control" type="text" placeholder="Threshold">
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top:30px;margin-bottom:30px">
+                                <div class="col-md-offset-1 col-md-10">
+                                    <ul class="list-group" data-bind="foreach: types, visible: types().length > 0">
+                                        <li class="list-group-item" style="color:#428bca">
+                                            <span data-bind="text: synset()">&nbsp;</span>
+                                            <span data-bind="text: sim()" style="font-weight:bold"></span>
+                                            <span data-bind="text: definition()">&nbsp;</span>
+                                            <ul data-bind="foreach: links">
+                                                <li><span data-bind="text: $data"></span></li>
+                                            </ul>
                                         </li> 
                                     </ul>
-                                    <ul data-bind="foreach: entities, visible: entities().length > 0">
-                                        <li>
-                                            <span data-bind="text: $data">&nbsp;</span>
-                                        </li> 
-                                    </ul>    
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
-                        <div class="panel panel-default">
-                            <div class="panel-heading" role="tab" id="headingTwo">
-                                <h4 class="panel-title">
-                                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">SPARQL Query List</a>
-                                </h4>
-                            </div>
-                            <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-                                <div class="panel-body">
-                                <ul data-bind="foreach: sparqls, visible: sparqls().length > 0">
-                                    <li>
-                                        <span data-bind="text: $data">&nbsp;</span>
-                                    </li> 
-                                </ul>  
+                        <div role="tabpanel" class="tab-pane" id="question">
+                            <!-- <div class="row" style="margin-top:30px">
+                                <div class="col-md-7 col-md-offset-2">
+                                    <input data-bind="value: query" type="text" class="form-control" placeholder="Example: university Spain">
                                 </div>
-                            </div>
+                                <div class="col-md-3">
+                                    <button data-bind="click: search" class="btn btn-default">Ask</button>
+                                </div>
+                            </div> -->
                         </div>
+                        <div role="tabpanel" class="tab-pane" id="similarity"></div>
                     </div>
-                </div>
-            </div>
-            
-            <div class="row" style="margin-top:30px">
-                <div class="col-md-offset-2 col-md-8">
-                    <ul data-bind="foreach: results, visible: results().length > 0">
-                        <li>
-                            <span data-bind="text: $data">&nbsp;</span>
-                        </li> 
-                    </ul>  
                 </div>
             </div>
         </div>
 
+        <footer class="footer">
+            <div class="container">
+                <div class="col-md-6 col-md-offset-3">
+                    <img src="http://gsi.dit.upm.es/templates/jgsi/images/logo.png" style="max-width:450px" class="img-responsive" alt="Responsive image">
+                </div>
+            </div>
+        </footer>
+
         <script type="text/javascript">
 
+            $(function () {
+                $('#myTab a:first').tab('show')
+            })
+
+            function Relation(data){
+                this.relation = ko.observable(data.relation);
+                this.entities = ko.observableArray(data.entities)
+                this.selected = ko.observable(true)
+            }
+
+            function Entity(data) {
+                this.uri = ko.observable(data.uri)
+                this.label = ko.observable(data.label)
+                this.comments = ko.observable(data.comments)
+            }
+
             function QueryViewModel() {
+
                 var self = this;
-                self.results = ko.observableArray([]);
+                self.search_results = ko.observableArray([]);
                 self.types = ko.observableArray([]);
                 self.entities = ko.observableArray([]);
                 self.sparqls = ko.observableArray([]);
                 self.query = ko.observable();
+                self.service = 'http://localhost:5000/api/'
+                self.search_results_len = ko.computed(function(){
+                    var total = 0;
+                    ko.utils.arrayForEach(self.search_results(), function(relation){
+                        if(relation.selected() == true) {
+                            total += relation.entities().length;
+                        }
+                    });
+                    return total + ' entities are retrieved';
+                });
 
                 self.ajax = function(uri, method, data) {
                     var request = {
@@ -124,20 +274,27 @@
                     var requestData = {
                         query:self.query()
                     };
-                    self.ajax('http://localhost:5000/sematch/api/search','GET',requestData).success(function(data){
-                        self.results(data);
+                    self.ajax(self.service + 'search','GET',requestData).success(function(data){
+                        var results = $.map(data, function(result) { 
+                            var entities = $.map(result['entities'], function(entity){
+                                return new Entity({uri:entity['uri'], label:entity['label'], 
+                                    comments:entity['comments']})
+                            });
+                            return new Relation({relation:result['relation'],entities:entities})
+                        });
+                        self.search_results(results);
                     });
-                    self.ajax('http://localhost:5000/sematch/api/entities','GET',requestData).success(function(data){
+
+                    self.ajax(self.service + 'entities','GET',requestData).success(function(data){
                         self.entities(data);
                     });
-                    self.ajax('http://localhost:5000/sematch/api/types','GET',requestData).success(function(data){
-                        self.types(data);
+                    self.ajax(self.service + 'types','GET',requestData).success(function(data){
+                         self.types(data);
                     });
-                    self.ajax('http://localhost:5000/sematch/api/queries','GET',requestData).success(function(data){
+                    self.ajax(self.service + 'queries','GET',requestData).success(function(data){
                         self.sparqls(data);
                     });
                 }
-
             }
             ko.applyBindings(new QueryViewModel());
         </script>

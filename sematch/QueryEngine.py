@@ -13,10 +13,27 @@ class QueryExecution:
         self.sparql = SPARQLWrapper(url)
         self.sparql.setReturnFormat(JSON)
 
-    def execute(self, query):
+    def execute(self, name, query):
         self.sparql.setQuery(query)
         results = self.sparql.query().convert()
-        return [result["x"]["value"] for result in results["results"]["bindings"]]
+        return self.qgp(name)(results)
+
+    def teq(self, results):
+        """type entity query"""
+        query_results = []
+        for result in results["results"]["bindings"]:
+            obj = {}
+            obj['uri'] = result["x"]["value"]
+            obj['relation'] = result["rel"]["value"]
+            obj['label'] = result["l"]["value"]
+            obj['comments'] = result["c"]["value"]
+            query_results.append(obj)
+        return {obj['uri']:obj for obj in query_results}
+
+    def qgp(self, name):
+        def function(results):
+            return getattr(self, name)(results)
+        return function
 
     def request_execution(self, query):
         params={
@@ -29,14 +46,10 @@ class QueryExecution:
         result = requests.get(self.url, params=params)
         return result.text
 
-class GPS:
-
-    def __init__(self):
-        self.sparql_tpl = """SELECT DISTINCT ?x WHERE {\n\t%s\n}\nGROUP BY ?x"""
-        self.str_rdftype = '<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>'
+class QueryGraphPattern:
 
     def gen_rdftype(self, t):
-        return """?x %s <%s>""" % (self.str_rdftype, t)
+        return """?x <%s> <%s>""" % (rdflib.RDF.type, t)
 
     def rdftype(self,t):
         if type(t) is list:
@@ -44,8 +57,32 @@ class GPS:
         else:
             return self.gen_rdftype(t)
 
-    def query(self, name, t, e):
-        return self.sparql_tpl % self.gpc(name)(t,e)
+    def lang_filter(self, variable, lang):
+        return """ \n\tFILTER( lang(%s) = "%s") .""" % (variable, lang)
+
+    def type_entity_query(self, name, t, e):
+        tpl = """SELECT DISTINCT ?x ?rel ?l ?c WHERE {\n\t%s\n}\nGROUP BY ?x"""
+        q = self.gpc(name)(t,e)
+        q += """ \n\t?x <%s> ?l .""" % rdflib.RDFS.label
+        q += """ \n\t?x <%s> ?c .""" % rdflib.RDFS.comment
+        q += """ \n\t?p <%s> ?rel .""" % rdflib.RDFS.label
+        q += """ \n\tFILTER( lang(?rel) = "en" and lang(?l) = "en" and lang(?c) = "en" ) ."""
+        return tpl % q
+
+    def entity_query(self, e):
+        pass
+
+    def entity_literal_query(self, e, p):
+        tpl = """SELECT DISTINCT ?o WHERE {\n\t%s\n}"""
+        q = self.gpc0(e,p)
+        q += self.lang_filter('?o','en')
+        return tpl % q
+
+    def entity_entity_query(self, e1, e2):
+        pass
+
+    def gpc0(self, e, p):
+        return """\n\t<%s> <%s> ?o .""" % (e, p)
 
     def gpc1(self, t, e):
         return self.rdftype(t) + """ .\n\t?x ?p <%s> .""" % e
@@ -79,7 +116,6 @@ class GPS:
             rdftypes = map(lambda x: """{ %s }""" % x, rdftypes)
             return "\n UNION ".join(rdftypes)
 
-
 class Engine:
 
     def __init__(self):
@@ -90,7 +126,7 @@ class Engine:
         self.config = Configuration()
         self.gpcs = ['gpc1','gpc2']
         self.split_n = 5
-        self.gps = GPS()
+        self.qgp = QueryGraphPattern()
 
     @staticmethod
     def chunks(l, n):
@@ -100,27 +136,30 @@ class Engine:
             yield l[i:i+n]
 
     @staticmethod
-    def remove_duplicates(lst):
+    def remove_list_duplicates(lst):
         return list(set(lst))
 
-    def sparql_query(self, gpc, t, e):
-        return self.gps.query(gpc,t,e)
-
-    def sparql_construction(self, query):
+    def type_entity_query_construction(self, query):
         type_links = self.types(query)
         entity_links = self.entities(query)
         queries = []
         for e in entity_links:
             for gpc in self.gpcs:
                 for t in Engine.chunks(type_links, self.split_n):
-                    queries.append(self.sparql_query(gpc,t,e))
+                    queries.append(self.qgp.type_entity_query(gpc,t,e))
         return queries
 
-    def sparql_execution(self, queries):
-        results = []
+    def entity_literal_query_construction(self, e, p):
+        pass
+
+    def sparql_execution(self, name, queries):
+        results_dic = {}
         for q in queries:
-             results += self.sparql.execute(q)
-        return Engine.remove_duplicates(results)
+            results = self.sparql.execute(name, q)
+            for key in results.keys():
+                if key not in results_dic:
+                    results_dic[key] = results[key]
+        return [results_dic[key] for key in results_dic.keys()]
 
     def types(self, query):
         return self.typeLinker.linking(query)
@@ -128,18 +167,7 @@ class Engine:
     def entities(self, query):
         return self.entityLinker.linking(query)
 
-    def query(self, query):
-        queries = self.sparql_construction(query)
-        return self.sparql_execution(queries)
-#
-# engine = Engine()
-# universities = engine.query('countries Europe')
-# graph = rdflib.Graph()
-# graph.parse(universities[1])
-# print len(graph)
-# print list(graph)[:]
-# print engine.query('lakes China')
-# print engine.query('mountains Italy')
-# print engine.query('lakes United States')
-
+    def search(self, query):
+        queries = self.type_entity_query_construction(query)
+        return self.sparql_execution('teq', queries)
 
