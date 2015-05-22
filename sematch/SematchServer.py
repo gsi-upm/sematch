@@ -43,8 +43,8 @@ def home():
     return template('demo.html')
 
 def runserver():
-    port = int(os.environ.get('PORT', 5000))
-    app.run(host='localhost', port=port)
+    port = int(os.environ.get('PORT', 5005))
+    app.run(host='demos.gsi.dit.upm.es', port=port)
 
 if __name__ == '__main__':
     runserver()
