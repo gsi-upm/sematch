@@ -44,7 +44,7 @@ def home():
 
 def runserver():
     port = int(os.environ.get('PORT', 5005))
-    app.run(host='demos.gsi.dit.upm.es/sematch/', port=port)
+    app.run(host='demos.gsi.dit.upm.es', port=port)
 
 if __name__ == '__main__':
     runserver()
