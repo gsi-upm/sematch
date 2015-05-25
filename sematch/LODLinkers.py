@@ -53,7 +53,7 @@ class SPARQLEntityLinker(Linker):
             entities.append(' '.join([tokens[i], tokens[i+1]]))
         e_links = []
         for e in entities:
-            q = self.query % e
+            q = self.query % e.title()
             self.sparql.setQuery(q)
             results = self.sparql.query().convert()
             e_links += [result["uri"]["value"] for result in results["results"]["bindings"]]

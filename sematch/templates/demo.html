@@ -27,17 +27,24 @@
     </head>
     <body>
 
-<a href="https://github.com/gsi-upm/sematch"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
+
+        <div class="container" style="width: inherit">
+            <div class="row">
+                <div class="col-md-12">
+                    <a href="https://github.com/gsi-upm/sematch"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
+                </div>
+            </div>
+        </div>
 
         <div class="container">
             <div class="row">
-                <div class="col-md-6 col-md-offset-3">
-                    <img src="static/logo.png" style="max-width:450px" class="img-responsive" alt="Responsive image">
+                <div class="col-md-6 col-md-offset-3 col-xs-10">
+                    <img src="static/logo.png" style="padding-right:30px;" class="img-responsive" alt="Responsive image">
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-offset-4 col-md-6">
-                    <ul class="nav nav-tabs" role="tablist" id="myTab" style="border:none">
+                    <ul class="nav nav-tabs" role="tablist" id="myTab" style="border:none;padding-left:30px">
                         <li role="presentation" class="active">
                             <a href="#entity" aria-controls="Entity" role="tab" data-toggle="tab">Entity</a>
                         </li>
@@ -59,11 +66,17 @@
                     <div class="tab-content">
                         <div role="tabpanel" class="tab-pane active" id="entity">
                             <div class="row" style="margin-top:30px">
-                                <div class="col-md-7 col-md-offset-2">
-                                    <input data-bind="value: query" type="text" class="form-control" placeholder="Example: university Spain">
+                                <div class="col-md-6 col-md-offset-3 col-xs-8">
+                                    <input data-bind="value: query, event: {keyup:entity_keypress}" type="text" class="form-control" placeholder="Example: university Spain, festivals Barcelona, airport Italy">
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-3 col-xs-3">
                                     <button data-bind="click: search" class="btn btn-default">search</button>
+                                     <img src="static/loading.GIF" data-bind="visible: entity_search_loading_state" style="height:35px" alt="Responsive image">
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top:20px">
+                                <div class="col-md-7 col-md-offset-3 col-xs-8">
+                                    <p style="text-align:center" class="text-info"><span style="text-align:left;color: #757575;font-size: 15px;">Enter entity type and speicific entity:&nbsp;</span>university Madrid Barcelona; movie United States; airport Beijing; festivals in Spain; car Germany. Note:It does not support spell correction currently.</p>
                                 </div>
                             </div>
                             <div class="row" style="margin-top:30px">
@@ -160,12 +173,12 @@
                             </div>
                         </div>
                         <div role="tabpanel" class="tab-pane" id="type">
-                            <!-- <div class="row" style="margin-top:30px">
-                                <div class="col-md-4">
-                                    <input data-bind="value: feature"  class="form-control" type="text" placeholder="type">
+                            <div class="row" style="margin-top:30px">
+                                <div class="col-md-3 col-md-offset-3">
+                                    <input data-bind="value: type_query"  class="form-control" type="text" placeholder="type">
                                 </div>
-                                <div class="col-md-4">
-                                   <select  class="form-control" data-bind="value:simType">
+                                <div class="col-md-2">
+                                   <select  class="form-control" data-bind="value:type_sim">
                                         <option value="1">Wu-Palmer</option>
                                         <option value="2">Path</option>
                                         <option value="3">Leacock-Chodorow</option>
@@ -174,24 +187,27 @@
                                         <option value="6">Lin</option>
                                     </select>
                                 </div>
-                                <div class="col-md-4">
-                                    <input data-bind="value: threshold" class="form-control" type="text" placeholder="Threshold">
+                                <div class="col-md-1">
+                                    <input data-bind="value: type_th" class="form-control" type="text" placeholder="Th.eg.0.9">
+                                </div>
+                                <div class="col-md-2 col-xs-4">
+                                    <button data-bind="click: type_search" class="btn btn-default">search</button>
                                 </div>
                             </div>
                             <div class="row" style="margin-top:30px;margin-bottom:30px">
                                 <div class="col-md-offset-1 col-md-10">
-                                    <ul class="list-group" data-bind="foreach: types, visible: types().length > 0">
+                                    <ul class="list-group" data-bind="foreach: type_results, visible: type_results().length > 0">
                                         <li class="list-group-item" style="color:#428bca">
-                                            <span data-bind="text: synset()">&nbsp;</span>
+                                           <!--  <span data-bind="text: synset()">&nbsp;</span>
                                             <span data-bind="text: sim()" style="font-weight:bold"></span>
                                             <span data-bind="text: definition()">&nbsp;</span>
                                             <ul data-bind="foreach: links">
                                                 <li><span data-bind="text: $data"></span></li>
-                                            </ul>
+                                            </ul> -->
                                         </li> 
                                     </ul>
                                 </div>
-                            </div> -->
+                            </div>
                         </div>
                         <div role="tabpanel" class="tab-pane" id="question">
                             <!-- <div class="row" style="margin-top:30px">
@@ -225,14 +241,14 @@
 
             function Relation(data){
                 this.relation = ko.observable(data.relation);
-                this.entities = ko.observableArray(data.entities)
-                this.selected = ko.observable(true)
+                this.entities = ko.observableArray(data.entities);
+                this.selected = ko.observable(true);
             }
 
             function Entity(data) {
-                this.uri = ko.observable(data.uri)
-                this.label = ko.observable(data.label)
-                this.comments = ko.observable(data.comments)
+                this.uri = ko.observable(data.uri);
+                this.label = ko.observable(data.label);
+                this.comments = ko.observable(data.comments);
             }
 
             function QueryViewModel() {
@@ -243,6 +259,12 @@
                 self.entities = ko.observableArray([]);
                 self.sparqls = ko.observableArray([]);
                 self.query = ko.observable();
+                self.type_query = ko.observable();
+                self.type_sim = ko.observable();
+                self.type_th = ko.observable();
+                self.type_results = ko.observableArray([]);
+                self.entity_search_loading_state = ko.observable(false);
+                //self.service = 'http://localhost:5005/api/'
                 self.service = 'http://demos.gsi.dit.upm.es/sematch/api/'
                 self.search_results_len = ko.computed(function(){
                     var total = 0;
@@ -251,6 +273,9 @@
                             total += relation.entities().length;
                         }
                     });
+                    if(total > 0){
+                        self.entity_search_loading_state(false);
+                    }
                     return total + ' entities are retrieved';
                 });
 
@@ -270,32 +295,59 @@
                     return $.ajax(request);
                 }
 
+                self.entity_keypress = function(data, event){
+                    if(event.keyCode == 13){
+                        //alert("Enter was pressed was presses"+self.query()+data.value);
+                        self.search();
+                    }
+                    return true;
+                }
+
+                self.type_search = function(){
+                    return true;
+                }
+
                 self.search = function() {
+                    self.entity_search_loading_state(true);
                     var requestData = {
                         query:self.query()
                     };
-                    self.ajax(self.service + 'search','GET',requestData).success(function(data){
-                        var results = $.map(data, function(result) { 
-                            var entities = $.map(result['entities'], function(entity){
-                                return new Entity({uri:entity['uri'], label:entity['label'], 
-                                    comments:entity['comments']})
-                            });
-                            return new Relation({relation:result['relation'],entities:entities})
-                        });
-                        self.search_results(results);
-                    });
+                    if(self.query()){
 
-                    self.ajax(self.service + 'entities','GET',requestData).success(function(data){
-                        self.entities(data);
-                    });
-                    self.ajax(self.service + 'types','GET',requestData).success(function(data){
-                         self.types(data);
-                    });
-                    self.ajax(self.service + 'queries','GET',requestData).success(function(data){
-                        self.sparqls(data);
-                    });
+                        self.ajax(self.service + 'search','GET',requestData).success(function(data){
+                            if($.isEmptyObject(data)){
+                                self.entity_search_loading_state(false);
+                                alert("Sorry, there is no such data in Knowledge Graph, you can check the query in the left!");
+                                return;
+                            }
+                            var results = $.map(data, function(result) { 
+                                var entities = $.map(result['entities'], function(entity){
+                                    return new Entity({uri:entity['uri'], label:entity['label'], 
+                                        comments:entity['comments']})
+                                });
+                                return new Relation({relation:result['relation'],entities:entities})
+                            });
+                            self.search_results(results);
+                        });
+
+                        self.ajax(self.service + 'entities','GET',requestData).success(function(data){
+                            self.entities(data);
+                        });
+                        self.ajax(self.service + 'types','GET',requestData).success(function(data){
+                             self.types(data);
+                        });
+                        self.ajax(self.service + 'queries','GET',requestData).success(function(data){
+                            self.sparqls(data);
+                        });
+
+                    }else{
+                        self.entity_search_loading_state(false);
+                        alert("Please input a query!");
+                    }
                 }
-            }
+
+            };
+
             ko.applyBindings(new QueryViewModel());
         </script>
     </body>

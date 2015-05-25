@@ -28,6 +28,7 @@ def entities():
 @app.route('/api/search')
 def search():
     query = request.args.get('query')
+    print query
     results = engine.search(query)
     relation_dict = {}
     for res in results:
@@ -45,6 +46,7 @@ def home():
 def runserver():
     port = int(os.environ.get('PORT', 5005))
     app.run(host='demos.gsi.dit.upm.es', port=port)
+    #app.run(host='localhost', port=port)
 
 if __name__ == '__main__':
     runserver()
