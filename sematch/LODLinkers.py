@@ -71,12 +71,35 @@ class SynsetLinker(Linker):
     def offset(self, synset):
         return str(synset.offset() + 100000000)
 
-    def link_append(self, typeLinks, lst):
-        if typeLinks.get('dbpedia'):
-            lst.append(typeLinks['dbpedia'])
 
-        if typeLinks.get('yago_dbpedia'):
-            lst.append(typeLinks['yago_dbpedia'])
+    def link_append(self, synset, lst):
+        if self.links.get(self.offset(synset)):
+            typeLinks = self.links.get(self.offset(synset))
+            if typeLinks.get('dbpedia'):
+                lst.append(typeLinks['dbpedia'])
+
+            if typeLinks.get('yago_dbpedia'):
+                lst.append(typeLinks['yago_dbpedia'])
+            return True
+        else:
+            return False
+
+    def searching(self, query, sim, th):
+        self.expander.sim = sim
+        self.expander.th = th
+        synsets_lst, synsets_tuple = self.expander.synsets_exapnsion(query)
+        results = []
+        for synset, score in synsets_tuple:
+            syn_obj = {}
+            syn_obj['synset'] = synset.__str__()
+            syn_obj['lemmas'] = ' '.join(synset._lemma_names)
+            syn_obj['definition'] = synset._definition
+            syn_obj['sim'] = score
+            link_lst = []
+            self.link_append(synset,link_lst)
+            syn_obj['LOD'] = link_lst
+            results.append(syn_obj)
+        return results
 
     def linking(self, query):
         tokens = self.query_processor.tokenization(query)
@@ -84,10 +107,9 @@ class SynsetLinker(Linker):
         types = [x for (x,y) in pos if y == 'NN' or y == 'NNS']
         links = []
         for t in types:
-            synsets = self.expander.synsets(t)
-            for s in synsets:
-                if self.links.get(self.offset(s)):
-                    self.link_append(self.links.get(self.offset(s)), links)
+            synsets_lst, synsets_score_tuple = self.expander.synsets_exapnsion(t)
+            for s in synsets_lst:
+                self.link_append(s,links)
         return links
 
 class LinkerFactory(Linker):
@@ -129,3 +151,4 @@ class TypeLinkers(LinkerFactory):
 
     def linking(self, data):
         return self.linker.linking(data)
+

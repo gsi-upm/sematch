@@ -20,6 +20,14 @@ def types():
     query = request.args.get('query')
     return json.dumps(engine.types(query))
 
+@app.route('/api/type_search')
+def type_search():
+    type = request.args.get('type')
+    sim = request.args.get('sim')
+    th = request.args.get('th')
+    result = engine.search_types(type, sim, float(th))
+    return json.dumps(result)
+
 @app.route('/api/entities')
 def entities():
     query = request.args.get('query')
@@ -28,7 +36,6 @@ def entities():
 @app.route('/api/search')
 def search():
     query = request.args.get('query')
-    print query
     results = engine.search(query)
     relation_dict = {}
     for res in results:

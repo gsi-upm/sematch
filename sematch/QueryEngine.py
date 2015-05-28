@@ -1,7 +1,7 @@
 from SPARQLWrapper import SPARQLWrapper, SPARQLExceptions, JSON
 from QueryProcessing import Query
 from LODLinkers import EntityLinkers
-from LODLinkers import TypeLinkers
+from LODLinkers import SynsetLinker
 from Utility import Configuration
 import requests
 import rdflib
@@ -121,7 +121,7 @@ class Engine:
     def __init__(self):
         self.sparql = QueryExecution()
         self.entityLinker = EntityLinkers('sparqllinker')
-        self.typeLinker = TypeLinkers('synsetLinker')
+        self.typeLinker = SynsetLinker()
         self.query_processor = Query()
         self.config = Configuration()
         self.gpcs = ['gpc1','gpc2']
@@ -151,6 +151,9 @@ class Engine:
 
     def entity_literal_query_construction(self, e, p):
         pass
+
+    def search_types(self, query, sim, th):
+        return self.typeLinker.searching(query, sim, th)
 
     def sparql_execution(self, name, queries):
         results_dic = {}
