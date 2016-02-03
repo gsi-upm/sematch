@@ -7,7 +7,7 @@ The name of Sematch is composed based on Spanish "se" and English "match". The l
 The first demo system overview is shown as below.
 ![overview](https://dl.dropboxusercontent.com/u/74428083/sematch/overview.png)
 
-This is the corresponding online [demo](https://github.com/gsi-upm/sematch).
+This is the corresponding online [demo](http://demos.gsi.dit.upm.es/sematch/).
 
 The goal of the sematch is to provide several core tools for applications based on Knowledge Graphs (KGs).
 
