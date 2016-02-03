@@ -2,16 +2,22 @@
 
 ## Introduction
 
-The name of Sematch is composed based on Spanish "se" and English "match". It is also the abbreviation of semantic matching.
+The name of Sematch is composed based on Spanish "se" and English "match". The logo of Sematch is based on the Chinese [Yin and Yang](http://en.wikipedia.org/wiki/Yin_and_yang) which is written in [I Ching](http://en.wikipedia.org/wiki/I_Ching). Somehow, it correlates to 0 and 1 in computer science. It is also the abbreviation of semantic matching. The sematch tool kit aims to provide you a framework for matching your required information from public Knowledge Graphs semantically. 
 
-The logo of Sematch is based on the Chinese [Yin and Yang](http://en.wikipedia.org/wiki/Yin_and_yang) which is written in [I Ching](http://en.wikipedia.org/wiki/I_Ching). Somehow, it correlates to 0 and 1 in computer science.
-
-Sematch is a semantic entity search framework aiming to provide a framework combining the natural language processing techniques and linked of data techniques. The system overview is shown as below.
+The first demo system overview is shown as below.
 ![overview](https://dl.dropboxusercontent.com/u/74428083/sematch/overview.png)
 
-Sematch is especially used for retrieving a list of entities from knowledge base using natural language queries. The results of executing each natural language query are a list of entities. The current prototype is using DBpedia SPARQL endpoint. The Sematch framework is designed to fit in different knowledge graph and different endpoints. We are still implementing more features of Sematch.
+This is the corresponding online [demo](https://github.com/gsi-upm/sematch).
 
-In the current prototype of sematch, you can try the following examples in your project.
+The goal of the sematch is to provide several core tools for applications based on Knowledge Graphs (KGs).
+
+- semantic similarity of concepts in KG
+- entity linking and disambiguation with KG
+- semantic parsing
+- question answering based on knowledge graph
+
+
+In the current prototype of sematch, you can try the following examples in your project to retrieve a list of entities using combination of keywords e.g. a entity type and a related entity.
 
 ```
 	from sematch.QueryEngine import Engine
@@ -35,6 +41,11 @@ This project is still under development.
 The project is mainly maintained by Ganggao Zhu.
 
 You can contact me via gzhu@dit.upm.es
+
+##Publications
+
+[Sematch: Semantic Entity Search from Knowledge Graph](http://km.aifb.kit.edu/ws/sumpre2015/paper4.pdf)
+Zhu, G. & Iglesias, C. A (2015). In SumPre 2015 ESWC
 
 ## License
 
