@@ -1,5 +1,5 @@
 from nltk.corpus import wordnet as wn
-from Similarity import SemanticSimilarity
+from similarity import SemanticSimilarity
 
 class SynsetExpansion:
 

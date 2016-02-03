@@ -1,6 +1,28 @@
 import nltk
+from nltk.tokenize import RegexpTokenizer
+from pygoogle import pygoogle
 
-class Query:
+StopWords = nltk.corpus.stopwords.words('english')
+
+def tokenization(query):
+    tokenizer = RegexpTokenizer(r'\w+')
+    return tokenizer.tokenize(query)
+
+def remove_stopwords(tokens):
+    return [w for w in tokens if w.lower() not in StopWords]
+
+def pos(tokens):
+    return nltk.pos_tag(tokens)
+
+def google_search_for_wiki(query):
+    wiki = ' site:wikipedia.org'
+    query = query + wiki
+    g = pygoogle(query)
+    g.pages = 5
+    #g.rsz = 10
+    return g.get_urls()
+
+class QueryProcessor:
 
     def __init__(self):
         self.stopwords = nltk.corpus.stopwords.words('english')

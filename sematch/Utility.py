@@ -47,6 +47,13 @@ class FileIO:
                 f.write("\n")
 
     @staticmethod
+    def append_list_file(name, data):
+        with open(FileIO.filename(name), 'a') as f:
+            for d in data:
+                f.write(d)
+                f.write('\n')
+
+    @staticmethod
     def save_list_file(name, data):
         with open(FileIO.filename(name),'w') as f:
             for d in data:
@@ -73,3 +80,54 @@ def trace(f):
 # print type(config.getConfig('expansion','sim'))
 # print type(config.getConfig('expansion', 'th'))
 # print config.getConfig('expansion','gpcs')
+
+
+import Levenshtein
+import math
+
+class Similarity:
+
+    #String similarity
+
+    def string(self, X, Y):
+        return Levenshtein.ratio(X, Y)
+
+    #convert the distance to similarity
+
+    def d_to_s(self, x):
+        return 1 / (1 + x)
+
+    #sigmoid function
+
+    def sigmoid(self, x):
+        if x > 500:
+            return 0
+        return self.d_to_s(math.exp(x))
+
+    #difference of two list
+
+    def difference(self, X, Y):
+        return [X[i] - Y[i] for i in range(len(X))]
+
+    def square(self, x):
+        return x**2
+
+    #The length of X and Y should be identical
+
+    def minkowski(self, X, Y, r):
+        distance = self.difference(X,Y)
+        distance = map(abs, distance)
+        distance = map(lambda x:pow(x,r), distance)
+        distance = sum(distance)
+        distance = pow(distance, 1/r)
+        return self.d_to_s(distance)
+
+    #manhattan similarity is when r in minkowski equals 1
+
+    def manhattan(self, X, Y):
+        return self.minkowski(X,Y,1)
+
+    #euclidean similarity is when r in minkowski equals 2
+
+    def euclidean(self, X, Y):
+        return self.minkowski(X,Y,2)

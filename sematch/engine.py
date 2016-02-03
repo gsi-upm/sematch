@@ -1,8 +1,8 @@
 from SPARQLWrapper import SPARQLWrapper, SPARQLExceptions, JSON
-from QueryProcessing import Query
+from nlp import QueryProcessor
 from LODLinkers import EntityLinkers
 from LODLinkers import SynsetLinker
-from Utility import Configuration
+from utility import Configuration
 import requests
 import rdflib
 
@@ -122,7 +122,7 @@ class Engine:
         self.sparql = QueryExecution()
         self.entityLinker = EntityLinkers('sparqllinker')
         self.typeLinker = SynsetLinker()
-        self.query_processor = Query()
+        self.query_processor = QueryProcessor()
         self.config = Configuration()
         self.gpcs = ['gpc1','gpc2']
         self.split_n = 5

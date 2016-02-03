@@ -1,7 +1,7 @@
 from SPARQLWrapper import SPARQLWrapper, SPARQLExceptions, JSON
-from QueryProcessing import Query
+from nlp import QueryProcessor
 from Expansion import SynsetExpansion
-from Utility import FileIO
+from utility import FileIO
 import abc
 import spotlight
 
@@ -32,7 +32,7 @@ class SPARQLEntityLinker(Linker):
         self.url = url
         self.sparql = SPARQLWrapper(url)
         self.sparql.setReturnFormat(JSON)
-        self.query_processor = Query()
+        self.query_processor = QueryProcessor()
         self.query = '''select distinct ?uri where {
                     ?uri rdfs:label "%s"@en .
                     {?uri rdf:type <http://dbpedia.org/ontology/Place>} UNION
@@ -65,7 +65,7 @@ class SynsetLinker(Linker):
     def __init__(self):
         self.links = FileIO.read_json_file("db/type-linkings.txt")
         self.links = {data['offset']:data for data in self.links}
-        self.query_processor = Query()
+        self.query_processor = QueryProcessor()
         self.expander = SynsetExpansion(0.95, 'wup')
 
     def offset(self, synset):
