@@ -9,6 +9,7 @@ class KnowledgeGraph(BaseSPARQL):
     def __init__(self):
         BaseSPARQL.__init__(self)
         self.synset_links_dic = FileIO.read_json_file("db/type-linkings.txt")
+        self.yago_synset_dic = {data['yago_dbpedia']:data['offset'] for data in self.synset_links_dic}
         self.synset_links_dic = {data['offset']:data for data in self.synset_links_dic}
 
     def synset_link(self, synset):
@@ -22,6 +23,10 @@ class KnowledgeGraph(BaseSPARQL):
 
     def offset(self, synset):
         return str(synset.offset() + 100000000)
+
+    def offset2synset(self, offset):
+        x = offset[1:]
+        return wn._synset_from_pos_and_offset('n', int(x))
 
     def word_to_synsets(self, w):
         return wn.synsets(w, pos=wn.NOUN)
@@ -141,6 +146,26 @@ class KnowledgeGraph(BaseSPARQL):
         query = o,q
         return self.execution_result(query)
 
+    def entity_category(self, resource):
+        o,q,v = self.get_category(resource)
+        query = o, q
+        categories = self.execution_result(query)
+        cates = [c.replace('http://dbpedia.org/resource/Category:', '') for c in categories]
+        cates = [c.lower().split('_') for c in cates]
+        return cates
+
+    def entity_classes(self, resource):
+        types = self.entity_type(resource)
+        type_synsets = []
+        for t in types:
+            if t in self.yago_synset_dic:
+                type_synsets.append(self.yago_synset_dic[t])
+            # if t.__contains__('http://dbpedia.org/ontology/'):
+            #     print t
+        type_synsets = [self.offset2synset(x) for x in type_synsets]
+        return type_synsets
+        #print types, categories
+
     # select count(?o) where s ?p ?o
     # subject is known
     def subject_count(self, s):
@@ -227,6 +252,12 @@ class KnowledgeGraph(BaseSPARQL):
         print 'domain', self.domain(property)
         print 'range',self.range(property)
 
+    def associativity(self, e1, e2):
+        '''
+        measure the link based asscociatity between two entities in KG.
+        :param e1:
+        :param e2:
+        :return:
+        '''
+        pass
 
-g = KnowledgeGraph()
-print g.entity_count('http://dbpedia.org/ontology/Place')

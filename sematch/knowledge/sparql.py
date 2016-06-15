@@ -6,6 +6,13 @@ class BaseSPARQL:
 
     def __init__(self, url="http://dbpedia.org/sparql"):
         self.url = url
+        self.name = 'http://dbpedia.org/property/name'
+        self.commonName ='http://dbpedia.org/property/commonName'
+        self.longName = 'http://dbpedia.org/ontology/longName'
+        self.demonym = 'http://dbpedia.org/ontology/demonym'
+        self.acronym = 'http://dbpedia.org/property/acronym'
+        self.redirect_pages = 'http://dbpedia.org/ontology/wikiPageRedirects'
+        self.disambiguation_pages = 'http://dbpedia.org/ontology/wikiPageDisambiguates'
         self.sparql = SPARQLWrapper(url)
         self.sparql.setReturnFormat(JSON)
         self.tpl = """SELECT DISTINCT %s WHERE {\n\t%s\n}"""
@@ -49,79 +56,55 @@ class BaseSPARQL:
         query= 's', q
         return self.execution_result(query)
 
-    def literal_mapping_entity(self, segment):
-        t0 = self.triple('?s', self.uri(RDF.type), self.uri(OWL.Thing))
-        t1 = t0 + self.literal_mapping_label(segment)
-        t2 = t0 + self.literal_mapping_title(segment)
-        q = self.union([t1,t2])
-        query = 's',q
-        resources = self.execution_result(query)
-        if not resources:
-            t3 = t0 + self.literal_mapping_redirect(segment)
-            t4 = t0 + self.literal_mapping_redirect_title(segment)
-            q = self.union([t3,t4])
-            query = 's',q
-            resources = self.execution_result(query)
-        if not resources:
-            t5 = t0 + self.literal_mapping_demonym(segment)
-            t6 = t0 + self.literal_mapping_commonName(segment)
-            t7 = t0 + self.literal_mapping_commonName_title(segment)
-            t8 = t0 + self.literal_mapping_longName(segment)
-            t9 = t0 + self.literal_mapping_longName_title(segment)
-            q = self.union([t5,t6,t7,t8,t9])
-            query = 's',q
-            resources = self.execution_result(query)
-        if not resources:
-            t10 = t0 + self.literal_mapping_name(segment)
-            t11 = t0 + self.literal_mapping_name_title(segment)
-            q = self.union([t10,t11])
-            query = 's',q
-            resources = self.execution_result(query)
-        return resources
-
-    def literal_mapping_redirect_title(self, segment):
-        t = self.triple('?x', self.uri(RDFS.label), self.literal(segment.title()))
-        return t + self.triple('?x', self.uri('http://dbpedia.org/ontology/wikiPageRedirects'), '?s')
-
-    def literal_mapping_redirect(self, segment):
-        t = self.triple('?x', self.uri(RDFS.label), self.literal(segment))
-        return t + self.triple('?x', self.uri('http://dbpedia.org/ontology/wikiPageRedirects'), '?s')
-
     def literal_mapping_lower(self, segment):
         t = self.triple('?s', self.uri(RDFS.label), '?q')
         return t + self.lcase_filter('?q', segment.lower())
 
-    def literal_mapping_label(self, segment):
-        return self.triple('?s', self.uri(RDFS.label), self.literal(segment))
+    def wiki2dbpedia(self, wiki_uri):
+        if wiki_uri.__contains__('https://en.wikipedia.org/wiki/'):
+            wiki_uri = wiki_uri.replace('https:','http:')
+            q = self.triple('?s', self.uri('http://xmlns.com/foaf/0.1/isPrimaryTopicOf'), self.uri(wiki_uri))
+            query = 's',q
+            return self.execution_result(query)
+        return []
 
-    def literal_mapping_title(self, segment):
-        return self.triple('?s', self.uri(RDFS.label), self.literal(segment.title()))
+    def redirect_mapping(self, segment):
+        t = self.triple('?x', self.uri(RDFS.label), self.literal(segment))
+        return t + self.triple('?x', self.uri(self.redirect_pages), '?s')
 
-    def literal_mapping_name(self, segment):
-        return self.triple('?s', self.uri('http://dbpedia.org/property/name'), self.literal(segment))
+    def check_redirect(self, dbr):
+        q = self.triple(self.uri(dbr), self.uri(self.redirect_pages), '?s')
+        query = 's', q
+        return self.execution_result(query)
 
-    def literal_mapping_name_title(self, segment):
-        return self.triple('?s', self.uri('http://dbpedia.org/property/name'), self.literal(segment.title()))
+    # check dbpedia resource, no redirect page,
+    def resource_filter(self, data):
+        result = [d for d in data if d.__contains__('http://dbpedia.org/resource/')]
+        #remove categories
+        result = [d for d in result if not d.__contains__('http://dbpedia.org/resource/Category')]
+        new_result = []
+        for res in result:
+            redirect = self.check_redirect(res)
+            if redirect:
+                new_result.append(redirect[0])
+            else:
+                new_result.append(res)
+        return list(set(new_result))
 
-    def literal_mapping_commonName(self, segment):
-        return self.triple('?s', self.uri('http://dbpedia.org/property/commonName'), self.literal(segment))
+    def entity_mapping(self, segment):
+        #t0 = self.triple('?s', self.uri(RDF.type), self.uri(OWL.Thing))
+        t1 = self.triple('?s', self.uri(RDFS.label), self.literal(segment))
+        t2 = self.triple('?s', self.uri(RDFS.label), self.literal(segment.title()))
+        t3 = self.redirect_mapping(segment)
+        t4 = self.triple('?s', self.uri(self.name), self.literal(segment))
+        t5 = self.triple('?s', self.uri(self.commonName), self.literal(segment))
+        t6 = self.triple('?s', self.uri(self.longName), self.literal(segment))
+        t7 = self.triple('?s', self.uri(self.demonym), self.literal(segment))
+        t8 = self.triple('?s', self.uri(self.acronym), self.literal(segment))
+        q = self.union([t1,t2,t3,t4,t5,t6,t7,t8])
+        query = 's',q
+        return self.resource_filter(self.execution_result(query))
 
-    def literal_mapping_commonName_title(self, segment):
-        return self.triple('?s', self.uri('http://dbpedia.org/property/commonName'), self.literal(segment.title()))
-
-    def literal_mapping_longName(self, segment):
-        return self.triple('?s', self.uri('http://dbpedia.org/ontology/longName'), self.literal(segment))
-
-    def literal_mapping_longName_title(self, segment):
-        return self.triple('?s', self.uri('http://dbpedia.org/ontology/longName'), self.literal(segment.title()))
-
-    def literal_mapping_demonym(self, segment):
-        return self.triple('?s', self.uri('http://dbpedia.org/ontology/demonym'), self.literal(segment.title()))
-
-    def literal_mapping_demonym_reg(self, segment):
-        t = self.triple('?s', self.uri('http://dbpedia.org/ontology/demonym'), '?d')
-        reg = '^%s' % segment.title()
-        return t + self.regex_filter('?d', reg)
 
     def execution(self,query):
         #print query
@@ -270,6 +253,12 @@ class BaseSPARQL:
             s = self.variable('s',v)
             q = ''
         return s, self.triple(self.q_mark(s), self.uri(RDF.type), self.uri(OWL.Thing)) + q, v
+
+    def get_category(self, s):
+        v = {}
+        o = self.variable('o', v)
+        q = ''
+        return o, self.triple(self.uri(s), self.uri('http://purl.org/dc/terms/subject'), self.q_mark(o)) + q, v
 
     def get_type(self, s):
         v = {}

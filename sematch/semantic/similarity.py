@@ -1,6 +1,7 @@
 from nltk.corpus import wordnet as wn
 from nltk.corpus import wordnet_ic
 from nltk.corpus.reader.wordnet import information_content
+from sematch.nlp import word_tokenize, lemmatization, porter
 from sematch.knowledge import graph
 from sematch.semantic.score import Score
 from sematch.utility import FileIO
@@ -41,9 +42,16 @@ class Similarity(Score):
     def word_similarity(self, w1, w2, name='wup'):
         sim = self.method(name)
         s1 = wn.synsets(w1, pos=wn.NOUN)
+        if not s1:
+            s1 = wn.synsets(porter.stem(w1), pos=wn.NOUN)
         s2 = wn.synsets(w2, pos=wn.NOUN)
-        scores = [sim(c1, c2) for c1 in s1 for c2 in s2]
+        if not s2:
+            s2 = wn.synsets(porter.stem(w2), pos=wn.NOUN)
+        scores = [sim(c1, c2) for c1 in s1 for c2 in s2] + [0]
         return max(scores)
+
+    def similarity(self, c1, c2, name='path'):
+        return self.method(name)(c1, c2)
 
     def pmi(self, c1, c2):
         freq_1 = self.graph.synset_entity_count(c1)
@@ -115,7 +123,7 @@ class Similarity(Score):
         depth = depth**beta
         return math.log(1+path*depth,2)
 
-    def wpath(self, c1, c2, k=0.8):
+    def wpath(self, c1, c2, k=0.9):
         lcs = self.least_common_subsumer(c1,c2)
         path = c1.shortest_path_distance(c2)
         weight = k ** self.synset_ic(lcs)
@@ -160,3 +168,46 @@ class Similarity(Score):
 
     def lin(self, c1, c2):
         return c1.lin_similarity(c2, self.ic_corpus)
+
+    def gloss_overlap(self, c1, c2):
+        gloss1 = lemmatization(word_tokenize(c1.definition()))
+        gloss2 = lemmatization(word_tokenize(c2.definition()))
+        gloss1 = set(map(porter.stem, gloss1))
+        gloss2 = set(map(porter.stem, gloss2))
+        return len(gloss1.intersection(gloss2))
+
+    def elesk(self, c1, c2):
+        # similarity(A,B) = overlap(gloss(A), gloss(B))
+        #  + overlap(gloss(hypo(A)), gloss(B))
+        #  + overlap(gloss(hypo(A)), gloss(hypo(B)))
+        #  + overlap(gloss(A), gloss(hypo(B)))
+        hypo1 = c1.hyponyms()
+        hypo2 = c2.hyponyms()
+        sim = self.gloss_overlap(c1, c2)
+        for h1 in hypo1:
+            sim += self.gloss_overlap(h1, c2)
+            for h2 in hypo2:
+                sim += self.gloss_overlap(h1, h2)
+        for h2 in hypo2:
+            sim += self.gloss_overlap(c1, h2)
+        return sim
+
+class TextSimilarity:
+
+    def __init__(self):
+        self.sim = Similarity()
+
+    def extract_words(self, text):
+        return lemmatization(word_tokenize(text))
+
+    def sum_words_similarity(self, words1, words2, method='path'):
+        return sum([max([self.sim.word_similarity(w1, w2, method) for w2 in words2]) for w1 in words1])
+
+    def text_similarity(self, t1, t2, method='path'):
+        words1 = self.extract_words(t1)
+        words2 = self.extract_words(t2)
+        N1 = len(words1)
+        N2 = len(words2)
+        sum_1 = self.sum_words_similarity(words1, words2, method) / N1
+        sum_2 = self.sum_words_similarity(words2, words1, method) / N2
+        return (sum_1 + sum_2) / 2.0

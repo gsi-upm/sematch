@@ -3,7 +3,6 @@ from scipy.stats import spearmanr
 from scipy.stats import pearsonr
 from scipy.stats import kendalltau
 from sematch.semantic.similarity import Similarity
-from sematch.semantic.relatedness import Relatedness
 from sematch.utility import FileIO
 import networkx as nx
 import numpy as np

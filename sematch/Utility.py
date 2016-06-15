@@ -85,49 +85,41 @@ def trace(f):
 import Levenshtein
 import math
 
-class Similarity:
 
-    #String similarity
+#String similarity
 
-    def string(self, X, Y):
-        return Levenshtein.ratio(X, Y)
+def string_similarity(X, Y):
+    return Levenshtein.ratio(X, Y)
 
-    #convert the distance to similarity
+#convert the distance to similarity
 
-    def d_to_s(self, x):
-        return 1 / (1 + x)
+def fraction(x):
+    return 1 / (1 + x)
 
-    #sigmoid function
+#difference of two list
 
-    def sigmoid(self, x):
-        if x > 500:
-            return 0
-        return self.d_to_s(math.exp(x))
+def difference(X, Y):
+    return [X[i] - Y[i] for i in range(len(X))]
 
-    #difference of two list
+def square(self, x):
+    return x**2
 
-    def difference(self, X, Y):
-        return [X[i] - Y[i] for i in range(len(X))]
+#The length of X and Y should be identical
 
-    def square(self, x):
-        return x**2
+def minkowski(X, Y, r):
+    distance = difference(X,Y)
+    distance = map(abs, distance)
+    distance = map(lambda x:pow(x,r), distance)
+    distance = sum(distance)
+    distance = pow(distance, 1/r)
+    return fraction(distance)
 
-    #The length of X and Y should be identical
+#manhattan similarity is when r in minkowski equals 1
 
-    def minkowski(self, X, Y, r):
-        distance = self.difference(X,Y)
-        distance = map(abs, distance)
-        distance = map(lambda x:pow(x,r), distance)
-        distance = sum(distance)
-        distance = pow(distance, 1/r)
-        return self.d_to_s(distance)
+def manhattan(X, Y):
+    return minkowski(X,Y,1)
 
-    #manhattan similarity is when r in minkowski equals 1
+#euclidean similarity is when r in minkowski equals 2
 
-    def manhattan(self, X, Y):
-        return self.minkowski(X,Y,1)
-
-    #euclidean similarity is when r in minkowski equals 2
-
-    def euclidean(self, X, Y):
-        return self.minkowski(X,Y,2)
+def euclidean(X, Y):
+    return minkowski(X,Y,2)
