@@ -1,136 +1,138 @@
-from nltk.corpus import wordnet as wn
-from nltk.stem import WordNetLemmatizer, PorterStemmer
+from sematch.nlp import word_tokenize, lemmatization
+from sematch.semantic.similarity import WordNetSimilarity, Word2VecSimilarity
+from sematch.utility import FileIO
+from BeautifulSoup import BeautifulSOAP as bs
+from sematch.utility import memoized
 from collections import Counter
-import json
+import numpy as np
+import abc
 
-class Aspect:
+#http://textminingonline.com/dive-into-nltk-part-ix-from-text-classification-to-sentiment-analysis
 
-    def __init__(self):
-        self.lemma = WordNetLemmatizer()
-        self.porter = PorterStemmer()
-        self.aspect_features = self.load_feature()
-        self.feature_category =self.load_cases()
+class SimAspect(object):
 
-    def load_cases(self):
-        feature_class = {}
-        for key in self.aspect_features:
-            for word in self.aspect_features[key]:
-                feature_class.setdefault(word, []).append(key)
-        return feature_class
+    __metaclass__ = abc.ABCMeta
 
-    def load_feature(self):
-        features = {}
-        with open('words.json','r') as f:
-            data = json.loads(f.read())
-            for d in data:
-                features[d['class']] = d['list'].keys()
-        for key in features:
-            words = features[key]
-            words = set(map(self.lemma.lemmatize, words))
-            words = [w for w in words if self.word2synsets(w)]
-            features[key] = words
-        features['food'] += ['food']
-        features['drinks'] += ['drink','beverage']
-        features['service'] += ['service']
-        features['ambience'] += ['band','live']
-        features['location'] += ['location','position']
-        for f in features:
-            features[f] = list(set(features[f]))
-        return features
+    def __init__(self, labels):
+        self._wns = WordNetSimilarity()
+        self._aspects = labels
 
-    def word2synsets(self, word):
-        syns = wn.synsets(word)
-        if syns:
-            return syns
-        else:
-            syns = wn.synsets(self.porter.stem(word))
-            if syns:
-                return syns
-            else:
-                return []
+    @abc.abstractmethod
+    def feature_aspect_similarity(self, word, aspect, method='path'):
+        pass
 
-    def concept_similarity(self, c1, c2):
-        score = c1.path_similarity(c2)
-        if score:
-            return score
-        else:
-            return 0.0
-
-    def word_similarity(self, w1, w2):
-        s1 = self.word2synsets(w1)
-        s2 = self.word2synsets(w2)
-        scores = [self.concept_similarity(c1,c2) for c1 in s1 for c2 in s2] + [0]
-        return max(scores)
-
-    def word_aspect_similarity(self, word, aspect):
-        sim = lambda x: self.word_similarity(word, x)
-        score = map(sim, self.aspect_features[aspect])
-        score = [s for s in score if s > 0.2]
-        if score:
-            if score.__contains__(1.0):
-                return 1.0
-            return sum(score) / len(score)
-        else:
-            return 0.0
-
-    def k_most_similar(self, word, k=5):
+    def classify(self, targets, method='path'):
+        '''
+        The input target words are compared to each category based on feature aspect similarity.
+        The final semantic similarity score between input words with category is sum.
+        The category having highest score become the category for target words.
+        '''
+        target_words = list(set(lemmatization(word_tokenize(targets))))
         score = {}
-        for f in self.feature_category:
-            score[f] = self.word_similarity(word, f)
-        return Counter(score).most_common(k)
-
-    def knn_classify(self, aspect_terms):
-        context = aspect_terms.lower().split()
-        context = list(set(map(self.lemma.lemmatize, context)))
-        votes = {key:0.0 for key in self.aspect_features}
-        for con in context:
-            categories = self.k_most_similar(con)
-            for cat in categories:
-                feature, score = cat
-                for v in self.feature_category[feature]:
-                    votes[v] += score
-        return Counter(votes).most_common(1)[0][0]
-
-    def max_sim_classify(self, targets):
-        context = targets.lower().split()
-        context = list(set(map(self.lemma.lemmatize, context)))
-        score = {}
-        for aspect in self.aspect_features:
-            score[aspect] = sum([self.word_aspect_similarity(w, aspect) for w in context])
+        for aspect in self._aspects:
+            #score[aspect] = sum([self.feature_aspect_similarity(w, aspect, method) for w in target_words])
+            score[aspect] = max([self.feature_aspect_similarity(w, aspect, method) for w in target_words] + [0.0])
         return Counter(score).most_common(1)[0][0]
 
-a = Aspect()
 
-print 'Feature: Taiwanese food => FOOD'
-print a.knn_classify('Taiwanese food')
-print 'Feature: bagels => FOOD'
-print a.knn_classify('bagels')
-print 'Feature: blond wood decor => AMBIENCE'
-print a.knn_classify('blond wood decor')
-print 'Feature: live jazz band => AMBIENCE'
-print a.knn_classify('live jazz band')
-print 'Feature: staff => SERVICE'
-print a.knn_classify('staff')
-print 'Feature: Winnie => SERVICE'
-print a.knn_classify('winnie')
-print 'Feature: view => LOCATION'
-print a.knn_classify('view')
-print 'Feature: place => LOCATION'
-print a.knn_classify('place')
-print 'Feature: strawberry daiquiries => DRINKS'
-print a.knn_classify('strawberry daiquiries')
-print 'Feature: Wine list => DRINKS'
-print a.knn_classify('Wine list')
+
+class MaxSimAspect(SimAspect):
+
+    def __init__(self, labels, features):
+        SimAspect.__init__(self, labels)
+        self._features = features
+
+    @memoized
+    def feature_aspect_similarity(self, word, aspect, method='path'):
+        sim = lambda x: self._wns.word_similarity(word, x, method)
+        return max(map(sim, self._features[aspect]) + [0.0])
 
 
 
+class WeightedSimAspect(SimAspect):
+    '''
+    Simple aspect category classifier based on WordNet and semantic similarity.
+    '''
+
+    def __init__(self, labels, weights):
+        SimAspect.__init__(self, labels)
+        self._weights = weights
+
+    @classmethod
+    def train(cls, labeled_featuresets, feature_num=5):
+        '''
+        Compute the weight for each feature token in each category
+        The weight is computed as token_count / total_feature_count
+        '''
+        labels = labeled_featuresets.keys()
+        weights = {}
+        for c in labeled_featuresets:
+            weight = []
+            commons = labeled_featuresets[c].most_common(feature_num)
+            print c, commons
+            total_count = float(sum([count for w, count in commons]))
+            for w, count in commons:
+                weight.append((w, count / total_count))
+            weights[c] = weight
+        return cls(labels, weights)
+
+    @memoized
+    def feature_aspect_similarity(self, word, aspect, method='path'):
+        '''
+        Input word is compared to each feature word using semantic similarity. The whole similarity
+        score is computed as weighted sum.
+        '''
+        sim = lambda x: self._wns.word_similarity(word, x, method)
+        features, weights = zip(*self._weights[aspect])
+        scores = map(sim, features)
+        return np.dot(np.array(scores), np.array(weights).transpose())
 
 
+from sematch.semantic.classification import SimpleClassification, SemanticClassification
+
+ABSA15Restu_Train =  FileIO.filename('eval/aspect/ABSA-15_Restaurants_Train_Final.xml')
+ABSA15Restu_Test =  FileIO.filename('eval/aspect/ABSA15_Restaurants_Test.xml')
+ABSA16Restu_Train =  FileIO.filename('eval/aspect/ABSA16_Restaurants_Train_SB1_v2.xml')
+ABSA16Restu_Test =  FileIO.filename('eval/aspect/ABSA16_Restaurants_Test_Gold.xml')
+
+def extract_pairs(dataset):
+    pairs = []
+    with open(dataset, 'r') as f:
+        corpus = f.read()
+        opinions = bs(corpus).findAll('opinion')
+        for op in opinions:
+            if not op['target'] == 'NULL':
+                t = op['target']
+                #c = op['category'].split('#')[0]
+                c = op['category']
+                pairs.append((t, c))
+    return pairs
+
+absa16_train = extract_pairs(ABSA16Restu_Train)
+absa16_test = extract_pairs(ABSA16Restu_Test)
+absa15_train = extract_pairs(ABSA15Restu_Train)
+absa15_test = extract_pairs(ABSA15Restu_Test)
+
+X_train, y_train = zip(*absa16_train)
+X_test, y_test = zip(*absa16_test)
+
+# bow_model = SimpleSVM.train(X_train, y_train)
+# bow_model.evaluate(X_test, y_test)
+#
+# tfidf_model = SimpleSVM.train(X_train, y_train, model='tfidf')
+# tfidf_model.evaluate(X_test, y_test)
+
+# onehot_model = SemanticSVM.train(X_train, y_train)
+# onehot_model.evaluate(X_test, y_test)
+#
+# wordnet_model = SemanticSVM.train(X_train, y_train, feature='wordnet')
+# wordnet_model.evaluate(X_test, y_test)
+
+# word2vec_model = SemanticSVM.train(X_train, y_train, feature='word2vec')
+# word2vec_model.evaluate(X_test, y_test)
 
 
-
-
-
-
+word2vec_model = SemanticClassification.train(X_train, y_train, feature='wordnet', wn_method='lch')
+word2vec_model.evaluate(X_test, y_test)
 
 

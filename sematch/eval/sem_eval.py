@@ -2,7 +2,8 @@ from nltk.corpus import wordnet as wn
 from scipy.stats import spearmanr
 from scipy.stats import pearsonr
 from scipy.stats import kendalltau
-from sematch.semantic.similarity import Similarity
+from sematch.semantic.similarity import WordNetSimilarity
+from sematch.eval.corrstats import dependent_corr
 from sematch.utility import FileIO
 import networkx as nx
 import numpy as np
@@ -47,7 +48,7 @@ class Dataset:
 class Evaluation:
 
     def __init__(self):
-        self.sim = Similarity()
+        self.sim = WordNetSimilarity()
 
     def has_type(self, lst):
         for l in lst:
@@ -169,14 +170,14 @@ class Evaluation:
 #   type_ws353-sim.txt
 #   type_simlex.txt
 
-eval = Evaluation()
-sim_methods_noun = ['path','lch','wup','li','res','lin','jcn','wpath']
-sim_methods_graph = ['path','lch','wup','li','res','res_graph','lin','jcn','wpath','wpath_graph']
-sim_methods_type = ['path','lch','wup','li','res','res_graph','lin','lin_graph','jcn','jcn_graph','wpath','wpath_graph']
+# eval = Evaluation()
+# sim_methods_noun = ['path','lch','wup','li','res','lin','jcn','wpath']
+# sim_methods_graph = ['path','lch','wup','li','res','res_graph','lin','jcn','wpath','wpath_graph']
+# sim_methods_type = ['path','lch','wup','li','res','res_graph','lin','lin_graph','jcn','jcn_graph','wpath','wpath_graph']
 word_noun = ['noun_rg.txt','noun_mc.txt','noun_ws353.txt','noun_ws353-sim.txt','noun_simlex.txt']
-word_graph = ['graph_rg.txt','graph_mc.txt','graph_ws353.txt','graph_ws353-sim.txt','graph_simlex.txt']
-word_type = ['type_rg.txt','type_mc.txt','type_ws353.txt','type_ws353-sim.txt','type_simlex.txt']
-datasets = [Dataset(f) for f in word_type]
+# word_graph = ['graph_rg.txt','graph_mc.txt','graph_ws353.txt','graph_ws353-sim.txt','graph_simlex.txt']
+# word_type = ['type_rg.txt','type_mc.txt','type_ws353.txt','type_ws353-sim.txt','type_simlex.txt']
+# datasets = [Dataset(f) for f in word_type]
 # for d in datasets:
 #     eval.sim_eval_file(sim_methods_type, d)
 # for f in word_type:
@@ -191,5 +192,38 @@ datasets = [Dataset(f) for f in word_type]
     #check_words = eval.check_word_noun
 #    eval.create_sub_dataset(d, check_words, 'graph_simlex.txt')
 #eval.sim_eval_analysis_file('spearman','noun_rg.txt')
-for d in datasets:
-    eval.sim_eval_wpath_k('spearman', 'wpath_graph', d)
+# for d in datasets:
+#     eval.sim_eval_wpath_k('spearman', 'wpath_graph', d)
+
+path = [0.781, 0.724, 0.314, 0.618, 0.584]
+lch = [0.781, 0.724, 0.314, 0.618, 0.584]
+wup = [0.755, 0.729, 0.348, 0.633, 0.542]
+li = [0.787, 0.719, 0.337, 0.636, 0.586]
+res = [0.776, 0.733, 0.347, 0.637, 0.535]
+lin = [0.784, 0.752, 0.310, 0.609, 0.582]
+jcn = [0.775, 0.820, 0.292, 0.592, 0.579]
+wpath = [0.795, 0.740, 0.349, 0.652, 0.603]
+
+method_human = {'path':path, 'lch':lch, 'wup':wup, 'li':li, 'res':res, 'lin':lin, 'jcn':jcn, 'wpath':wpath}
+
+def steiger_test(dataset, method, index):
+    ratings = Result(dataset).ratings()
+    N = len(ratings[method])
+    rate_x = ratings[method]
+    for y in ratings.keys():
+        if not method == y:
+            rate_y = ratings[y]
+            print method, y
+            cor = spearmanr(rate_x, rate_y)[0]
+            xy = round(cor, 3) # correlation x method with y method
+            xz = method_human[method][index] #correlation x method with human
+            yz = method_human[y][index] #correlation y method with human
+            print 'xz, yz, xy, N :', xz, yz, xy, N
+            tmp = dependent_corr(xz, yz, xy, N, method='steiger')[1]
+            if tmp < 0.05:
+                print 'Significant: ', tmp
+            else:
+                print 'Not Significant: ', tmp
+
+steiger_test('noun_simlex.txt', 'wpath', 4)
+

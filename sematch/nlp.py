@@ -1,7 +1,9 @@
+from nltk.stem import WordNetLemmatizer, PorterStemmer, LancasterStemmer, SnowballStemmer
 from nltk.corpus import stopwords
 from nltk.tokenize import RegexpTokenizer
-from nltk.stem import WordNetLemmatizer, PorterStemmer
-#import spacy
+from nltk import RegexpParser
+from collections import Counter
+import string
 
 StopWords = stopwords.words('english')
 
@@ -24,12 +26,36 @@ FunctionWords = ['about', 'across', 'against', 'along', 'around', 'at',
                  'never', 'sometimes', 'usually', 'often', 'therefore',
                  'however', 'besides', 'moreover', 'though', 'otherwise',
                  'else', 'instead', 'anyway', 'incidentally', 'meanwhile']
+
+SpecialWords = ['.', ',', '?', '"', '``', "''", "'", '--', '-', ':', ';', '(',
+             ')', '$', '000', '1', '2', '10,' 'I', 'i', 'a',]
+
+punctuations = string.punctuation
+
+noun_pos = ['nn','nns','nn$','nn-tl','nn+bez','nn+hvz','nns$', 'np', \
+                           'np$', 'np+bez', 'nps', 'nps$', 'nr', 'np-tl', 'nrs', 'nr$']
+
 #r'(?u)\b\w\w+\b'
-reg_tokenizer = RegexpTokenizer(r'[a-z]+')
-#reg_tokenizer = RegexpTokenizer(r'\w+')
+#r'[a-z]+'
+#r'\w+'
+#r'''(?x)
+#([A-Z]\.)+        # abbreviations, e.g. U.S.A.
+#| \w+(-\w+)*        # words with optional internal hyphens
+#| \$?\d+(\.\d+)?%?  # currency and percentages, e.g. $12.40, 82%
+#| \w+[\x90-\xff]  # these are escaped emojis
+#| [][.,;"'?():-_`]  # these are separate tokens
+#'''
+
+tokenization_pattern = r'\w+'
+noun_chunk_pattern = r"T: {<(JJ|NN|NNS|NNP|NNPS)>+<(NN|NNS|NNP|NNPS|CD)>|<(NN|NNS|NNP|NNPS)>}"
+
+reg_tokenizer = RegexpTokenizer(tokenization_pattern)
+chunk_parser = RegexpParser(noun_chunk_pattern)
 
 lemma = WordNetLemmatizer()
 porter = PorterStemmer()
+lancaster = LancasterStemmer()
+
 
 def reg_tokenize(text):
     return reg_tokenizer.tokenize(text)
@@ -43,8 +69,7 @@ def clean_context(text):
     return ' '.join(tokens)
 
 def is_noun(tag):
-    return tag.lower() in ['nn','nns','nn$','nn-tl','nn+bez','nn+hvz','nns$', 'np', \
-                           'np$', 'np+bez', 'nps', 'nps$', 'nr', 'np-tl', 'nrs', 'nr$']
+    return tag.lower() in noun_pos
 
 def word_tokenize(text):
     tokens = reg_tokenize(text.lower())
@@ -57,17 +82,21 @@ def lemmatization(tokens):
     #tokens = [porter.stem(w) for w in tokens]
     return tokens
 
-# class SpacyNLP:
-#
-#     #http://textminingonline.com/tag/noun-phrase-extraction
-#
-#     def __init__(self):
-#         self.nlp = spacy.load('en')
-#
-#     def tokenize(self, text):
-#         doc = self.nlp(text)
-#         for np in doc.noun_chunks:
-#             print np
-#         for ent in doc.ents:
-#             print ent
+def feature_words_of_category(corpus):
+    '''
+    sentence and category pairs
+    '''
+    cat_word = {}
+    for words, cat in corpus:
+        cat_word.setdefault(cat, []).extend(lemmatization(word_tokenize(words)))
+    return {cat:Counter(cat_word[cat]) for cat in cat_word}
+
+def noun_phrases(tags):
+    phrases = []
+    for subtree in chunk_parser.parse(tags).subtrees():
+        if subtree.label() == 'T':
+            labels = subtree.leaves()
+            labels = [x for x, y in labels]
+            phrases.append(' '.join(labels))
+    return phrases
 
