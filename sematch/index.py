@@ -1,67 +1,13 @@
-from pymongo import MongoClient
-from pysolr import Solr
-from sematch.utility import FileIO
-import re
-import json
 
-SOLR_ADDRESS = 'http://localhost:8983/solr/%s'
-
-names = Solr(SOLR_ADDRESS % 'names')
-types = Solr(SOLR_ADDRESS % 'types')
-redirects = Solr(SOLR_ADDRESS % 'redirects')
-entities = Solr(SOLR_ADDRESS % 'entities')
-categories = Solr(SOLR_ADDRESS % 'categories')
-
-def redirect(dbr):
-    query = 'dbr:"%s"'
-    data = redirects.search(query % dbr)
-    data = [d['redirect'][0] for d in data]
-    if data:
-        return data[0]
-    return None
-
-def entity_category(dbr):
-    query = 'dbr:"%s"'
-    data = categories.search(query % dbr, **{'rows':500})
-    data = [d['category'][0] for d in data]
-    if data:
-        return data
-    return None
-
-def entity_type(dbr):
-    query = 'dbr:"%s"'
-    data = types.search(query % dbr)
-    data = [d['type'][0] for d in data]
-    if data:
-        return data[0]
-    return None
-
-def has_entity(dbr):
-    query = 'dbr:"%s"'
-    data = entities.search(query % dbr)
-    data = [d['dbr'][0] for d in data]
-    if data:
-        return True
-    return False
-
-def redirect_filter(link):
-    red = redirect(link)
-    return red if red else link
-
-def disambiguation_page_filter(link):
-    return True if link.__contains__('(disambiguation)') else False
-
-def entity_candidates(text):
-    query = 'name:"%s"'
-    data = names.search(query % text, **{'rows':500})
-    data = [d['dbr'][0] for d in data]
-    data = map(redirect_filter, data)
-    data = list(set(data))
-    data = [d for d in data if not disambiguation_page_filter(d)]
-    return data
 
 
 #################OFFLINE PROCESS###############################
+
+from sematch.utility import FileIO
+from pymongo import MongoClient
+from pysolr import Solr
+import re
+import json
 
 LABELS = 'db/names/labels_en.nt'
 CORPUS = 'db/names/labels.json'

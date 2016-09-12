@@ -4,7 +4,6 @@ from nltk.corpus.reader.wordnet import information_content
 from gensim.models import Word2Vec
 from sematch.nlp import word_tokenize, lemma, porter, lemmatization
 from sematch.knowledge import graph
-from sematch.semantic.score import Score
 from sematch.utility import FileIO,memoized
 import math
 
@@ -25,7 +24,7 @@ def graph_ic_writer(filename, items):
         data.append(' '.join([str(key),str(items[key])]))
     FileIO.append_list_file(filename, data)
 
-class GraphSimilarity(Score):
+class YagoWordSimilarity:
 
     def __init__(self):
         self.ic_graph = graph_ic_reader('db/graph-ic.txt')
@@ -94,7 +93,7 @@ class GraphSimilarity(Score):
 
 
 
-class WordNetSimilarity(Score):
+class WordNetSimilarity:
 
     # wns = WordNetSimilarity()
     # print wns.word_similarity('rooster', 'voyage', 'res')
@@ -123,6 +122,20 @@ class WordNetSimilarity(Score):
         self.ic_corpus = wordnet_ic.ic('ic-brown.dat')
         self.semcor_ic = wordnet_ic.ic('ic-semcor.dat')
         self.wn_max_depth = 19
+
+    def method(self, name):
+        def function(syn1, syn2):
+            score = getattr(self, name)(syn1, syn2)
+            return abs(score)
+
+        return function
+
+    def k_method(self, name):
+        def function(syn1, syn2, k):
+            score = getattr(self, name)(syn1, syn2, k)
+            return abs(score)
+
+        return function
 
     #return all the noun synsets in wordnet
     def get_all_synsets(self):
@@ -274,10 +287,10 @@ class WordNetSimilarity(Score):
 
 class Word2VecSimilarity:
 
-    def __init__(self, trained_file=None,
+    def __init__(self, trained_file='db/yelp/w2v-400d-yelp-comment_w2vformat',
                  google_news='db/GoogleNews-vectors-negative300.bin'):
         if trained_file:
-            self._model = Word2Vec.load(FileIO.filename(trained_file))
+            self._model = Word2Vec.load_word2vec_format(FileIO.filename(trained_file))
         else:
             self._model = Word2Vec.load_word2vec_format(FileIO.filename(google_news), binary=True)
 
@@ -291,6 +304,10 @@ class Word2VecSimilarity:
         except:
             return 0.0
         return sim
+#
+# w2vs = Word2Vec.load_word2vec_format(FileIO.filename('db/yelp/w2v-400d-yelp-comment_w2vformat'))
+# print w2vs.most_similar('food')
+
 
 class GloveSimilarity:
 
@@ -317,3 +334,4 @@ class TextSimilarity:
         sum_1 = self.sum_words_similarity(words1, words2, method) / N1
         sum_2 = self.sum_words_similarity(words2, words1, method) / N2
         return (sum_1 + sum_2) / 2.0
+

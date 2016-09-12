@@ -1,6 +1,6 @@
 from rdflib import RDFS
 from nltk.corpus import wordnet as wn
-from sematch.knowledge.sparql import BaseSPARQL
+from sematch.sparql import BaseSPARQL
 from sematch.utility import FileIO
 
 

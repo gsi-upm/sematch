@@ -1,13 +1,13 @@
-from nltk.stem import WordNetLemmatizer, PorterStemmer, LancasterStemmer, SnowballStemmer
+from nltk.stem import WordNetLemmatizer, PorterStemmer, LancasterStemmer
 from nltk.corpus import stopwords
 from nltk.tokenize import RegexpTokenizer
 from nltk import RegexpParser
 from collections import Counter
 import string
 
-StopWords = stopwords.words('english')
+StopWords = set(stopwords.words('english'))
 
-FunctionWords = ['about', 'across', 'against', 'along', 'around', 'at',
+FunctionWords = set(['about', 'across', 'against', 'along', 'around', 'at',
                  'behind', 'beside', 'besides', 'by', 'despite', 'down',
                  'during', 'for', 'from', 'in', 'inside', 'into', 'near', 'of',
                  'off', 'on', 'onto', 'over', 'through', 'to', 'toward',
@@ -25,15 +25,15 @@ FunctionWords = ['about', 'across', 'against', 'along', 'around', 'at',
                  'should', 'must', 'here', 'there', 'now', 'then', 'always',
                  'never', 'sometimes', 'usually', 'often', 'therefore',
                  'however', 'besides', 'moreover', 'though', 'otherwise',
-                 'else', 'instead', 'anyway', 'incidentally', 'meanwhile']
+                 'else', 'instead', 'anyway', 'incidentally', 'meanwhile'])
 
-SpecialWords = ['.', ',', '?', '"', '``', "''", "'", '--', '-', ':', ';', '(',
-             ')', '$', '000', '1', '2', '10,' 'I', 'i', 'a',]
+SpecialWords = set(['.', ',', '?', '"', '``', "''", "'", '--', '-', ':', ';', '(',
+             ')', '$', '000', '1', '2', '10,' 'I', 'i', 'a',])
 
-punctuations = string.punctuation
+punctuations = set(string.punctuation)
 
-noun_pos = ['nn','nns','nn$','nn-tl','nn+bez','nn+hvz','nns$', 'np', \
-                           'np$', 'np+bez', 'nps', 'nps$', 'nr', 'np-tl', 'nrs', 'nr$']
+noun_pos = set(['nn','nns','nn$','nn-tl','nn+bez','nn+hvz','nns$', 'np', \
+                           'np$', 'np+bez', 'nps', 'nps$', 'nr', 'np-tl', 'nrs', 'nr$'])
 
 #r'(?u)\b\w\w+\b'
 #r'[a-z]+'

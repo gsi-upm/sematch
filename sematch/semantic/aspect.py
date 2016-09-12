@@ -116,6 +116,9 @@ absa15_test = extract_pairs(ABSA15Restu_Test)
 X_train, y_train = zip(*absa16_train)
 X_test, y_test = zip(*absa16_test)
 
+print len(X_train)
+print len(X_test)
+
 # bow_model = SimpleSVM.train(X_train, y_train)
 # bow_model.evaluate(X_test, y_test)
 #
@@ -128,11 +131,11 @@ X_test, y_test = zip(*absa16_test)
 # wordnet_model = SemanticSVM.train(X_train, y_train, feature='wordnet')
 # wordnet_model.evaluate(X_test, y_test)
 
-# word2vec_model = SemanticSVM.train(X_train, y_train, feature='word2vec')
+# word2vec_model = SemanticClassification.train(X_train, y_train, feature='word2vec')
 # word2vec_model.evaluate(X_test, y_test)
 
-
-word2vec_model = SemanticClassification.train(X_train, y_train, feature='wordnet', wn_method='lch')
-word2vec_model.evaluate(X_test, y_test)
-
+#
+# word2vec_model = SemanticClassification.train(X_train, y_train, feature_num=10, feature='both', wn_method='lin')
+# word2vec_model.evaluate(X_test, y_test)
+#
 

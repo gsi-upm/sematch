@@ -47,6 +47,7 @@ class TextPreprocessor(BaseEstimator, TransformerMixin):
         feature_words = []
         for key in all_words:
             words, counts = zip(*all_words[key].most_common(feature_num))
+            print key, words
             feature_words.extend(list(words))
         feature_words = set(feature_words)
         print 'feature number', len(feature_words)
@@ -187,9 +188,54 @@ class SimpleClassification:
 
 
 
+from nltk.corpus import reuters
+
+def collection_stats():
+    documents = reuters.fileids()
+    print len(documents)
+    print reuters.categories()
+    train_docs = list(filter(lambda doc: doc.startswith("train"),
+                             documents))
+    test_docs = list(filter(lambda doc: doc.startswith("test"), documents))
+    print reuters.raw(train_docs[0])
+    print reuters.raw(test_docs[0])
+    category_docs = reuters.fileids('acq')
+
+    document_id = category_docs[0]
+    print reuters.words(document_id)
+    print reuters.raw(document_id)
 
 
+from nltk import word_tokenize
+from nltk.stem.porter import PorterStemmer
+import re
+from nltk.corpus import stopwords
+
+cachedStopWords = stopwords.words("english")
 
 
+def tokenize(text):
+    min_length = 3
+    words = map(lambda word: word.lower(), word_tokenize(text))
+    words = [word for word in words
+             if word not in cachedStopWords]
+    tokens = (list(map(lambda token: PorterStemmer().stem(token),
+                       words)))
+    p = re.compile('[a-zA-Z]+')
+    filtered_tokens = list(filter(lambda token: p.match(token) and len(token) >= min_length,
+                tokens))
+    return filtered_tokens
 
+def tf_idf(docs):
+    tfidf = TfidfVectorizer(tokenizer=tokenize, min_df=3,
+                        max_df=0.90, max_features=3000,
+                        use_idf=True, sublinear_tf=True,
+                        norm='l2')
+    tfidf.fit(docs)
+    return tfidf
 
+def feature_values(doc, vectorizer):
+    doc_representation = vectorizer.transform([doc])
+    features = vectorizer.get_feature_names()
+    return [(features[index], doc_representation[0, index])
+                 for index in doc_representation.nonzero()[1]]
