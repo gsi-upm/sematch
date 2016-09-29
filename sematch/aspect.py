@@ -1,5 +1,5 @@
 from sematch.nlp import word_tokenize, lemmatization
-from sematch.semantic.similarity import WordNetSimilarity, Word2VecSimilarity
+from sematch.semantic.similarity import WordNetSimilarity, WordVecSimilarity
 from sematch.utility import FileIO
 from BeautifulSoup import BeautifulSOAP as bs
 from sematch.utility import memoized
@@ -7,7 +7,7 @@ from collections import Counter
 import numpy as np
 import abc
 
-#http://textminingonline.com/dive-into-nltk-part-ix-from-text-classification-to-sentiment-analysis
+
 
 class SimAspect(object):
 

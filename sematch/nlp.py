@@ -4,6 +4,7 @@ from nltk.tokenize import RegexpTokenizer
 from nltk import RegexpParser
 from collections import Counter
 import string
+import re
 
 StopWords = set(stopwords.words('english'))
 
@@ -76,6 +77,9 @@ def word_tokenize(text):
     tokens = [w for w in tokens if w not in StopWords]
     tokens = [w for w in tokens if w not in FunctionWords]
     return tokens
+
+def sent_tokenize(text):
+    return  re.compile(u'[.!?,;:\t\\\\"\\(\\)\\\'\u2019\u2013]|\\s\\-\\s').split(text)
 
 def lemmatization(tokens):
     tokens = [lemma.lemmatize(w) for w in tokens]

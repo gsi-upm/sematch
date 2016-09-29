@@ -185,9 +185,6 @@ class SimpleClassification:
 
 
 
-
-
-
 from nltk.corpus import reuters
 
 def collection_stats():

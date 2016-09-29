@@ -5,11 +5,12 @@ import requests
 class BaseSPARQL:
 
     def __init__(self, url="http://dbpedia.org/sparql"):
-        self.url = url
-        self.sparql = SPARQLWrapper(url)
-        self.sparql.setReturnFormat(JSON)
-        self.tpl = """SELECT DISTINCT %s WHERE {\n\t%s\n}"""
-        self.count_tpl = """SELECT %s WHERE {\n\t%s\n}"""
+        self._url = url
+        self._sparql = SPARQLWrapper(url)
+        self._sparql.setReturnFormat(JSON)
+        self._tpl = """SELECT DISTINCT %s WHERE {\n\t%s\n}"""
+        self._count_tpl = """SELECT %s WHERE {\n\t%s\n}"""
+
 
     def request_execution(self, query):
         params={
@@ -19,178 +20,38 @@ class BaseSPARQL:
                 "format": "application/json",
                 "timeout": 30000,
             }
-        result = requests.get(self.url, params=params)
+        result = requests.get(self._url, params=params)
         return result.text
 
     def execution(self, query):
         #print query
-        self.sparql.setQuery(query)
-        results = self.sparql.query().convert()
+        self._sparql.setQuery(query)
+        results = self._sparql.query().convert()
         #print results
         return results["results"]["bindings"]
 
-    def result(self, x, y, q, tpl):
-        #self.request_execution(self.tpl % (y, q))
-        return [r[x]["value"] for r in self.execution(tpl % (y, q))]
+    #SELECT DISTINCT ?x WHERE is query line containing variables
+    #{?s ?p ?o . ?s2 ?p2 ?o } is triples line of query
 
-    def execution_query(self, query):
-        x, q = query
-        return self.tpl % (self.q_mark(x), q)
+    def execution_template(self, variable, query, triples, template):
+        """retrieve query results from sparql end point"""
+        return [r[variable]["value"] for r in self.execution(template % (query, triples))]
 
-    def execution_result(self, query):
-        x, q = query
-        return self.result(x, self.q_mark(x), q, self.tpl)
+    def create_query(self, variable, triples):
+        """create a sparql query in string based on template, variable and triples"""
+        return self._tpl % (self.q_mark(variable), triples)
 
-    def counter(self, query):
-        x, q = query
-        y = 'count(%s) as %s' % (self.q_mark(x), self.q_mark(x))
-        return self.result(x, y, q, self.count_tpl)[0]
+    def resource_query(self, variable, triples):
+        """execute query to return resources"""
+        return self.execution_template(variable, self.q_mark(variable), triples, self._tpl)
+
+    def count_query(self, variable, triples):
+        """execute query to return counts """
+        query = 'count(%s) as %s' % (self.q_mark(variable), self.q_mark(variable))
+        return self.execution_template(variable, query, triples, self._count_tpl)[0]
 
     def literal(self, label, lang='en'):
         return '"%s"@%s' % (label, lang)
-
-    def new_triple(self, s, p, o, q):
-        return self.triple(self.q_mark(s), self.q_mark(p), self.q_mark(o)) + q
-
-    def new_subject(self, query):
-        p,o,q,v = query
-        s = self.variable('s',v)
-        return s, self.new_triple(s,p,o,q), v
-
-    def new_predicate(self, query):
-        s,o,q,v = query
-        p = self.variable('p',v)
-        return p, self.new_triple(s,p,o,q), v
-
-    def new_object(self, query):
-        s,p,q,v = query
-        o = self.variable('o',v)
-        return o, self.new_triple(s,p,o,q), v
-
-    def new_subject_predicate(self, query):
-        o,q,v = query
-        s = self.variable('s',v)
-        p = self.variable('p',v)
-        return s,p,self.new_triple(s,p,o,q), v
-
-    def new_predicate_object(self, query):
-        s,q,v = query
-        p = self.variable('p',v)
-        o = self.variable('o',v)
-        return p,o,self.new_triple(s,p,o,q), v
-
-    def new_subject_object(self,query):
-        p,q,v = query
-        s = self.variable('s',v)
-        o = self.variable('o',v)
-        return s,o, self.new_triple(s,p,o,q), v
-
-    def subject(self, s, query=''):
-        if query:
-            p,o,q,v = query
-        else:
-            v = {}
-            p = self.variable('p',v)
-            o = self.variable('o',v)
-            q = ''
-        return p, o, self.triple(self.uri(s), self.q_mark(p), self.q_mark(o)) + q, v
-
-    def predicate(self, p, query=''):
-        if query:
-            s,o,q,v = query
-        else:
-            v = {}
-            s = self.variable('s',v)
-            o = self.variable('o',v)
-            q = ''
-        return s, o, self.triple(self.q_mark(s), self.uri(p), self.q_mark(o)) + q, v
-
-    def object(self, o, query=''):
-        if query:
-            s,p,q,v = query
-        else:
-            v = {}
-            s = self.variable('s',v)
-            p = self.variable('p',v)
-            q = ''
-        return s,p, self.triple(self.q_mark(s), self.q_mark(p), self.uri(o)) + q, v
-
-    def subject_predicate(self, s, p, query=''):
-        if query:
-            o,q,v = query
-        else:
-            v = {}
-            o = self.variable('o',v)
-            q = ''
-        return o, self.triple(self.uri(s), self.uri(p), self.q_mark(o)) + q, v
-
-    def predicate_object(self, p, o, query=''):
-        if query:
-            s,q,v = query
-        else:
-            v = {}
-            s = self.variable('s',v)
-            q = ''
-        return s, self.triple(self.q_mark(s), self.uri(p), self.uri(o)) + q, v
-
-    def subject_object(self, s, o, query=''):
-        if query:
-            p,q,v = query
-        else:
-            v = {}
-            p = self.variable('p',v)
-            q = ''
-        return p, self.triple(self.uri(s), self.q_mark(p), self.uri(o)) + q, v
-
-    def label(self, query=''):
-        if query:
-            s,q,v = query
-        else:
-            v = {}
-            s = self.variable('s',v)
-            q = ''
-        o = self.variable('o',v)
-        return s, o, self.triple(self.q_mark(s), self.uri(RDFS.label), self.q_mark(o)) + q, v
-
-    def type(self, type, query=''):
-        if query:
-            s,q,v = query
-        else:
-            v = {}
-            s = self.variable('s', v)
-            q = ''
-        return s, self.triple(self.q_mark(s), self.uri(RDF.type), self.uri(type)) + q, v
-
-    def thing(self, query=''):
-        if query:
-            s,q,v = query
-        else:
-            v = {}
-            s = self.variable('s',v)
-            q = ''
-        return s, self.triple(self.q_mark(s), self.uri(RDF.type), self.uri(OWL.Thing)) + q, v
-
-    def domain(self, property):
-        o,q,v = self.subject_predicate(property, RDFS.domain)
-        query = o,q
-        return self.execution_result(query)
-
-    def range(self, property):
-        o,q,v = self.subject_predicate(property, RDFS.range)
-        query = o,q
-        return self.execution_result(query)
-
-    def subclass(self, c):
-        s,q,v = self.predicate_object(RDFS.subClassOf, c)
-        query = s,q
-        return self.execution_result(query)
-
-    def variable(self, x, v):
-        l = v.setdefault(x,[])
-        n = len(l)
-        y = x + str(n)
-        l.append(y)
-        return y
 
     def triple(self, subject, predicate, object):
         return """ \n\t%s %s %s .""" % (subject, predicate, object)
@@ -214,11 +75,66 @@ class BaseSPARQL:
     def composeX(self, f, g):
         return lambda x: f(g(x))
 
-    def composeXY(self,f, g):
-        return lambda x,y:f(y,g(x))
+    def composeXY(self, f, g):
+        return lambda x, y: f(y, g(x))
 
     def uri(self, x):
         return '<%s>' % x
+
+    def new_triple(self, v, triple):
+        def function(triple_type, x, y):
+            v2, triple2 = triple_type(x, y, v)
+            return v2, triple + triple2
+        return function
+
+    def v_triple(self, s, p, o):
+        """unknown s, p, o"""
+        return self.triple(self.q_mark(s), self.q_mark(p), self.q_mark(o))
+
+    def s_triple(self, s, p, o):
+        """known s, unknown p, o"""
+        return self.triple(self.uri(s), self.q_mark(p), self.q_mark(o))
+
+    def p_triple(self, s, p, o):
+        """known p, unknown s, o"""
+        return self.triple(self.q_mark(s), self.uri(p), self.q_mark(o))
+
+    def o_triple(self, s, p, o):
+        """known o, unknown s, p"""
+        return self.triple(self.q_mark(s), self.q_mark(p), self.uri(o))
+
+    def sp_triple(self, s, p, v):
+        """given known subject and predicate, object is a variable"""
+        return v, self.triple(self.uri(s), self.uri(p), self.q_mark(v))
+
+    def po_triple(self, p, o, v):
+        """given known predicate and object, subject is a variable"""
+        return v, self.triple(self.q_mark(v), self.uri(p), self.uri(o))
+
+    def so_triple(self, s, o, v):
+        """given known subject and object, predicate is a variable"""
+        return v, self.triple(self.uri(s), self.q_mark(v), self.uri(o))
+
+    def label(self, s, lang='en'):
+        """query the lable of a resource"""
+        return self.resource_query(*self.new_triple('o',
+               self.lang_filter('o', lang))(self.sp_triple, s, RDFS.label))
+
+    def thing(self, s):
+        return self.po_triple(RDF.type, OWL.Thing, s)
+
+    def type_of_thing(self, concept, v):
+        """given the type such as movie, return a list of movien entities"""
+        return self.new_triple(*self.thing(v))(self.po_triple, RDF.type, concept)
+
+    def domain(self, property):
+        return self.resource_query(*self.sp_triple(property, RDFS.domain, 'o'))
+
+    def range(self, property):
+        return self.resource_query(*self.sp_triple(property, RDFS.range, 'o'))
+
+    def subclass(self, concept):
+        return self.resource_query(*self.po_triple(RDFS.subClassOf, concept, 's'))
 
 
 class EntityFeatures(BaseSPARQL):
@@ -226,29 +142,75 @@ class EntityFeatures(BaseSPARQL):
     def __init__(self):
         BaseSPARQL.__init__(self)
 
-    def entity_type(self, entity):
-        query = 'type', self.triple(self.uri(entity), self.uri(RDF.type), self.q_mark('type'))
-        return self.execution_result(query)
+    def type(self, entity):
+        return self.resource_query(*self.sp_triple(entity, RDF.type, 'o'))
 
-    def entity_category(self, entity):
-        query = 'cat', self.triple(self.uri(entity), self.uri('http://purl.org/dc/terms/subject'), self.q_mark('cat'))
-        return self.execution_result(query)
+    def category(self, entity):
+        return self.resource_query(*self.sp_triple(entity,
+                                'http://purl.org/dc/terms/subject', 'o'))
 
-    def entity_abstract(self, entity):
-        query = self.triple(self.uri(entity), self.uri('http://dbpedia.org/ontology/abstract'), self.q_mark('abstract'))
-        query = 'abstract', query + self.lang_filter('abstract', 'en')
-        return self.execution_result(query)[0]
+    def abstract(self, entity, lang='en'):
+        return self.resource_query(*self.new_triple('o',
+            self.lang_filter('o', lang))(self.sp_triple, entity,
+                'http://dbpedia.org/ontology/abstract'))
 
-
-    def entity_features(self, entity):
+    def features(self, entity):
         return {
-            'type':self.entity_type(entity),
-            'category':self.entity_category(entity),
-            'abstract':self.entity_abstract(entity)
+            'type':self.type(entity),
+            'category':self.category(entity),
+            'abstract':self.abstract(entity)[0]
         }
+
+class StatSPARQL(BaseSPARQL):
+
+    def __init__(self):
+        BaseSPARQL.__init__(self)
+
+    def entity_N(self, cal=False, default=4298433):
+        """select count(?s) where ?s is thing"""
+        if cal:
+            return int(self.count_query(*self.thing('s')))
+        return default
+
+    def concept_freq(self, concept):
+        """select count(?s) where ?s is concept. ?s is thing"""
+        return self.count_query(*self.type_of_thing(concept, 's'))
+
+    # select count(?p) where ?s1 is c1 . ?s2 is c2 . ?s1 ?p ?s2 or ?s2 ?p ?s1
+    # the types of two subjects are known
+    def concept_coocurence(self, c1, c2):
+        s1, t1 = self.type_of_thing(c1, 's1')
+        s2, t2 = self.type_of_thing(c2, 's2')
+        t3 = self.v_triple(s1, 'p', s2)
+        t4 = self.v_triple(s2, 'p', s1)
+        count_1 = self.count_query('p', t1 + t2 + t3)
+        count_2 = self.count_query('p', t1 + t2 + t4)
+        return int(count_1) + int(count_2)
+
+    # select count(?p) where ?s is concept ?s ?p ?o or ?o ?p ?s
+    def concept_relation(self, concept):
+        s1, t1 = self.type_of_thing(concept, 's1')
+        s2, t2 = self.thing('s2')
+        t3 = self.v_triple(s1, 'p', s2)
+        t4 = self.v_triple(s2, 'p', s1)
+        count_1 = self.count_query('p', t1 + t2 + t3)
+        count_2 = self.count_query('p', t1 + t2 + t4)
+        return int(count_1) + int(count_2)
+
+    # select count(?p) where s ?p ?o or ?o ?p s
+    # subject is known
+    def entity_relation(self, entity):
+        s1, t1 = self.thing('s1')
+        t2 = self.s_triple(entity, 'p', s1)
+        t3 = self.o_triple(s1, 'p', entity)
+        count_1 = self.count_query('p', t1 + t2)
+        count_2 = self.count_query('p', t1 + t3)
+        return int(count_1) + int(count_2)
 
 
 class NameSPARQL(BaseSPARQL):
+
+    """query resource through names"""
 
     def __init__(self):
         BaseSPARQL.__init__(self)
@@ -260,51 +222,19 @@ class NameSPARQL(BaseSPARQL):
         self.redirect_pages = 'http://dbpedia.org/ontology/wikiPageRedirects'
         self.disambiguation_pages = 'http://dbpedia.org/ontology/wikiPageDisambiguates'
 
-    # def literal_mapping_property(self, segment, property):
-    #     t0 = self.triple('?s', self.uri(RDF.type), self.uri(property))
-    #     t1 = t0 + self.literal_mapping_label(segment)
-    #     t2 = t0 + self.literal_mapping_title(segment)
-    #     q = self.union([t1, t2])
-    #     query = 's', q
-    #     return self.execution_result(query)
-    #
-    # def literal_mapping_general_property(self, segment):
-    #     return self.literal_mapping_property(segment, RDF.Property)
-    #
-    # def literal_mapping_datatype_property(self, segment):
-    #     return self.literal_mapping_property(segment, OWL.DatatypeProperty)
-
-    # def literal_mapping_object_property(self, segment):
-    #     return self.literal_mapping_property(segment, OWL.ObjectProperty)
-
-    def literal_mapping_class(self, segment):
-        t0 = self.triple('?s', self.uri(RDF.type), self.uri(OWL.Class))
-        t1 = t0 + self.literal_mapping_label(segment)
-        t2 = t0 + self.literal_mapping_title(segment)
-        q = self.union([t1, t2])
-        query = 's', q
-        return self.execution_result(query)
-
-    def literal_mapping_lower(self, segment):
-        t = self.triple('?s', self.uri(RDFS.label), '?q')
-        return t + self.lcase_filter('?q', segment.lower())
-
     def wiki2dbpedia(self, wiki_uri):
         if wiki_uri.__contains__('https://en.wikipedia.org/wiki/'):
             wiki_uri = wiki_uri.replace('https:', 'http:')
             q = self.triple('?s', self.uri('http://xmlns.com/foaf/0.1/isPrimaryTopicOf'), self.uri(wiki_uri))
-            query = 's', q
-            return self.execution_result(query)
+            return self.resource_query('s', q)
         return []
 
-    def redirect_mapping(self, segment):
-        t = self.triple('?x', self.uri(RDFS.label), self.literal(segment))
+    def redirect(self, name):
+        t = self.triple('?x', self.uri(RDFS.label), self.literal(name))
         return t + self.triple('?x', self.uri(self.redirect_pages), '?s')
 
     def check_redirect(self, dbr):
-        q = self.triple(self.uri(dbr), self.uri(self.redirect_pages), '?s')
-        query = 's', q
-        return self.execution_result(query)
+        return self.resource_query(*self.sp_triple(dbr, self.redirect_pages, 's'))
 
     # check dbpedia resource, no redirect page,
     def resource_filter(self, data):
@@ -320,16 +250,20 @@ class NameSPARQL(BaseSPARQL):
                 new_result.append(res)
         return list(set(new_result))
 
-    def entity_mapping(self, segment):
-        # t0 = self.triple('?s', self.uri(RDF.type), self.uri(OWL.Thing))
-        t1 = self.triple('?s', self.uri(RDFS.label), self.literal(segment))
-        t2 = self.triple('?s', self.uri(RDFS.label), self.literal(segment.title()))
-        t3 = self.redirect_mapping(segment)
-        t4 = self.triple('?s', self.uri(self.name), self.literal(segment))
-        t5 = self.triple('?s', self.uri(self.commonName), self.literal(segment))
-        t6 = self.triple('?s', self.uri(self.longName), self.literal(segment))
-        t7 = self.triple('?s', self.uri(self.demonym), self.literal(segment))
-        t8 = self.triple('?s', self.uri(self.acronym), self.literal(segment))
-        q = self.union([t1, t2, t3, t4, t5, t6, t7, t8])
-        query = 's', q
-        return self.resource_filter(self.execution_result(query))
+    def name2entities(self, name):
+        s, t0 = self.thing('s')
+        t1 = self.triple('?s', self.uri(RDFS.label), self.literal(name))
+        t2 = self.triple('?s', self.uri(RDFS.label), self.literal(name.title()))
+        t3 = self.redirect(name)
+        t4 = self.triple('?s', self.uri(self.demonym), self.literal(name))
+        t5 = self.triple('?s', self.uri(self.acronym), self.literal(name))
+        t = self.union([t1, t2, t3, t4, t5])
+        return self.resource_filter(self.resource_query(s, t + t0))
+
+    def name2entities_expand(self, name):
+        s, t0 = self.thing('s')
+        t1 = self.triple('?s', self.uri(self.name), self.literal(name))
+        t2 = self.triple('?s', self.uri(self.commonName), self.literal(name))
+        t3 = self.triple('?s', self.uri(self.longName), self.literal(name))
+        t = self.union([t1, t2, t3])
+        return self.resource_filter(self.resource_query(s, t+t0))

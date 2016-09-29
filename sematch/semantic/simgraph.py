@@ -1,12 +1,3 @@
-# Implementation of Several Ranking Approaches
-# Graph-Based Ranking Using PageRank, HITS
-# Supervised Learning to Rank
-# Unsupervised Rank Aggregation
-
-
-from collections import Counter
-from itertools import combinations
-import networkx as nx
 
 from itertools import combinations
 import networkx as nx

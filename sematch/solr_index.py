@@ -1,4 +1,61 @@
 
+class EntityIndex:
+
+    def __init__(self, solr_uri='http://localhost:8983/solr/%s'):
+        from pysolr import Solr
+        self._names = Solr(solr_uri % 'names')
+        self._types = Solr(solr_uri % 'types')
+        self._redirects = Solr(solr_uri % 'redirects')
+        self._entities = Solr(solr_uri % 'entities')
+        self._categories = Solr(solr_uri % 'categories')
+
+    def redirect(self, dbr):
+        query = 'dbr:"%s"'
+        data = self._redirects.search(query % dbr)
+        data = [d['redirect'][0] for d in data]
+        if data:
+            return data[0]
+        return None
+
+    def entity_category(self, dbr):
+        query = 'dbr:"%s"'
+        data = self._categories.search(query % dbr, **{'rows':500})
+        data = [d['category'][0] for d in data]
+        if data:
+            return data
+        return None
+
+    def entity_type(self, dbr):
+        query = 'dbr:"%s"'
+        data = self._types.search(query % dbr)
+        data = [d['type'][0] for d in data]
+        if data:
+            return data[0]
+        return None
+
+    def has_entity(self, dbr):
+        query = 'dbr:"%s"'
+        data = self._entities.search(query % dbr)
+        data = [d['dbr'][0] for d in data]
+        if data:
+            return True
+        return False
+
+    def redirect_filter(self, link):
+        red = self.redirect(link)
+        return red if red else link
+
+    def disambiguation_page_filter(self, link):
+        return True if link.__contains__('(disambiguation)') else False
+
+    def entity_candidates(self, text):
+        query = 'name:"%s"'
+        data = self._names.search(query % text, **{'rows':500})
+        data = [d['dbr'][0] for d in data]
+        data = map(self.redirect_filter, data)
+        data = list(set(data))
+        data = [d for d in data if not self.disambiguation_page_filter(d)]
+        return data
 
 
 #################OFFLINE PROCESS###############################

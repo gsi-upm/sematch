@@ -1,7 +1,10 @@
 from sematch.utility import FileIO
+from collections import Counter
+import itertools, nltk, string, re
+
 
 def extract_candidate_chunks(text, grammar=r'KT: {(<JJ>* <NN.*>+ <IN>)? <JJ>* <NN.*>+}'):
-    import itertools, nltk, string
+
 
     # exclude candidates that are stop words or entirely punctuation
     punct = set(string.punctuation)
@@ -162,22 +165,86 @@ class RAKE:
 
     """
     Implementation of RAKE -- Rapid Automatic Keywords Extraction From Individual Documents
+    https://github.com/aneesha/RAKE/blob/master/rake.py
+
+    To make a class for rake python implementation for easy incorporation in other modules.
     """
 
-    def __init__(self, stopwords_file):
-        self.stopwords = self.load_stopwords(stopwords_file)
+    def __init__(self, stopwords_file, word_tokenize=None, sent_tokenize=None):
+        self._stopwords_pattern = self.build_patterns(self.load_stopwords(stopwords_file))
+        self._sent_tokenize = sent_tokenize if sent_tokenize else nltk.sent_tokenize
+        self._word_tokenize = word_tokenize if word_tokenize else nltk.word_tokenize
 
     def load_stopwords(self, filename):
         data = FileIO.read_list_file(FileIO.filename(filename))
+        data = [d.split() for d in data[1:]] # skip first line, in case more than one word per line
+        data = list(itertools.chain.from_iterable(data))
+        return data
+
+    def build_patterns(self, stopwords):
+        pattern = lambda x: r'\b' + x + r'(?![\w-])'  # added look ahead for hyphen
+        stopword_patterns = map(pattern, stopwords)
+        return re.compile('|'.join(stopword_patterns), re.IGNORECASE)
+
+    def candidate_phrases(self, text):
+        candidates = []
+        for s in self._sent_tokenize(text):
+            phrases = re.sub(self._stopwords_pattern, '|', s.strip()).split('|')
+            for p in phrases:
+                p = p.strip().lower()
+                candidates.append(p) if p else None
+        return candidates
+
+    def ranking_phrases(self, phrases):
+        word_frequency = {}
+        word_degree = {}
+        for p in phrases:
+            words = self._word_tokenize(p)
+            degree = len(words) - 1
+            for w in words:
+                word_frequency.setdefault(w, 0)
+                word_frequency[w] += 1
+                word_degree.setdefault(w, 0)
+                word_degree[w] += degree
+
+        for word in word_frequency:
+            word_degree[word] += word_frequency[word]
+
+        word_scorer = lambda x: word_degree[x] / 1.0 * word_frequency[x]
+        word_score = {word:word_scorer(word) for word in word_frequency}
+
+        phrase_scorer = lambda x: sum([word_score[word] for word in self._word_tokenize(x)])
+        phrase_score = {p:phrase_scorer(p) for p in phrases}
+
+        return phrase_score
+
+    def extract(self, text, ratio=3):
+        phrases = self.ranking_phrases(self.candidate_phrases(text))
+        phrases = Counter(phrases).most_common(len(phrases.keys()) / ratio)
+        phrases, _ = zip(*phrases)
+        return phrases
 
 
-from nltk.corpus import reuters
 
-documents = reuters.fileids()
-train_docs = list(filter(lambda doc: doc.startswith("train"),
-                             documents))
-text = reuters.raw(train_docs[0])
 
-#print extract_candidate_chunks(text)
-#print set(extract_candidate_words(text))
-print keyphrases_pagerank_ranking(text)
+
+from sematch.sparql import EntityFeatures
+from sematch.nlp import word_tokenize, sent_tokenize
+
+ef = EntityFeatures()
+apple = ef.features('http://dbpedia.org/resource/Steve_Jobs')
+r = RAKE('db/stopwords/SmartStoplist.txt', word_tokenize, sent_tokenize)
+print apple['abstract']
+print r.extract(apple['abstract'])
+
+
+# from nltk.corpus import reuters
+#
+# documents = reuters.fileids()
+# train_docs = list(filter(lambda doc: doc.startswith("train"),
+#                              documents))
+# text = reuters.raw(train_docs[0])
+#
+# #print extract_candidate_chunks(text)
+# #print set(extract_candidate_words(text))
+# print keyphrases_pagerank_ranking(text)

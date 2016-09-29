@@ -2,7 +2,6 @@
 
 ## Introduction
 
-The name of Sematch is composed based on Spanish "se" and English "match". The logo of Sematch is based on the Chinese [Yin and Yang](http://en.wikipedia.org/wiki/Yin_and_yang) which is written in [I Ching](http://en.wikipedia.org/wiki/I_Ching). Somehow, it correlates to 0 and 1 in computer science. It is also the abbreviation of semantic matching. The sematch tool kit aims to provide you a framework for matching your required information from public Knowledge Graphs semantically. 
 
 The first demo system overview is shown as below.
 ![overview](https://dl.dropboxusercontent.com/u/74428083/sematch/overview.png)
@@ -40,17 +39,29 @@ This project is still under development.
 
 The project is mainly maintained by Ganggao Zhu.
 
-You can contact me via gzhu@dit.upm.es
+You can contact me via gzhu [at] dit.upm.es
 
 ##Publications
 
-[Sematch: Semantic Entity Search from Knowledge Graph](http://km.aifb.kit.edu/ws/sumpre2015/paper4.pdf)
-Zhu, G. & Iglesias, C. A (2015). In SumPre 2015 ESWC
+
+Ganggao Zhu and Carlos A. Iglesias Computing Semantic Similarity of Concepts in Knowledge Graphs, IEEE Transactions on Data and Knowledge Engineering.
+
+Ganggao Zhu and Carlos A. Iglesias [Sematch: Semantic Entity Search from Knowledge Graph](http://km.aifb.kit.edu/ws/sumpre2015/paper4.pdf)
+In SumPre 2015 ESWC
+
+##About Sematch
+
+The name of Sematch is composed based on Spanish "se" and English "match". The logo of Sematch is based on
+Chinese [Yin and Yang](http://en.wikipedia.org/wiki/Yin_and_yang) which is written
+in [I Ching](http://en.wikipedia.org/wiki/I_Ching). Somehow, it correlates to 0 and 1 in computer science.
+It is also the abbreviation of semantic matching because semantic similarity helps to match concepts, words,
+entities semantically, instead of exact matching. Sematch aims to provide a framework to develop and evaluate
+semantic similarity measures and their application for both textual corpus and structural knowledge graphs.
 
 ## License
 
 ```
-Copyright 2015 UPM-GSI: Group of Intelligent Systems - Universidad Politécnica de Madrid (UPM)
+Copyright 2016 UPM-GSI: Group of Intelligent Systems - Universidad Politécnica de Madrid (UPM)
 
 Licensed under the Apache License, Version 2.0 (the "License"); 
 You may not use this file except in compliance with the License. 
