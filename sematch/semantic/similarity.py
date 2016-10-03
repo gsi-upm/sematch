@@ -13,6 +13,11 @@ import math
 
 class GraphIC:
 
+    """
+    This class is used to compute graph-based IC in knowledge graph, which is
+    basically the proportion of instances tagged with a specific concept
+    """
+
     def __init__(self, ic_file):
         self._ic_file = ic_file
         self._graph_ic = self.graph_ic_reader(ic_file)
@@ -20,6 +25,11 @@ class GraphIC:
         self._N = self._graph_stats.entity_N()
 
     def concept_ic(self, concept):
+        """
+        Compute the ic value of a concept using sparql query
+        :param concept: a id of concept, here is the uri of concept
+        :return: the ic value of the concept
+        """
         if concept in self._graph_ic:
             return self._graph_ic[concept]
         else:
@@ -34,10 +44,21 @@ class GraphIC:
             return ic
 
     def graph_ic_reader(self, filename):
+        """
+        Load the saved IC values
+        :param filename: the file containing IC values of concepts
+        :return: a dictionary concept:IC
+        """
         data = FileIO.read_json_file(filename)
         return {d['concept']:float(d['ic']) for d in data}
 
     def graph_ic_writer(self, filename, data):
+        """
+        Save the ic values for a concept for faster access.
+        :param filename:
+        :param data:
+        :return:
+        """
         FileIO.append_json_file(filename, data)
 
 class ConceptSimilarity:
@@ -52,19 +73,40 @@ class ConceptSimilarity:
         self._graph_ic = GraphIC(ic_file)
 
     def name2concept(self, name):
+        """
+        This function maps a string name to a node in taxonomy based on node's labels
+        :param name: string name of a concept
+        :return: the node id if contains the named node otherwise None.
+        """
         return self._taxonomy._label2id[name] if self._taxonomy._label2id.get(name) else None
 
     def concept_ic(self, concept):
-        """the ic of virtual root is 0"""
+        """
+        Get the graph-based IC of a concept. the ic of virtual root is 0
+        :param concept: the node id of concept
+        :return: the ic value of concept
+        """
         if concept == self._taxonomy._root:
             return 0.0
         else:
             return self._graph_ic.concept_ic(self._taxonomy._nodes[concept])
 
     def path(self, c1, c2):
+        """
+        Rada's shortest path based similarity metric
+        :param c1:
+        :param c2:
+        :return: similarity score in [0,1]
+        """
         return 1.0/ self._taxonomy.shortest_path_length(c1, c2)
 
     def wup(self, c1, c2):
+        """
+        Wu and Palm's similarity metric
+        :param c1:
+        :param c2:
+        :return:
+        """
         lcs = self._taxonomy.least_common_subsumer(c1, c2)
         depth_c1 = self._taxonomy.depth(c1)
         depth_c2 = self._taxonomy.depth(c2)
@@ -114,17 +156,6 @@ class ConceptSimilarity:
         weight = k ** self.concept_ic(lcs)
         return 1.0 / (1 + path * weight)
 
-# from sematch.knowledge.taxonomy import Taxonomy, DBpediaDataTransform
-# concet_sim = ConceptSimilarity(Taxonomy(DBpediaDataTransform()), 'models/dbpedia_type_ic.txt')
-# c1 = concet_sim.name2concept('species')
-# c2 = concet_sim.name2concept('organ')
-# print concet_sim.path(c1, c1)
-# print concet_sim.path(c1, c2)
-# print concet_sim.wup(c1,c2)
-# print concet_sim.li(c1, c2)
-# print concet_sim.res(c1,c2)
-# print concet_sim.jcn(c1, c2)
-# print concet_sim.wpath(c1,c2)
 
 
 class WordNetSimilarity:
@@ -134,17 +165,6 @@ class WordNetSimilarity:
     # print wns.word_similarity('rooster', 'voyage', 'li')
     # print wns.word_similarity('rooster', 'voyage', 'jcn')
 
-    # beef = wn.synset('beef.n.02')
-    # lamb = wn.synset('lamb.n.05')
-    # octopus = wn.synset('octopus.n.01')
-    # shellfish = wn.synset('shellfish.n.01')
-    # meat = wn.synset('meat.n.01')
-    # seafood = wn.synset('seafood.n.01')
-    # food = wn.synset('food.n.02')
-    # service = wn.synset('service.n.02')
-    # atmosphere = wn.synset('atmosphere.n.01')
-    # coffee = wn.synset('coffee.n.01')
-
     # print beef, lamb, octopus, shellfish, meat, seafood, food
 
     # wns = WordNetSimilarity()
@@ -152,10 +172,10 @@ class WordNetSimilarity:
     # wns.similarity_all_methods(beef, lamb)
     # wns.similarity_all_methods(food, coffee)
 
-    def __init__(self):
-        self.ic_corpus = wordnet_ic.ic('ic-brown.dat')
-        self.ic_semcor = wordnet_ic.ic('ic-semcor.dat')
-        self.wn_max_depth = 19
+    def __init__(self, ic_corpus='brown'):
+        self._ic_corpus = wordnet_ic.ic('ic-brown.dat') if ic_corpus == 'brown' else wordnet_ic.ic('ic-semcor.dat')
+        self._wn_max_depth = 19
+        self._default_metrics = ['path','lch','wup','li','res','lin','jcn','wpath']
 
     def method(self, name):
         def function(syn1, syn2):
@@ -200,6 +220,13 @@ class WordNetSimilarity:
 
     @memoized
     def similarity(self, c1, c2, name='path'):
+        """
+        Compute semantic similarity between two concepts
+        :param c1:
+        :param c2:
+        :param name:
+        :return:
+        """
         return self.method(name)(c1, c2)
 
     @memoized
@@ -215,15 +242,8 @@ class WordNetSimilarity:
         sims = Counter({(c1, c2):self.similarity(c1, c2, name) for c1 in s1 for c2 in s2})
         return sims.most_common(1)[0][0]
 
-    def word_similarity_all_methods(self, c1, c2):
-        print 'path', self.similarity(c1, c2, name='path')
-        print 'lch', self.similarity(c1, c2, name='lch')
-        print 'wup', self.similarity(c1, c2, name='wup')
-        print 'li', self.similarity(c1, c2, name='li')
-        print 'res', self.similarity(c1, c2, name='res')
-        print 'lin', self.similarity(c1, c2, name='lin')
-        print 'jcn', self.similarity(c1, c2, name='jcn')
-        print 'wpath', self.similarity(c1, c2, name='wpath')
+    def word_similarity_all_metrics(self, c1, c2):
+        return {m:self.similarity(c1, c2, name=m) for m in self._default_metrics}
 
     def word_similarity_wpath(self, w1, w2, k):
         s1 = self.word2synset(w1)
@@ -234,7 +254,7 @@ class WordNetSimilarity:
         return c1.lowest_common_hypernyms(c2)[0]
 
     def synset_ic(self, c):
-        return information_content(c, self.ic_corpus)
+        return information_content(c, self._ic_corpus)
 
     def dpath(self, c1, c2, alpha=1.0, beta=1.0):
         lcs = self.least_common_subsumer(c1, c2)
@@ -242,11 +262,11 @@ class WordNetSimilarity:
         path = 1.0 / (1 + path)
         path = path**alpha
         depth = lcs.max_depth() + 1
-        depth = depth*1.0/(1 + self.wn_max_depth)
+        depth = depth*1.0/(1 + self._wn_max_depth)
         depth = depth**beta
         return math.log(1+path*depth,2)
 
-    def wpath(self, c1, c2, k=0.9):
+    def wpath(self, c1, c2, k=0.8):
         lcs = self.least_common_subsumer(c1,c2)
         path = c1.shortest_path_distance(c2)
         weight = k ** self.synset_ic(lcs)
@@ -275,7 +295,7 @@ class WordNetSimilarity:
         return c1.lch_similarity(c2)
 
     def res(self, c1, c2):
-        return c1.res_similarity(c2, self.ic_corpus)
+        return c1.res_similarity(c2, self._ic_corpus)
 
     def jcn(self, c1, c2):
         lcs = self.least_common_subsumer(c1, c2)
@@ -287,7 +307,7 @@ class WordNetSimilarity:
         return 1.0/(1 + diff)
 
     def lin(self, c1, c2):
-        return c1.lin_similarity(c2, self.ic_corpus)
+        return c1.lin_similarity(c2, self._ic_corpus)
 
     def gloss_overlap(self, c1, c2):
         gloss1 = lemmatization(word_tokenize(c1.definition()))
@@ -320,7 +340,7 @@ class YagoTypeSimilarity(WordNetSimilarity):
 
     """Extend the WordNet synset to linked data through YAGO mappings"""
 
-    def __init__(self, graph_ic='models/yago_type_ic.txt', mappings="db/type-linkings.txt"):
+    def __init__(self, graph_ic='models/yago_type_ic.txt', mappings="models/type-linkings.txt"):
         WordNetSimilarity.__init__(self)
         self._graph_ic = GraphIC(graph_ic)
         self._mappings = FileIO.read_json_file(mappings)
@@ -353,6 +373,11 @@ class YagoTypeSimilarity(WordNetSimilarity):
 
     def word2yago(self, word):
         return [self.synset2yago(s) for s in self.word2synset(word) if self.synset2yago(s)]
+
+    def word_similarity_wpath_graph(self, w1, w2, k):
+        s1 = self.word2synset(w1)
+        s2 = self.word2synset(w2)
+        return max([self.wpath_graph(c1, c2, k) for c1 in s1 for c2 in s2] + [0])
 
     def res_graph(self, c1, c2):
         lcs = self.least_common_subsumer(c1,c2)

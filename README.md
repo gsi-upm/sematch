@@ -12,8 +12,7 @@ The goal of the sematch is to provide several core tools for applications based 
 
 - semantic similarity of concepts in KG
 - entity linking and disambiguation with KG
-- semantic parsing
-- question answering based on knowledge graph
+- question answering over knowledge graph
 
 
 In the current prototype of sematch, you can try the following examples in your project to retrieve a list of entities using combination of keywords e.g. a entity type and a related entity.

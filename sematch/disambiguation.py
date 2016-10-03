@@ -102,3 +102,28 @@ class WSD(ClassifierI):
     #     return Counter(result).most_common(1)[0][0]
 
 
+class Combiner:
+
+    def sim_normalization(self, simList):
+        pass
+
+    def sim2rank(self, simList):
+        pass
+
+    def comb_sum(self, simList):
+        pass
+
+    def comb_anz(self, simList):
+        pass
+
+    def comb_mnz(self, simList):
+        pass
+
+    def borda(self, rankList):
+        pass
+
+    def condorcet(self, rankList):
+        pass
+
+    def reciprocal(self, rankList):
+        pass
