@@ -2,13 +2,16 @@ from nltk.stem import WordNetLemmatizer, PorterStemmer, LancasterStemmer
 from nltk.corpus import stopwords
 from nltk.tokenize import RegexpTokenizer
 from nltk import RegexpParser
+import nltk
+
+from sematch.utility import FileIO
 from collections import Counter
+import itertools
 import string
 import re
 
-StopWords = set(stopwords.words('english'))
-
-FunctionWords = set(['about', 'across', 'against', 'along', 'around', 'at',
+StopWords = stopwords.words('english')
+FunctionWords = ['about', 'across', 'against', 'along', 'around', 'at',
                  'behind', 'beside', 'besides', 'by', 'despite', 'down',
                  'during', 'for', 'from', 'in', 'inside', 'into', 'near', 'of',
                  'off', 'on', 'onto', 'over', 'through', 'to', 'toward',
@@ -26,15 +29,17 @@ FunctionWords = set(['about', 'across', 'against', 'along', 'around', 'at',
                  'should', 'must', 'here', 'there', 'now', 'then', 'always',
                  'never', 'sometimes', 'usually', 'often', 'therefore',
                  'however', 'besides', 'moreover', 'though', 'otherwise',
-                 'else', 'instead', 'anyway', 'incidentally', 'meanwhile'])
+                 'else', 'instead', 'anyway', 'incidentally', 'meanwhile']
+SpecialWords = ['.', ',', '?', '"', '``', "''", "'", '--', '-', ':', ';', '(',
+                    ')', '$', '000', '1', '2', '10,' 'I', 'i', 'a', ]
+NOUNS = ['nn', 'nns', 'nn$', 'nn-tl', 'nn+bez', 'nn+hvz', 'nns$', 'np',
+            'np$', 'np+bez', 'nps', 'nps$', 'nr', 'np-tl', 'nrs', 'nr$']
 
-SpecialWords = set(['.', ',', '?', '"', '``', "''", "'", '--', '-', ':', ';', '(',
-             ')', '$', '000', '1', '2', '10,' 'I', 'i', 'a',])
-
+StopWords = set(StopWords)
+FunctionWords = set(FunctionWords)
 punctuations = set(string.punctuation)
-
-noun_pos = set(['nn','nns','nn$','nn-tl','nn+bez','nn+hvz','nns$', 'np', \
-                           'np$', 'np+bez', 'nps', 'nps$', 'nr', 'np-tl', 'nrs', 'nr$'])
+SpecialWords = set(SpecialWords)
+NOUNS = set(NOUNS)
 
 #r'(?u)\b\w\w+\b'
 #r'[a-z]+'
@@ -48,10 +53,8 @@ noun_pos = set(['nn','nns','nn$','nn-tl','nn+bez','nn+hvz','nns$', 'np', \
 #'''
 
 tokenization_pattern = r'\w+'
-noun_chunk_pattern = r"T: {<(JJ|NN|NNS|NNP|NNPS)>+<(NN|NNS|NNP|NNPS|CD)>|<(NN|NNS|NNP|NNPS)>}"
 
 reg_tokenizer = RegexpTokenizer(tokenization_pattern)
-chunk_parser = RegexpParser(noun_chunk_pattern)
 
 lemma = WordNetLemmatizer()
 porter = PorterStemmer()
@@ -70,7 +73,7 @@ def clean_context(text):
     return ' '.join(tokens)
 
 def is_noun(tag):
-    return tag.lower() in noun_pos
+    return tag.lower() in NOUNS
 
 def word_tokenize(text):
     tokens = reg_tokenize(text.lower())
@@ -86,21 +89,112 @@ def lemmatization(tokens):
     #tokens = [porter.stem(w) for w in tokens]
     return tokens
 
-def feature_words_of_category(corpus):
-    '''
-    sentence and category pairs
-    '''
-    cat_word = {}
-    for words, cat in corpus:
-        cat_word.setdefault(cat, []).extend(lemmatization(word_tokenize(words)))
-    return {cat:Counter(cat_word[cat]) for cat in cat_word}
+#chunk_grammar=r'KT: {(<JJ>* <NN.*>+ <IN>)? <JJ>* <NN.*>+}'
+#chunk_grammar=r'T: {<(JJ|NN|NNS|NNP|NNPS)>+<(NN|NNS|NNP|NNPS|CD)>|<(NN|NNS|NNP|NNPS)>}'
+chunk_grammar = """CHUNK: {<NNP><IN><DT><NNS>}
+    {<NNP><NNP><NNP><NNP>}
+    {<NNP|NNPS><NNP|NNPS><NNP|NNPS>}
+    {<NNP|NNPS><NNP|NNPS>}
+    {<NN|NNS><NNP|NNPS>}
+    {<NNP|NNPS><NN|NNS>}
+    {<NNP|NNPS>+}
+    {<NN|NNS><NN|NNS>+}"""
 
-def noun_phrases(tags):
-    phrases = []
-    for subtree in chunk_parser.parse(tags).subtrees():
-        if subtree.label() == 'T':
-            labels = subtree.leaves()
-            labels = [x for x, y in labels]
-            phrases.append(' '.join(labels))
-    return phrases
+chunker = RegexpParser(chunk_grammar)
 
+def extract_chunks_sent(sent, word_tokenize=nltk.word_tokenize, pos_tag=nltk.pos_tag):
+    tags = pos_tag(word_tokenize(sent))
+    chunks = nltk.chunk.tree2conlltags(chunker.parse(tags))
+    # join constituent chunk words into a single chunked phrase
+    return [' '.join(word for word, pos, chunk in group)
+              for key, group in itertools.groupby(chunks, lambda (word, pos, chunk): chunk != 'O') if key]
+
+def extract_chunks_doc(text, sent_tokenize=nltk.sent_tokenize,
+                       word_tokenize=nltk.word_tokenize,
+                       pos_tag=nltk.pos_tag):
+    sent_chunk = lambda x: extract_chunks_sent(x, word_tokenize, pos_tag)
+    return list(itertools.chain.from_iterable(map(sent_chunk, sent_tokenize(text))))
+
+def tokenize(text):
+    min_length = 3
+    words = map(lambda word: word.lower(), word_tokenize(text))
+    words = [word for word in words if word not in StopWords]
+    tokens = (list(map(lambda token: porter.stem(token), words)))
+    p = re.compile('[a-zA-Z]+')
+    return list(filter(lambda token: p.match(token) and len(token) >= min_length, tokens))
+
+def tf_idf(docs):
+    from sklearn.feature_extraction.text import TfidfVectorizer
+    return TfidfVectorizer(tokenizer=tokenize, min_df=3,
+                        max_df=0.90, max_features=3000,
+                        use_idf=True, sublinear_tf=True,
+                        norm='l2').fit(docs)
+
+def feature_values(doc, vectorizer):
+    doc_representation = vectorizer.transform([doc])
+    features = vectorizer.get_feature_names()
+    return [(features[index], doc_representation[0, index])
+                 for index in doc_representation.nonzero()[1]]
+
+class RAKE:
+
+    """
+    Implementation of RAKE -- Rapid Automatic Keywords Extraction From Individual Documents
+    https://github.com/aneesha/RAKE/blob/master/rake.py
+
+    To make a class for rake python implementation for easy incorporation in other modules.
+    """
+
+    def __init__(self, stopwords_file, word_tokenize=None, sent_tokenize=None):
+        self._stopwords_pattern = self.build_patterns(self.load_stopwords(stopwords_file))
+        self._sent_tokenize = sent_tokenize if sent_tokenize else nltk.sent_tokenize
+        self._word_tokenize = word_tokenize if word_tokenize else nltk.word_tokenize
+
+    def load_stopwords(self, filename):
+        data = FileIO.read_list_file(FileIO.filename(filename))
+        data = [d.split() for d in data[1:]] # skip first line, in case more than one word per line
+        data = list(itertools.chain.from_iterable(data))
+        return data
+
+    def build_patterns(self, stopwords):
+        pattern = lambda x: r'\b' + x + r'(?![\w-])'  # added look ahead for hyphen
+        stopword_patterns = map(pattern, stopwords)
+        return re.compile('|'.join(stopword_patterns), re.IGNORECASE)
+
+    def candidate_phrases(self, text):
+        candidates = []
+        for s in self._sent_tokenize(text):
+            phrases = re.sub(self._stopwords_pattern, '|', s.strip()).split('|')
+            for p in phrases:
+                p = p.strip().lower()
+                candidates.append(p) if p else None
+        return candidates
+
+    def ranking_phrases(self, phrases):
+        word_frequency = {}
+        word_degree = {}
+        for p in phrases:
+            words = self._word_tokenize(p)
+            degree = len(words) - 1
+            for w in words:
+                word_frequency.setdefault(w, 0)
+                word_frequency[w] += 1
+                word_degree.setdefault(w, 0)
+                word_degree[w] += degree
+
+        for word in word_frequency:
+            word_degree[word] += word_frequency[word]
+
+        word_scorer = lambda x: word_degree[x] / 1.0 * word_frequency[x]
+        word_score = {word:word_scorer(word) for word in word_frequency}
+
+        phrase_scorer = lambda x: sum([word_score[word] for word in self._word_tokenize(x)])
+        phrase_score = {p:phrase_scorer(p) for p in phrases}
+
+        return phrase_score
+
+    def extract(self, text, ratio=3):
+        phrases = self.ranking_phrases(self.candidate_phrases(text))
+        phrases = Counter(phrases).most_common(len(phrases.keys()) / ratio)
+        phrases, _ = zip(*phrases)
+        return phrases

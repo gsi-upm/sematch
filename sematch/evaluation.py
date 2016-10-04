@@ -12,6 +12,30 @@ from scipy.stats import t, norm
 from math import atanh, pow
 from numpy import tanh
 
+from sklearn.metrics import classification_report
+from sklearn.metrics import precision_recall_fscore_support
+from sklearn.metrics import accuracy_score
+from nltk import ConfusionMatrix
+
+def generate_report(gold, predict, labels, detailed=True):
+    """
+    Generate the classification report
+    :param gold: the gold label
+    :param predict: the predict label
+    :param labels: label sets
+    :return: none
+    """
+    if detailed:
+        print 'macro averge: ', precision_recall_fscore_support(gold, predict, average='macro')
+        print 'micro average: ', precision_recall_fscore_support(gold, predict, average='micro')
+        print 'weighted average: ', precision_recall_fscore_support(gold, predict, average='weighted')
+    else:
+        import warnings
+        warnings.filterwarnings("ignore")
+    print 'accuracy: ', accuracy_score(gold, predict)
+    print classification_report(gold, predict, target_names=labels)
+    print ConfusionMatrix(gold, predict)
+
 
 class SteigerTest:
 
@@ -243,7 +267,7 @@ class WordSimDataset:
 
 class WordSimEvaluation:
 
-    """This class used used for evaluating similarity metrics in word similarity datasets"""
+    """This class is used for evaluating similarity metrics in word similarity datasets"""
 
     def __init__(self, metric='Spearman'):
         self._dataset = WordSimDataset()
@@ -318,4 +342,65 @@ class WordSimEvaluation:
         return cor_z, s
 
 
+class TextSimEvaluation:
 
+    """
+    This class is used for evaluating text similarity metrics
+    """
+
+    def __init__(self, sim_metric):
+        self._sim_metric = sim_metric
+
+    def load_dataset(self, dataset_file):
+        """
+        Generate sentence pairs.
+        :param dataset_file: dataset file
+        :return: sentence pairs
+        """
+        data = FileIO.read_list_file(dataset_file)
+        data = [d.strip() for d in data]
+        corpus = []
+        for d in data:
+            item = d.split('\t')
+            corpus.append((item[0], item[1]))
+        return corpus
+
+    def evaluate(self, input_file, output_file):
+        """
+        Evaluate the sentence similarity
+        :param input_file: corpus file
+        :param output_file: result file
+        :return: similarity scores of text pairs
+        """
+        corpus = self.load_dataset(input_file)
+        print 'dataset size: ', len(corpus)
+        result = [self._sim_metric(t1, t2) for t1, t2 in corpus]
+        result = map(lambda x:"%.3f" % round(x,3), result)
+        FileIO.save_list_file(output_file, result)
+        return result
+
+class ABSAEvaluation:
+
+    """
+    This class is used for aspect based sentiment analysis evaluation
+    """
+    def __init__(self):
+        pass
+
+    def load_dataset(self, dataset_file, cat_full=False):
+        from BeautifulSoup import BeautifulSOAP as bs
+        pairs = []
+        with open(FileIO.filename(dataset_file), 'r') as f:
+            corpus = f.read()
+            opinions = bs(corpus).findAll('opinion')
+            for op in opinions:
+                if not op['target'] == 'NULL':
+                    t = op['target']
+                    c = op['category'] if cat_full else op['category'].split('#')[0]
+                    pairs.append((t, c))
+        X, y = zip(*pairs)
+        return X, y
+
+    def evaluate(self, X, y, classifier, detailed_report=True):
+        pred = classifier.classify(X)
+        generate_report(list(y), list(pred), list(set(y)), detailed_report)

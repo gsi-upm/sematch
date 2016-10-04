@@ -3,18 +3,20 @@
 ## Introduction
 
 
+
+
+## Examples
+
+### Word Similarity
+
+### Text Similarity
+
+### Query Expansion
+
 The first demo system overview is shown as below.
 ![overview](https://dl.dropboxusercontent.com/u/74428083/sematch/overview.png)
 
 This is the corresponding online [demo](http://demos.gsi.dit.upm.es/sematch/).
-
-The goal of the sematch is to provide several core tools for applications based on Knowledge Graphs (KGs).
-
-- semantic similarity of concepts in KG
-- entity linking and disambiguation with KG
-- question answering over knowledge graph
-
-
 In the current prototype of sematch, you can try the following examples in your project to retrieve a list of entities using combination of keywords e.g. a entity type and a related entity.
 
 ```
@@ -42,8 +44,7 @@ You can contact me via gzhu [at] dit.upm.es
 
 ##Publications
 
-
-Ganggao Zhu and Carlos A. Iglesias Computing Semantic Similarity of Concepts in Knowledge Graphs, IEEE Transactions on Data and Knowledge Engineering.
+Ganggao Zhu and Carlos A. Iglesias [Computing Semantic Similarity of Concepts in Knowledge Graphs](http://ieeexplore.ieee.org/document/7572993/), TKDE, 2016.
 
 Ganggao Zhu and Carlos A. Iglesias [Sematch: Semantic Entity Search from Knowledge Graph](http://km.aifb.kit.edu/ws/sumpre2015/paper4.pdf)
 In SumPre 2015 ESWC

@@ -410,7 +410,7 @@ class YagoTypeSimilarity(WordNetSimilarity):
             return 0.0
         return 1.0 / 1+(c1_ic + c2_ic - lcs_ic)
 
-    def wpath_graph(self, c1, c2, k=0.8):
+    def wpath_graph(self, c1, c2, k=0.9):
         lcs = self.least_common_subsumer(c1, c2)
         path = c1.shortest_path_distance(c2)
         yago_lcs = self.synset2yago(lcs)
@@ -420,8 +420,13 @@ class YagoTypeSimilarity(WordNetSimilarity):
 
 class WordVecSimilarity:
 
-    def __init__(self, vec_file='models/GoogleNews-vectors-negative300.bin'):
-        self._wordvec = Word2Vec.load_word2vec_format(FileIO.filename(vec_file), binary=True)
+    def __init__(self, vec_file='models/GoogleNews-vectors-negative300.bin', binary=True):
+        """
+
+        :param vec_file: the file storing vectors
+        :param binary: if vector are stored in binary. Google news use binary while yelp not
+        """
+        self._wordvec = Word2Vec.load_word2vec_format(FileIO.filename(vec_file), binary=binary)
 
     @memoized
     def word_similarity(self, w1, w2):
@@ -430,7 +435,6 @@ class WordVecSimilarity:
         except:
             return 0.0
         return sim
-
 
 class TextSimilarity:
 

@@ -1,14 +1,139 @@
+
+from sematch.nlp import word_tokenize, lemmatization
+from sematch.semantic.similarity import WordVecSimilarity, WordNetSimilarity
+from sematch.utility import memoized
+from collections import Counter
+
+import numpy as np
+
+
+class SimCatClassifier:
+    """
+    This class implements similarity based category classifiers.
+    """
+
+    def __init__(self, labels, cat_features, feature_weights, sim_metric, sim_model='weighted'):
+        """
+         Class initialization.
+        :param labels: predefined categories
+        :param cat_features: features to represent each category
+        :param sim_metric: word similarity function
+        """
+        self._categories = labels
+        self._cat_features = cat_features
+        self._feature_weights = feature_weights
+        self._sim_metric = sim_metric
+        self._sim_model = self.pick_sim_model(sim_model)
+
+    def pick_sim_model(self, sim_model):
+        weighted = lambda x, y: self.weighted_similarity(x, y)
+        max_sim = lambda x, y: self.max_similarity(x, y)
+        average = lambda x, y: self.average_similarity(x, y)
+        model_dic = {'weighted':weighted, 'max':max_sim, 'average':average}
+        return model_dic[sim_model]
+
+    @classmethod
+    def train(cls, corpus, sim_metric, feature_num=5, sim_model='weighted'):
+        '''
+        Extract categories, features, feature weights, from corpus.
+        Compute the weight for each feature token in each category
+        The weight is computed as token_count / total_feature_count
+        '''
+        cat_word = {}
+        for sent, cat in corpus:
+            cat_word.setdefault(cat, []).extend(lemmatization(word_tokenize(sent)))
+        features = {cat: Counter(cat_word[cat]) for cat in cat_word}
+        labels = features.keys()
+        cat_features = {}
+        feature_weights = {}
+        for c, f in features.iteritems():
+            w_c_pairs = f.most_common(feature_num)
+            words, counts = zip(*w_c_pairs)
+            cat_features[c] = words
+            total_count = float(sum(counts))
+            word_weights = []
+            for w, count in w_c_pairs:
+                word_weights.append((w, count / total_count))
+            feature_weights[c] = word_weights
+        return cls(labels, cat_features, feature_weights, sim_metric, sim_model)
+
+    def weighted_similarity(self, word, category):
+        """
+        Input word is compared to each feature word using semantic similarity. The whole similarity
+        score is computed as weighted sum.
+        :param word: feature word
+        :param category: a predefined category
+        :return: weighted word similarity score between word and category
+        """
+        features, weights = zip(*self._feature_weights[category])
+        scores = map(lambda x: self._sim_metric(word, x), features)
+        return np.dot(np.array(scores), np.array(weights).transpose())
+
+    def max_similarity(self, word, category):
+        """
+        Compute similarity between word and category, where
+        category is represented by several feature words
+        :param word: feature word
+        :param category: a predefined category
+        :return: max word similarity score between word and category
+        """
+        return max(map(lambda x: self._sim_metric(word, x), self._cat_features[category]) + [0.0])
+
+    def average_similarity(self, word, category):
+        """
+        Compute similarity between word and category, where
+        category is represented by several feature words
+        :param word: feature word
+        :param category: a predefined category
+        :return: average word similarity score between word and category
+        """
+        sum_score = sum(map(lambda x: self._sim_metric(word, x), self._cat_features[category]) + [0.0])
+        N = len(self._cat_features[category])
+        return sum_score / N
+
+    @memoized
+    def category_similarity(self, word, category):
+        """
+        Compute the semantic similarity between a word and a category.
+        :param word: a feature word
+        :param category: predefined category
+        :param method: the name of semantic similarity metric
+        :return: similarity score between word and category
+        """
+        return self._sim_model(word, category)
+
+    def classify_single(self, sent, feature_model='max'):
+        """
+        The input feature words are compared to each category based on category similarity.
+        Sum the semantic similarity score between features and category.
+        The category having highest similarity score is the correct category.
+
+        :param featuresets: feature sets such as word list
+        :param method: specify the semantic similarity metric
+        :param model: similarity combination model 'max', 'sum'. Default is 'max'
+        :return: the correct category label.
+        """
+        feature_words = list(set(lemmatization(word_tokenize(sent))))
+        score = {}
+        for c in self._categories:
+            if feature_model == 'max':
+                score[c] = max([self.category_similarity(w, c) for w in feature_words] + [0.0])
+            else:
+                score[c] = sum([self.category_similarity(w, c) for w in feature_words] + [0.0])
+        return Counter(score).most_common(1)[0][0]
+
+    def classify(self, X, feature_model='max'):
+        return [self.classify_single(x, feature_model) for x in X]
+
+
 from sklearn.svm import LinearSVC
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import LabelEncoder
 from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
 from sklearn.feature_extraction import DictVectorizer
-from sematch.nlp import feature_words_of_category, word_tokenize, lemmatization
-from sematch.semantic.similarity import Word2VecSimilarity, WordNetSimilarity
-from sematch.utility import generate_report
-import time
 
+import time
 
 def timeit(func):
 
@@ -24,7 +149,10 @@ class TextPreprocessor(BaseEstimator, TransformerMixin):
     """
     Transform input text into feature representation
     """
-    def __init__(self, corpus, feature_num=10, model='onehot', wn_method='path'):
+    def __init__(self, corpus, feature_num=10, model='onehot',
+                 wn_method='path',
+                 vec_file='models/GoogleNews-vectors-negative300.bin',
+                 binary=True):
         """
         :param corpus: use a corpus to train a vector representation
         :param feature_num: number of dimensions
@@ -34,7 +162,7 @@ class TextPreprocessor(BaseEstimator, TransformerMixin):
         self._wn_method = wn_method
         self._features = self.extract_features(corpus, feature_num)
         self._wns = WordNetSimilarity() if model == 'wordnet' or model == 'both' else None
-        self._wvs = Word2VecSimilarity() if model == 'word2vec' or model == 'both' else None
+        self._wvs = WordVecSimilarity(vec_file, binary) if model == 'word2vec' or model == 'both' else None
 
     def fit(self, X, y=None):
         return self
@@ -43,17 +171,18 @@ class TextPreprocessor(BaseEstimator, TransformerMixin):
         return X
 
     def extract_features(self, corpus, feature_num=10):
-        all_words = feature_words_of_category(corpus)
+        cat_word = {}
+        for sent, cat in corpus:
+            cat_word.setdefault(cat, []).extend(lemmatization(word_tokenize(sent)))
+        features = {cat: Counter(cat_word[cat]) for cat in cat_word}
         feature_words = []
-        for key in all_words:
-            words, counts = zip(*all_words[key].most_common(feature_num))
-            print key, words
+        for c, f in features.iteritems():
+            words, counts = zip(*f.most_common(feature_num))
             feature_words.extend(list(words))
         feature_words = set(feature_words)
-        print 'feature number', len(feature_words)
         return feature_words
 
-    def similarity(self, tokens, feature, method='wordnet',):
+    def similarity(self, tokens, feature, method='wordnet'):
         if method == 'wordnet':
             sim = lambda x: self._wns.word_similarity(feature, x, self._wn_method)
         else:
@@ -102,14 +231,20 @@ class TextPreprocessor(BaseEstimator, TransformerMixin):
             return map(self.semantic_features, X_tokens)
 
 
-class SemanticClassification:
+class SimCatSVMClassifier:
 
     def __init__(self, labels, model):
         self._labels = labels
         self._model = model
 
     @classmethod
-    def train(cls, X, y, classifier=LinearSVC, feature_num=10, feature='onehot', wn_method='path', verbose=True):
+    def train(cls, X, y, classifier=LinearSVC,
+              feature_num=10,
+              feature='onehot',
+              wn_method='path',
+              vec_file='models/GoogleNews-vectors-negative300.bin',
+              binary=True,
+              verbose=True):
 
         if isinstance(classifier, type):
             classifier = classifier()
@@ -122,7 +257,7 @@ class SemanticClassification:
 
             corpus = zip(X, y)
             model = Pipeline([
-                ('preprocessor', TextPreprocessor(corpus, feature_num, feature, wn_method)),
+                ('preprocessor', TextPreprocessor(corpus, feature_num, feature, wn_method, vec_file, binary)),
                 ('vectorizer', DictVectorizer()),
                 ('classifier', classifier),
             ])
@@ -140,13 +275,9 @@ class SemanticClassification:
         predicted = self._model.predict(X)
         return list(self._labels.inverse_transform(predicted))
 
-    def evaluate(self, X, y):
-        pred = self.classify(X)
-        print("Classification Report:\n")
-        generate_report(list(y), list(pred), list(set(y)))
 
 
-class SimpleClassification:
+class SimpleSVMClassifier:
 
     def __init__(self, labels, vectorizer, classifier):
         self._labels = labels
@@ -178,61 +309,9 @@ class SimpleClassification:
         predicted = self._classifier.predict(X_test)
         return list(self._labels.inverse_transform(predicted))
 
-    def evaluate(self, X, y):
-        pred = self.classify(X)
-        print("Classification Report:\n")
-        generate_report(list(y), list(pred), list(set(y)))
 
 
 
-from nltk.corpus import reuters
-
-def collection_stats():
-    documents = reuters.fileids()
-    print len(documents)
-    print reuters.categories()
-    train_docs = list(filter(lambda doc: doc.startswith("train"),
-                             documents))
-    test_docs = list(filter(lambda doc: doc.startswith("test"), documents))
-    print reuters.raw(train_docs[0])
-    print reuters.raw(test_docs[0])
-    category_docs = reuters.fileids('acq')
-
-    document_id = category_docs[0]
-    print reuters.words(document_id)
-    print reuters.raw(document_id)
 
 
-from nltk import word_tokenize
-from nltk.stem.porter import PorterStemmer
-import re
-from nltk.corpus import stopwords
 
-cachedStopWords = stopwords.words("english")
-
-
-def tokenize(text):
-    min_length = 3
-    words = map(lambda word: word.lower(), word_tokenize(text))
-    words = [word for word in words
-             if word not in cachedStopWords]
-    tokens = (list(map(lambda token: PorterStemmer().stem(token),
-                       words)))
-    p = re.compile('[a-zA-Z]+')
-    filtered_tokens = list(filter(lambda token: p.match(token) and len(token) >= min_length,
-                tokens))
-    return filtered_tokens
-
-def tf_idf(docs):
-    tfidf = TfidfVectorizer(tokenizer=tokenize, min_df=3,
-                        max_df=0.90, max_features=3000,
-                        use_idf=True, sublinear_tf=True,
-                        norm='l2')
-    tfidf.fit(docs)
-    return tfidf
-
-def feature_values(doc, vectorizer):
-    doc_representation = vectorizer.transform([doc])
-    features = vectorizer.get_feature_names()
-    return [(features[index], doc_representation[0, index])
-                 for index in doc_representation.nonzero()[1]]
