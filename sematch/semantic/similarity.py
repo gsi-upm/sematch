@@ -218,6 +218,19 @@ class WordNetSimilarity:
             syns = wn.synsets(porter.stem(w), pos=wn.NOUN)
         return syns
 
+    def multilingual2synset(self, word, lang='spa'):
+        """
+        Map words in different language to wordnet synsets
+        ['als', 'arb', 'cat', 'cmn', 'dan', 'eng', 'eus', 'fas', 'fin', 'fra', 'fre',
+         'glg', 'heb', 'ind', 'ita', 'jpn', 'nno','nob', 'pol', 'por', 'spa', 'tha', 'zsm']
+        :param word: a word in different language that has been defined in
+        Open Open Multilingual WordNet, using ISO-639 language codes.
+        :param lang: the language code defined
+        :return: wordnet synsets.
+        """
+        return wn.synsets(word, lang=lang, pos=wn.NOUN)
+
+
     @memoized
     def similarity(self, c1, c2, name='path'):
         """
@@ -229,11 +242,22 @@ class WordNetSimilarity:
         """
         return self.method(name)(c1, c2)
 
+    def max_synset_similarity(self, syns1, syns2, sim_metric):
+        """
+        Compute the maximum similarity score between two list of synsets
+        :param syns1: synset list
+        :param syns2: synset list
+        :param sim_metric: similarity function
+        :return: maximum semantic similarity score
+        """
+        return max([sim_metric(c1, c2) for c1 in syns1 for c2 in syns2] + [0])
+
     @memoized
     def word_similarity(self, w1, w2, name='path'):
         s1 = self.word2synset(w1)
         s2 = self.word2synset(w2)
-        return max([self.similarity(c1, c2, name) for c1 in s1 for c2 in s2] + [0])
+        sim_metric = lambda x, y: self.similarity(x, y, name)
+        return self.max_synset_similarity(s1, s2, sim_metric)
 
     @memoized
     def best_synset_pair(self, w1, w2, name='path'):
@@ -242,13 +266,45 @@ class WordNetSimilarity:
         sims = Counter({(c1, c2):self.similarity(c1, c2, name) for c1 in s1 for c2 in s2})
         return sims.most_common(1)[0][0]
 
-    def word_similarity_all_metrics(self, c1, c2):
-        return {m:self.similarity(c1, c2, name=m) for m in self._default_metrics}
+    def word_similarity_all_metrics(self, w1, w2):
+        return {m:self.word_similarity(w1, w2, name=m) for m in self._default_metrics}
 
     def word_similarity_wpath(self, w1, w2, k):
         s1 = self.word2synset(w1)
         s2 = self.word2synset(w2)
-        return max([self.wpath(c1, c2, k) for c1 in s1 for c2 in s2] +[0])
+        sim_metric = lambda x, y: self.wpath(x, y, k)
+        return self.max_synset_similarity(s1, s2, sim_metric)
+
+    @memoized
+    def monol_word_similarity(self, w1, w2, lang='spa', name='path'):
+        """
+         Compute mono-lingual word similarity, two words are in same language.
+        :param w1: word
+        :param w2: word
+        :param lang: language code
+        :param name: name of similarity metric
+        :return: semantic similarity score
+        """
+        s1 = self.multilingual2synset(w1.decode('utf-8'), lang)
+        s2 = self.multilingual2synset(w2.decode('utf-8'), lang)
+        sim_metric = lambda x, y: self.similarity(x, y, name)
+        return self.max_synset_similarity(s1, s2, sim_metric)
+
+    @memoized
+    def crossl_word_similarity(self, w1, w2, lang1='spa', lang2='eng', name='path'):
+        """
+         Compute cross-lingual word similarity, two words are in different language.
+        :param w1: word
+        :param w2: word
+        :param lang1: language code for word1
+        :param lang2: language code for word2
+        :param name: name of similarity metric
+        :return: semantic similarity score
+        """
+        s1 = self.multilingual2synset(w1.decode('utf-8'), lang1)
+        s2 = self.multilingual2synset(w2.decode('utf-8'), lang2)
+        sim_metric = lambda x, y: self.similarity(x, y, name)
+        return self.max_synset_similarity(s1, s2, sim_metric)
 
     def least_common_subsumer(self, c1, c2):
         return c1.lowest_common_hypernyms(c2)[0]
@@ -368,7 +424,7 @@ class YagoTypeSimilarity(WordNetSimilarity):
     def synset2dbpedia(self, synset):
         return self.synset2mapping(synset, 'dbpedia')
 
-    def word_to_dbpedia(self, word):
+    def word2dbpedia(self, word):
         return [self.synset2dbpedia(s) for s in self.word2synset(word) if self.synset2dbpedia(s)]
 
     def word2yago(self, word):

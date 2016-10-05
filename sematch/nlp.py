@@ -37,9 +37,14 @@ NOUNS = ['nn', 'nns', 'nn$', 'nn-tl', 'nn+bez', 'nn+hvz', 'nns$', 'np',
 
 StopWords = set(StopWords)
 FunctionWords = set(FunctionWords)
-punctuations = set(string.punctuation)
+
 SpecialWords = set(SpecialWords)
 NOUNS = set(NOUNS)
+
+lemma = WordNetLemmatizer()
+porter = PorterStemmer()
+lancaster = LancasterStemmer()
+
 
 #r'(?u)\b\w\w+\b'
 #r'[a-z]+'
@@ -55,12 +60,6 @@ NOUNS = set(NOUNS)
 tokenization_pattern = r'\w+'
 
 reg_tokenizer = RegexpTokenizer(tokenization_pattern)
-
-lemma = WordNetLemmatizer()
-porter = PorterStemmer()
-lancaster = LancasterStemmer()
-
-
 def reg_tokenize(text):
     return reg_tokenizer.tokenize(text)
 
@@ -88,32 +87,6 @@ def lemmatization(tokens):
     tokens = [lemma.lemmatize(w) for w in tokens]
     #tokens = [porter.stem(w) for w in tokens]
     return tokens
-
-#chunk_grammar=r'KT: {(<JJ>* <NN.*>+ <IN>)? <JJ>* <NN.*>+}'
-#chunk_grammar=r'T: {<(JJ|NN|NNS|NNP|NNPS)>+<(NN|NNS|NNP|NNPS|CD)>|<(NN|NNS|NNP|NNPS)>}'
-chunk_grammar = """CHUNK: {<NNP><IN><DT><NNS>}
-    {<NNP><NNP><NNP><NNP>}
-    {<NNP|NNPS><NNP|NNPS><NNP|NNPS>}
-    {<NNP|NNPS><NNP|NNPS>}
-    {<NN|NNS><NNP|NNPS>}
-    {<NNP|NNPS><NN|NNS>}
-    {<NNP|NNPS>+}
-    {<NN|NNS><NN|NNS>+}"""
-
-chunker = RegexpParser(chunk_grammar)
-
-def extract_chunks_sent(sent, word_tokenize=nltk.word_tokenize, pos_tag=nltk.pos_tag):
-    tags = pos_tag(word_tokenize(sent))
-    chunks = nltk.chunk.tree2conlltags(chunker.parse(tags))
-    # join constituent chunk words into a single chunked phrase
-    return [' '.join(word for word, pos, chunk in group)
-              for key, group in itertools.groupby(chunks, lambda (word, pos, chunk): chunk != 'O') if key]
-
-def extract_chunks_doc(text, sent_tokenize=nltk.sent_tokenize,
-                       word_tokenize=nltk.word_tokenize,
-                       pos_tag=nltk.pos_tag):
-    sent_chunk = lambda x: extract_chunks_sent(x, word_tokenize, pos_tag)
-    return list(itertools.chain.from_iterable(map(sent_chunk, sent_tokenize(text))))
 
 def tokenize(text):
     min_length = 3
@@ -198,3 +171,81 @@ class RAKE:
         phrases = Counter(phrases).most_common(len(phrases.keys()) / ratio)
         phrases, _ = zip(*phrases)
         return phrases
+
+chunk_grammar_nounphrase=r'KT: {(<JJ>* <NN.*>+ <IN>)? <JJ>* <NN.*>+}'
+#chunk_grammar=r'T: {<(JJ|NN|NNS|NNP|NNPS)>+<(NN|NNS|NNP|NNPS|CD)>|<(NN|NNS|NNP|NNPS)>}'
+chunk_grammar_phrases = """CHUNK: {<NNP><IN><DT><NNS>}
+    {<NNP><NNP><NNP><NNP>}
+    {<NNP|NNPS><NNP|NNPS><NNP|NNPS>}
+    {<NNP|NNPS><NNP|NNPS>}
+    {<NN|NNS><NNP|NNPS>}
+    {<NNP|NNPS><NN|NNS>}
+    {<NNP|NNPS>+}
+    {<NN|NNS><NN|NNS>+}"""
+chunk_grammar_propernouns = """CHUNK: {<NNP><NNP><NNP><NNP>}
+    {<NNP|NNPS><NNP|NNPS><NNP|NNPS>}
+    {<NNP|NNPS><NNP|NNPS>}
+    {<NNP|NNPS>+}"""
+
+
+
+class Extraction:
+
+    """This class is used to extract nouns, proper nouns, phrases from text"""
+
+    def __init__(self, word_tokenize=None, sent_tokenize=None,
+                 pos_tag=None, stop_words=None, punct=None,
+                 grammar=chunk_grammar_propernouns):
+        self._word_tokenize = word_tokenize if word_tokenize else nltk.word_tokenize
+        self._sent_tokenize = sent_tokenize if sent_tokenize else nltk.sent_tokenize
+        self._pos_tag = pos_tag if pos_tag else nltk.pos_tag
+        self._stop_words = stop_words if stop_words else set(nltk.corpus.stopwords.words('english'))
+        self._punct = punct if punct else set(string.punctuation)
+        self._chunk_grammar = grammar
+        self._chunker = RegexpParser(self._chunk_grammar)
+
+    def extract_chunks_sent(self, sent):
+        """
+        Extract chunk phrases from a sentence.
+        :param sent: a sentence level text.
+        :return: chunk phrases
+        """
+        tags = self._pos_tag(self._word_tokenize(sent))
+        chunks = nltk.chunk.tree2conlltags(self._chunker.parse(tags))
+        # join constituent chunk words into a single chunked phrase
+        return [' '.join(word for word, pos, chunk in group)
+                  for key, group in itertools.groupby(chunks, lambda (word, pos, chunk): chunk != 'O') if key]
+
+    def extract_chunks_doc(self, text):
+        """
+        Extract chunk phrases from a document.
+        :param text: a document level text
+        :return: chunk phrases
+        """
+        sents = self._sent_tokenize(text)
+        sents = [s for s in sents if s]
+        return list(itertools.chain.from_iterable(map(self.extract_chunks_sent, sents)))
+
+    def extract_words_sent(self, sent, good_tags=set(['NN', 'NNS'])):
+        """
+        Extract desired words from a sentence.
+        :param sent: a sentence level text
+        :param good_tags: desired word tags
+        :return: words with desired word tags
+        """
+        tagged_words = self._pos_tag(self._word_tokenize(sent))
+        return [word for word, tag in tagged_words
+                if tag in good_tags and word.lower() not in self._stop_words
+                and not all(char in self._punct for char in word)]
+
+    def extract_words_doc(self, text, good_tags=set(['NN', 'NNS'])):
+        """
+        Extract desiredwords from document
+        :param text: a document level text
+        :param good_tags: desired word tags
+        :return: words with desired word tags
+        """
+        sents = self._sent_tokenize(text)
+        sents = [s for s in sents if s]
+        func_extract = lambda x: self.extract_words_sent(x, good_tags)
+        return list(itertools.chain.from_iterable(map(func_extract, sents)))

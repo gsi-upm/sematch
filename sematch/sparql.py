@@ -267,3 +267,30 @@ class NameSPARQL(BaseSPARQL):
         t3 = self.triple('?s', self.uri(self.longName), self.literal(name))
         t = self.union([t1, t2, t3])
         return self.resource_filter(self.resource_query(s, t+t0))
+
+
+class QueryGraph(BaseSPARQL):
+
+    def __init__(self):
+        BaseSPARQL.__init__(self)
+
+    def type_entity_query(self, concepts, entity):
+        """
+        Construct type entity queries.
+        Some more possible patterns.
+        ?x ?p1 ?y. ?y ?p2 <%s>.
+        ?x ?p1 ?y. <%s> ?p2 ?y.
+        ?y ?p1 ?x. ?y ?p2 <%s>
+        ?y ?p1 ?x. <%s> ?p2 ?y.
+        :param concepts:
+        :param entity:
+        :return:
+        """
+        triples = map(lambda x: self.po_triple(RDF.type, x, 's'), concepts)
+        t1 = [t for v, t in triples]
+        t1 = self.union(t1)
+        t2 = self.s_triple(entity, 'p', 's')
+        t3 = self.o_triple('s', 'p', entity)
+        res1 = self.resource_query('s', t1 + t2)
+        res2 = self.resource_query('s', t1 + t3)
+        return res1 + res2

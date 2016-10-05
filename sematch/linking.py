@@ -1,17 +1,11 @@
-#from sematch.nlp import WebQuestion,TwitterText, SearchQuery, clean_context
-# from sematch.semantic.analysis import EntityCommentModel
-# from sematch.semantic.analysis import EntityAbstractModel
-# from sematch.semantic.analysis import TypeModel
-# from sematch.semantic.analysis import CatModel
-# from sematch.utility import string_similarity
-#from sematch.index import entity_candidates
-from collections import Counter
-import requests
 
-#simple wrapper implementation of dbpedia spotlight web service using local server
+from sematch.sparql import NameSPARQL
+import requests
 
 
 class DBpediaSpotlight:
+    """simple wrapper implementation of dbpedia spotlight web service using local server"""
+
 
     def __init__(self):
         self.uri = 'http://localhost:8888/rest/'
@@ -203,20 +197,6 @@ class BabelNet:
         return list(set(result))
 
 
-
-
-class IREntityRank:
-
-    def __init__(self):
-        pass
-
-class EnbeddingRank:
-
-    def __init__(self):
-        pass
-
-
-
 #
 # class Matching:
 #
@@ -271,77 +251,3 @@ class EnbeddingRank:
 #         return max_span
 
 
-# class EntityLinking:
-#
-#     def __init__(self):
-#         #latent semantic models and tfidf model using distributional semantics of words
-#         self.comment = EntityCommentModel()
-#         self.abstract = EntityAbstractModel()
-#         #embedding models for category and types
-#         self.type = TypeModel()
-#         self.category = CatModel()
-#
-#     def spoting(self, text):
-#         #blob = WebQuestion(text)
-#         blob = SearchQuery(text)
-#         phrases = blob.phrases
-#         #print blob.tags
-#         #print phrases
-#         result = {}
-#         for p in phrases:
-#             match = Matching(p.split())
-#             entities = match.entities()
-#             if entities:
-#                 result[p] = entities
-#         return result
-#
-#     def weighting(self, score_dict, w):
-#         return Counter({key:w*value for key, value in score_dict.items()})
-#
-#     def comment_tfidf_similarity(self, context, candidates):
-#         comment_tfidf = self.comment.text_entities_similarity(context, candidates.keys(), model='tfidf')
-#         return Counter(comment_tfidf)
-#
-#     def abstract_tfidf_similarity(self, context, candidates, w=1):
-#         abstract_tfidf = self.abstract.text_entities_similarity(context, candidates.keys(), model='tfidf')
-#         return self.weighting(abstract_tfidf,w)
-#
-#     def comment_lsi_similarity(self,context, candidates):
-#         lsi = self.comment.text_entities_similarity(context, candidates.keys(), model='lsi')
-#         return Counter(lsi)
-#
-#     def abstract_lsi_similarity(self, context, candidates, w=1):
-#         lsi = self.abstract.text_entities_similarity(context, candidates.keys(), model='lsi')
-#         return self.weighting(lsi,w)
-#
-#     def type_similarity(self, context, candidates, w=1):
-#         type_score = self.type.context_entities(context, candidates.keys())
-#         return self.weighting(type_score,w)
-#
-#     def category_similarity(self, context, candidates, w=4):
-#         cat_score = self.category.context_entities(context, candidates.keys())
-#         return self.weighting(cat_score, w)
-#
-#     def disambiguation(self, text, candidates):
-#         context = clean_context(text)
-#         results = {}
-#         for key in candidates:
-#             if len(candidates[key]) == 1:
-#                 results[key] = candidates[key].keys()[0]
-#                 continue
-#             entities = Counter(candidates[key])
-#             #scorer = self.weighting(entities, 3)#best given 3
-#             #scorer = self.comment_tfidf_similarity(context, entities)
-#             #scorer = self.comment_lsi_similarity(context, entities)
-#             #scorer = self.abstract_tfidf_similarity(context, entities)
-#             #scorer = self.abstract_lsi_similarity(context, entities)
-#             #scorer = self.category_similarity(context, entities)
-#             scorer = self.type_similarity(context, entities)
-#             link, score = scorer.most_common(1)[0]
-#             results[key] = link
-#         return results
-#
-#     def annotate(self, text):
-#         spots = self.spoting(text)
-#         return self.disambiguation(text, spots)
-#
