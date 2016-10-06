@@ -7,13 +7,13 @@
 
 ## You have just found Sematch
 
-Sematch is a semantic similarity analysis library, written in Python. Semantic similarity is a very useful metric for many applications that require to quantify the semantic distance between concepts using structural knowledge drawn from conceptual taxonomy and statistical information calculated from textual corpora. Sematch was developed with a focus on enabling semantic similarity analysis in both textual corpora and structural Knowledge Graphs (KGs).
+Sematch is a semantic similarity analysis library, written in Python. Semantic similarity is a very useful metric for many applications that require to quantify the semantic distance between concepts using structural knowledge drawn from conceptual taxonomy and statistical information calculated from textual corpora. Sematch was developed with a focus on enabling semantic similarity analysis in both textual corpora and structural Knowledge Graphs (KGs). 
 
 ![logo](img/sematch-motivation.jpg)
 
-This motivation comes from the observation that many textual applications and KG applications share a common pipeline in using semantic similarity analysis. In textual applications, word similarity is measured based on WordNet taxonomy or word cooccurence. Then text similarity (sentence level) is measured by composing word similarities, while document level text could be analysed by identifying important sentences based on text similarity, e.g. TextRank.  Obviously, the pipeline starts from measuring concept similarity. Concepts usually represent atomic word meanings  and have a hierarchical structure, such as WordNet synsets. Concept similarity are normally quantified using various information such as structural knowledge (e.g. path length, depth, least common subsumer) and statistical knowledge ( information content).
+This motivation comes from the observation that many textual applications and KG applications share a common pipeline in using semantic similarity analysis. In textual applications, word similarity is measured based on WordNet taxonomy or word cooccurence. Then text similarity (sentence level) is measured by composing word similarities, while document level text could be analysed by identifying important sentences based on text similarity, e.g. TextRank.  Obviously, the pipeline starts from measuring concept similarity. Concepts usually represent atomic word meanings  and have a hierarchical structure, such as WordNet synsets. Concept similarity are normally quantified using various information such as structural knowledge (e.g. path length, depth, least common subsumer) and statistical knowledge ( information content). 
 
-KG based application also have similar pipeline. Entities in KGs are similar to words, while entities are described by concepts  (e.g. dbo:Movie, dbc:English_opera_singers) which are similar to word meanings (senses). Similar to word similarity, entity similarity can be quantified based on concept similarity. Moreover, those concepts in KGs are usually constructed into hierarchical taxonomies, such as DBpedia ontology class, Wikipedia categories, therefore quantifying concept similarity in WordNet or DBpedia relies on similar semantic information (e.g. path length,  depth, least common subsumer, information content) and semantic similarity metrics (e.g. Path, Wu & Palmer,Li,  Resnik, Lin, Jiang & Conrad and WPath). Furthermore, as WordNet concepts have been integrated into many modern KGs such as DBpedia, YAGO and BabelNet, it would be convenient to apply conventional textual similarity analysis to KGs. Consequently,  Sematch aims to provide a framework to develop and evaluate semantic similarity metrics for concepts, entities, texts and their applications.
+KG based application also have similar pipeline. Entities in KGs are similar to words, while entities are described by concepts  (e.g. dbo:Movie, dbc:English_opera_singers) which are similar to word meanings (senses). Similar to word similarity, entity similarity can be quantified based on concept similarity. Moreover, those concepts in KGs are usually constructed into hierarchical taxonomies, such as DBpedia ontology class, Wikipedia categories, therefore quantifying concept similarity in WordNet or DBpedia relies on similar semantic information (e.g. path length,  depth, least common subsumer, information content) and semantic similarity metrics (e.g. Path, Wu & Palmer,Li,  Resnik, Lin, Jiang & Conrad and WPath). Furthermore, as WordNet concepts have been integrated into many modern KGs such as DBpedia, YAGO and BabelNet, it would be convenient to apply conventional textual similarity analysis to KGs. Consequently,  Sematch aims to provide a framework to develop and evaluate semantic similarity metrics for concepts, entities, texts and their applications. 
 
 
 
@@ -25,7 +25,7 @@ KG based application also have similar pipeline. Entities in KGs are similar to 
 
 The goal of the sematch is to provide several core tools for semantic similarity analysis. Aiming this goal, Sematch has several guiding principles in development.
 
-- Provide a convenient framework for developing and evaluating semantic similarity metrics and provide easy interface in developing similarity based applications.
+- Provide a convenient framework for developing and evaluating semantic similarity metrics and provide easy interface in developing similarity based applications. 
 - Connect the textual world with KGs by providing linking and disambiguations. This could be viewed as application of semantic similarity metrics. Also, linking and disambiguation could be useful for higher level applications.
 
 
@@ -157,7 +157,7 @@ Sematch uses the following dependencies:
 
 You should check out the requirements.txt to install the complete dependencies.
 
-To install Sematch, you need to install its dependencies and download some datasets it requires. In NLTK, you need to download WordNet 3.0 and Open Mutilingual WordNet. We have included experimental datasets and type mappings with YAGO in models folder inside Sematch. However, some datasets such as Aspect Based Sentitiment Analysis you need to download from their original site.
+To install Sematch, you need to install its dependencies and download some datasets it requires. In NLTK, you need to download WordNet 3.0 and Open Mutilingual WordNet. We have included experimental datasets and type mappings with YAGO in models folder inside Sematch. However, some datasets such as Aspect Based Sentitiment Analysis you need to download from their original site. 
 
 Currently, you could clone Sematch and setup it in your local.
 
@@ -182,7 +182,7 @@ pytest
 
 ## Support
 
-You can post bug reports and feature requests in [Github issues](https://github.com/gsi-upm/sematch/issues).
+You can post bug reports and feature requests in [Github issues](https://github.com/gsi-upm/sematch/issues). 
 Make sure to read our guidelines first.
 This project is still under active development approaching to its goals. The project is mainly maintained by Ganggao Zhu. You can contact him via gzhu [at] dit.upm.es
 
@@ -193,8 +193,3 @@ This project is still under active development approaching to its goals. The pro
 The name of Sematch is composed based on Spanish "se" and English "match". It is also the abbreviation of semantic matching because semantic similarity metrics helps to determine semantic distance of concepts, words, entities, instead of exact matching.
 
 The logo of Sematch is based on Chinese [Yin and Yang](http://en.wikipedia.org/wiki/Yin_and_yang) which is written in [I Ching](http://en.wikipedia.org/wiki/I_Ching). Somehow, it correlates to 0 and 1 in computer science.
-
-
-
-
-![GSI Logo](http://vps161.cesvima.upm.es/images/stories/logos/gsi.png)

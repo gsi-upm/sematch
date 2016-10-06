@@ -27,4 +27,3 @@ def test_entity_search():
     searcher = EntitySearch()
     for q in queries:
         assert searcher.search(q) is not None
-

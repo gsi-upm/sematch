@@ -224,11 +224,11 @@ class WordNetSimilarity:
         ['als', 'arb', 'cat', 'cmn', 'dan', 'eng', 'eus', 'fas', 'fin', 'fra', 'fre',
          'glg', 'heb', 'ind', 'ita', 'jpn', 'nno','nob', 'pol', 'por', 'spa', 'tha', 'zsm']
         :param word: a word in different language that has been defined in
-        Open Open Multilingual WordNet, using ISO-639 language codes.
+         Open Multilingual WordNet, using ISO-639 language codes.
         :param lang: the language code defined
         :return: wordnet synsets.
         """
-        return wn.synsets(word, lang=lang, pos=wn.NOUN)
+        return wn.synsets(word.decode('utf-8'), lang=lang, pos=wn.NOUN)
 
 
     @memoized
@@ -285,8 +285,8 @@ class WordNetSimilarity:
         :param name: name of similarity metric
         :return: semantic similarity score
         """
-        s1 = self.multilingual2synset(w1.decode('utf-8'), lang)
-        s2 = self.multilingual2synset(w2.decode('utf-8'), lang)
+        s1 = self.multilingual2synset(w1, lang)
+        s2 = self.multilingual2synset(w2, lang)
         sim_metric = lambda x, y: self.similarity(x, y, name)
         return self.max_synset_similarity(s1, s2, sim_metric)
 
@@ -301,8 +301,8 @@ class WordNetSimilarity:
         :param name: name of similarity metric
         :return: semantic similarity score
         """
-        s1 = self.multilingual2synset(w1.decode('utf-8'), lang1)
-        s2 = self.multilingual2synset(w2.decode('utf-8'), lang2)
+        s1 = self.multilingual2synset(w1, lang1)
+        s2 = self.multilingual2synset(w2, lang2)
         sim_metric = lambda x, y: self.similarity(x, y, name)
         return self.max_synset_similarity(s1, s2, sim_metric)
 
@@ -424,11 +424,30 @@ class YagoTypeSimilarity(WordNetSimilarity):
     def synset2dbpedia(self, synset):
         return self.synset2mapping(synset, 'dbpedia')
 
+    def yago2synset(self, yago):
+        if yago in self._yago2id:
+            return self.id2synset(self._yago2id[yago])
+        return None
+
     def word2dbpedia(self, word):
         return [self.synset2dbpedia(s) for s in self.word2synset(word) if self.synset2dbpedia(s)]
 
     def word2yago(self, word):
         return [self.synset2yago(s) for s in self.word2synset(word) if self.synset2yago(s)]
+
+    def yago_similarity(self, yago1, yago2, name='wpath'):
+        """
+        Compute semantic similarity of two yago concepts by mapping concept uri to wordnet synset.
+        :param yago1: yago concept uri
+        :param yago2: yago concept uri
+        :param name: name of semantic similarity metric
+        :return: semantic similarity score if both uri can be mapped to synsets, otherwise 0.
+        """
+        s1 = self.yago2synset(yago1)
+        s2 = self.yago2synset(yago2)
+        if s1 and s2:
+            return self.similarity(s1, s2, name)
+        return 0.0
 
     def word_similarity_wpath_graph(self, w1, w2, k):
         s1 = self.word2synset(w1)

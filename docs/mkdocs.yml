@@ -1,0 +1,15 @@
+site_name: Sematch Documentation
+theme: readthedocs
+docs_dir: sources
+repo_url: https://github.com/gsi-upm/sematch
+# site_url: 
+site_description: 'Documentation for Sematch, semantic similarity analysis framework for textual corpus and structural knowledge graphs'
+site_author: Ganggao Zhu
+#copyright: 
+
+pages:
+- Home: index.md
+- Word similarity: word_similarity.md
+- Concept similarity: concept_similarity.md
+- Category Classification: category_classify.md
+- Entity Search: entity_search.md 

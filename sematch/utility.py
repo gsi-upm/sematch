@@ -1,15 +1,5 @@
 import json
-import ConfigParser
 import os
-
-class Configuration:
-
-    def __init__(self):
-        self.config = ConfigParser.RawConfigParser()
-        self.config.read('settings.cfg')
-
-    def getConfig(self,section,variable):
-        return self.config.get(section,variable)
 
 
 class FileIO:
@@ -76,12 +66,6 @@ def trace(f):
     return g
 
 
-# config = Configuration()
-# print type(config.getConfig('expansion','sim'))
-# print type(config.getConfig('expansion', 'th'))
-# print config.getConfig('expansion','gpcs')
-
-
 import Levenshtein
 import math
 
@@ -101,7 +85,7 @@ def fraction(x):
 def difference(X, Y):
     return [X[i] - Y[i] for i in range(len(X))]
 
-def square(self, x):
+def square(x):
     return x**2
 
 #The length of X and Y should be identical

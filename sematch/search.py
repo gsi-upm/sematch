@@ -30,7 +30,6 @@ class EntitySearch:
     def search(self, query):
         results = []
         concepts, entities = self.query_process(query)
-        print concepts, entities
         for e in entities:
             for i in xrange(0, len(concepts), 5):
                 results.extend(self._query_graph.type_entity_query(concepts[i:i + 5], e))

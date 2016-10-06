@@ -18,3 +18,9 @@ def test_query_graph():
                 'http://dbpedia.org/class/yago/Film103338821']
     entity = 'http://dbpedia.org/resource/Hal_Roach'
     assert 'http://dbpedia.org/resource/Luke_Pipes_the_Pippins' in qg.type_entity_query(concepts,entity)
+
+def test_entity_features():
+    from sematch.sparql import EntityFeatures
+    entity_f = EntityFeatures()
+    yin_and_yang = entity_f.features('http://dbpedia.org/resource/Yin_and_yang')
+    print yin_and_yang
