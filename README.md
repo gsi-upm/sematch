@@ -1,4 +1,4 @@
-![logo](img/logo.png)
+![logo](docs/sources/img/logo.png)
 
 ------------------
 
@@ -9,7 +9,7 @@
 
 Sematch is a semantic similarity analysis library, written in Python. Semantic similarity is a very useful metric for many applications that require to quantify the semantic distance between concepts using structural knowledge drawn from conceptual taxonomy and statistical information calculated from textual corpora. Sematch was developed with a focus on enabling semantic similarity analysis in both textual corpora and structural Knowledge Graphs (KGs).
 
-![logo](img/sematch-motivation.jpg)
+![logo](docs/sources/img/sematch-motivation.jpg)
 
 This motivation comes from the observation that many textual applications and KG applications share a common pipeline in using semantic similarity analysis. In textual applications, word similarity is measured based on WordNet taxonomy or word cooccurence. Then text similarity (sentence level) is measured by composing word similarities, while document level text could be analysed by identifying important sentences based on text similarity, e.g. TextRank.  Obviously, the pipeline starts from measuring concept similarity. Concepts usually represent atomic word meanings  and have a hierarchical structure, such as WordNet synsets. Concept similarity are normally quantified using various information such as structural knowledge (e.g. path length, depth, least common subsumer) and statistical knowledge ( information content).
 
