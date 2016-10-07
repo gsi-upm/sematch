@@ -234,9 +234,10 @@ class Extraction:
         :return: words with desired word tags
         """
         tagged_words = self._pos_tag(self._word_tokenize(sent))
-        return [word for word, tag in tagged_words
+        words = [word for word, tag in tagged_words
                 if tag in good_tags and word.lower() not in self._stop_words
                 and not all(char in self._punct for char in word)]
+        return list(set(words))
 
     def extract_words_doc(self, text, good_tags=set(['NN', 'NNS'])):
         """
@@ -248,4 +249,5 @@ class Extraction:
         sents = self._sent_tokenize(text)
         sents = [s for s in sents if s]
         func_extract = lambda x: self.extract_words_sent(x, good_tags)
-        return list(itertools.chain.from_iterable(map(func_extract, sents)))
+        words = list(itertools.chain.from_iterable(map(func_extract, sents)))
+        return list(set(words))

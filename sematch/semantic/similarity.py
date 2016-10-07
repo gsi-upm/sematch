@@ -72,12 +72,30 @@ class ConceptSimilarity:
         self._taxonomy = taxonomy
         self._graph_ic = GraphIC(ic_file)
 
+    def method(self, name):
+        def function(c1, c2):
+            score = getattr(self, name)(c1, c2)
+            return abs(score)
+        return function
+
+    def name2uri(self, name):
+        """
+        Get the URI of a node.
+        :param name:
+        :return:
+        """
+        c = self.name2concept(name)
+        return self.concept2uri(c) if c else None
+
+    def concept2uri(self, c):
+        return self._taxonomy._nodes[c] if c <= len(self._taxonomy._nodes) else None
+
     def name2concept(self, name):
         """
-        This function maps a string name to a node in taxonomy based on node's labels
-        :param name: string name of a concept
-        :return: the node id if contains the named node otherwise None.
-        """
+            This function maps a string name to a node in taxonomy based on node's labels
+            :param name: string name of a concept
+            :return: the node id if contains the named node otherwise None.
+            """
         return self._taxonomy._label2id[name] if self._taxonomy._label2id.get(name) else None
 
     def concept_ic(self, concept):
@@ -90,6 +108,17 @@ class ConceptSimilarity:
             return 0.0
         else:
             return self._graph_ic.concept_ic(self._taxonomy._nodes[concept])
+
+    @memoized
+    def similarity(self, c1, c2, name='wpath'):
+        """
+        Compute semantic similarity between two concepts
+        :param c1:
+        :param c2:
+        :param name:
+        :return:
+        """
+        return self.method(name)(c1, c2)
 
     def path(self, c1, c2):
         """
@@ -253,14 +282,14 @@ class WordNetSimilarity:
         return max([sim_metric(c1, c2) for c1 in syns1 for c2 in syns2] + [0])
 
     @memoized
-    def word_similarity(self, w1, w2, name='path'):
+    def word_similarity(self, w1, w2, name='wpath'):
         s1 = self.word2synset(w1)
         s2 = self.word2synset(w2)
         sim_metric = lambda x, y: self.similarity(x, y, name)
         return self.max_synset_similarity(s1, s2, sim_metric)
 
     @memoized
-    def best_synset_pair(self, w1, w2, name='path'):
+    def best_synset_pair(self, w1, w2, name='wpath'):
         s1 = self.word2synset(w1)
         s2 = self.word2synset(w2)
         sims = Counter({(c1, c2):self.similarity(c1, c2, name) for c1 in s1 for c2 in s2})
@@ -276,7 +305,7 @@ class WordNetSimilarity:
         return self.max_synset_similarity(s1, s2, sim_metric)
 
     @memoized
-    def monol_word_similarity(self, w1, w2, lang='spa', name='path'):
+    def monol_word_similarity(self, w1, w2, lang='spa', name='wpath'):
         """
          Compute mono-lingual word similarity, two words are in same language.
         :param w1: word
@@ -291,7 +320,7 @@ class WordNetSimilarity:
         return self.max_synset_similarity(s1, s2, sim_metric)
 
     @memoized
-    def crossl_word_similarity(self, w1, w2, lang1='spa', lang2='eng', name='path'):
+    def crossl_word_similarity(self, w1, w2, lang1='spa', lang2='eng', name='wpath'):
         """
          Compute cross-lingual word similarity, two words are in different language.
         :param w1: word

@@ -4,6 +4,8 @@ import networkx as nx
 from itertools import combinations
 import numpy as np
 
+from sematch.ontology import DBpedia
+
 class DataTransform:
     """
     The interface of taxonomy data transformation. From skos, rdfs or any format, to
@@ -16,6 +18,24 @@ class DataTransform:
     def transform(self):
         """return nodes, labels, and edges"""
         pass
+
+class DBpediaDataTransform(DataTransform):
+
+    def __init__(self):
+        self._ontology = DBpedia()
+
+    def transform(self):
+        nodes =  map(lambda x:x.toPython(), self._ontology.classes)
+        node_id = {n:i for i,n in enumerate(nodes)}
+        labels = [self._ontology.token(value) for i,value in enumerate(self._ontology.classes)]
+        edges = []
+        for i, node in enumerate(nodes):
+            children = self._ontology.subClass(node)
+            children = [child for child in children if child in nodes]
+            children_ids = map(lambda x:node_id[x], children)
+            for child_id in children_ids:
+                edges.append((i, child_id))
+        return nodes, labels, edges
 
 class Taxonomy:
 
@@ -108,46 +128,53 @@ class Taxonomy:
 
 class SimGraph:
     '''
-    General Purpose Similarity Net
+    General Purpose Similarity Graph which is used to perform graph analysis.
 
-    The nodes in graph represent general purpose object such as synset, word, phrase,
+    The nodes in graph represent general purpose object such as concept, word, phrase,
     sentence, document, entity.
 
-    The edges in graph represent general purpose object similarity. The similarity score between
-    objects is ranged in [0,1] and computed by specific similarity measures. It can measuring
-    taxonomical similarity, general purpose similarity or hybrid similarity.
+    The edges in graph represent semantic similarity between nodes. The similarity score between
+    objects is ranged in [0,1] and computed by specific similarity measures.
+
     '''
 
-    def __init__(self, object_list, similarity, threshold):
-        self.sim = similarity
-        self.object_list = object_list
-        self.threshold = threshold
-        self.id2object = {i:self.object_list[i] for i in range(len(self.object_list))}
-        self.graph = self.sim_graph(self.sim_matrix())
+    def __init__(self, nodes, sim_metric, threshold=0.0):
+        self._nodes = nodes
+        self._sim_metric = sim_metric
+        self._threshold = threshold
+        self._node2id = {n: i for i, n in enumerate(self._nodes)}
+        #self.id2object = {i:self.object_list[i] for i in range(len(self.object_list))}
+        self._graph = self.similarity_graph(self.similarity_matrix())
 
-    def sim_matrix(self):
-        N = len(self.object_list)
+    def similarity_matrix(self):
+        """
+        :return: a similarity matrix
+        """
+        N = len(self._nodes)
         M = np.zeros((N, N), dtype=np.float64)
         for i in range(N):
             M[i,i] = 1.0
         for x,y in combinations(range(N), 2):
-            score = self.sim(self.id2object[x], self.id2object[y])
-            if score > self.threshold:
+            score = self._sim_metric(self._nodes[x], self._nodes[y])
+            if score > self._threshold:
                 M[x,y] = score
+            else:
+                M[x,y] = 0.0
         return M
 
-    def sim_graph(self, M):
+    def similarity_graph(self, M):
         return nx.from_numpy_matrix(M)
 
     def page_rank(self):
-        return nx.pagerank(self.graph)
+        rank_scores = nx.pagerank(self._graph)
+        return {self._nodes[key]: value for key, value in rank_scores.iteritems()}
 
     def hits(self):
         '''h, a = hits() hub and authority'''
-        return nx.hits(self.graph)
+        return nx.hits(self._graph)
 
     def minimum_spanning_tree(self):
-        return nx.minimum_spanning_tree(self.graph)
+        return nx.minimum_spanning_tree(self._graph)
 
 
 

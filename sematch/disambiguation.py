@@ -1,23 +1,47 @@
-from nltk.classify.api import ClassifierI
 from sematch.semantic.similarity import WordNetSimilarity
-from nltk.wsd import lesk as nltk_lesk
+from sematch.semantic.graph import SimGraph
 from sematch.nlp import word_tokenize, lemmatization
+
 from collections import Counter
-from itertools import combinations
-import networkx as nx
+import itertools
 import random
 
 
-class WSD(ClassifierI):
+class WSD:
 
-    def __init__(self, method='maxsim', name='path'):
+    def __init__(self, wsd_method='maxsim', sim_name='wpath'):
         '''
-        method = ['random_sense','first','frequent','maxsim', 'graph', 'lesk', 'naive']
-        name = ['path', 'lch', 'wup', 'li', 'res', 'lin', 'jcn', 'wpath']
+        wsd_methods = ['random_sense','first','frequent','maxsim', 'graph', 'lesk', 'naive']
+        sim_name = ['path', 'lch', 'wup', 'li', 'res', 'lin', 'jcn', 'wpath']
         '''
-        self._method = method
-        self._sim_name = name
+        self._method = wsd_method
+        self._sim_name = sim_name
         self._wn_sim = WordNetSimilarity()
+
+    def disambiguate_graph(self, sentence):
+        words_origin = word_tokenize(sentence)
+        #extract words that have a synset in WordNet, currently support NOUN.
+        words = [w for w in words_origin if self._wn_sim.word2synset(w)]
+        # map words to synsets
+        words_synsets = {w:self._wn_sim.word2synset(w) for w in words}
+        # construct sets list
+        synsets = list(itertools.chain.from_iterable([words_synsets[w] for w in words]))
+        # remove duplicate synsets
+        synsets = list(set(synsets))
+        # define semantic similarity metric
+        sim_metric = lambda x, y: self._wn_sim.similarity(x, y, self._sim_name)
+        # construct similarity graphs
+        sim_graph = SimGraph(synsets, sim_metric)
+        # get pagerank scores of synsets
+        rank_scores = sim_graph.page_rank()
+        results = []
+        for w in words_origin:
+            if w in words:
+                candidate_scores = {s:rank_scores[s] for s in words_synsets[w]}
+                results.append((w, Counter(candidate_scores).most_common(1)[0][0]))
+            else:
+                results.append((w, None))
+        return results
 
     def classify(self, featureset):
         context = featureset['context']
@@ -59,71 +83,8 @@ class WSD(ClassifierI):
         return self.max_senses(context, senses)
 
     def lesk(self, context, word):
+        from nltk.wsd import lesk as nltk_lesk
         context_words = self.context2words(context)
         return nltk_lesk(context_words, word, 'n')
 
-# wsd = WSD()
-# sentence = ' '.join(['I', 'went', 'to', 'the', 'bank', 'to', 'deposit', 'money', '.'])
-# print sentence
-# test = wsd.max_sim(sentence, 'bank')
-# print test, test.definition()
-# test2 = wsd.lesk(sentence, 'bank')
-# print test, test.definition()
 
-
-    # def disambiguate_pagerank(self, context_words, ambiguous_word, method):
-    #     ambiguous_synsets = self.word2synset(ambiguous_word)
-    #     if not ambiguous_synsets:
-    #         return None
-    #     if len(ambiguous_synsets) == 1:
-    #         return ambiguous_synsets[0]
-    #     context_words = list(set(context_words))
-    #     context_synsets = []
-    #     for word in context_words:
-    #         if word != ambiguous_word:
-    #             context = wn.synsets(word, pos=wn.NOUN)
-    #             if context:
-    #                for con in context:
-    #                    context_synsets.append(con)
-    #     context_synsets = list(set(context_synsets))
-    #     all_synsets = [x for x in ambiguous_synsets]
-    #     for x in context_synsets:
-    #         if x not in ambiguous_synsets:
-    #             all_synsets.append(x)
-    #     synset_id_dic = {all_synsets[i]:i for i in range(len(all_synsets))}
-    #     graph = nx.Graph()
-    #     for pair in combinations(all_synsets, 2):
-    #         x, y = pair
-    #         sim_score = self.similarity(x, y, method)
-    #         if sim_score > 0:
-    #             graph.add_edge(synset_id_dic[x], synset_id_dic[y], weight=sim_score)
-    #     ranks = nx.pagerank(graph)
-    #     result = {x:ranks[synset_id_dic[x]] for x in ambiguous_synsets if synset_id_dic[x] in ranks}
-    #     return Counter(result).most_common(1)[0][0]
-
-
-class Combiner:
-
-    def sim_normalization(self, simList):
-        pass
-
-    def sim2rank(self, simList):
-        pass
-
-    def comb_sum(self, simList):
-        pass
-
-    def comb_anz(self, simList):
-        pass
-
-    def comb_mnz(self, simList):
-        pass
-
-    def borda(self, rankList):
-        pass
-
-    def condorcet(self, rankList):
-        pass
-
-    def reciprocal(self, rankList):
-        pass

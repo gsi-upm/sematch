@@ -26,7 +26,8 @@ KG based application also have similar pipeline. Entities in KGs are similar to 
 The goal of the sematch is to provide several core tools for semantic similarity analysis. Aiming this goal, Sematch has several guiding principles in development.
 
 - Provide a convenient framework for developing and evaluating semantic similarity metrics and provide easy interface in developing similarity based applications.
-- Connect the textual world with KGs by providing linking and disambiguations. This could be viewed as application of semantic similarity metrics. Also, linking and disambiguation could be useful for higher level applications.
+- Provide a convenient framework for interacting  KGs by providing entity linking and disambiguations, entity feature extraction, since KGs contain various textual descriptions and structural relations.
+- Provide a convenient frameowrk for performing semantic similarity analysis such as similarity graph.
 
 
 ------------------
@@ -79,7 +80,36 @@ yago_sim.word_similarity('dancer', 'actor', 'wpath')#0.642
 yago_sim.word_similarity('dancer', 'actor', 'wpath_graph')#0.423
 ```
 
+Previous similarity metrics implementations are based on WordNet taxonomy through NLTK's WordNet interface. Apart from English words in WordNet, many real world concepts can be represented hiearchically as concept taonomies, such as DBpedia ontology classes, Wikipedia categories, [Open Diretory Project](https://www.dmoz.org/), [Medical Subject Headings](https://www.nlm.nih.gov/mesh/), [ACM Term ClassificationIn](https://www.acm.org/publications/class-2012) and many others. In order to make it convenient to use, develeop and evaluate semantic similarity metrics in those concept taxonomies, Sematch provides a general purpose taxonomy interface. As those concept taxonomies may be represented in different ways (e.g. RDFS, SKOS), an abstract class is used to transform taxonomies into nodes, edges, and labels. An example of DBpedia ontology class is shown in following code example.
 
+```python
+from sematch.semantic.graph import DataTransform, Taxonomy
+from sematch.semantic.similarity import ConceptSimilarity
+from sematch.ontology import DBpedia
+
+class DBpediaDataTransform(DataTransform):
+
+    def __init__(self):
+        self._ontology = DBpedia()
+
+    def transform(self):
+        nodes =  map(lambda x:x.toPython(), self._ontology.classes)
+        node_id = {n:i for i,n in enumerate(nodes)}
+        labels = [self._ontology.token(value) for i,value in enumerate(self._ontology.classes)]
+        edges = []
+        for i, node in enumerate(nodes):
+            children = self._ontology.subClass(node)
+            children = [child for child in children if child in nodes]
+            children_ids = map(lambda x:node_id[x], children)
+            for child_id in children_ids:
+                edges.append((i, child_id))
+        return nodes, labels, edges
+
+concept_sim = ConceptSimilarity(Taxonomy(DBpediaDataTransform()), 'models/dbpedia_type_ic.txt')
+c1 = concept_sim.name2concept('species')
+c2 = concept_sim.name2concept('organ')
+print concept_sim.similarity(c1, c2)
+```
 
 When developing new similarity metrics, proper evaluation is important, whereas sometimes it is tedious. Sematch helps save such efforts by providing a evaluation framework, where similarity metrics are evaluated with common Word Similarity datasets. Futhermore, a statistical test is included by comparing two similarity metrics.
 
@@ -102,6 +132,7 @@ Although the word similarity correlation measure is the standard way to evaluate
 ```python
 from sematch.classification import SimCatClassifier
 from sematch.evaluation import ABSAEvaluation
+from sematch.semantic.similarity import WordNetSimilarity
 #defining similarity metric
 wns = WordNetSimilarity()
 sim_metric_jcn = lambda x, y: wns.word_similarity(x, y, 'jcn')
@@ -112,13 +143,13 @@ X_train_16, y_train_16 = absa_eval.load_dataset('path to ABSA16_Train')
 X_test_16, y_test_16 = absa_eval.load_dataset('path to ABSA16_Test')
 #train the classifiers
 sim_jcn_classifier = SimCatClassifier.train(zip(X_train_16, y_train_16), sim_metric_jcn)
-sim_jcn_classifier = SimCatClassifier.train(zip(X_train_16, y_train_16), sim_metric_wpath)
+sim_wpath_classifier = SimCatClassifier.train(zip(X_train_16, y_train_16), sim_metric_wpath)
 #evaluate the classifiers
 absa_eval.evaluate(X_test_16, y_test_16, sim_jcn_classifier)
 absa_eval.evaluate(X_test_16, y_test_16, sim_wpath_classifier)
 ```
 
-Like the words can be mapped to WordNet concepts, some muti-word expressions can be mapped to real word entities based on their meanings. Usually, such expressions are composed by a meaningful noun and a specific proper noun, which we can call as type of things. For example, university (common noun) and Madrid (proper noun) refer to all the universities located in Madrid. To conveniently map such experessions to their corresponding entities in DBpedia, you can use sematch EntitySearch class.
+Like the words can be mapped to WordNet concepts, some muti-word expressions can be mapped to real word entities based on their meanings. Usually, such expressions are composed by a meaningful noun and a specific proper noun, which we can call as type of things. For example, university (common noun) and Madrid (proper noun) refer to all the universities located in Madrid. To conveniently map such experessions to their corresponding entities in DBpedia, you can use sematch `EntitySearch` class.
 
 ```python
 from sematch.search import EntitySearch
@@ -141,7 +172,35 @@ entity_f = EntityFeatures()
 yin_and_yang = entity_f.features('http://dbpedia.org/resource/Yin_and_yang')
 ```
 
+
+A simple semantic similarity analysis is applying graph analysis in similarity graph, where nodes are concepts, words, entities and sentences, while edges denote their semantic  similarity. Concept similarity graph can be used for graph-based disambiguation. Word similarity graph or Entity similarity graph can be used to rank or extract important words and entities. Sentence similarity graph can be used for extractive document summarization. An example of using similarity graph for extracting important words from a entity description.
+
+```python
+from sematch.semantic.graph import SimGraph
+from sematch.semantic.similarity import WordNetSimilarity
+from sematch.nlp import Extraction, lemmatization
+from sematch.sparql import EntityFeatures
+from collections import Counter
+#query Tom Cruise DBpedia textual description
+tom = EntityFeatures().features('http://dbpedia.org/resource/Tom_Cruise')
+#extract common nouns from abstract
+words = Extraction().extract_words_sent(tom['abstract'])
+#lemmatize words to remove duplicates
+words = list(set(lemmatization(words)))
+#define a similarity metric
+wns = WordNetSimilarity()
+#construct a similarity graph
+word_graph = SimGraph(words, wns.word_similarity)
+#rank words using Page Rank
+word_scores = word_graph.page_rank()
+words, scores =zip(*Counter(word_scores).most_common(10))
+print words
+(u'action', u'Picture', u'Performance', u'program', u'sport', u'number', u'film', u'series', u'role', u'credit')
+```
+
 ------------------
+
+
 
 ## Installation
 

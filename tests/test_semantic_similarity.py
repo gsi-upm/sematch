@@ -39,3 +39,15 @@ def test_yagotype_similarity():
     assert yagosim.word_similarity('dancer', 'actor', 'wpath') is not None
     #using graph-based IC from DBpedia
     assert yagosim.word_similarity('dancer', 'actor', 'wpath_graph') is not None
+
+def test_concept_similarity():
+    from sematch.semantic.graph import DBpediaDataTransform, Taxonomy
+    from sematch.semantic.similarity import ConceptSimilarity
+    concept_sim = ConceptSimilarity(Taxonomy(DBpediaDataTransform()), 'models/dbpedia_type_ic.txt')
+    c1 = concept_sim.name2concept('species')
+    c2 = concept_sim.name2concept('organ')
+    uri1 = concept_sim.name2uri('species')
+    uri2 = concept_sim.name2uri('organ')
+    assert uri1 is not None
+    assert uri2 is not None
+    assert concept_sim.similarity(c1, c2) is not None
