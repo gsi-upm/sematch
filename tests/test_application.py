@@ -20,4 +20,3 @@ def test_matcher():
     from sematch.application import Matcher
     matcher = Matcher()
     assert matcher.match_entity_type('Give me all movies directed by Francis Ford Coppola') is not None
-    assert matcher.match_type('dancer') is not None
