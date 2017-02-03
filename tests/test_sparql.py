@@ -1,6 +1,6 @@
 
 def test_name_sparql():
-    from sematch.sparql import NameSPARQL
+    from sematch.semantic.sparql import NameSPARQL
     name_linker = NameSPARQL()
     assert 'http://dbpedia.org/resource/Natalie_Portman' in name_linker.name2entities('Natalie Portman')
     assert 'http://dbpedia.org/resource/China' in name_linker.name2entities('China')
@@ -9,7 +9,7 @@ def test_name_sparql():
 
 
 def test_query_graph():
-    from sematch.sparql import QueryGraph
+    from sematch.semantic.sparql import QueryGraph
     qg = QueryGraph()
     concepts = ['http://dbpedia.org/class/yago/Film106262567',
                 'http://dbpedia.org/class/yago/Film103339296',
@@ -18,9 +18,3 @@ def test_query_graph():
                 'http://dbpedia.org/class/yago/Film103338821']
     entity = 'http://dbpedia.org/resource/Hal_Roach'
     assert 'http://dbpedia.org/resource/Luke_Pipes_the_Pippins' in qg.type_entity_query(concepts,entity)
-
-def test_entity_features():
-    from sematch.sparql import EntityFeatures
-    entity_f = EntityFeatures()
-    yin_and_yang = entity_f.features('http://dbpedia.org/resource/Yin_and_yang')
-    print yin_and_yang

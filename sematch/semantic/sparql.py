@@ -1,30 +1,39 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+# Copyright 2017 Ganggao Zhu- Grupo de Sistemas Inteligentes
+# gzhu[at]dit.upm.es
+# DIT, UPM
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+#    distributed under the License is distributed on an "AS IS" BASIS,
+#    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#    See the License for the specific language governing permissions and
+#    limitations under the License.
+
 from SPARQLWrapper import SPARQLWrapper, JSON
 from rdflib import RDF, RDFS, OWL
-import requests
 
 class BaseSPARQL:
 
-    def __init__(self, url="http://dbpedia.org/sparql"):
+    """This class implements basic sparql patterns."""
+
+    def __init__(self, url="http://dbpedia.org/sparql", limit=5000):
         self._url = url
         self._sparql = SPARQLWrapper(url)
         self._sparql.setReturnFormat(JSON)
-        self._tpl = """SELECT DISTINCT %s WHERE {\n\t%s\n}"""
-        self._count_tpl = """SELECT %s WHERE {\n\t%s\n}"""
+        self._tpl = """SELECT DISTINCT %s WHERE {\n\t%s\n} LIMIT """ + str(limit)
+        self._count_tpl = """SELECT %s WHERE {\n\t%s\n} LIMIT """ + str(limit)
+        self._text_tpl = """SELECT DISTINCT %s, ?label, ?abstract WHERE {\n\t%s\n} LIMIT """ + str(limit)
 
-
-    def request_execution(self, query):
-        params={
-                "default-graph": "http://dbpedia.org",
-                "query": query,
-                "debug": "on",
-                "format": "application/json",
-                "timeout": 30000,
-            }
-        result = requests.get(self._url, params=params)
-        return result.text
-
-    def execution(self, query):
-        #print query
+    def execution(self, query, show_query=False):
+        if show_query:
+            print query
         self._sparql.setQuery(query)
         results = self._sparql.query().convert()
         #print results
@@ -33,17 +42,30 @@ class BaseSPARQL:
     #SELECT DISTINCT ?x WHERE is query line containing variables
     #{?s ?p ?o . ?s2 ?p2 ?o } is triples line of query
 
-    def execution_template(self, variable, query, triples, template):
+    def execution_template(self, variable, query, triples, template, show_query=False):
         """retrieve query results from sparql end point"""
-        return [r[variable]["value"] for r in self.execution(template % (query, triples))]
+        return [r[variable]["value"] for r in self.execution(template % (query, triples), show_query)]
 
     def create_query(self, variable, triples):
         """create a sparql query in string based on template, variable and triples"""
         return self._tpl % (self.q_mark(variable), triples)
 
-    def resource_query(self, variable, triples):
+    def resource_query(self, variable, triples, show_query=False):
         """execute query to return resources"""
-        return self.execution_template(variable, self.q_mark(variable), triples, self._tpl)
+        return self.execution_template(variable, self.q_mark(variable), triples, self._tpl, show_query)
+
+    def text_query(self, variable, triples, lang='en', show_query=False):
+        triples += self.label_triple(variable, lang)
+        triples += self.abstract_triple(variable, lang)
+        data = self.execution(self._text_tpl % (self.q_mark(variable), triples), show_query)
+        result = []
+        for d in data:
+            res = {}
+            res['uri'] = d[variable]['value']
+            res['label'] = d['label']['value']
+            res['abstract'] = d['abstract']['value']
+            result.append(res)
+        return result
 
     def count_query(self, variable, triples):
         """execute query to return counts """
@@ -115,10 +137,15 @@ class BaseSPARQL:
         """given known subject and object, predicate is a variable"""
         return v, self.triple(self.uri(s), self.q_mark(v), self.uri(o))
 
-    def label(self, s, lang='en'):
-        """query the lable of a resource"""
-        return self.resource_query(*self.new_triple('o',
-               self.lang_filter('o', lang))(self.sp_triple, s, RDFS.label))
+    def label_triple(self, s, lang='en'):
+        return self.triple(self.q_mark(s),
+                           self.uri(RDFS.label),
+                           self.q_mark('label')) + self.lang_filter('label', lang)
+
+    def abstract_triple(self, s, lang='en'):
+        return self.triple(self.q_mark(s),
+                              self.uri('http://dbpedia.org/ontology/abstract'),
+                              self.q_mark('abstract')) + self.lang_filter('abstract', lang)
 
     def thing(self, s):
         return self.po_triple(RDF.type, OWL.Thing, s)
@@ -139,8 +166,16 @@ class BaseSPARQL:
 
 class EntityFeatures(BaseSPARQL):
 
+    """This class implements entity feature extraction from DBpedia through SPARQL,
+    which supports features such as entity types, labels, abstracts, categories"""
+
     def __init__(self):
         BaseSPARQL.__init__(self)
+
+    def label(self, entity, lang='en'):
+        """query the lable of a resource"""
+        return self.resource_query(*self.new_triple('o',
+               self.lang_filter('o', lang))(self.sp_triple, entity, RDFS.label))
 
     def type(self, entity):
         return self.resource_query(*self.sp_triple(entity, RDF.type, 'o'))
@@ -156,12 +191,16 @@ class EntityFeatures(BaseSPARQL):
 
     def features(self, entity):
         return {
+            'label':self.label(entity)[0],
             'type':self.type(entity),
             'category':self.category(entity),
             'abstract':self.abstract(entity)[0]
         }
 
 class StatSPARQL(BaseSPARQL):
+
+    """This class implements statistics for concepts and entities using SPARQL. It can be used to
+    count concept frequency, entity relation frequency from DBpedia."""
 
     def __init__(self):
         BaseSPARQL.__init__(self)
@@ -197,20 +236,33 @@ class StatSPARQL(BaseSPARQL):
         count_2 = self.count_query('p', t1 + t2 + t4)
         return int(count_1) + int(count_2)
 
-    # select count(?p) where s ?p ?o or ?o ?p s
+    # select count(?o) where s ?p ?o or ?o ?p s
     # subject is known
     def entity_relation(self, entity):
         s1, t1 = self.thing('s1')
         t2 = self.s_triple(entity, 'p', s1)
         t3 = self.o_triple(s1, 'p', entity)
-        count_1 = self.count_query('p', t1 + t2)
-        count_2 = self.count_query('p', t1 + t3)
+        count_1 = self.count_query(s1, t1 + t2)
+        count_2 = self.count_query(s1, t1 + t3)
         return int(count_1) + int(count_2)
+
+    def entity_share(self, entity1, entity2):
+        s1, t1 = self.thing('s1')
+        t2 = self.s_triple(entity1, 'p1', s1 )
+        t3 = self.o_triple(s1, 'p1', entity1)
+        t4 = self.s_triple(entity2, 'p2', s1)
+        t5 = self.o_triple(s1, 'p2', entity2)
+        count_1 = self.count_query(s1, t1+t2+t4)
+        count_2 = self.count_query(s1, t1+t2+t5)
+        count_3 = self.count_query(s1, t1+t3+t4)
+        count_4 = self.count_query(s1, t1+t3+t5)
+        return sum(map(int, [count_1, count_2, count_3, count_4]))
 
 
 class NameSPARQL(BaseSPARQL):
 
-    """query resource through names"""
+    """This class implements exact name matching for entities. It queries entity resource
+    from DBpedia through entity's names"""
 
     def __init__(self):
         BaseSPARQL.__init__(self)
@@ -271,10 +323,19 @@ class NameSPARQL(BaseSPARQL):
 
 class QueryGraph(BaseSPARQL):
 
-    def __init__(self):
-        BaseSPARQL.__init__(self)
+    """This class implement basic query graph patterns which can query type of things, and a type entity pattern."""
 
-    def type_entity_query(self, concepts, entity):
+    def __init__(self, result_limit=5000):
+        BaseSPARQL.__init__(self, limit=result_limit)
+
+    def type_query(self, concepts, lang='en', show_query=False):
+        triples = map(lambda x: self.po_triple(RDF.type, x, 's'), concepts)
+        t1 = [t for v, t in triples]
+        t1 = self.union(t1)
+        v, t2 = self.thing('s')
+        return self.text_query(v, t1 + t2, lang, show_query)
+
+    def type_entity_query(self, concepts, entity, show_query=False):
         """
         Construct type entity queries.
         Some more possible patterns.
@@ -291,6 +352,6 @@ class QueryGraph(BaseSPARQL):
         t1 = self.union(t1)
         t2 = self.s_triple(entity, 'p', 's')
         t3 = self.o_triple('s', 'p', entity)
-        res1 = self.resource_query('s', t1 + t2)
-        res2 = self.resource_query('s', t1 + t3)
+        res1 = self.text_query('s', t1 + t2, show_query)
+        res2 = self.text_query('s', t1 + t3, show_query)
         return res1 + res2

@@ -2,10 +2,20 @@
 
 def test_extraction():
     from sematch.nlp import Extraction
-    from sematch.sparql import EntityFeatures
-    entity_f = EntityFeatures()
-    yin_and_yang = entity_f.features('http://dbpedia.org/resource/Yin_and_yang')
-    assert yin_and_yang is not None
+    from sematch.semantic.sparql import EntityFeatures
+    upm = EntityFeatures().features('http://dbpedia.org/resource/Technical_University_of_Madrid')
     extract = Extraction()
-    assert 'Chinese' in extract.extract_chunks_doc(yin_and_yang['abstract'])
-    assert 'philosophy' in extract.extract_words_doc(yin_and_yang['abstract'])
+    assert extract.extract_nouns(upm['abstract']) is not None
+    assert extract.extract_verbs(upm['abstract']) is not None
+    assert extract.extract_chunks_doc(upm['abstract']) is not None
+    cats = extract.category_features(upm['category'])
+    assert extract.category2words(cats) is not None
+
+
+
+def test_rake():
+    from sematch.nlp import RAKE
+    from sematch.semantic.sparql import EntityFeatures
+    upm = EntityFeatures().features('http://dbpedia.org/resource/Technical_University_of_Madrid')
+    rake = RAKE()
+    assert rake.extract(upm['abstract']) is not None

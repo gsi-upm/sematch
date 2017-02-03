@@ -1,13 +1,113 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+# Copyright 2017 Ganggao Zhu- Grupo de Sistemas Inteligentes
+# gzhu[at]dit.upm.es
+# DIT, UPM
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+#    distributed under the License is distributed on an "AS IS" BASIS,
+#    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#    See the License for the specific language governing permissions and
+#    limitations under the License.
 
-from sematch.nlp import word_tokenize, lemmatization
-from sematch.semantic.similarity import WordVecSimilarity, WordNetSimilarity
+from sematch.semantic.sparql import NameSPARQL, QueryGraph
+from sematch.semantic.similarity import YagoTypeSimilarity
 from sematch.utility import memoized
-from collections import Counter
+from sematch.nlp import word_tokenize, word_process, Extraction
 
 import numpy as np
+import itertools
+from collections import Counter
 
 
-class SimCatClassifier:
+class Matcher:
+
+    """This class is used for concept based entity match in DBpedia"""
+
+    def __init__(self, result_limit=5000, expansion=True, show_query=False):
+        self._expansion = expansion
+        self._show_query = show_query
+        self._linker = NameSPARQL()
+        self._extracter = Extraction()
+        self._yago = YagoTypeSimilarity()
+        self._query_graph = QueryGraph(result_limit)
+
+    def type_links(self, word, lang='eng'):
+        synsets = self._yago.multilingual2synset(word, lang=lang)
+        if self._expansion:
+            synsets = list(set(itertools.chain.from_iterable([self._yago.synset_expand(s) for s in synsets])))
+        links = []
+        for s in synsets:
+            link_dic = {}
+            link_dic['name'] = s.name()
+            link_dic['gloss'] = s._definition
+            link_dic['lemma'] = ' '.join(s._lemma_names)
+            concept_link = []
+            yago_link = self._yago.synset2yago(s)
+            dbpedia_link = self._yago.synset2dbpedia(s)
+            concept_link.append(yago_link) if yago_link else None
+            concept_link.append(dbpedia_link) if dbpedia_link else None
+            link_dic['lod'] = concept_link
+            if link_dic['lod']:
+                links.append(link_dic)
+        return links
+
+    def query_process(self, query):
+        """
+        Process query into concept (common noun) and entity (proper noun). Link them
+        to Knowledge Graph uri links respectively.
+        :param query: short text query
+        :return: tuple of concepts and entities in uris.
+        """
+        entities = self._extracter.extract_chunks_sent(query)
+        entity_filter = list(itertools.chain.from_iterable([e.lower().split() for e in entities]))
+        entity_filter = set(entity_filter)
+        concepts = list(set(self._extracter.extract_nouns(query)))
+        concepts = [c for c in concepts if c not in entity_filter]
+        concept_uris = [list(itertools.chain.from_iterable([s['lod'] for s in self.type_links(c)])) for c in concepts]
+        concept_uris = list(itertools.chain.from_iterable(concept_uris))
+        entity_uris = list(itertools.chain.from_iterable(map(self._linker.name2entities, entities)))
+        return list(set(concept_uris)), list(set(entity_uris))
+
+    def match_type(self, query, lang='eng'):
+        lang_map = {'eng':'en','spa':'es', 'cmn':'zh'}
+        result_lang = lang_map[lang]
+        words = query.split()
+        concept_uris = []
+        for w in words:
+            concepts = list(itertools.chain.from_iterable([s['lod'] for s in self.type_links(w,lang)]))
+            concept_uris.extend(concepts)
+        concept_uris = list(set(concept_uris))
+        results = []
+        for i in xrange(0, len(concept_uris), 5):
+            results.extend(self._query_graph.type_query(concept_uris[i:i + 5], result_lang, self._show_query))
+        result_dic = {}
+        for res in results:
+            if res['uri'] not in result_dic:
+                result_dic[res['uri']] = res
+        return [result_dic[key] for key in result_dic.keys()]
+
+    def match_entity_type(self, query):
+        results = []
+        concepts, entities = self.query_process(query)
+        for e in entities:
+            for i in xrange(0, len(concepts), 5):
+                results.extend(self._query_graph.type_entity_query(concepts[i:i + 5], e, self._show_query))
+        result_dic = {}
+        for res in results:
+            if res['uri'] not in result_dic:
+                result_dic[res['uri']] = res
+        result = [result_dic[key] for key in result_dic.keys()]
+        return result
+
+
+class SimClassifier:
     """
     This class implements similarity based category classifiers.
     """
@@ -39,9 +139,10 @@ class SimCatClassifier:
         Compute the weight for each feature token in each category
         The weight is computed as token_count / total_feature_count
         '''
+        print "Training..."
         cat_word = {}
         for sent, cat in corpus:
-            cat_word.setdefault(cat, []).extend(lemmatization(word_tokenize(sent)))
+            cat_word.setdefault(cat, []).extend(word_process(word_tokenize(sent)))
         features = {cat: Counter(cat_word[cat]) for cat in cat_word}
         labels = features.keys()
         cat_features = {}
@@ -113,7 +214,7 @@ class SimCatClassifier:
         :param model: similarity combination model 'max', 'sum'. Default is 'max'
         :return: the correct category label.
         """
-        feature_words = list(set(lemmatization(word_tokenize(sent))))
+        feature_words = list(set(word_process(word_tokenize(sent))))
         score = {}
         for c in self._categories:
             if feature_model == 'max':
@@ -124,6 +225,7 @@ class SimCatClassifier:
 
     def classify(self, X, feature_model='max'):
         return [self.classify_single(x, feature_model) for x in X]
+
 
 
 from sklearn.svm import LinearSVC
@@ -149,20 +251,15 @@ class TextPreprocessor(BaseEstimator, TransformerMixin):
     """
     Transform input text into feature representation
     """
-    def __init__(self, corpus, feature_num=10, model='onehot',
-                 wn_method='path',
-                 vec_file='models/GoogleNews-vectors-negative300.bin',
-                 binary=True):
+    def __init__(self, corpus, word_sim_metric, feature_num=10, model='sim'):
         """
         :param corpus: use a corpus to train a vector representation
         :param feature_num: number of dimensions
-        :param model: onehot or wordnet or word2vec or both
+        :param model: onehot or sim
         """
         self._model = model
-        self._wn_method = wn_method
+        self._word_sim = word_sim_metric
         self._features = self.extract_features(corpus, feature_num)
-        self._wns = WordNetSimilarity() if model == 'wordnet' or model == 'both' else None
-        self._wvs = WordVecSimilarity(vec_file, binary) if model == 'word2vec' or model == 'both' else None
 
     def fit(self, X, y=None):
         return self
@@ -173,7 +270,7 @@ class TextPreprocessor(BaseEstimator, TransformerMixin):
     def extract_features(self, corpus, feature_num=10):
         cat_word = {}
         for sent, cat in corpus:
-            cat_word.setdefault(cat, []).extend(lemmatization(word_tokenize(sent)))
+            cat_word.setdefault(cat, []).extend(word_process(word_tokenize(sent)))
         features = {cat: Counter(cat_word[cat]) for cat in cat_word}
         feature_words = []
         for c, f in features.iteritems():
@@ -182,11 +279,8 @@ class TextPreprocessor(BaseEstimator, TransformerMixin):
         feature_words = set(feature_words)
         return feature_words
 
-    def similarity(self, tokens, feature, method='wordnet'):
-        if method == 'wordnet':
-            sim = lambda x: self._wns.word_similarity(feature, x, self._wn_method)
-        else:
-            sim = lambda x: self._wvs.word_similarity(feature, x)
+    def similarity(self, tokens, feature):
+        sim = lambda x: self._word_sim(feature, x)
         return max(map(sim, tokens) + [0.0])
 
     def unigram_features(self, tokens):
@@ -196,55 +290,31 @@ class TextPreprocessor(BaseEstimator, TransformerMixin):
             features['contains({})'.format(f)] = (f in words)
         return features
 
-    def wordnet_features(self, tokens):
+    def sim_features(self, tokens):
         words = set(tokens)
         features = {}
         for f in self._features:
-            features['wns({})'.format(f)] = self.similarity(words, f)
-        return features
-
-    def word2vec_features(self, tokens):
-        words = set(tokens)
-        features = {}
-        for f in self._features:
-            features['w2v({})'.format(f)] = self.similarity(words, f, method='word2vec')
-        return features
-
-    def semantic_features(self, tokens):
-        words = set(tokens)
-        features = {}
-        for f in self._features:
-            features['wns({})'.format(f)] = self.similarity(words, f)
-            features['w2v({})'.format(f)] = self.similarity(words, f, method='word2vec')
+            features['sim({})'.format(f)] = self.similarity(words, f)
         return features
 
     def transform(self, X):
-        tokenize = lambda x: lemmatization(word_tokenize(x))
+        tokenize = lambda x: word_process(word_tokenize(x))
         X_tokens = map(tokenize, X)
         if self._model == 'onehot':
             return map(self.unigram_features, X_tokens)
-        elif self._model == 'wordnet':
-            return map(self.wordnet_features, X_tokens)
-        elif self._model == 'word2vec':
-            return map(self.word2vec_features, X_tokens)
-        elif self._model == 'both':
-            return map(self.semantic_features, X_tokens)
+        else:
+            return map(self.sim_features, X_tokens)
 
 
-class SimCatSVMClassifier:
+class SimSVMClassifier:
 
     def __init__(self, labels, model):
         self._labels = labels
         self._model = model
 
     @classmethod
-    def train(cls, X, y, classifier=LinearSVC,
-              feature_num=10,
-              feature='onehot',
-              wn_method='path',
-              vec_file='models/GoogleNews-vectors-negative300.bin',
-              binary=True,
-              verbose=True):
+    def train(cls, X, y, word_sim_metric, classifier=LinearSVC,
+              feature_num=10, feature_type='sim', verbose=True):
 
         if isinstance(classifier, type):
             classifier = classifier()
@@ -257,7 +327,7 @@ class SimCatSVMClassifier:
 
             corpus = zip(X, y)
             model = Pipeline([
-                ('preprocessor', TextPreprocessor(corpus, feature_num, feature, wn_method, vec_file, binary)),
+                ('preprocessor', TextPreprocessor(corpus, word_sim_metric, feature_num, feature_type)),
                 ('vectorizer', DictVectorizer()),
                 ('classifier', classifier),
             ])
@@ -274,44 +344,3 @@ class SimCatSVMClassifier:
     def classify(self, X):
         predicted = self._model.predict(X)
         return list(self._labels.inverse_transform(predicted))
-
-
-
-class SimpleSVMClassifier:
-
-    def __init__(self, labels, vectorizer, classifier):
-        self._labels = labels
-        self._vectorizer = vectorizer
-        self._classifier = classifier
-
-    @classmethod
-    def train(cls, X, y, classifier=LinearSVC, model='bow'):
-        """
-        :param X:
-        :param y:
-        :param classifier:
-        :param model: bow or tfidf
-        :return:
-        """
-        tokenize = lambda x: lemmatization(word_tokenize(x))
-        labels = LabelEncoder()
-        y_train = labels.fit_transform(y)
-        vectorizer = CountVectorizer(tokenizer=tokenize) \
-            if model == 'bow' else TfidfVectorizer(tokenizer=tokenize)
-        X_train = vectorizer.fit_transform(X)
-        if isinstance(classifier, type):
-            classifier = classifier()
-        classifier.fit_transform(X_train, y_train)
-        return cls(labels, vectorizer, classifier)
-
-    def classify(self, X):
-        X_test = self._vectorizer.transform(X)
-        predicted = self._classifier.predict(X_test)
-        return list(self._labels.inverse_transform(predicted))
-
-
-
-
-
-
-

@@ -184,7 +184,7 @@ from collections import Counter
 #query Tom Cruise DBpedia textual description
 tom = EntityFeatures().features('http://dbpedia.org/resource/Tom_Cruise')
 #extract common nouns from abstract
-words = Extraction().extract_words_sent(tom['abstract'])
+words = Extraction().extract_words_doc(tom['abstract'])
 #lemmatize words to remove duplicates
 words = list(set(lemmatization(words)))
 #define a similarity metric
@@ -195,7 +195,7 @@ word_graph = SimGraph(words, wns.word_similarity)
 word_scores = word_graph.page_rank()
 words, scores =zip(*Counter(word_scores).most_common(10))
 print words
-(u'action', u'Picture', u'Performance', u'program', u'sport', u'number', u'film', u'series', u'role', u'credit')
+(u'action', u'Picture', u'Performance', u'number', u'program', u'sport', u'film', u'role', u'series', u'credit')
 ```
 
 ------------------

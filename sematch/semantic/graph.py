@@ -1,10 +1,31 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+# Copyright 2017 Ganggao Zhu- Grupo de Sistemas Inteligentes
+# gzhu[at]dit.upm.es
+# DIT, UPM
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+#    distributed under the License is distributed on an "AS IS" BASIS,
+#    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#    See the License for the specific language governing permissions and
+#    limitations under the License.
+
 from abc import ABCMeta, abstractmethod
 from collections import deque
-import networkx as nx
 from itertools import combinations
+
+import networkx as nx
 import numpy as np
 
-from sematch.ontology import DBpedia
+from sematch.semantic.ontology import DBpedia
+from sematch.utility import FileIO
+
 
 class DataTransform:
     """
@@ -121,10 +142,10 @@ class Taxonomy:
         return lcs
 
     def hyponyms(self, node):
-        return self._hyponyms[node] if self._hyponyms.get(node) else []
+        return self._hyponyms[node] if node in self._hyponyms else []
 
     def hypernyms(self, node):
-        return self._hypernyms[node] if self._hypernyms.get(node) else []
+        return self._hypernyms[node] if node in self._hypernyms else []
 
 class SimGraph:
     '''
@@ -142,8 +163,6 @@ class SimGraph:
         self._nodes = nodes
         self._sim_metric = sim_metric
         self._threshold = threshold
-        self._node2id = {n: i for i, n in enumerate(self._nodes)}
-        #self.id2object = {i:self.object_list[i] for i in range(len(self.object_list))}
         self._graph = self.similarity_graph(self.similarity_matrix())
 
     def similarity_matrix(self):
@@ -176,16 +195,57 @@ class SimGraph:
     def minimum_spanning_tree(self):
         return nx.minimum_spanning_tree(self._graph)
 
+from sematch.semantic.sparql import StatSPARQL
+import math
 
+class GraphIC:
 
-#
-# entity_list = ['Steve Jobs', 'Steve Wozniak', 'Jonathan Ivex', 'Mac Pro']
-#
-# sim = lambda x, y: len(x) + len(y)
-#
-# sim_graph = SimGraph(entity_list, sim, 0)
-# print sim_graph.page_rank()
-# print sim_graph.hits()
-# sim_graph.draw2file(sim_graph.minimum_spanning_tree())
+    """
+    This class is used to compute graph-based IC in knowledge graph, which is
+    basically the proportion of instances tagged with a specific concept
+    """
+
+    def __init__(self, ic_file):
+        self._ic_file = ic_file
+        self._graph_ic = self.graph_ic_reader(ic_file)
+        self._graph_stats = StatSPARQL()
+        self._N = self._graph_stats.entity_N()
+
+    def concept_ic(self, concept):
+        """
+        Compute the ic value of a concept using sparql query
+        :param concept: a id of concept, here is the uri of concept
+        :return: the ic value of the concept
+        """
+        if concept in self._graph_ic:
+            return self._graph_ic[concept]
+        else:
+            freq = int(self._graph_stats.concept_freq(concept))
+            if freq == 0:
+                ic = 0.0
+            else:
+                prob = 1.0 * freq / self._N
+                ic = -math.log(prob)
+            self.graph_ic_writer(self._ic_file, [{'concept':concept, 'ic':str(ic)}])
+            self._graph_ic[concept] = ic
+            return ic
+
+    def graph_ic_reader(self, filename):
+        """
+        Load the saved IC values
+        :param filename: the file containing IC values of concepts
+        :return: a dictionary concept:IC
+        """
+        data = FileIO.read_json_file(filename)
+        return {d['concept']:float(d['ic']) for d in data}
+
+    def graph_ic_writer(self, filename, data):
+        """
+        Save the ic values for a concept for faster access.
+        :param filename:
+        :param data:
+        :return:
+        """
+        FileIO.append_json_file(filename, data)
 
 

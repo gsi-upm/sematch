@@ -57,58 +57,6 @@ class FileIO:
         return data
 
 
-def trace(f):
-    def g(x):
-        print f.__name__, x
-        value = f(x)
-        print 'return', repr(value)
-        return value
-    return g
-
-
-import Levenshtein
-import math
-
-
-#String similarity
-
-def string_similarity(X, Y):
-    return Levenshtein.ratio(X, Y)
-
-#convert the distance to similarity
-
-def fraction(x):
-    return 1 / (1 + x)
-
-#difference of two list
-
-def difference(X, Y):
-    return [X[i] - Y[i] for i in range(len(X))]
-
-def square(x):
-    return x**2
-
-#The length of X and Y should be identical
-
-def minkowski(X, Y, r):
-    distance = difference(X,Y)
-    distance = map(abs, distance)
-    distance = map(lambda x:pow(x,r), distance)
-    distance = sum(distance)
-    distance = pow(distance, 1/r)
-    return fraction(distance)
-
-#manhattan similarity is when r in minkowski equals 1
-
-def manhattan(X, Y):
-    return minkowski(X,Y,1)
-
-#euclidean similarity is when r in minkowski equals 2
-
-def euclidean(X, Y):
-    return minkowski(X,Y,2)
-
-
 import collections
 import functools
 

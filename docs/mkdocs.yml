@@ -9,7 +9,8 @@ site_author: Ganggao Zhu
 
 pages:
 - Home: index.md
-- Word similarity: word_similarity.md
-- Concept similarity: concept_similarity.md
-- Category Classification: category_classify.md
-- Entity Search: entity_search.md 
+- Similarity: similarity.md
+- Evaluation: evaluation.md 
+- NLP: nlp.md
+- Application: application.md
+- API: api.md

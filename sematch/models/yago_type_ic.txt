@@ -2887,3 +2887,4 @@
 {"ic": "10.6198007455", "concept": "http://dbpedia.org/class/yago/Colonel109937250"}
 {"ic": "0.0", "concept": "http://dbpedia.org/class/yago/Fur101899062"}
 {"ic": "0.0", "concept": "http://dbpedia.org/class/yago/Fur103404149"}
+{"ic": "6.78147553993", "concept": "http://dbpedia.org/class/yago/Dancer109989502"}
