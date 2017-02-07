@@ -75,6 +75,16 @@ class Matcher:
         entity_uris = list(itertools.chain.from_iterable(map(self._linker.name2entities, entities)))
         return list(set(concept_uris)), list(set(entity_uris))
 
+    def match_concepts(self, concepts, lang='en'):
+        results = []
+        for i in xrange(0, len(concepts), 5):
+            results.extend(self._query_graph.type_query(concepts[i:i + 5], lang, self._show_query))
+        result_dic = {}
+        for res in results:
+            if res['uri'] not in result_dic:
+                result_dic[res['uri']] = res
+        return [result_dic[key] for key in result_dic.keys()]
+
     def match_type(self, query, lang='eng'):
         lang_map = {'eng':'en','spa':'es', 'cmn':'zh'}
         result_lang = lang_map[lang]
@@ -84,18 +94,12 @@ class Matcher:
             concepts = list(itertools.chain.from_iterable([s['lod'] for s in self.type_links(w,lang)]))
             concept_uris.extend(concepts)
         concept_uris = list(set(concept_uris))
-        results = []
-        for i in xrange(0, len(concept_uris), 5):
-            results.extend(self._query_graph.type_query(concept_uris[i:i + 5], result_lang, self._show_query))
-        result_dic = {}
-        for res in results:
-            if res['uri'] not in result_dic:
-                result_dic[res['uri']] = res
-        return [result_dic[key] for key in result_dic.keys()]
+        return self.match_concepts(concept_uris, result_lang)
 
     def match_entity_type(self, query):
         results = []
         concepts, entities = self.query_process(query)
+        print concepts, entities
         for e in entities:
             for i in xrange(0, len(concepts), 5):
                 results.extend(self._query_graph.type_entity_query(concepts[i:i + 5], e, self._show_query))

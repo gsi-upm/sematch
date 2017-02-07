@@ -352,6 +352,6 @@ class QueryGraph(BaseSPARQL):
         t1 = self.union(t1)
         t2 = self.s_triple(entity, 'p', 's')
         t3 = self.o_triple('s', 'p', entity)
-        res1 = self.text_query('s', t1 + t2, show_query)
-        res2 = self.text_query('s', t1 + t3, show_query)
+        res1 = self.text_query('s', t1 + t2, show_query=show_query)
+        res2 = self.text_query('s', t1 + t3, show_query=show_query)
         return res1 + res2

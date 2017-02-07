@@ -20,3 +20,10 @@ def test_matcher():
     from sematch.application import Matcher
     matcher = Matcher()
     assert matcher.match_entity_type('Give me all movies directed by Francis Ford Coppola') is not None
+
+
+from sematch.application import Matcher
+matcher = Matcher(result_limit=2,expansion=False, show_query=True)
+print matcher.match_type('singer')
+print matcher.match_concepts(['http://dbpedia.org/class/yago/Singer110599806'])
+print matcher.match_entity_type('singer Spain')
