@@ -1,5 +1,5 @@
 include requirements.txt
-include README.rst
+include README.md
 include LICENSE.txt
 graft sematch/dataset/aspect
 graft sematch/dataset/wordsim

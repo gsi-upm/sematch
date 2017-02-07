@@ -22,6 +22,7 @@ Install Sematch
 
 ```
 pip install sematch
+python -m sematch.download
 ```
 
 The core module of Sematch is measuring semantic similarity between concepts that are represeted as concept taxonomies. Word similarity is computed based on the maximum semantic similarity of WordNet concepts. You can use Sematch to compute multilingual word similarity based on WordNet with various of semantic similarity metrics.

@@ -58,3 +58,5 @@ def test_entity_similarity():
     assert entity_sim.similarity('http://dbpedia.org/resource/Madrid',
                                  'http://dbpedia.org/resource/Barcelona') is not None
     assert entity_sim.relatedness('http://dbpedia.org/resource/Madrid', 'http://dbpedia.org/resource/Barcelona') is not None
+
+test_word_similarity()

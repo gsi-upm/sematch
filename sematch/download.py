@@ -16,10 +16,14 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-def test_matcher():
-    from sematch.application import Matcher
-    matcher = Matcher(result_limit=2, expansion=False, show_query=True)
-    assert matcher.match_type('singer') is not None
-    assert matcher.match_concepts(['http://dbpedia.org/class/yago/Singer110599806']) is not None
-    assert matcher.match_entity_type('singer Spain') is not None
+import nltk
 
+def download():
+    nltk.download('stopwords')
+    nltk.download('wordnet')
+    nltk.download('wordnet_ic')
+    nltk.download('omw')
+    nltk.download('averaged_perceptron_tagger')
+
+if __name__ == '__main__':
+    download()
