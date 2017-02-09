@@ -31,7 +31,7 @@ pip install sematch
 python -m sematch.download
 ```
 
-We also provide a [Sematch-Demo Server](https://github.com/gsi-upm/sematch-demo). You can use it for experimenting with main functionalities or take it as an example for using Sematch to develop applications.
+We also provide a [Sematch-Demo Server](https://github.com/gsi-upm/sematch-demo). You can use it for experimenting with main functionalities or take it as an example for using Sematch to develop applications. Please check our [Documentation](http://gsi-upm.github.io/sematch/) for more details.
 
 ### Computing Word Similarity
 
