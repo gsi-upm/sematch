@@ -4,13 +4,19 @@
 
 # Introduction
 
-Sematch is an integrated framework for the development, evaluation, and application of semantic similarity for Knowledge Graphs. Semantic similarity is a very useful metric for many applications that require to quantify the semantic similarity between concepts. Sematch focuses on knowledge-based semantic similarity using structural knowledge in taxonomy (e.g. depth, path length, least common subsumer), and statistical information contents (corpus-IC and graph-IC). 
+Sematch is an integrated framework for the development, evaluation, and application of semantic similarity for Knowledge Graphs (KGs). It is easy to use Sematch to compute semantic similarity scores of concepts, words and entities. Sematch focuses on specific knowledge-based semantic similarity metrics that rely on structural knowledge in taxonomy (e.g. depth, path length, least common subsumer), and statistical information contents (corpus-IC and graph-IC). Knowledge-based approaches are different from their conterpart corpus-based approaches, which are mainly based on word coocurrence (e.g. Pointwise Mutual Information) or distributional semantics (Latent Semantic Analysis, Word2Vec, GLOVE and etc). Knowledge-based approaches are usually used for structual KGs, while corpus-based approaches are normally applied in textual corpora.
+
+In text analysis applications, a common pipeline is adolpted in using semantic similarity from concept level, to word and sentence level. For example, word similarity is first computed based on similarity scores of WordNet concepts, and sentence similarity is computed by composing word similarity scores. Finally, document similarity could be computed by identifying important sentences, e.g. TextRank. 
 
 ![logo](docs/sources/img/sematch-motivation.jpg)
 
-Many applications share a common pipeline in using semantic similarity analysis. In textual applications, word similarity is measured based on WordNet with various semantic similarity metrics. Then text similarity (sentence level) is measured by composing word similarities, while document level text could be analysed by identifying important sentences based on text similarity, e.g. TextRank. This process starts from measuring concept similarity (word meanings or senses which are denoted as synsets in WordNet) which is normally referred as knowledge-based semantic similarity compared to its conterpart corpus-based approaches that are based on word coocurrence (e.g. Pointwise Mutual Information) or distributional semantics (Explict Semantic Analysis, Word2Vec, GLOVE and etc). Concept similarity are normally quantified using various information such as structural knowledge (e.g. path length, depth, least common subsumer) and statistical knowledge ( information content). 
 
-KG based applications also meet the requirments in computing concept similarity (e.g. `http://dbpedia.org/class/yago/Actor109765278`) and entity similarity (e.g. `http://dbpedia.org/resource/Madrid`). Since entities usually contain several concepts to describe entity meanings, similar to word similarity, entity similarity can be quantified based on their concept similarity. Moreover, those concepts in KGs are usually constructed into hierarchical taxonomies, such as DBpedia ontology class, Wikipedia categories, therefore quantifying concept similarity in WordNet or DBpedia relies on similar semantic information (e.g. path length,  depth, least common subsumer, information content) and semantic similarity metrics (e.g. Path, Wu & Palmer,Li,  Resnik, Lin, Jiang & Conrad and WPath). Consequently,  Sematch provides an integrated framework to develop and evaluate semantic similarity metrics for concepts, words, entities and their applications. 
+
+KG based applications also meet similar pipeline in using semantic similarity, from concept similarity (e.g. `http://dbpedia.org/class/yago/Actor109765278`) to entity similarity (e.g. `http://dbpedia.org/resource/Madrid`). Furthermore, in computing document similarity, entities are extracted and document similarity is computed by composing entity similarity scores. 
+
+![kg](docs/sources/img/kg.png)
+
+In KGs, concepts usually denote ontology classes while entities refer to ontology instances. Moreover, those concepts are usually constructed into hierarchical taxonomies, such as DBpedia ontology class, thus quantifying concept similarity in KG relies on similar semantic information (e.g. path length,  depth, least common subsumer, information content) and semantic similarity metrics (e.g. Path, Wu & Palmer,Li,  Resnik, Lin, Jiang & Conrad and WPath). In consequence,  Sematch provides an integrated framework to develop and evaluate semantic similarity metrics for concepts, words, entities and their applications. 
 
 ------------------
 
@@ -18,12 +24,16 @@ KG based applications also meet the requirments in computing concept similarity 
 
 ## Getting started: 20 minutes to Sematch
 
-Install Sematch
+### Install Sematch
 
 ```
 pip install sematch
 python -m sematch.download
 ```
+
+We also provide a [Sematch-Demo Server](https://github.com/gsi-upm/sematch-demo). You can use it for experimenting with main functionalities or take it as an example for using Sematch to develop applications.
+
+### Computing Word Similarity
 
 The core module of Sematch is measuring semantic similarity between concepts that are represeted as concept taxonomies. Word similarity is computed based on the maximum semantic similarity of WordNet concepts. You can use Sematch to compute multilingual word similarity based on WordNet with various of semantic similarity metrics.
 
@@ -45,53 +55,47 @@ wns.crossl_word_similarity('perro', '猫', 'spa', 'cmn', 'jcn') #0.31023804699
 wns.crossl_word_similarity('狗', 'cat', 'cmn', 'eng', 'wpath')#0.593666388463
 ```
 
-You can use sematch to compute semantic similarity between YAGO concepts with various of semantic similarity metrics.
+### Computing semantic similarity of YAGO concepts.
 
 ```python
 from sematch.semantic.similarity import YagoTypeSimilarity
 sim = YagoTypeSimilarity()
 
 #Measuring YAGO concept similarity through WordNet taxonomy and corpus based information content
-sim.yago_similarity('http://dbpedia.org/class/yago/Dancer109989502', 
-                    'http://dbpedia.org/class/yago/Actor109765278', 'wpath') #0.642
-sim.yago_similarity('http://dbpedia.org/class/yago/Dancer109989502',
-                    'http://dbpedia.org/class/yago/Singer110599806', 'wpath') #0.544
-
-#Measuring YAGO concept similarity based on graph-based IC sim.yago_similarity('http://dbpedia.org/class/yago/Dancer109989502', 
-                    'http://dbpedia.org/class/yago/Actor109765278', 'wpath_graph') #0.423
-sim.yago_similarity('http://dbpedia.org/class/yago/Dancer109989502',
-                    'http://dbpedia.org/class/yago/Singer110599806', 'wpath_graph') #0.328
+sim.yago_similarity('http://dbpedia.org/class/yago/Dancer109989502','http://dbpedia.org/class/yago/Actor109765278', 'wpath') #0.642
+sim.yago_similarity('http://dbpedia.org/class/yago/Dancer109989502','http://dbpedia.org/class/yago/Singer110599806', 'wpath') #0.544
+#Measuring YAGO concept similarity based on graph-based IC sim.yago_similarity('http://dbpedia.org/class/yago/Dancer109989502','http://dbpedia.org/class/yago/Actor109765278', 'wpath_graph') #0.423
+sim.yago_similarity('http://dbpedia.org/class/yago/Dancer109989502','http://dbpedia.org/class/yago/Singer110599806', 'wpath_graph') #0.328
 ```
 
-You can use sematch to compute semantic similarity between DBpedia concepts with different similarity metrics.
+### Computing semantic similarity of DBpedia concepts.
 
 ```python
 from sematch.semantic.graph import DBpediaDataTransform, Taxonomy
 from sematch.semantic.similarity import ConceptSimilarity
-concept = ConceptSimilarity(Taxonomy(DBpediaDataTransform()), 'models/dbpedia_type_ic.txt')
+concept = ConceptSimilarity(Taxonomy(DBpediaDataTransform()),'models/dbpedia_type_ic.txt')
 concept.name2concept('actor')
-concept.similarity('http://dbpedia.org/ontology/Actor', 'http://dbpedia.org/ontology/Film', 'path')
-concept.similarity('http://dbpedia.org/ontology/Actor', 'http://dbpedia.org/ontology/Film', 'wup')
-concept.similarity('http://dbpedia.org/ontology/Actor', 'http://dbpedia.org/ontology/Film', 'li')
-concept.similarity('http://dbpedia.org/ontology/Actor', 'http://dbpedia.org/ontology/Film', 'res')
-concept.similarity('http://dbpedia.org/ontology/Actor', 'http://dbpedia.org/ontology/Film', 'lin')
-concept.similarity('http://dbpedia.org/ontology/Actor', 'http://dbpedia.org/ontology/Film', 'jcn')
-concept.similarity('http://dbpedia.org/ontology/Actor', 'http://dbpedia.org/ontology/Film', 'wpath')
+concept.similarity('http://dbpedia.org/ontology/Actor','http://dbpedia.org/ontology/Film', 'path')
+concept.similarity('http://dbpedia.org/ontology/Actor','http://dbpedia.org/ontology/Film', 'wup')
+concept.similarity('http://dbpedia.org/ontology/Actor','http://dbpedia.org/ontology/Film', 'li')
+concept.similarity('http://dbpedia.org/ontology/Actor','http://dbpedia.org/ontology/Film', 'res')
+concept.similarity('http://dbpedia.org/ontology/Actor','http://dbpedia.org/ontology/Film', 'lin')
+concept.similarity('http://dbpedia.org/ontology/Actor','http://dbpedia.org/ontology/Film', 'jcn')
+concept.similarity('http://dbpedia.org/ontology/Actor','http://dbpedia.org/ontology/Film', 'wpath')
 ```
 
-You can also compute entity similarity.
+### Computing semantic similarity of DBpedia entities.
 
 ```python
 from sematch.semantic.similarity import EntitySimilarity
 sim = EntitySimilarity()
 sim.similarity('http://dbpedia.org/resource/Madrid','http://dbpedia.org/resource/Barcelona') #0.409923677282
 sim.similarity('http://dbpedia.org/resource/Apple_Inc.','http://dbpedia.org/resource/Steve_Jobs')#0.0904545454545
-
 sim.relatedness('http://dbpedia.org/resource/Madrid','http://dbpedia.org/resource/Barcelona')#0.457984139871
 sim.relatedness('http://dbpedia.org/resource/Apple_Inc.','http://dbpedia.org/resource/Steve_Jobs')#0.465991132787
 ```
 
-It is easy to evaluate a similarity metric with common word similarity datasets, including cross-lingual and multilingual word similarity datasets.
+### Evaluate semantic similarity metrics with word similarity datasets
 
 ```python
 from sematch.evaluation import WordSimEvaluation
@@ -101,7 +105,7 @@ evaluation.dataset_names()
 wns = WordNetSimilarity()
 # define similarity metrics
 wpath = lambda x, y: wns.word_similarity_wpath(x, y, 0.8)
-# evaluate similarity metrics
+# evaluate similarity metrics with SimLex dataset
 evaluation.evaluate_metric('wpath', wpath, 'noun_simlex')
 # performa Steiger's Z significance Test
 evaluation.statistical_test('wpath', 'path', 'noun_simlex')
@@ -109,12 +113,14 @@ evaluation.statistical_test('wpath', 'path', 'noun_simlex')
 wpath_es = lambda x, y: wns.monol_word_similarity(x, y, 'spa', 'path')
 # define cross-lingual similarity metrics for English-Spanish
 wpath_en_es = lambda x, y: wns.crossl_word_similarity(x, y, 'eng', 'spa', 'wpath')
-# evaluate metrics
+# evaluate metrics in multilingual word similarity datasets
 evaluation.evaluate_metric('wpath_es', wpath_es, 'rg65_spanish')
 evaluation.evaluate_metric('wpath_en_es', wpath_en_es, 'rg65_EN-ES')
 ```
 
-Although the word similarity correlation measure is the standard way to evaluate the semantic similarity metrics, it relies on human judgements over word pairs which may not have same performance in real applications. Therefore, apart from word similarity evaluation, the Sematch evaluation framework also includes a simple aspect category classification.
+### Evaluate semantic similarity metrics with category classification
+
+Although the word similarity correlation measure is the standard way to evaluate the semantic similarity metrics, it relies on human judgements over word pairs which may not have same performance in real applications. Therefore, apart from word similarity evaluation, the Sematch evaluation framework also includes a simple aspect category classification. The task classifies noun concepts such as pasta, noodle, steak, tea into their ontological parent concept FOOD, DRINKS.
 
 ```python
 from sematch.evaluation import AspectEvaluation
@@ -147,6 +153,8 @@ accuracy:  0.792101679528
 
 avg / total       0.81      0.79      0.80      4406
 ```
+
+### Matching Entities with type using SPARQL queries
 
 You can use Sematch to download a list of entities having a specific type using different languages. Sematch will generate SPARQL queries and execute them in [DBpedia Sparql Endpoint](http://dbpedia.org/sparql).
 
@@ -182,6 +190,7 @@ SELECT DISTINCT ?s, ?label, ?abstract WHERE {
 } LIMIT 5000
 ```
 
+### Entity feature extraction with Similarity Graph
 
 Apart from semantic matching of entities from DBpedia, you can also use Sematch to extract features of entities and apply semantic similarity analysis using graph-based ranking algorithms. Given a list of objects (concepts, words, entities), Sematch compute their pairwise semantic similarity and generate similarity graph where nodes denote objects and edges denote similarity scores. An example of using similarity graph for extracting important words from an entity description.
 
@@ -202,7 +211,6 @@ print words
 (u'picture', u'action', u'number', u'film', u'post', u'sport', 
 u'program', u'men', u'performance', u'motion')
 ```
-
 
 ------------------
 

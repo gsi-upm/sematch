@@ -18,13 +18,21 @@ KG based applications also meet the requirments in computing concept similarity 
 
 ## Getting started: 20 minutes to Sematch
 
-Install Sematch
+Install Sematch with pip
 
 ```
 pip install sematch
-```
 
-The core module of Sematch is measuring semantic similarity between concepts that are represeted as concept taxonomies. Word similarity is computed based on the maximum semantic similarity of WordNet concepts. You can use Sematch to compute multilingual word similarity based on WordNet with various of semantic similarity metrics.
+```
+After installation, you need to download required data for Sematch. So run following commands in order to obtain those data.
+```
+python -m sematch.download
+```
+We also provide a [Sematch-Demo Server](https://github.com/gsi-upm/sematch-demo). You can use it for experimenting with main functionalities or take it as an example for using Sematch to develop applications.
+
+The core module of Sematch is measuring semantic similarity between concepts that are represeted as concept taxonomies. Word similarity is computed based on the maximum semantic similarity of WordNet concepts. You can use Sematch to compute multilingual word similarity based on WordNet with various of semantic similarity metrics. In summary, Sematch offers various similarity metrics for concepts, words and entities.
+
+**Semantic similarity between words**.
 
 ```python
 from sematch.semantic.similarity import WordNetSimilarity
@@ -44,67 +52,45 @@ print wns.crossl_word_similarity('perro', '猫', 'spa', 'cmn', 'jcn') #0.3102380
 print wns.crossl_word_similarity('狗', 'cat', 'cmn', 'eng', 'wpath')#0.593666388463
 ```
 
-You can use sematch to compute semantic similarity between YAGO concepts with various of semantic similarity metrics.
+**Semantic similarity between YAGO concepts**.
 
 ```python
 from sematch.semantic.similarity import YagoTypeSimilarity
-yago_sim = YagoTypeSimilarity()
+sim = YagoTypeSimilarity()
 
 #Measuring YAGO concept similarity through WordNet taxonomy and corpus based information content
-yago_sim.yago_similarity('http://dbpedia.org/class/yago/Dancer109989502', 
-                        'http://dbpedia.org/class/yago/Actor109765278', 'wpath')
-0.642
-
-yago_sim.yago_similarity('http://dbpedia.org/class/yago/Dancer109989502',
-                        'http://dbpedia.org/class/yago/Singer110599806', 'wpath')
-0.544
-
+sim.yago_similarity('http://dbpedia.org/class/yago/Dancer109989502', 'http://dbpedia.org/class/yago/Actor109765278', 'wpath') #0.642
+sim.yago_similarity('http://dbpedia.org/class/yago/Dancer109989502','http://dbpedia.org/class/yago/Singer110599806', 'wpath')#0.544
 #Measuring YAGO concept similarity based on graph-based IC 
-yago_sim.yago_similarity('http://dbpedia.org/class/yago/Dancer109989502', 
-                        'http://dbpedia.org/class/yago/Actor109765278', 'wpath_graph')
-0.423
-
-yago_sim.yago_similarity('http://dbpedia.org/class/yago/Dancer109989502',
-                        'http://dbpedia.org/class/yago/Singer110599806', 'wpath_graph')
-0.328
+sim.yago_similarity('http://dbpedia.org/class/yago/Dancer109989502', 'http://dbpedia.org/class/yago/Actor109765278', 'wpath_graph')#0.423
+sim.yago_similarity('http://dbpedia.org/class/yago/Dancer109989502','http://dbpedia.org/class/yago/Singer110599806', 'wpath_graph')#0.328
 ```
 
-You can use sematch to compute semantic similarity between DBpedia concepts with different similarity metrics.
+**Semantic similarity between DBpedia concepts**.
 
 ```python
 from sematch.semantic.graph import DBpediaDataTransform, Taxonomy
 from sematch.semantic.similarity import ConceptSimilarity
 concept = ConceptSimilarity(Taxonomy(DBpediaDataTransform()), 'models/dbpedia_type_ic.txt')
-print concept.name2concept('actor')
-print concept.similarity('http://dbpedia.org/ontology/Actor', 'http://dbpedia.org/ontology/Film', 'path')
-print concept.similarity('http://dbpedia.org/ontology/Actor', 'http://dbpedia.org/ontology/Film', 'wup')
-print concept.similarity('http://dbpedia.org/ontology/Actor', 'http://dbpedia.org/ontology/Film', 'li')
-print concept.similarity('http://dbpedia.org/ontology/Actor', 'http://dbpedia.org/ontology/Film', 'res')
-print concept.similarity('http://dbpedia.org/ontology/Actor', 'http://dbpedia.org/ontology/Film', 'lin')
-print concept.similarity('http://dbpedia.org/ontology/Actor', 'http://dbpedia.org/ontology/Film', 'jcn')
-print concept.similarity('http://dbpedia.org/ontology/Actor', 'http://dbpedia.org/ontology/Film', 'wpath')
+concept.name2concept('actor')
+concept.similarity('http://dbpedia.org/ontology/Actor', 'http://dbpedia.org/ontology/Film', 'path')
+concept.similarity('http://dbpedia.org/ontology/Actor', 'http://dbpedia.org/ontology/Film', 'wup')
+concept.similarity('http://dbpedia.org/ontology/Actor', 'http://dbpedia.org/ontology/Film', 'li')
+concept.similarity('http://dbpedia.org/ontology/Actor', 'http://dbpedia.org/ontology/Film', 'res')
+concept.similarity('http://dbpedia.org/ontology/Actor', 'http://dbpedia.org/ontology/Film', 'lin')
+concept.similarity('http://dbpedia.org/ontology/Actor', 'http://dbpedia.org/ontology/Film', 'jcn')
+concept.similarity('http://dbpedia.org/ontology/Actor', 'http://dbpedia.org/ontology/Film', 'wpath')
 ```
 
-You can also compute entity similarity.
+**Semantic similarity between DBpedia entities**.
 
 ```python
 from sematch.semantic.similarity import EntitySimilarity
-entity_sim = EntitySimilarity()
-print entity_sim.similarity('http://dbpedia.org/resource/Madrid',
-                            'http://dbpedia.org/resource/Barcelona')
-0.409923677282
-
-print entity_sim.similarity('http://dbpedia.org/resource/Apple_Inc.',
-                            'http://dbpedia.org/resource/Steve_Jobs')
-0.0904545454545
-
-print entity_sim.relatedness('http://dbpedia.org/resource/Madrid', 
-                             'http://dbpedia.org/resource/Barcelona')
-0.457984139871
-
-print entity_sim.relatedness('http://dbpedia.org/resource/Apple_Inc.',
-                             'http://dbpedia.org/resource/Steve_Jobs')
-0.465991132787
+entity = EntitySimilarity()
+entity.similarity('http://dbpedia.org/resource/Madrid','http://dbpedia.org/resource/Barcelona')#0.409923677282
+entity.similarity('http://dbpedia.org/resource/Apple_Inc.','http://dbpedia.org/resource/Steve_Jobs')#0.0904545454545
+entity.relatedness('http://dbpedia.org/resource/Madrid', 'http://dbpedia.org/resource/Barcelona')#0.457984139871
+entity.relatedness('http://dbpedia.org/resource/Apple_Inc.','http://dbpedia.org/resource/Steve_Jobs')#0.465991132787
 ```
 
 It is easy to evaluate a similarity metric with common word similarity datasets, including cross-lingual and multilingual word similarity datasets.
@@ -130,7 +116,7 @@ print evaluation.evaluate_metric('wpath_es', wpath_es, 'rg65_spanish')
 print evaluation.evaluate_metric('wpath_en_es', wpath_en_es, 'rg65_EN-ES')
 ```
 
-Although the word similarity correlation measure is the standard way to evaluate the semantic similarity metrics, it relies on human judgements over word pairs which may not have same performance in real applications. Therefore, apart from word similarity evaluation, the Sematch evaluation framework also includes a simple aspect category classification.
+Although the word similarity correlation measure is the standard way to evaluate the semantic similarity metrics, it relies on human judgements over word pairs which may not have same performance in real applications. Therefore, apart from word similarity evaluation, Sematch also includes a simple aspect category classification. The task classifies noun concepts such as pasta, noodle, steak into their ontological parent concept FOOD.
 
 ```python
 from sematch.evaluation import AspectEvaluation

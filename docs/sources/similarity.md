@@ -45,6 +45,22 @@ print wns.crossl_word_similarity('狗', 'cat', 'cmn', 'eng', 'wpath')#0.59366638
 
 ```
 
+You can compute pairwised semantic similarity between a list of words. We show an example for illustration.
+
+```Python
+wns = WordNetSimilarity()
+words = ['artist', 'musician', 'scientist', 'physicist', 'actor', 'movie']
+sim_matrix = [[wns.word_similarity(w1, w2, 'wpath') for w1 in words] for w2 in words]
+```
+
+|         |  artist      |musician    |scientist   |physicist   |actor       |movie    |
+| --------|:------------:|:----------:|:----------:|:----------:|:----------:|--------:|
+|artist   |  1.000000    |0.809924    |0.359417    |0.296175    |0.359417    |0.135239 | 
+|musician |  0.809924    |1.000000    |0.296175    |0.251859    |0.641697    |0.123384 | 
+|scientist|  0.359417    |0.296175    |1.000000    |0.790743    |0.456999    |0.149615 |
+|physicist|  0.296175    |0.251859    |0.790743    |1.000000    |0.359417    |0.135239 |
+|actor    |  0.359417    |0.641697    |0.456999    |0.359417    |1.000000    |0.149615 |
+|movie    |  0.135239    |0.123384    |0.149615    |0.135239    |0.149615    |1.000000 |
 
 ## YAGO Concept Similarity
 
