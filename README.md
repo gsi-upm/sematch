@@ -35,7 +35,7 @@ We also provide a [Sematch-Demo Server](https://github.com/gsi-upm/sematch-demo)
 
 ### Computing Word Similarity
 
-The core module of Sematch is measuring semantic similarity between concepts that are represeted as concept taxonomies. Word similarity is computed based on the maximum semantic similarity of WordNet concepts. You can use Sematch to compute multilingual word similarity based on WordNet with various of semantic similarity metrics.
+The core module of Sematch is measuring semantic similarity between concepts that are represented as concept taxonomies. Word similarity is computed based on the maximum semantic similarity of WordNet concepts. You can use Sematch to compute multilingual word similarity based on WordNet with various of semantic similarity metrics.
 
 ```python
 from sematch.semantic.similarity import WordNetSimilarity
@@ -64,7 +64,8 @@ sim = YagoTypeSimilarity()
 #Measuring YAGO concept similarity through WordNet taxonomy and corpus based information content
 sim.yago_similarity('http://dbpedia.org/class/yago/Dancer109989502','http://dbpedia.org/class/yago/Actor109765278', 'wpath') #0.642
 sim.yago_similarity('http://dbpedia.org/class/yago/Dancer109989502','http://dbpedia.org/class/yago/Singer110599806', 'wpath') #0.544
-#Measuring YAGO concept similarity based on graph-based IC sim.yago_similarity('http://dbpedia.org/class/yago/Dancer109989502','http://dbpedia.org/class/yago/Actor109765278', 'wpath_graph') #0.423
+#Measuring YAGO concept similarity based on graph-based IC
+sim.yago_similarity('http://dbpedia.org/class/yago/Dancer109989502','http://dbpedia.org/class/yago/Actor109765278', 'wpath_graph') #0.423
 sim.yago_similarity('http://dbpedia.org/class/yago/Dancer109989502','http://dbpedia.org/class/yago/Singer110599806', 'wpath_graph') #0.328
 ```
 
