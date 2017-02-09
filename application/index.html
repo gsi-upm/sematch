@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="Ganggao Zhu">
+  
+  <title>Application - Sematch Documentation</title>
+  
+
+  <link rel="shortcut icon" href="../img/favicon.ico">
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Application";
+    var mkdocs_page_input_path = "application.md";
+    var mkdocs_page_url = "/application/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script>
+  <script src="../js/theme.js"></script> 
+
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Sematch Documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <ul class="current">
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="..">Home</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../similarity/">Similarity</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../evaluation/">Evaluation</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../nlp/">NLP</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 current">
+        <a class="current" href="./">Application</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#semantic-matching">Semantic Matching</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#similarity-based-classification">Similarity-Based Classification</a></li>
+                
+            
+            </ul>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../api/">API</a>
+        
+    </li>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Sematch Documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Application</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/gsi-upm/sematch" class="icon icon-github"> Edit on GitHub</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h2 id="semantic-matching">Semantic Matching</h2>
+<p>Sematch offers <strong>Matcher</strong> class for matching entities (e.g. <code>http://dbpedia.org/resource/Tom Cruise</code>) and entity types (e.g.<code>http://dbpedia.org/ontology/Actor</code>). The type matching first maps Multilingual word forms to WordNet synsets and performs synset expansion using depth-based tree search to find all the sub-concepts of the synset in WordNet taxonomy. Then, the mapped synsets having LOD links are retrieved. We provide 68423 synset-yago mappings by processing YAGO data. Note that we only consider common nouns. You can use English words, car, university, singer; Spanish words, coche, universidad, cantante; Chinese words, 汽车, 大学, 歌手, to search for type links. The results may be different with different languages because the lemma to synset mapping are different for different languages.</p>
+<pre><code class="python">from sematch.application import Matcher
+matcher = Matcher()
+#use English word to search LOD ontology class links 
+print matcher.type_links('actor')
+
+#use Spanish word to search LOD ontology class links 
+print matcher.type_links('coche', lang='spa')
+
+#use Chinese word to search LOD ontology class links 
+print matcher.type_links('猫', lang='cmn')
+</code></pre>
+
+<p>Having LOD ontology classes, you can match entities from DBpedia using SPARQL queries. As a word can be mapped to many LOD ontology classes including sub-concepts, we split the SPARQL queries and exectue them separately in order to match full list of entities related to a specific type word. We use SPARQL templates to construct such queries automatically and exectue the SPARQL queries in <a href="http://dbpedia.org/sparql">DBpedia Sparql Endpoint</a>.</p>
+<pre><code class="python">matcher.match_type('scientist')
+matcher.match_type('científico', 'spa')
+matcher.match_type('科学家', 'cmn')
+</code></pre>
+
+<p>With the above code, we have 56730 scientist entities including their name, abstracts, and DBpedia links. Within different language setting, the function will return entity's textual label and abstract in corresponding language. Those multilingual word forms are mapped to WordNet synsets and corresponding YAGO concepts. Then YAGO concepts are used to construct the SPARQL queries. An example of automatically generated SPARQL query is shown.</p>
+<pre><code>SELECT DISTINCT ?s, ?label, ?abstract WHERE {
+    {  
+    ?s &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://dbpedia.org/class/yago/NuclearPhysicist110364643&gt; . }
+ UNION {  
+    ?s &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://dbpedia.org/class/yago/Econometrician110043491&gt; . }
+ UNION {  
+    ?s &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://dbpedia.org/class/yago/Sociologist110620758&gt; . }
+ UNION {  
+    ?s &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://dbpedia.org/class/yago/Archeologist109804806&gt; . }
+ UNION {  
+    ?s &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://dbpedia.org/class/yago/Neurolinguist110354053&gt; . } 
+    ?s &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://www.w3.org/2002/07/owl#Thing&gt; . 
+    ?s &lt;http://www.w3.org/2000/01/rdf-schema#label&gt; ?label . 
+    FILTER( lang(?label) = &quot;en&quot;) . 
+    ?s &lt;http://dbpedia.org/ontology/abstract&gt; ?abstract . 
+    FILTER( lang(?abstract) = &quot;en&quot;) .
+} LIMIT 5000
+</code></pre>
+
+<p>In addition to match entities with specific types, you can add entities to restrict the results, such as <code>movies of Tom Cruise</code>. This stands for give me <code>movies</code> that have some relation with entity <code>Tom Cruise</code>. Like the words can be mapped to WordNet concepts, this kind of muti-word expressions can be mapped to real world entities representing their meanings. Usually, such expressions are composed by a meaningful common noun and a specific proper noun, which we can call as type entity pattern. For example, university (common noun) and Madrid (proper noun) refer to all the universities located in Madrid. Such expressions have been used as categorical labels such as Wikipedia categories, while we use type entity pattern to formulate SPARQL queries in order to expand and match entities. The <strong>Matcher</strong> maps common nouns and proper nouns in the query to YAGO concepts and entity instances respectively. Then <em>type entity</em> SPARQL query template is used to construct the query based on type link and entity link. Finally, the execution results give you a list of entities having type (rdf:type) of common noun, which have some semantic relation with proper noun. Moreover, semantic expansion is performed with common noun based on WordNet taxonomy in order to match more related entities. You can check out the technical details in the following publication.   </p>
+<ul>
+<li>Zhu, Ganggao, and Carlos Angel Iglesias. "Sematch: Semantic Entity Search from Knowledge Graph." SumPre-HSWI@ ESWC. 2015.</li>
+</ul>
+<p>The common noun to YAGO concept mapping is based on <em>type_link</em> function as shown above, while the proper noun to DBpedia instance mapping is based on exact string matching using SPARQL queries. So it is required to make sure that the spell and string of the instance names are correct.</p>
+<pre><code class="python">from sematch.sparql import NameSPARQL
+#a simple linker to match proper noun through labels and names.
+name_linker = NameSPARQL()
+name_linker.name2entities('China')#'http://dbpedia.org/resource/China'
+name_linker.name2entities('Spain')#'http://dbpedia.org/resource/Spain'
+name_linker.name2entities('Tom Cruise')#'http://dbpedia.org/resource/Spain'
+
+</code></pre>
+
+<p>For example, to map <code>Tom Cruise</code> to proper instance, the following SPARQL query is executed. </p>
+<pre><code>SELECT DISTINCT ?s WHERE {
+    {  
+    ?s &lt;http://www.w3.org/2000/01/rdf-schema#label&gt; &quot;Tom Cruise&quot;@en . }
+ UNION {  
+    ?s &lt;http://www.w3.org/2000/01/rdf-schema#label&gt; &quot;Tom Cruise&quot;@en . }
+ UNION {  
+    ?x &lt;http://www.w3.org/2000/01/rdf-schema#label&gt; &quot;Tom Cruise&quot;@en . 
+    ?x &lt;http://dbpedia.org/ontology/wikiPageRedirects&gt; ?s . }
+ UNION {  
+    ?s &lt;http://dbpedia.org/ontology/demonym&gt; &quot;Tom Cruise&quot;@en . }
+ UNION {  
+    ?s &lt;http://dbpedia.org/property/acronym&gt; &quot;Tom Cruise&quot;@en . } 
+    ?s &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://www.w3.org/2002/07/owl#Thing&gt; .
+} LIMIT 5000
+SELECT DISTINCT ?s WHERE {
+
+    &lt;http://dbpedia.org/resource/Tom_Cruise&gt; &lt;http://dbpedia.org/ontology/wikiPageRedirects&gt; ?s .
+} LIMIT 5000
+
+</code></pre>
+
+<p>Use the following example to match entities. We do not provide mutilingual version of type entity pattern matching because of the query processing. User can implement the multilingual version with proper segmentation and proper noun or entity extraction. Currently, we use rule based noun extraction and named phrase extraction for English text.                                      </p>
+<pre><code class="python">print matcher.match_entity_type('university in Madrid')
+print matcher.match_entity_type('movies with Tom Cruise')
+</code></pre>
+
+<p>For example, to match <code>movies with Tom Cruise</code>, some of the SPARQL queries are shown. We retrieve all the entities and merge them based on their DBpedia resource links.</p>
+<pre><code>SELECT DISTINCT ?s, ?label, ?abstract WHERE {
+    {  
+    ?s &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://dbpedia.org/class/yago/Newsreel106616703&gt; . }
+ UNION {  
+    ?s &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://dbpedia.org/class/yago/Shoot-'em-up106616216&gt; . }
+ UNION {  
+    ?s &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://dbpedia.org/class/yago/SkinFlick106617413&gt; . }
+ UNION {  
+    ?s &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://dbpedia.org/class/yago/Movie106613686&gt; . }
+ UNION {  
+    ?s &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://dbpedia.org/class/yago/Cartoon106616464&gt; . } 
+    &lt;http://dbpedia.org/resource/Tom_Cruise&gt; ?p ?s . 
+    ?s &lt;http://www.w3.org/2000/01/rdf-schema#label&gt; ?label . 
+    FILTER( lang(?label) = &quot;en&quot;) . 
+    ?s &lt;http://dbpedia.org/ontology/abstract&gt; ?abstract . 
+    FILTER( lang(?abstract) = &quot;en&quot;) .
+} LIMIT 5000
+
+SELECT DISTINCT ?s, ?label, ?abstract WHERE {
+    {  
+    ?s &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://dbpedia.org/class/yago/FilmNoir106617165&gt; . }
+ UNION {  
+    ?s &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://dbpedia.org/class/yago/CollageFilm106615818&gt; . }
+ UNION {  
+    ?s &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://dbpedia.org/class/yago/RoughCut106617644&gt; . }
+ UNION {  
+    ?s &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://dbpedia.org/class/yago/TalkingPicture106618822&gt; . }
+ UNION {  
+    ?s &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://dbpedia.org/class/yago/Musical107019172&gt; . } 
+    &lt;http://dbpedia.org/resource/Tom_Cruise&gt; ?p ?s . 
+    ?s &lt;http://www.w3.org/2000/01/rdf-schema#label&gt; ?label . 
+    FILTER( lang(?label) = &quot;en&quot;) . 
+    ?s &lt;http://dbpedia.org/ontology/abstract&gt; ?abstract . 
+    FILTER( lang(?abstract) = &quot;en&quot;) .
+} LIMIT 5000
+
+
+SELECT DISTINCT ?s, ?label, ?abstract WHERE {
+    {  
+    ?s &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://dbpedia.org/class/yago/Feature106615026&gt; . }
+ UNION {  
+    ?s &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://dbpedia.org/class/yago/SilentMovie106617752&gt; . }
+ UNION {  
+    ?s &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://dbpedia.org/class/yago/FinalCut106615216&gt; . }
+ UNION {  
+    ?s &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://dbpedia.org/class/yago/SpaghettiWestern106618653&gt; . }
+ UNION {  
+    ?s &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://dbpedia.org/ontology/Musical&gt; . } 
+    &lt;http://dbpedia.org/resource/Tom_Cruise&gt; ?p ?s . 
+    ?s &lt;http://www.w3.org/2000/01/rdf-schema#label&gt; ?label . 
+    FILTER( lang(?label) = &quot;en&quot;) . 
+    ?s &lt;http://dbpedia.org/ontology/abstract&gt; ?abstract . 
+    FILTER( lang(?abstract) = &quot;en&quot;) .
+} LIMIT 5000
+
+
+SELECT DISTINCT ?s, ?label, ?abstract WHERE {
+    {  
+    ?s &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://dbpedia.org/class/yago/HomeMovie106615458&gt; . }
+ UNION {  
+    ?s &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://dbpedia.org/ontology/Film&gt; . }
+ UNION {  
+    ?s &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://dbpedia.org/class/yago/ShortSubject106616314&gt; . }
+ UNION {  
+    ?s &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://dbpedia.org/class/yago/HorseOpera106616035&gt; . }
+ UNION {  
+    ?s &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://dbpedia.org/class/yago/CinemaVerite106617011&gt; . } 
+    &lt;http://dbpedia.org/resource/Tom_Cruise&gt; ?p ?s . 
+    ?s &lt;http://www.w3.org/2000/01/rdf-schema#label&gt; ?label . 
+    FILTER( lang(?label) = &quot;en&quot;) . 
+    ?s &lt;http://dbpedia.org/ontology/abstract&gt; ?abstract . 
+    FILTER( lang(?abstract) = &quot;en&quot;) .
+} LIMIT 5000
+
+
+SELECT DISTINCT ?s, ?label, ?abstract WHERE {
+    {  
+    ?s &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://dbpedia.org/class/yago/Telefilm106614628&gt; . }
+ UNION {  
+    ?s &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://dbpedia.org/class/yago/Documentary106616806&gt; . }
+ UNION {  
+    ?s &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://dbpedia.org/class/yago/Peepshow106617527&gt; . }
+ UNION {  
+    ?s &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://dbpedia.org/class/yago/SlowMotion106617866&gt; . }
+ UNION {  
+    ?s &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://dbpedia.org/class/yago/Three-D106618937&gt; . } 
+    &lt;http://dbpedia.org/resource/Tom_Cruise&gt; ?p ?s . 
+    ?s &lt;http://www.w3.org/2000/01/rdf-schema#label&gt; ?label . 
+    FILTER( lang(?label) = &quot;en&quot;) . 
+    ?s &lt;http://dbpedia.org/ontology/abstract&gt; ?abstract . 
+    FILTER( lang(?abstract) = &quot;en&quot;) .
+} LIMIT 5000
+
+</code></pre>
+
+<p>You can see from above SPARQL example, we are able to match more entities by performing concept expansion. You can disable the expansion with the following example.</p>
+<pre><code class="Python">from sematch.application import Matcher
+matcher = Matcher(expansion=False)
+matcher.match_entity_type('movies with Tom Cruise')
+</code></pre>
+
+<p>The SPARQL queries will be limited to movies. Note that two query patterns are needed in order to match all the relations.</p>
+<pre><code>SELECT DISTINCT ?s, ?label, ?abstract WHERE {
+    {  
+    ?s &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://dbpedia.org/class/yago/Movie106613686&gt; . }
+ UNION {  
+    ?s &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://dbpedia.org/ontology/Film&gt; . } 
+    &lt;http://dbpedia.org/resource/Tom_Cruise&gt; ?p ?s . 
+    ?s &lt;http://www.w3.org/2000/01/rdf-schema#label&gt; ?label . 
+    FILTER( lang(?label) = &quot;en&quot;) . 
+    ?s &lt;http://dbpedia.org/ontology/abstract&gt; ?abstract . 
+    FILTER( lang(?abstract) = &quot;en&quot;) .
+} LIMIT 5000
+
+SELECT DISTINCT ?s, ?label, ?abstract WHERE {
+    {  
+    ?s &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://dbpedia.org/class/yago/Movie106613686&gt; . }
+ UNION {  
+    ?s &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://dbpedia.org/ontology/Film&gt; . } 
+    ?s ?p &lt;http://dbpedia.org/resource/Tom_Cruise&gt; . 
+    ?s &lt;http://www.w3.org/2000/01/rdf-schema#label&gt; ?label . 
+    FILTER( lang(?label) = &quot;en&quot;) . 
+    ?s &lt;http://dbpedia.org/ontology/abstract&gt; ?abstract . 
+    FILTER( lang(?abstract) = &quot;en&quot;) .
+} LIMIT 5000
+</code></pre>
+
+<h2 id="similarity-based-classification">Similarity-Based Classification</h2>
+<p>We have implemented two similarity based classification model (unsupervised <strong>SimClassifier</strong> and supvervised <strong>SimSVMClassifier</strong>) in order to evaluate similarity metrics and provide similarity based text classification. </p>
+<p>The idea of similarity based classification is to extract most N frequent words associated with a class label so that those words are used as features to represet the label. Then, with given target words, by comparing the semantic similarity between target words and feature words, the correct label can be determined. The unsupervised <strong>SimClassifier</strong> chooses the corect label with the highest similarity score. The supervised <strong>SimSVMClassifier</strong> employs a Support Vector Machine (SVM) with a linear kernel and the trained SVM classifier is used to predict the correct label. Within similarity-based classification, the effectiveness of different knowledge-based semantic similarity metrics can be evaluated in applications apart from word similarities.</p>
+<pre><code class="python">from sematch.evaluation import AspectEvaluation
+from sematch.application import SimClassifier, SimSVMClassifier
+from sematch.semantic.similarity import WordNetSimilarity
+evaluation = AspectEvaluation()
+X, y = evaluation.load_dataset()
+wns = WordNetSimilarity()
+sim_metric = wns.word_similarity
+simclassifier = SimClassifier.train(zip(X,y), sim_metric)
+evaluation.evaluate(X,y, simclassifier)
+simSVMclassifier = SimSVMClassifier.train(X, y, sim_metric)
+evaluation.evaluate(X, y, simSVMclassifier)
+</code></pre>
+
+<p>We use the sentence-level Aspect-based Sentiment Analysis for illustration. In this task, aspect target words are associated to a list of aspect categories. We use the restaurant domain, which contains category classes of SERVICE, FOOD, DRINKS, AMBIENCE, etc. The aspect category classification task consists in assigning aspect category to opinion target words. This task challenges semantic relatedness methods, especially for corpus-based methods. For instance, in restaurant review corpora, those target words such as fish and wine would appear in same surrounding contexts (e.g., “the fish is delicious and the wine is great”). Since corpus-based methods are based on calculating co-occurrences of terms in a corpus, they can hardly discriminate terms from different categories that are frequently collocated (e.g., fish and wine). In such scenario, knowledge-based methods are useful to include the structural knowledge from domain taxonomy. Semantic similarity methods can be used to measure the taxonomical similarity between target words and aspect category in order to classify the target words into correct aspect category. We processed the dataset and got 4406 tuples containing target words and their categories. For example, ("wine list", "DRINKS") and ("spicy tuna roll", "FOOD"). For more details, reader can check the following articles.</p>
+<ul>
+<li>
+<p>Zhu, Ganggao, and Carlos A. Iglesias. <a href="http://ieeexplore.ieee.org/document/7572993/">"Computing Semantic Similarity of Concepts in Knowledge Graphs."</a> IEEE Transactions on Knowledge and Data Engineering 29.1 (2017): 72-85.</p>
+</li>
+<li>
+<p>Oscar Araque, Ganggao Zhu, Manuel Garcia-Amado and Carlos A. Iglesias <a href="http://sentic.net/sentire2016araque.pdf">Mining the Opinionated Web: Classification and Detection of Aspect Contexts for Aspect Based Sentiment Analysis</a>,  ICDM sentire, 2016.</p>
+</li>
+</ul>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../api/" class="btn btn-neutral float-right" title="API">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../nlp/" class="btn btn-neutral" title="NLP"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/gsi-upm/sematch" class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../nlp/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../api/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="Ganggao Zhu">
+  
+  <title>Similarity - Sematch Documentation</title>
+  
+
+  <link rel="shortcut icon" href="../img/favicon.ico">
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Similarity";
+    var mkdocs_page_input_path = "similarity.md";
+    var mkdocs_page_url = "/similarity/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script>
+  <script src="../js/theme.js"></script> 
+
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Sematch Documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <ul class="current">
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="..">Home</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 current">
+        <a class="current" href="./">Similarity</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#word-similarity">Word Similarity</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#yago-concept-similarity">YAGO Concept Similarity</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#dbpedia-concept-similarity">DBpedia Concept Similarity</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#dbpedia-entity-similarity">DBpedia Entity Similarity</a></li>
+                
+            
+            </ul>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../evaluation/">Evaluation</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../nlp/">NLP</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../application/">Application</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../api/">API</a>
+        
+    </li>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Sematch Documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Similarity</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/gsi-upm/sematch" class="icon icon-github"> Edit on GitHub</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h2 id="word-similarity">Word Similarity</h2>
+<p>The key module of Sematch is measuring semantic similarity based on taxonomies. The word similarity is computed based on WordNet taxonomy with various semantic similarity metrics. Sematch extends the NLTK version of WordNet and similarities with lemmatization, multilingual support <a href="http://compling.hss.ntu.edu.sg/omw/">Open Multilingual WordNet</a> and more semantic similarity metrics into a single class <strong>WordNetSimilarity</strong>. NLTK provides path, lch, wup, res, lin, and jcn, while jcn metric has divide zero problem. In Sematch, we provide uniformed metric interfaces and include two more metrics li and wpath. Those metric names and their corresponding publications are listed as below.</p>
+<ul>
+<li><strong>path</strong>
+Rada, Roy, et al. "Development and application of a metric on semantic nets." IEEE transactions on systems, man, and cybernetics 19.1 (1989): 17-30.</li>
+<li><strong>lch</strong>
+Leacock, Claudia, and Martin Chodorow. "Combining local context and WordNet similarity for word sense identification." WordNet: An electronic lexical database 49.2 (1998): 265-283.</li>
+<li><strong>wup</strong>
+Wu, Zhibiao, and Martha Palmer. "Verbs semantics and lexical selection." Proceedings of the 32nd annual meeting on Association for Computational Linguistics. Association for Computational Linguistics, 1994.</li>
+<li><strong>li</strong>
+Li, Yuhua, Zuhair A. Bandar, and David McLean. "An approach for measuring semantic similarity between words using multiple information sources." IEEE Transactions on knowledge and data engineering 15.4 (2003): 871-882.</li>
+<li><strong>res</strong>
+Resnik, Philip. "Using information content to evaluate semantic similarity in a taxonomy." arXiv preprint cmp-lg/9511007 (1995).</li>
+<li><strong>lin</strong>
+Lin, Dekang. "An information-theoretic definition of similarity." ICML. Vol. 98. No. 1998. 1998.</li>
+<li><strong>jcn</strong>
+Jiang, Jay J., and David W. Conrath. "Semantic similarity based on corpus statistics and lexical taxonomy." arXiv preprint cmp-lg/9709008 (1997).</li>
+<li><strong>wpath</strong>
+Zhu, Ganggao, and Carlos A. Iglesias. "Computing Semantic Similarity of Concepts in Knowledge Graphs." IEEE Transactions on Knowledge and Data Engineering 29.1 (2017): 72-85.</li>
+</ul>
+<p>You can compute multilingual word similarity with various semantic similarity metrics using WordNet. Some examples are shown as below.</p>
+<pre><code class="python">from sematch.semantic.similarity import WordNetSimilarity
+wns = WordNetSimilarity()
+# Computing English word similarity using Li method
+print wns.word_similarity('dog', 'cat', 'li') # 0.449327301063
+
+# Computing Spanish word similarity using Lin method
+print wns.monol_word_similarity('perro', 'gato', 'spa', 'lin') #0.876800984373
+
+# Computing Chinese word similarity using  Wu &amp; Palmer method
+print wns.monol_word_similarity('狗', '猫', 'cmn', 'wup') # 0.857142857143
+
+# Computing Spanish and English word similarity using Resnik method
+print wns.crossl_word_similarity('perro', 'cat', 'spa', 'eng', 'res') #7.91166650904
+
+# Computing Spanish and Chinese word similarity using Jiang &amp; Conrad method
+print wns.crossl_word_similarity('perro', '猫', 'spa', 'cmn', 'jcn') #0.31023804699
+
+# Computing Chinese and English word similarity using WPath method
+print wns.crossl_word_similarity('狗', 'cat', 'cmn', 'eng', 'wpath')#0.593666388463
+
+</code></pre>
+
+<p>You can compute pairwised semantic similarity between a list of words. We show an example for illustration.</p>
+<pre><code class="Python">wns = WordNetSimilarity()
+words = ['artist', 'musician', 'scientist', 'physicist', 'actor', 'movie']
+sim_matrix = [[wns.word_similarity(w1, w2, 'wpath') for w1 in words] for w2 in words]
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th align="center">artist</th>
+<th align="center">musician</th>
+<th align="center">scientist</th>
+<th align="center">physicist</th>
+<th align="center">actor</th>
+<th align="right">movie</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>artist</td>
+<td align="center">1.000000</td>
+<td align="center">0.809924</td>
+<td align="center">0.359417</td>
+<td align="center">0.296175</td>
+<td align="center">0.359417</td>
+<td align="right">0.135239</td>
+</tr>
+<tr>
+<td>musician</td>
+<td align="center">0.809924</td>
+<td align="center">1.000000</td>
+<td align="center">0.296175</td>
+<td align="center">0.251859</td>
+<td align="center">0.641697</td>
+<td align="right">0.123384</td>
+</tr>
+<tr>
+<td>scientist</td>
+<td align="center">0.359417</td>
+<td align="center">0.296175</td>
+<td align="center">1.000000</td>
+<td align="center">0.790743</td>
+<td align="center">0.456999</td>
+<td align="right">0.149615</td>
+</tr>
+<tr>
+<td>physicist</td>
+<td align="center">0.296175</td>
+<td align="center">0.251859</td>
+<td align="center">0.790743</td>
+<td align="center">1.000000</td>
+<td align="center">0.359417</td>
+<td align="right">0.135239</td>
+</tr>
+<tr>
+<td>actor</td>
+<td align="center">0.359417</td>
+<td align="center">0.641697</td>
+<td align="center">0.456999</td>
+<td align="center">0.359417</td>
+<td align="center">1.000000</td>
+<td align="right">0.149615</td>
+</tr>
+<tr>
+<td>movie</td>
+<td align="center">0.135239</td>
+<td align="center">0.123384</td>
+<td align="center">0.149615</td>
+<td align="center">0.135239</td>
+<td align="center">0.149615</td>
+<td align="right">1.000000</td>
+</tr>
+</tbody>
+</table>
+<h2 id="yago-concept-similarity">YAGO Concept Similarity</h2>
+<p>Apart from word similarity, <strong>YagoTypeSimilarity</strong> extends the <strong>WordNetSimilarity</strong> to compute semantic similarity between YAGO concepts (e.g. <code>http://dbpedia.org/class/yago/Actor109765278</code>). In order to achieve this, Sematch created WordNet synset and YAGO concept mappings based on the <a href="http://www.mpi-inf.mpg.de/departments/databases-and-information-systems/research/yago-naga/yago/downloads/">YAGO dataset</a>. Using the synset version in WordNet for YAGO concepts has three main advantages. First, it is convenient and fast to explore taxonomy structure and derive structural information (depth, path length, least common subsumer) using existing WordNet taxonomy in NLTK. Note that YAGO concepts are originally created based on WordNet synsets. Second, existing information contents computed from SemCor or Brown Corpus can be directly used to compute YAGO concept similarity with metrics such as res, lin, jcn and wpath. Finally, words can be mapped to YAGO concepts easily which is useful for semantic matching applications. </p>
+<p>Apart from the existing metrics, in <strong>YagoTypeSimilarity</strong>, we also implemented those metrics res, lin, jcn and wpath with graph-based information content that is computed from YAGO concept's frequency in DBpedia by executing SPARQL queries to DBpedia endpoint. In summary, <strong>YagoTypeSimilarity</strong> maps YAGO concepts to WordNet synsets and computes their semantic similarity using WordNet taxonomy and either corpus-based or graph-based information content. We give some examples for illustration.</p>
+<pre><code class="python">from sematch.semantic.similarity import YagoTypeSimilarity
+yago_sim = YagoTypeSimilarity()
+
+#Mapping a word to yago links in DBpedia
+dancer = yago_sim.word2yago('dancer')# e.g. 'http://dbpedia.org/class/yago/Dancer109989502'
+actor = yago_sim.word2yago('actor') # e.g. 'http://dbpedia.org/class/yago/Actor109765278'
+singer = yago_sim.word2yago('singer')# e.g. 'http://dbpedia.org/class/yago/Singer110599806'
+
+#Mapping a yago link to WordNet synset
+print yago_sim.yago2synset('http://dbpedia.org/class/yago/Actor109765278') 
+Synset('actor.n.01')
+
+#Measuring YAGO concept similarity through WordNet taxonomy and corpus based information content
+yago_sim.yago_similarity('http://dbpedia.org/class/yago/Dancer109989502', 
+                        'http://dbpedia.org/class/yago/Actor109765278', 'wpath')
+0.642
+
+yago_sim.yago_similarity('http://dbpedia.org/class/yago/Dancer109989502',
+                        'http://dbpedia.org/class/yago/Singer110599806', 'wpath')
+0.544
+
+#Measuring YAGO concept similarity based on graph-based IC 
+yago_sim.yago_similarity('http://dbpedia.org/class/yago/Dancer109989502', 
+                        'http://dbpedia.org/class/yago/Actor109765278', 'wpath_graph')
+0.423
+
+yago_sim.yago_similarity('http://dbpedia.org/class/yago/Dancer109989502',
+                        'http://dbpedia.org/class/yago/Singer110599806', 'wpath_graph')
+0.328
+</code></pre>
+
+<h2 id="dbpedia-concept-similarity">DBpedia Concept Similarity</h2>
+<p>Since YAGO concepts have corresponding mappings to WordNet synsets, we can reuse exsiting codes for computing semantic similarity of YAGO concepts. However, DBpedia concepts (ontology classes) in DBpedia ontology does not have such mappings, so we created <strong>Taxonomy</strong> class to parse such kind of concept taxonomy and implemented <strong>ConceptSimilarity</strong> class with all the semantic similarity metrics used in WordNet taxonomy. Since concept taxonomies such as DBpedia concept taxonomy does not have concept-annotated corpus like SemCor for WordNet, those semantic similarity metrics based on information contents can not be used. In order to solve this problem, we implemented graph-based information content (<strong>GraphIC</strong> class) relies on concept distribution in Knowledge Graph like DBpedia. For more technical details, user should refer the following article.</p>
+<ul>
+<li>Zhu, Ganggao, and Carlos A. Iglesias. "Computing Semantic Similarity of Concepts in Knowledge Graphs." IEEE Transactions on Knowledge and Data Engineering 29.1 (2017): 72-85.</li>
+</ul>
+<p>Then you can parse DBpedia concept data to <strong>Taxonomy</strong> and <strong>ConceptSimilarity</strong> for computing semantic similarity between DBpedia concepts.</p>
+<pre><code class="python">from sematch.semantic.graph import DBpediaDataTransform, Taxonomy
+from sematch.semantic.similarity import ConceptSimilarity
+concept = ConceptSimilarity(Taxonomy(DBpediaDataTransform()), 'models/dbpedia_type_ic.txt')
+print concept.name2concept('actor')
+print concept.similarity('http://dbpedia.org/ontology/Actor', 'http://dbpedia.org/ontology/Film', 'path')
+print concept.similarity('http://dbpedia.org/ontology/Actor', 'http://dbpedia.org/ontology/Film', 'wup')
+print concept.similarity('http://dbpedia.org/ontology/Actor', 'http://dbpedia.org/ontology/Film', 'li')
+print concept.similarity('http://dbpedia.org/ontology/Actor', 'http://dbpedia.org/ontology/Film', 'res')
+print concept.similarity('http://dbpedia.org/ontology/Actor', 'http://dbpedia.org/ontology/Film', 'lin')
+print concept.similarity('http://dbpedia.org/ontology/Actor', 'http://dbpedia.org/ontology/Film', 'jcn')
+print concept.similarity('http://dbpedia.org/ontology/Actor', 'http://dbpedia.org/ontology/Film', 'wpath')
+</code></pre>
+
+<h2 id="dbpedia-entity-similarity">DBpedia Entity Similarity</h2>
+<p>We provide two methods to measure entity similarity. One is <strong>entity relatedness</strong> which is based on DBpedia link association which mainly measures entity link overlap between entities. You can check the detail of the method in the following article</p>
+<ul>
+<li><strong>entity relatedness</strong> Milne, David, and Ian H. Witten. "Learning to link with wikipedia." Proceedings of the 17th ACM conference on Information and knowledge management. ACM, 2008.</li>
+</ul>
+<p>Another one is <strong>entity similarity</strong> measure which is based on YAGO concept similarity. First YAGO concepts of entity is extracted from DBpedia using <strong>EntityFeatures</strong> class. Then, top 5 concets with highest graph-based information contents are selected and composed as concept list. Finally, we compute semantic similarity of two entities by calculating semantic similarity of two concept lists, which is similar to compute text similarity based two word lists. You can check the function details in the following publication.</p>
+<ul>
+<li><strong>entity similarity</strong> Mihalcea, Rada, Courtney Corley, and Carlo Strapparava. "Corpus-based and knowledge-based measures of text semantic similarity." AAAI. Vol. 6. 2006.</li>
+</ul>
+<pre><code class="python">from sematch.semantic.similarity import EntitySimilarity
+entity_sim = EntitySimilarity()
+print entity_sim.similarity('http://dbpedia.org/resource/Madrid',
+                            'http://dbpedia.org/resource/Barcelona')
+0.409923677282
+
+print entity_sim.similarity('http://dbpedia.org/resource/Apple_Inc.',
+                            'http://dbpedia.org/resource/Steve_Jobs')
+0.0904545454545
+
+print entity_sim.relatedness('http://dbpedia.org/resource/Madrid', 
+                             'http://dbpedia.org/resource/Barcelona')
+0.457984139871
+
+print entity_sim.relatedness('http://dbpedia.org/resource/Apple_Inc.',
+                             'http://dbpedia.org/resource/Steve_Jobs')
+0.465991132787
+</code></pre>
+
+<p>You can see from the example that the <strong>entity similarity</strong> gives very low similarity score to entity <em>http://dbpedia.org/resource/Apple_Inc.</em> and entity <em>http://dbpedia.org/resource/Steve_Jobs</em> because semantic similarity measures entity's taxonomical similarity. Apple_Inc is a company and Steve_Jobs is a person. Although they are clearly related, they are not similar type.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../evaluation/" class="btn btn-neutral float-right" title="Evaluation">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href=".." class="btn btn-neutral" title="Home"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/gsi-upm/sematch" class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href=".." style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../evaluation/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+
+</body>
+</html>

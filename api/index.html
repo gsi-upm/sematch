@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="Ganggao Zhu">
+  
+  <title>API - Sematch Documentation</title>
+  
+
+  <link rel="shortcut icon" href="../img/favicon.ico">
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "API";
+    var mkdocs_page_input_path = "api.md";
+    var mkdocs_page_url = "/api/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script>
+  <script src="../js/theme.js"></script> 
+
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Sematch Documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <ul class="current">
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="..">Home</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../similarity/">Similarity</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../evaluation/">Evaluation</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../nlp/">NLP</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../application/">Application</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 current">
+        <a class="current" href="./">API</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#similarity-api">Similarity API</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#evaluation-api">Evaluation API</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#taxonomy-api">Taxonomy API</a></li>
+                
+            
+            </ul>
+        
+    </li>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Sematch Documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>API</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/gsi-upm/sematch" class="icon icon-github"> Edit on GitHub</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="similarity-api">Similarity API</h1>
+<p>Some common interfaces for semantic information are provided so that novel similarity metrics are easy to implement with Sematch.</p>
+<h1 id="evaluation-api">Evaluation API</h1>
+<h1 id="taxonomy-api">Taxonomy API</h1>
+<p>Within the <strong>Taxonomy</strong> class, <strong>ConceptSimilarity</strong> class and <strong>GraphIC</strong> class, user can parse any concept taxonomies where 
+concepts are represented hiearchically such as Wikipedia categories, <a href="https://www.dmoz.org/">Open Diretory Project</a>, <a href="https://www.nlm.nih.gov/mesh/">Medical Subject Headings</a>, <a href="https://www.acm.org/publications/class-2012">ACM Term ClassificationIn</a> and many others. For those ontology classes with the support of Knowledge Graph, <strong>GraphIC</strong> can be used to compute graph-based information content. Otherwise, user needs to implement similar class of <strong>GraphIC</strong> based on specific data management system or just use those metrics only dependent on path length, depth, least common subsumer, such as path, wup, li, and wpath (set k parameter as 1).  We provide an example of using these general classes for computing semantic similarity.</p>
+<p>You need to first implement <strong>DataTransform</strong> class to convert concept taxonomy data into nodes, labels, and edges. Nodes is a set of concept links. Labels is corresponding labels of nodes. Edges is list of (super-concept, sub-concept) tuples. Note that in edges those node are represented by their list index. </p>
+<pre><code class="python">from sematch.semantic.ontology import DBpedia
+
+class DBpediaDataTransform(DataTransform):
+
+    def __init__(self):
+        self._ontology = DBpedia()
+
+    def transform(self):
+        nodes =  map(lambda x:x.toPython(), self._ontology.classes)
+        node_id = {n:i for i,n in enumerate(nodes)}
+        labels = [self._ontology.token(value) for i,value in enumerate(self._ontology.classes)]
+        edges = []
+        for i, node in enumerate(nodes):
+            children = self._ontology.subClass(node)
+            children = [child for child in children if child in nodes]
+            children_ids = map(lambda x:node_id[x], children)
+            for child_id in children_ids:
+                edges.append((i, child_id))
+        return nodes, labels, edges
+
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="../application/" class="btn btn-neutral" title="Application"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/gsi-upm/sematch" class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../application/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+    </span>
+</div>
+
+</body>
+</html>

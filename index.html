@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Documentation for Sematch, semantic similarity analysis framework for textual corpus and structural knowledge graphs">
+  <meta name="author" content="Ganggao Zhu">
+  
+  <title>Sematch Documentation</title>
+  
+
+  <link rel="shortcut icon" href="./img/favicon.ico">
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="./css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="./css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="./css/highlight.css">
+
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "None";
+    var mkdocs_page_input_path = "index.md";
+    var mkdocs_page_url = "/";
+  </script>
+  
+  <script src="./js/jquery-2.1.1.min.js"></script>
+  <script src="./js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="./js/highlight.pack.js"></script>
+  <script src="./js/theme.js"></script> 
+
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="." class="icon icon-home"> Sematch Documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="./search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <ul class="current">
+          
+            <li>
+    <li class="toctree-l1 current">
+        <a class="current" href=".">Home</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#introduction">Introduction</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#getting-started-20-minutes-to-sematch">Getting started: 20 minutes to Sematch</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#publications">Publications</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#support">Support</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#why-this-name-sematch-and-logo">Why this name, Sematch and Logo?</a></li>
+                
+            
+            </ul>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="similarity/">Similarity</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="evaluation/">Evaluation</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="nlp/">NLP</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="application/">Application</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="api/">API</a>
+        
+    </li>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href=".">Sematch Documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Home</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/gsi-upm/sematch" class="icon icon-github"> Edit on GitHub</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <p><img alt="logo" src="./img/logo.png" /></p>
+<hr />
+<h2 id="introduction">Introduction</h2>
+<p>Sematch is an integrated framework for the development, evaluation, and application of semantic similarity for Knowledge Graphs (KGs). It is easy to use Sematch to compute semantic similarity scores of concepts, words and entities. Sematch focuses on specific knowledge-based semantic similarity metrics that rely on structural knowledge in taxonomy (e.g. depth, path length, least common subsumer), and statistical information contents (corpus-IC and graph-IC). Knowledge-based approaches are different from their conterpart corpus-based approaches, which are mainly based on word coocurrence (e.g. Pointwise Mutual Information) or distributional semantics (Latent Semantic Analysis, Word2Vec, GLOVE and etc). Knowledge-based approaches are usually used for structual KGs, while corpus-based approaches are normally applied in textual corpora.</p>
+<p>In text analysis applications, a common pipeline is adolpted in using semantic similarity from concept level, to word and sentence level. For example, word similarity is first computed based on similarity scores of WordNet concepts, and sentence similarity is computed by composing word similarity scores. Finally, document similarity could be computed by identifying important sentences, e.g. TextRank.  </p>
+<p><img alt="example" src="./img/sematch-motivation.jpg" /></p>
+<p>KG based applications also meet similar pipeline in using semantic similarity, from concept similarity (e.g. <code>http://dbpedia.org/class/yago/Actor109765278</code>) to entity similarity (e.g. <code>http://dbpedia.org/resource/Madrid</code>). Furthermore, in computing document similarity, entities are extracted and document similarity is computed by composing entity similarity scores. </p>
+<p><img alt="kg" src="./img/kg.png" /></p>
+<p>In KGs, concepts usually denote ontology classes while entities refer to ontology instances. Moreover, those concepts are usually constructed into hierarchical taxonomies, such as DBpedia ontology class, thus quantifying concept similarity in KG relies on similar semantic information (e.g. path length,  depth, least common subsumer, information content) and semantic similarity metrics (e.g. Path, Wu &amp; Palmer,Li,  Resnik, Lin, Jiang &amp; Conrad and WPath). In consequence,  Sematch provides an integrated framework to develop and evaluate semantic similarity metrics for concepts, words, entities and their applications. </p>
+<hr />
+<h2 id="getting-started-20-minutes-to-sematch">Getting started: 20 minutes to Sematch</h2>
+<p><strong>Install Sematch</strong></p>
+<pre><code>pip install sematch
+python -m sematch.download
+</code></pre>
+
+<p>We also provide a <a href="https://github.com/gsi-upm/sematch-demo">Sematch-Demo Server</a>. You can use it for experimenting with main functionalities or take it as an example for using Sematch to develop applications.</p>
+<p><strong>Computing Word Similarity</strong>.</p>
+<p>The core module of Sematch is measuring semantic similarity between concepts that are represented as concept taxonomies. Word similarity is computed based on the maximum semantic similarity of WordNet concepts. You can use Sematch to compute multilingual word similarity based on WordNet with various of semantic similarity metrics.</p>
+<pre><code class="python">from sematch.semantic.similarity import WordNetSimilarity
+wns = WordNetSimilarity()
+
+# Computing English word similarity using Li method
+wns.word_similarity('dog', 'cat', 'li') # 0.449327301063
+# Computing Spanish word similarity using Lin method
+wns.monol_word_similarity('perro', 'gato', 'spa', 'lin') #0.876800984373
+# Computing Chinese word similarity using  Wu &amp; Palmer method
+wns.monol_word_similarity('狗', '猫', 'cmn', 'wup') # 0.857142857143
+# Computing Spanish and English word similarity using Resnik method
+wns.crossl_word_similarity('perro', 'cat', 'spa', 'eng', 'res') #7.91166650904
+# Computing Spanish and Chinese word similarity using Jiang &amp; Conrad method
+wns.crossl_word_similarity('perro', '猫', 'spa', 'cmn', 'jcn') #0.31023804699
+# Computing Chinese and English word similarity using WPath method
+wns.crossl_word_similarity('狗', 'cat', 'cmn', 'eng', 'wpath')#0.593666388463
+</code></pre>
+
+<p><strong>Computing semantic similarity of YAGO concepts</strong>.</p>
+<pre><code class="python">from sematch.semantic.similarity import YagoTypeSimilarity
+sim = YagoTypeSimilarity()
+
+#Measuring YAGO concept similarity through WordNet taxonomy and corpus based information content
+sim.yago_similarity('http://dbpedia.org/class/yago/Dancer109989502','http://dbpedia.org/class/yago/Actor109765278', 'wpath') #0.642
+sim.yago_similarity('http://dbpedia.org/class/yago/Dancer109989502','http://dbpedia.org/class/yago/Singer110599806', 'wpath') #0.544
+#Measuring YAGO concept similarity based on graph-based IC
+sim.yago_similarity('http://dbpedia.org/class/yago/Dancer109989502','http://dbpedia.org/class/yago/Actor109765278', 'wpath_graph') #0.423
+sim.yago_similarity('http://dbpedia.org/class/yago/Dancer109989502','http://dbpedia.org/class/yago/Singer110599806', 'wpath_graph') #0.328
+</code></pre>
+
+<p><strong>Computing semantic similarity of DBpedia concepts</strong>.</p>
+<pre><code class="python">from sematch.semantic.graph import DBpediaDataTransform, Taxonomy
+from sematch.semantic.similarity import ConceptSimilarity
+concept = ConceptSimilarity(Taxonomy(DBpediaDataTransform()),'models/dbpedia_type_ic.txt')
+concept.name2concept('actor')
+concept.similarity('http://dbpedia.org/ontology/Actor','http://dbpedia.org/ontology/Film', 'path')
+concept.similarity('http://dbpedia.org/ontology/Actor','http://dbpedia.org/ontology/Film', 'wup')
+concept.similarity('http://dbpedia.org/ontology/Actor','http://dbpedia.org/ontology/Film', 'li')
+concept.similarity('http://dbpedia.org/ontology/Actor','http://dbpedia.org/ontology/Film', 'res')
+concept.similarity('http://dbpedia.org/ontology/Actor','http://dbpedia.org/ontology/Film', 'lin')
+concept.similarity('http://dbpedia.org/ontology/Actor','http://dbpedia.org/ontology/Film', 'jcn')
+concept.similarity('http://dbpedia.org/ontology/Actor','http://dbpedia.org/ontology/Film', 'wpath')
+</code></pre>
+
+<p><strong>Computing semantic similarity of DBpedia entities</strong>.</p>
+<pre><code class="python">from sematch.semantic.similarity import EntitySimilarity
+sim = EntitySimilarity()
+sim.similarity('http://dbpedia.org/resource/Madrid','http://dbpedia.org/resource/Barcelona') #0.409923677282
+sim.similarity('http://dbpedia.org/resource/Apple_Inc.','http://dbpedia.org/resource/Steve_Jobs')#0.0904545454545
+sim.relatedness('http://dbpedia.org/resource/Madrid','http://dbpedia.org/resource/Barcelona')#0.457984139871
+sim.relatedness('http://dbpedia.org/resource/Apple_Inc.','http://dbpedia.org/resource/Steve_Jobs')#0.465991132787
+</code></pre>
+
+<p><strong>Evaluate semantic similarity metrics with word similarity datasets</strong>.</p>
+<pre><code class="python">from sematch.evaluation import WordSimEvaluation
+from sematch.semantic.similarity import WordNetSimilarity
+evaluation = WordSimEvaluation()
+evaluation.dataset_names()
+wns = WordNetSimilarity()
+# define similarity metrics
+wpath = lambda x, y: wns.word_similarity_wpath(x, y, 0.8)
+# evaluate similarity metrics with SimLex dataset
+evaluation.evaluate_metric('wpath', wpath, 'noun_simlex')
+# performa Steiger's Z significance Test
+evaluation.statistical_test('wpath', 'path', 'noun_simlex')
+# define similarity metrics for Spanish words
+wpath_es = lambda x, y: wns.monol_word_similarity(x, y, 'spa', 'path')
+# define cross-lingual similarity metrics for English-Spanish
+wpath_en_es = lambda x, y: wns.crossl_word_similarity(x, y, 'eng', 'spa', 'wpath')
+# evaluate metrics in multilingual word similarity datasets
+evaluation.evaluate_metric('wpath_es', wpath_es, 'rg65_spanish')
+evaluation.evaluate_metric('wpath_en_es', wpath_en_es, 'rg65_EN-ES')
+</code></pre>
+
+<p><strong>Evaluate semantic similarity metrics with category classification</strong>.</p>
+<p>Although the word similarity correlation measure is the standard way to evaluate the semantic similarity metrics, it relies on human judgements over word pairs which may not have same performance in real applications. Therefore, apart from word similarity evaluation, the Sematch evaluation framework also includes a simple aspect category classification. The task classifies noun concepts such as pasta, noodle, steak, tea into their ontological parent concept FOOD, DRINKS.</p>
+<pre><code class="python">from sematch.evaluation import AspectEvaluation
+from sematch.application import SimClassifier, SimSVMClassifier
+from sematch.semantic.similarity import WordNetSimilarity
+
+# create aspect classification evaluation
+evaluation = AspectEvaluation()
+# load the dataset
+X, y = evaluation.load_dataset()
+# define word similarity function
+wns = WordNetSimilarity()
+word_sim = lambda x, y: wns.word_similarity(x, y)
+# Train and evaluate metrics with unsupervised classification model
+simclassifier = SimClassifier.train(zip(X,y), word_sim)
+evaluation.evaluate(X,y, simclassifier)
+
+macro averge:  (0.65319812882333839, 0.7101245049198579, 0.66317566364913016, None)
+micro average:  (0.79210167952791644, 0.79210167952791644, 0.79210167952791644, None)
+weighted average:  (0.80842645056024054, 0.79210167952791644, 0.79639496616636352, None)
+accuracy:  0.792101679528
+             precision    recall  f1-score   support
+
+    SERVICE       0.50      0.43      0.46       519
+ RESTAURANT       0.81      0.66      0.73       228
+       FOOD       0.95      0.87      0.91      2256
+   LOCATION       0.26      0.67      0.37        54
+   AMBIENCE       0.60      0.70      0.65       597
+     DRINKS       0.81      0.93      0.87       752
+
+avg / total       0.81      0.79      0.80      4406
+</code></pre>
+
+<p>You can use Sematch to download a list of entities having a specific type using different languages. Sematch will generate SPARQL queries and execute them in <a href="http://dbpedia.org/sparql">DBpedia Sparql Endpoint</a>.</p>
+<pre><code class="python">from sematch.application import Matcher
+matcher = Matcher()
+# matching scientist entities from DBpedia
+matcher.match_type('scientist')
+matcher.match_type('científico', 'spa')
+matcher.match_type('科学家', 'cmn')
+
+
+----SPARQL queries----
+SELECT DISTINCT ?s, ?label, ?abstract WHERE {
+    {  
+    ?s &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://dbpedia.org/class/yago/NuclearPhysicist110364643&gt; . }
+ UNION {  
+    ?s &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://dbpedia.org/class/yago/Econometrician110043491&gt; . }
+ UNION {  
+    ?s &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://dbpedia.org/class/yago/Sociologist110620758&gt; . }
+ UNION {  
+    ?s &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://dbpedia.org/class/yago/Archeologist109804806&gt; . }
+ UNION {  
+    ?s &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://dbpedia.org/class/yago/Neurolinguist110354053&gt; . } 
+    ?s &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://www.w3.org/2002/07/owl#Thing&gt; . 
+    ?s &lt;http://www.w3.org/2000/01/rdf-schema#label&gt; ?label . 
+    FILTER( lang(?label) = &quot;en&quot;) . 
+    ?s &lt;http://dbpedia.org/ontology/abstract&gt; ?abstract . 
+    FILTER( lang(?abstract) = &quot;en&quot;) .
+} LIMIT 5000
+</code></pre>
+
+<p><strong>Matching Entities with type using SPARQL queries</strong>.</p>
+<p>You can use Sematch to download a list of entities having a specific type using different languages. Sematch will generate SPARQL queries and execute them in <a href="http://dbpedia.org/sparql">DBpedia Sparql Endpoint</a>.</p>
+<pre><code class="python">from sematch.application import Matcher
+matcher = Matcher()
+# matching scientist entities from DBpedia
+matcher.match_type('scientist')
+matcher.match_type('científico', 'spa')
+matcher.match_type('科学家', 'cmn')
+matcher.match_entity_type('movies with Tom Cruise')
+</code></pre>
+
+<p>Example of automatically generated SPARQL query.</p>
+<pre><code class="sql">SELECT DISTINCT ?s, ?label, ?abstract WHERE {
+    {  
+    ?s &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://dbpedia.org/class/yago/NuclearPhysicist110364643&gt; . }
+ UNION {  
+    ?s &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://dbpedia.org/class/yago/Econometrician110043491&gt; . }
+ UNION {  
+    ?s &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://dbpedia.org/class/yago/Sociologist110620758&gt; . }
+ UNION {  
+    ?s &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://dbpedia.org/class/yago/Archeologist109804806&gt; . }
+ UNION {  
+    ?s &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://dbpedia.org/class/yago/Neurolinguist110354053&gt; . } 
+    ?s &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://www.w3.org/2002/07/owl#Thing&gt; . 
+    ?s &lt;http://www.w3.org/2000/01/rdf-schema#label&gt; ?label . 
+    FILTER( lang(?label) = &quot;en&quot;) . 
+    ?s &lt;http://dbpedia.org/ontology/abstract&gt; ?abstract . 
+    FILTER( lang(?abstract) = &quot;en&quot;) .
+} LIMIT 5000
+</code></pre>
+
+<p><strong>Entity feature extraction with Similarity Graph</strong></p>
+<p>Apart from semantic matching of entities from DBpedia, you can also use Sematch to extract features of entities and apply semantic similarity analysis using graph-based ranking algorithms. Given a list of objects (concepts, words, entities), Sematch compute their pairwise semantic similarity and generate similarity graph where nodes denote objects and edges denote similarity scores. An example of using similarity graph for extracting important words from an entity description.</p>
+<pre><code class="python">from sematch.semantic.graph import SimGraph
+from sematch.semantic.similarity import WordNetSimilarity
+from sematch.nlp import Extraction, word_process
+from sematch.semantic.sparql import EntityFeatures
+from collections import Counter
+tom = EntityFeatures().features('http://dbpedia.org/resource/Tom_Cruise')
+words = Extraction().extract_nouns(tom['abstract'])
+words = word_process(words)
+wns = WordNetSimilarity()
+word_graph = SimGraph(words, wns.word_similarity)
+word_scores = word_graph.page_rank()
+words, scores =zip(*Counter(word_scores).most_common(10))
+print words
+(u'picture', u'action', u'number', u'film', u'post', u'sport', 
+u'program', u'men', u'performance', u'motion')
+</code></pre>
+
+<hr />
+<h2 id="publications">Publications</h2>
+<ul>
+<li>Ganggao Zhu and Carlos A. Iglesias <a href="http://ieeexplore.ieee.org/document/7572993/">Computing Semantic Similarity of Concepts in Knowledge Graphs</a>, TKDE, 2016.</li>
+<li>Oscar Araque, Ganggao Zhu, Manuel Garcia-Amado and Carlos A. Iglesias <a href="http://sentic.net/sentire2016araque.pdf">Mining the Opinionated Web: Classification and Detection of Aspect Contexts for Aspect Based Sentiment Analysis</a>,  ICDM sentire, 2016.</li>
+<li>Ganggao Zhu and Carlos A. Iglesias <a href="http://km.aifb.kit.edu/ws/sumpre2015/paper4.pdf">Sematch: Semantic Entity Search from Knowledge Graph</a>
+  ESWC SumPre 2015</li>
+</ul>
+<hr />
+<h2 id="support">Support</h2>
+<p>You can post bug reports and feature requests in <a href="https://github.com/gsi-upm/sematch/issues">Github issues</a>. 
+The project is mainly maintained by Ganggao Zhu. You can contact him via gzhu [at] dit.upm.es</p>
+<hr />
+<h2 id="why-this-name-sematch-and-logo">Why this name, Sematch and Logo?</h2>
+<p>The name of Sematch is composed based on Spanish "se" and English "match". It is also the abbreviation of semantic matching because semantic similarity metrics help to determine semantic distance of concepts, words, entities, instead of exact matching.</p>
+<p>The logo of Sematch is based on Chinese <a href="http://en.wikipedia.org/wiki/Yin_and_yang">Yin and Yang</a> which is written in <a href="http://en.wikipedia.org/wiki/I_Ching">I Ching</a>. Somehow, it correlates to 0 and 1 in computer science.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="similarity/" class="btn btn-neutral float-right" title="Similarity">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/gsi-upm/sematch" class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+      
+        <span style="margin-left: 15px"><a href="similarity/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+
+</body>
+</html>
+
+<!--
+MkDocs version : 0.15.3
+Build Date UTC : 2017-02-09 14:23:30.229902
+-->
