@@ -98,9 +98,6 @@
                 <li class="toctree-l3"><a href="#similarity-api">Similarity API</a></li>
                 
             
-                <li class="toctree-l3"><a href="#evaluation-api">Evaluation API</a></li>
-                
-            
                 <li class="toctree-l3"><a href="#taxonomy-api">Taxonomy API</a></li>
                 
             
@@ -146,8 +143,40 @@
             <div class="section">
               
                 <h1 id="similarity-api">Similarity API</h1>
-<p>Some common interfaces for semantic information are provided so that novel similarity metrics are easy to implement with Sematch.</p>
-<h1 id="evaluation-api">Evaluation API</h1>
+<p>Some common interfaces for semantic information are provided so that novel similarity metrics are easy to implement with Sematch. The main semantic resources include:</p>
+<ul>
+<li><strong>Depth</strong> is the path length between a root and a specific concept in taxonomy.</li>
+<li><strong>Shortest Path Length</strong> is the shortest path length between two concepts in taxonomy.</li>
+<li><strong>Least Common Subsumer</strong> is the common parent of two concepts which has maximun depth.</li>
+<li><strong>Corpus-based IC</strong> is the information content computed from sense-annotated corpora such as SemCor or Brown Corpus</li>
+<li><strong>Graph-based IC</strong> is the information content computed from Knowledge graph</li>
+</ul>
+<p>To design a new semantic similarity metric in WordNet, you can take the implementation of WPath method as example.</p>
+<pre><code class="Python">def wpath(self, c1, c2, k=0.8):
+    lcs = self.least_common_subsumer(c1,c2)
+    path = c1.shortest_path_distance(c2)
+    weight = k ** self.synset_ic(lcs)
+    return 1.0 / (1 + path*weight)
+</code></pre>
+
+<p>To design a new semantic similarity metric for YAGO concepts, you can not only use corpus based IC <strong>synset_ic</strong>, buth also use <strong>concept_ic</strong> which computes graph-based IC.</p>
+<pre><code class="Python">def wpath_graph(self, c1, c2, k=0.9):
+    lcs = self.least_common_subsumer(c1, c2)
+    path = c1.shortest_path_distance(c2)
+    yago_lcs = self.synset2yago(lcs)
+    weight = k ** self._graph_ic.concept_ic(yago_lcs)
+    return 1.0 / (1 + path*weight)
+</code></pre>
+
+<p>To add new semantic similarity metric in common Taxonomy class, you use the similar interface as previous two examples.</p>
+<pre><code>def wpath(self, c1, c2, k=0.8):
+    lcs = self.least_common_subsumer(c1, c2)
+    path = self.shortest_path_length(c1, c2) - 1
+    weight = k ** self.concept_ic(lcs)
+    return 1.0 / (1 + path * weight)
+</code></pre>
+
+<p>The common Taxonomy and ConceptSimilarity class are designed for ontology classes of KGs, thus it only contains graph-based IC. The corpus-based IC computation requires concept-annotated corpus so we only provide YAGO concept with such support since YAGO concepts are built based on WordNet and corresponding synsets have existing sense-annotated corpora. In concequence, to compute YAGO concept similarity, user can use both kind of IC resources.</p>
 <h1 id="taxonomy-api">Taxonomy API</h1>
 <p>Within the <strong>Taxonomy</strong> class, <strong>ConceptSimilarity</strong> class and <strong>GraphIC</strong> class, user can parse any concept taxonomies where 
 concepts are represented hiearchically such as Wikipedia categories, <a href="https://www.dmoz.org/">Open Diretory Project</a>, <a href="https://www.nlm.nih.gov/mesh/">Medical Subject Headings</a>, <a href="https://www.acm.org/publications/class-2012">ACM Term ClassificationIn</a> and many others. For those ontology classes with the support of Knowledge Graph, <strong>GraphIC</strong> can be used to compute graph-based information content. Otherwise, user needs to implement similar class of <strong>GraphIC</strong> based on specific data management system or just use those metrics only dependent on path length, depth, least common subsumer, such as path, wup, li, and wpath (set k parameter as 1).  We provide an example of using these general classes for computing semantic similarity.</p>
