@@ -33,7 +33,7 @@ class BaseSPARQL:
 
     def execution(self, query, show_query=False):
         if show_query:
-            print query
+            print(query)
         self._sparql.setQuery(query)
         results = self._sparql.query().convert()
         #print results
