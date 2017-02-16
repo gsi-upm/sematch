@@ -4,9 +4,9 @@
 
 # Introduction
 
-Sematch is an integrated framework for the development, evaluation, and application of semantic similarity for Knowledge Graphs (KGs). It is easy to use Sematch to compute semantic similarity scores of concepts, words and entities. Sematch focuses on specific knowledge-based semantic similarity metrics that rely on structural knowledge in taxonomy (e.g. depth, path length, least common subsumer), and statistical information contents (corpus-IC and graph-IC). Knowledge-based approaches are different from their conterpart corpus-based approaches, which are mainly based on word coocurrence (e.g. Pointwise Mutual Information) or distributional semantics (Latent Semantic Analysis, Word2Vec, GLOVE and etc). Knowledge-based approaches are usually used for structual KGs, while corpus-based approaches are normally applied in textual corpora.
+Sematch is an integrated framework for the development, evaluation, and application of semantic similarity for Knowledge Graphs (KGs). It is easy to use Sematch to compute semantic similarity scores of concepts, words and entities. Sematch focuses on specific knowledge-based semantic similarity metrics that rely on structural knowledge in taxonomy (e.g. depth, path length, least common subsumer), and statistical information contents (corpus-IC and graph-IC). Knowledge-based approaches differ from their counterpart corpus-based approaches relying on co-occurrence (e.g. Pointwise Mutual Information) or distributional similarity (Latent Semantic Analysis, Word2Vec, GLOVE and etc). Knowledge-based approaches are usually used for structural KGs, while corpus-based approaches are normally applied in textual corpora.
 
-In text analysis applications, a common pipeline is adolpted in using semantic similarity from concept level, to word and sentence level. For example, word similarity is first computed based on similarity scores of WordNet concepts, and sentence similarity is computed by composing word similarity scores. Finally, document similarity could be computed by identifying important sentences, e.g. TextRank. 
+In text analysis applications, a common pipeline is adopted in using semantic similarity from concept level, to word and sentence level. For example, word similarity is first computed based on similarity scores of WordNet concepts, and sentence similarity is computed by composing word similarity scores. Finally, document similarity could be computed by identifying important sentences, e.g. TextRank.
 
 ![logo](docs/sources/img/sematch-motivation.jpg)
 
@@ -35,7 +35,7 @@ We also provide a [Sematch-Demo Server](https://github.com/gsi-upm/sematch-demo)
 
 ### Computing Word Similarity
 
-The core module of Sematch is measuring semantic similarity between concepts that are represented as concept taxonomies. Word similarity is computed based on the maximum semantic similarity of WordNet concepts. You can use Sematch to compute multilingual word similarity based on WordNet with various of semantic similarity metrics.
+The core module of Sematch is measuring semantic similarity between concepts that are represented as concept taxonomies. Word similarity is computed based on the maximum semantic similarity of WordNet concepts. You can use Sematch to compute multi-lingual word similarity based on WordNet with various of semantic similarity metrics.
 
 ```python
 from sematch.semantic.similarity import WordNetSimilarity
@@ -217,11 +217,11 @@ u'program', u'men', u'performance', u'motion')
 
 ## Publications
 
-- Zhu, Ganggao, and Carlos A. Iglesias. ["Computing Semantic Similarity of Concepts in Knowledge Graphs."](http://ieeexplore.ieee.org/document/7572993/) IEEE Transactions on Knowledge and Data Engineering 29.1 (2017): 72-85.
+- Ganggao Zhu, and Carlos A. Iglesias. ["Computing Semantic Similarity of Concepts in Knowledge Graphs."](http://ieeexplore.ieee.org/document/7572993/) IEEE Transactions on Knowledge and Data Engineering 29.1 (2017): 72-85.
 
 - Oscar Araque, Ganggao Zhu, Manuel Garcia-Amado and Carlos A. Iglesias [Mining the Opinionated Web: Classification and Detection of Aspect Contexts for Aspect Based Sentiment Analysis](http://sentic.net/sentire2016araque.pdf),  ICDM sentire, 2016.
 
-- Zhu, Ganggao, and Carlos Angel Iglesias. "Sematch: Semantic Entity Search from Knowledge Graph." SumPre-HSWI@ ESWC. 2015.
+- Ganggao Zhu, and Carlos Angel Iglesias. "Sematch: Semantic Entity Search from Knowledge Graph." SumPre-HSWI@ ESWC. 2015.
 
 
 ------------------
