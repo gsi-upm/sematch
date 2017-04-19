@@ -59,4 +59,12 @@ def test_entity_similarity():
                                  'http://dbpedia.org/resource/Barcelona') is not None
     assert entity_sim.relatedness('http://dbpedia.org/resource/Madrid', 'http://dbpedia.org/resource/Barcelona') is not None
 
-test_word_similarity()
+def test_language():
+    from sematch.semantic.similarity import WordNetSimilarity
+    wns = WordNetSimilarity()
+    #check the supported languages
+    assert wns.languages() is not None
+    #find the language code
+    assert wns.languages('English') is not None
+    assert wns.languages('chinese_simplified') is not None
+    assert wns.languages('spanish') is not None

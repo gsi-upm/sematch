@@ -232,6 +232,54 @@ class WordNetSimilarity:
         word = self._wn_lemma.lemmatize(word)
         return wn.synsets(word, pos)
 
+    def languages(self, l=None):
+        """Return a list of supported languages or find the corresponding language code of supported language.
+
+        :param l: The default value is None or the name of language
+        :return: if the default none is set, return a list of supported language names. When l is assigned with a
+        language name, the corresponding code is returned.
+
+        User should use this function to check the languages and find the language code.
+        """
+        langs = {'albanian':'als',
+                 'arabic':'arb',
+                 'bulgarian':'bul',
+                 'chinese_simplified':'cmn',
+                 'chinese_traditional':'qcn',
+                 'danish':'dan',
+                 'greek':'ell',
+                 'english':'eng',
+                 'persian':'fas',
+                 'finnish':'fin',
+                 'french':'fra',
+                 'hebrew':'heb',
+                 'croatian':'hrv',
+                 'icelandic':'isl',
+                 'italian':'ita',
+                 'japanese':'jpn',
+                 'catalan':'cat',
+                 'basque':'eus',
+                 'galicain':'glg',
+                 'spanish':'spa',
+                 'indonesian':'ind',
+                 'malay':'zsm',
+                 'dutch':'nld',
+                 'polish':'pol',
+                 'portuguese':'por',
+                 'romanian':'ron',
+                 'lithuanian':'lit',
+                 'slovak':'slk',
+                 'slovene':'slv',
+                 'swedish':'swe',
+                 'thai':'tha'}
+        if l:
+            if l.lower() in langs:
+                return langs[l.lower()]
+            else:
+                return l+" is not supported!"
+        return map(lambda x:x.capitalize(), langs.keys())
+
+
     def multilingual2synset(self, word, lang='spa'):
         """
         Map words in different language to wordnet synsets
@@ -268,6 +316,18 @@ class WordNetSimilarity:
 
     @memoized
     def word_similarity(self, w1, w2, name='wpath'):
+        """ Return similarity score between two words based on WordNet.
+
+        :param w1: first word to be compared which should be contained in WordNet
+        :param w2: second word to be compared which should be contained in WordNet
+        :param name: the name of knowledge-based semantic similarity metrics
+        :return: numerical score indicating degree of similarity between two words. The
+        minimum score is 0. If one of the input words is not contained in WordNet, 0 is given. The up bound of
+        the similarity score depends on the similarity metric you use. Bigger similarity values indicate higher
+        similarity between two words.
+        :rtype : Float
+
+        """
         s1 = self.word2synset(w1)
         s2 = self.word2synset(w2)
         sim_metric = lambda x, y: self.similarity(x, y, name)
@@ -376,7 +436,6 @@ class WordNetSimilarity:
 
     def lin(self, c1, c2):
         return c1.lin_similarity(c2, self._ic_corpus)
-
 
 
 class YagoTypeSimilarity(WordNetSimilarity):

@@ -1,28 +1,40 @@
-## Semantic Matching
+## Semantic Search
 
-Sematch offers **Matcher** class for matching entities (e.g. `http://dbpedia.org/resource/Tom Cruise`) and entity types (e.g.`http://dbpedia.org/ontology/Actor`). The type matching first maps Multilingual word forms to WordNet synsets and performs synset expansion using depth-based tree search to find all the sub-concepts of the synset in WordNet taxonomy. Then, the mapped synsets having LOD links are retrieved. We provide 68423 synset-yago mappings by processing YAGO data. Note that we only consider common nouns. You can use English words, car, university, singer; Spanish words, coche, universidad, cantante; Chinese words, 汽车, 大学, 歌手, to search for type links. The results may be different with different languages because the lemma to synset mapping are different for different languages.
+Sematch offers semantic search in terms of searching entities (e.g. `http://dbpedia.org/resource/Tom Cruise`)  and concepts (e.g.`http://dbpedia.org/ontology/Actor`), which are implemented in **Matcher** class.
+
+##### Search LOD concept links
+
+Users may need to search LOD concept links through natural language words. Sematch offers this search with Multilingual support.  An input word will be mapped to WordNet synsets, and then the mapped synsets having LOD links are retrieved. We provide 68423 synset-yago mappings by processing YAGO data. Note that we only consider common nouns. You can use different languages such as English words, car, university, singer; Spanish words, coche, universidad, cantante; Chinese words, 汽车, 大学, 歌手, to search for links. 
 
 ```python
 from sematch.application import Matcher
 matcher = Matcher()
 #use English word to search LOD ontology class links 
 print matcher.type_links('actor')
-
 #use Spanish word to search LOD ontology class links 
 print matcher.type_links('coche', lang='spa')
-
 #use Chinese word to search LOD ontology class links 
 print matcher.type_links('猫', lang='cmn')
 ```
-Having LOD ontology classes, you can match entities from DBpedia using SPARQL queries. As a word can be mapped to many LOD ontology classes including sub-concepts, we split the SPARQL queries and exectue them separately in order to match full list of entities related to a specific type word. We use SPARQL templates to construct such queries automatically and exectue the SPARQL queries in [DBpedia Sparql Endpoint](http://dbpedia.org/sparql).
+Sematch supports Taxonomy based concept expansion. Users need to enable the expansion with the following code example.
+
+```Python
+from sematch.application import Matcher
+matcher = Matcher(expansion=True)
+print matcher.type_links('singer')
+```
+
+ With concept expansion, Sematch will perform depth-based tree search in WordNet taxonomy to find all the sub-concepts. For example,  singer's sub-concept baritone will be returned as well given query singer. Note that the results may be different with different languages because the lemma to synset mapping are different for different languages.
+
+##### Search entities using concepts
+
+Having LOD concept links, you can search entities belonging to a specific type from DBpedia using SPARQL queries through rdf:type.  We use SPARQL templates to construct such queries automatically and exectue the SPARQL queries in [DBpedia Sparql Endpoint](http://dbpedia.org/sparql) remotely. With the following code examples, entities belonging to scientist type will be retrieved, including their name, abstracts, and DBpedia links. With different language queries, Sematch will return entity's textual label and abstract in corresponding language. Sematch first use concept search to find concept links, and then those concept links are used to construct SPARQL queries. An example of automatically generated SPARQL query is shown.
 
 ```python
 matcher.match_type('scientist')
 matcher.match_type('científico', 'spa')
 matcher.match_type('科学家', 'cmn')
 ```
-With the above code, we have 56730 scientist entities including their name, abstracts, and DBpedia links. Within different language setting, the function will return entity's textual label and abstract in corresponding language. Those multilingual word forms are mapped to WordNet synsets and corresponding YAGO concepts. Then YAGO concepts are used to construct the SPARQL queries. An example of automatically generated SPARQL query is shown.
-
 ```
 SELECT DISTINCT ?s, ?label, ?abstract WHERE {
     {  
@@ -43,12 +55,16 @@ SELECT DISTINCT ?s, ?label, ?abstract WHERE {
 } LIMIT 5000
 ```
 
-In addition to match entities with specific types, you can add entities to restrict the results, such as `movies of Tom Cruise`. This stands for give me `movies` that have some relation with entity `Tom Cruise`. Like the words can be mapped to WordNet concepts, this kind of muti-word expressions can be mapped to real world entities representing their meanings. Usually, such expressions are composed by a meaningful common noun and a specific proper noun, which we can call as type entity pattern. For example, university (common noun) and Madrid (proper noun) refer to all the universities located in Madrid. Such expressions have been used as categorical labels such as Wikipedia categories, while we use type entity pattern to formulate SPARQL queries in order to expand and match entities. The **Matcher** maps common nouns and proper nouns in the query to YAGO concepts and entity instances respectively. Then *type entity* SPARQL query template is used to construct the query based on type link and entity link. Finally, the execution results give you a list of entities having type (rdf:type) of common noun, which have some semantic relation with proper noun. Moreover, semantic expansion is performed with common noun based on WordNet taxonomy in order to match more related entities. You can check out the technical details in the following publication.   
+Since DBpedia endpoint has query size limitation, Sematch will decompose bigger queries into smaller ones and extecute them separately. Then results are combined when all the SPARQL queries are exectuted. Thus, the query execution may be slow if a query can be mapped to multiple concepts or query expansion is enabled. 
+
+##### Search entities using concepts and entity restriction
+
+It is common that users may only want to search for a smaller group of entities having a specific type and some restrctions such as location, person, event to name a few. For example,  searching for someone's song or movie (e.g `movies of Tom Cruise`.) or searching for `scientists in Spain`. Such queries are composed by a concept and an entity, representing information needs of entities having type of the concept and having some relations with the entity(e.g, `movies` that have some relation with entity `Tom Cruise`).  Usually, concepts correspond to meaningful common nouns, while entities correspond to specific proper nouns (e.g. university is common noun and Madrid is proper noun, query university of Madrid refers to all the universities located in Madrid). Sematch uses template to formulate SPARQL queries for such query patterns. The common nouns and proper nouns in the query are linked to concept and entity respectively. Then concept and entity links are used to construct the SPARQL query. Finally, the execution results give you a list of entities having type (rdf:type) of common noun, which have some semantic relation with proper noun. In addition, if query expansion is enabled, concepts will be expanded based on WordNet taxonomy in order to match more related entities. You can check out the technical details in the following publication.   
 
 
-- Zhu, Ganggao, and Carlos Angel Iglesias. "Sematch: Semantic Entity Search from Knowledge Graph." SumPre-HSWI@ ESWC. 2015.
+- Ganggao Zhu, and Carlos Angel Iglesias. "Sematch: Semantic Entity Search from Knowledge Graph." SumPre-HSWI@ ESWC. 2015.
 
-The common noun to YAGO concept mapping is based on *type_link* function as shown above, while the proper noun to DBpedia instance mapping is based on exact string matching using SPARQL queries. So it is required to make sure that the spell and string of the instance names are correct.
+The common noun to YAGO concept mapping is based on *type_link* function as shown above, while the proper noun to DBpedia instance mapping is currently based on exact string matching using SPARQL queries. So it is required to make sure that the spell and string of the instance names are correct.
 
 ```python
 from sematch.sparql import NameSPARQL
@@ -56,8 +72,7 @@ from sematch.sparql import NameSPARQL
 name_linker = NameSPARQL()
 name_linker.name2entities('China')#'http://dbpedia.org/resource/China'
 name_linker.name2entities('Spain')#'http://dbpedia.org/resource/Spain'
-name_linker.name2entities('Tom Cruise')#'http://dbpedia.org/resource/Spain'
-
+name_linker.name2entities('Tom Cruise')#'http://dbpedia.org/resource/Tom_Cruise'
 ```
 For example, to map `Tom Cruise` to proper instance, the following SPARQL query is executed. 
 
@@ -80,122 +95,16 @@ SELECT DISTINCT ?s WHERE {
      
     <http://dbpedia.org/resource/Tom_Cruise> <http://dbpedia.org/ontology/wikiPageRedirects> ?s .
 } LIMIT 5000
-
 ```
 
-Use the following example to match entities. We do not provide mutilingual version of type entity pattern matching because of the query processing. User can implement the multilingual version with proper segmentation and proper noun or entity extraction. Currently, we use rule based noun extraction and named phrase extraction for English text.                                      
+ The following examples are illustrated to search entities with concept and restriction. We do not provide mutilingual version of this function because of the query processing problem. User can implement the multilingual version with proper segmentation and proper noun or entity extraction. Currently, we use rule based noun extraction and named phrase extraction for English text.                                      
 
 ```python
 print matcher.match_entity_type('university in Madrid')
 print matcher.match_entity_type('movies with Tom Cruise')
 ```
 
-For example, to match `movies with Tom Cruise`, some of the SPARQL queries are shown. We retrieve all the entities and merge them based on their DBpedia resource links.
-
-```
-SELECT DISTINCT ?s, ?label, ?abstract WHERE {
-    {  
-    ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/class/yago/Newsreel106616703> . }
- UNION {  
-    ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/class/yago/Shoot-'em-up106616216> . }
- UNION {  
-    ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/class/yago/SkinFlick106617413> . }
- UNION {  
-    ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/class/yago/Movie106613686> . }
- UNION {  
-    ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/class/yago/Cartoon106616464> . } 
-    <http://dbpedia.org/resource/Tom_Cruise> ?p ?s . 
-    ?s <http://www.w3.org/2000/01/rdf-schema#label> ?label . 
-    FILTER( lang(?label) = "en") . 
-    ?s <http://dbpedia.org/ontology/abstract> ?abstract . 
-    FILTER( lang(?abstract) = "en") .
-} LIMIT 5000
-
-SELECT DISTINCT ?s, ?label, ?abstract WHERE {
-    {  
-    ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/class/yago/FilmNoir106617165> . }
- UNION {  
-    ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/class/yago/CollageFilm106615818> . }
- UNION {  
-    ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/class/yago/RoughCut106617644> . }
- UNION {  
-    ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/class/yago/TalkingPicture106618822> . }
- UNION {  
-    ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/class/yago/Musical107019172> . } 
-    <http://dbpedia.org/resource/Tom_Cruise> ?p ?s . 
-    ?s <http://www.w3.org/2000/01/rdf-schema#label> ?label . 
-    FILTER( lang(?label) = "en") . 
-    ?s <http://dbpedia.org/ontology/abstract> ?abstract . 
-    FILTER( lang(?abstract) = "en") .
-} LIMIT 5000
-
-
-SELECT DISTINCT ?s, ?label, ?abstract WHERE {
-    {  
-    ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/class/yago/Feature106615026> . }
- UNION {  
-    ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/class/yago/SilentMovie106617752> . }
- UNION {  
-    ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/class/yago/FinalCut106615216> . }
- UNION {  
-    ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/class/yago/SpaghettiWestern106618653> . }
- UNION {  
-    ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/Musical> . } 
-    <http://dbpedia.org/resource/Tom_Cruise> ?p ?s . 
-    ?s <http://www.w3.org/2000/01/rdf-schema#label> ?label . 
-    FILTER( lang(?label) = "en") . 
-    ?s <http://dbpedia.org/ontology/abstract> ?abstract . 
-    FILTER( lang(?abstract) = "en") .
-} LIMIT 5000
-
-
-SELECT DISTINCT ?s, ?label, ?abstract WHERE {
-    {  
-    ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/class/yago/HomeMovie106615458> . }
- UNION {  
-    ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/Film> . }
- UNION {  
-    ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/class/yago/ShortSubject106616314> . }
- UNION {  
-    ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/class/yago/HorseOpera106616035> . }
- UNION {  
-    ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/class/yago/CinemaVerite106617011> . } 
-    <http://dbpedia.org/resource/Tom_Cruise> ?p ?s . 
-    ?s <http://www.w3.org/2000/01/rdf-schema#label> ?label . 
-    FILTER( lang(?label) = "en") . 
-    ?s <http://dbpedia.org/ontology/abstract> ?abstract . 
-    FILTER( lang(?abstract) = "en") .
-} LIMIT 5000
-
-
-SELECT DISTINCT ?s, ?label, ?abstract WHERE {
-    {  
-    ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/class/yago/Telefilm106614628> . }
- UNION {  
-    ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/class/yago/Documentary106616806> . }
- UNION {  
-    ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/class/yago/Peepshow106617527> . }
- UNION {  
-    ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/class/yago/SlowMotion106617866> . }
- UNION {  
-    ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/class/yago/Three-D106618937> . } 
-    <http://dbpedia.org/resource/Tom_Cruise> ?p ?s . 
-    ?s <http://www.w3.org/2000/01/rdf-schema#label> ?label . 
-    FILTER( lang(?label) = "en") . 
-    ?s <http://dbpedia.org/ontology/abstract> ?abstract . 
-    FILTER( lang(?abstract) = "en") .
-} LIMIT 5000
-
-```
-You can see from above SPARQL example, we are able to match more entities by performing concept expansion. You can disable the expansion with the following example.
-
-```Python
-from sematch.application import Matcher
-matcher = Matcher(expansion=False)
-matcher.match_entity_type('movies with Tom Cruise')
-```
-
-The SPARQL queries will be limited to movies. Note that two query patterns are needed in order to match all the relations.
+For example, to match `movies with Tom Cruise`, the SPARQL query is shown. 
 
 ```
 SELECT DISTINCT ?s, ?label, ?abstract WHERE {
@@ -204,18 +113,6 @@ SELECT DISTINCT ?s, ?label, ?abstract WHERE {
  UNION {  
     ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/Film> . } 
     <http://dbpedia.org/resource/Tom_Cruise> ?p ?s . 
-    ?s <http://www.w3.org/2000/01/rdf-schema#label> ?label . 
-    FILTER( lang(?label) = "en") . 
-    ?s <http://dbpedia.org/ontology/abstract> ?abstract . 
-    FILTER( lang(?abstract) = "en") .
-} LIMIT 5000
-
-SELECT DISTINCT ?s, ?label, ?abstract WHERE {
-    {  
-    ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/class/yago/Movie106613686> . }
- UNION {  
-    ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/Film> . } 
-    ?s ?p <http://dbpedia.org/resource/Tom_Cruise> . 
     ?s <http://www.w3.org/2000/01/rdf-schema#label> ?label . 
     FILTER( lang(?label) = "en") . 
     ?s <http://dbpedia.org/ontology/abstract> ?abstract . 

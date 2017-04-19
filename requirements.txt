@@ -1,8 +1,8 @@
-networkx==1.11
-nltk==3.2
-numpy==1.8.0
-rdflib==4.0.1
-scikit-learn==0.17.1
-scipy==0.13.2
-SPARQLWrapper==1.5.2
-pytest==3.0.3
+networkx>=1.11
+nltk>=3.2
+numpy>=1.8.0
+rdflib>=4.0.1
+scikit-learn>=0.17.1
+scipy>=0.13.2
+SPARQLWrapper>=1.5.2
+pytest>=3.0.3
