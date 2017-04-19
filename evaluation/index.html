@@ -7,19 +7,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <meta name="author" content="Ganggao Zhu">
-  
-  <title>Evaluation - Sematch Documentation</title>
-  
-
   <link rel="shortcut icon" href="../img/favicon.ico">
-
-  
+  <title>Evaluation - Sematch Documentation</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
   <link rel="stylesheet" href="../css/highlight.css">
-
   
   <script>
     // Current page data
@@ -30,9 +24,7 @@
   
   <script src="../js/jquery-2.1.1.min.js"></script>
   <script src="../js/modernizr-2.8.3.min.js"></script>
-  <script type="text/javascript" src="../js/highlight.pack.js"></script>
-  <script src="../js/theme.js"></script> 
-
+  <script type="text/javascript" src="../js/highlight.pack.js"></script> 
   
 </head>
 
@@ -52,59 +44,47 @@
       </div>
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-        <ul class="current">
+	<ul class="current">
+	  
           
-            <li>
-    <li class="toctree-l1 ">
-        <a class="" href="..">Home</a>
-        
-    </li>
-<li>
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Home</a>
+	    </li>
           
-            <li>
-    <li class="toctree-l1 ">
-        <a class="" href="../similarity/">Similarity</a>
-        
-    </li>
-<li>
+            <li class="toctree-l1">
+		
+    <a class="" href="../similarity/">Similarity</a>
+	    </li>
           
-            <li>
-    <li class="toctree-l1 current">
-        <a class="current" href="./">Evaluation</a>
-        
-            <ul>
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">Evaluation</a>
+    <ul class="subnav">
             
-                <li class="toctree-l3"><a href="#word-similarity-evaluation">Word Similarity Evaluation</a></li>
-                
-            
-                <li class="toctree-l3"><a href="#category-classification-evaluation">Category Classification Evaluation</a></li>
-                
-            
-            </ul>
-        
-    </li>
-<li>
+    <li class="toctree-l2"><a href="#word-similarity-evaluation">Word Similarity Evaluation</a></li>
+    
+
+    <li class="toctree-l2"><a href="#category-classification-evaluation">Category Classification Evaluation</a></li>
+    
+
+    </ul>
+	    </li>
           
-            <li>
-    <li class="toctree-l1 ">
-        <a class="" href="../nlp/">NLP</a>
-        
-    </li>
-<li>
+            <li class="toctree-l1">
+		
+    <a class="" href="../nlp/">NLP</a>
+	    </li>
           
-            <li>
-    <li class="toctree-l1 ">
-        <a class="" href="../application/">Application</a>
-        
-    </li>
-<li>
+            <li class="toctree-l1">
+		
+    <a class="" href="../application/">Application</a>
+	    </li>
           
-            <li>
-    <li class="toctree-l1 ">
-        <a class="" href="../api/">API</a>
-        
-    </li>
-<li>
+            <li class="toctree-l1">
+		
+    <a class="" href="../api/">API</a>
+	    </li>
           
         </ul>
       </div>
@@ -131,9 +111,8 @@
     <li>Evaluation</li>
     <li class="wy-breadcrumbs-aside">
       
-        
-          <a href="https://github.com/gsi-upm/sematch" class="icon icon-github"> Edit on GitHub</a>
-        
+        <a href="https://github.com/gsi-upm/sematch/edit/master/docs/evaluation.md"
+          class="icon icon-github"> Edit on GitHub</a>
       
     </li>
   </ul>
@@ -168,7 +147,8 @@
 <li><a href="http://lcl.uniroma1.it/similarity-datasets/">Multilingual Word Similarity</a></li>
 </ul>
 <p>Camacho-Collados, José, Mohammad Taher Pilehvar, and Roberto Navigli. "A Framework for the Construction of Monolingual and Cross-lingual Word Similarity Datasets." ACL (2). 2015.</p>
-<p>When developing new similarity metrics, proper evaluation is important, whereas sometimes it is tedious. Sematch helps to save such efforts by providing a evaluation framework, where similarity metrics are evaluated with common word similarity datasets and can be compared with other similarity metrics. Futhermore, the Steiger's Z Significance Test is included to perform dependent statistical significance test. For example, we have developed a novel similarity metric WPath, and we want to evaluate with some datasets and compare it to Lin method.</p>
+<p>When developing new similarity metrics, proper evaluation is important, whereas sometimes it is tedious. Sematch helps to save such efforts by providing a evaluation framework, where similarity methods are evaluated with common word similarity datasets and can be compared with each other. </p>
+<p>The most established methodology for evaluating performance of semantic similarity methods in word similarity dataset, is measuring the Spearman correlation between similarity scores generated by the similarity methods and scores assessed by human. Note that both Spearman's and Pearson's correlations coefficients have been commonly used in the literatures. They are equivalent if rating scores are ordered and we use Spearman correlation coefficients as default. A similarity method is acknolwedged to have better performance if it has higher correlation score (the closer to 1.0 the better ) with human judgements, while it is acknowledged to be unrelated to human assessment if the correlation is 0. Since the Spearman's rank correlation coefficients produced by different similarity methods are dependent on the human ratings for each dataset, we need to conduct statistical significance tests on two dependent (overlapping) correlations. Thus, the Steiger's Z Significance Test is used to calculate statistical significance test between the dependent correlation coefficients produced by different similarity methods, using a one-tailed hypothesis test for assessing the difference between two paired correlations. To illustrate the evaluation process, we have demonstrate the evaluation of a novel similarity method WPath, and we want to evaluate with some datasets and compare it to Lin method.</p>
 <pre><code class="python">from sematch.evaluation import WordSimEvaluation
 from sematch.semantic.similarity import WordNetSimilarity
 evaluation = WordSimEvaluation()
@@ -177,10 +157,12 @@ wns = WordNetSimilarity()
 #define similarity metrics
 lin = lambda x, y: wns.word_similarity(x, y, 'lin')
 wpath = lambda x, y: wns.word_similarity_wpath(x, y, 0.8)
-#evaluate similarity metrics
+#evaluate similarity metrics which generates Spearman correlation score.
 print evaluation.evaluate_metric('wpath', wpath, 'noun_simlex')
-#performa Steiger's Z significance Test
-print evaluation.statistical_test('wpath', 'path', 'noun_simlex')
+print evaluation.evaluate_metric('lin', lin, 'noun_simlex')
+#perform Steiger's Z significance Test
+print evaluation.statistical_test('wpath', 'lin', 'noun_simlex')
+
 #define multilingual similarity metrics Spanish-Spanish 
 wpath_es = lambda x, y: wns.monol_word_similarity(x, y, 'spa', 'path')
 #English-Spanish
@@ -188,7 +170,6 @@ wpath_en_es = lambda x, y: wns.crossl_word_similarity(x, y, 'eng', 'spa', 'wpath
 #Evaluate multilingual word similarity datasets
 print evaluation.evaluate_metric('wpath_es', wpath_es, 'rg65_spanish')
 print evaluation.evaluate_metric('wpath_en_es', wpath_en_es, 'rg65_EN-ES')
-
 </code></pre>
 
 <h2 id="category-classification-evaluation">Category Classification Evaluation</h2>
@@ -318,13 +299,13 @@ RESTAURANT |   21    4  138    4 &lt;422&gt;   8 |
       </div>
 
     </section>
-
+    
   </div>
 
-<div class="rst-versions" role="note" style="cursor: pointer">
+  <div class="rst-versions" role="note" style="cursor: pointer">
     <span class="rst-current-version" data-toggle="rst-current-version">
       
-          <a href="https://github.com/gsi-upm/sematch" class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+          <a href="https://github.com/gsi-upm/sematch" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
         <span><a href="../similarity/" style="color: #fcfcfc;">&laquo; Previous</a></span>
@@ -334,6 +315,7 @@ RESTAURANT |   21    4  138    4 &lt;422&gt;   8 |
       
     </span>
 </div>
+    <script src="../js/theme.js"></script>
 
 </body>
 </html>

@@ -7,19 +7,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <meta name="author" content="Ganggao Zhu">
-  
-  <title>API - Sematch Documentation</title>
-  
-
   <link rel="shortcut icon" href="../img/favicon.ico">
-
-  
+  <title>API - Sematch Documentation</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
   <link rel="stylesheet" href="../css/highlight.css">
-
   
   <script>
     // Current page data
@@ -30,9 +24,7 @@
   
   <script src="../js/jquery-2.1.1.min.js"></script>
   <script src="../js/modernizr-2.8.3.min.js"></script>
-  <script type="text/javascript" src="../js/highlight.pack.js"></script>
-  <script src="../js/theme.js"></script> 
-
+  <script type="text/javascript" src="../js/highlight.pack.js"></script> 
   
 </head>
 
@@ -52,59 +44,47 @@
       </div>
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-        <ul class="current">
+	<ul class="current">
+	  
           
-            <li>
-    <li class="toctree-l1 ">
-        <a class="" href="..">Home</a>
-        
-    </li>
-<li>
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Home</a>
+	    </li>
           
-            <li>
-    <li class="toctree-l1 ">
-        <a class="" href="../similarity/">Similarity</a>
-        
-    </li>
-<li>
+            <li class="toctree-l1">
+		
+    <a class="" href="../similarity/">Similarity</a>
+	    </li>
           
-            <li>
-    <li class="toctree-l1 ">
-        <a class="" href="../evaluation/">Evaluation</a>
-        
-    </li>
-<li>
+            <li class="toctree-l1">
+		
+    <a class="" href="../evaluation/">Evaluation</a>
+	    </li>
           
-            <li>
-    <li class="toctree-l1 ">
-        <a class="" href="../nlp/">NLP</a>
-        
-    </li>
-<li>
+            <li class="toctree-l1">
+		
+    <a class="" href="../nlp/">NLP</a>
+	    </li>
           
-            <li>
-    <li class="toctree-l1 ">
-        <a class="" href="../application/">Application</a>
-        
-    </li>
-<li>
+            <li class="toctree-l1">
+		
+    <a class="" href="../application/">Application</a>
+	    </li>
           
-            <li>
-    <li class="toctree-l1 current">
-        <a class="current" href="./">API</a>
-        
-            <ul>
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">API</a>
+    <ul class="subnav">
             
-                <li class="toctree-l3"><a href="#similarity-api">Similarity API</a></li>
-                
-            
-                <li class="toctree-l3"><a href="#taxonomy-api">Taxonomy API</a></li>
-                
-            
-            </ul>
-        
-    </li>
-<li>
+    <li class="toctree-l2"><a href="#similarity-api">Similarity API</a></li>
+    
+
+    <li class="toctree-l2"><a href="#taxonomy-api">Taxonomy API</a></li>
+    
+
+    </ul>
+	    </li>
           
         </ul>
       </div>
@@ -131,9 +111,8 @@
     <li>API</li>
     <li class="wy-breadcrumbs-aside">
       
-        
-          <a href="https://github.com/gsi-upm/sematch" class="icon icon-github"> Edit on GitHub</a>
-        
+        <a href="https://github.com/gsi-upm/sematch/edit/master/docs/api.md"
+          class="icon icon-github"> Edit on GitHub</a>
       
     </li>
   </ul>
@@ -151,6 +130,33 @@
 <li><strong>Corpus-based IC</strong> is the information content computed from sense-annotated corpora such as SemCor or Brown Corpus</li>
 <li><strong>Graph-based IC</strong> is the information content computed from Knowledge graph</li>
 </ul>
+<p>The word similarity interface is shown below.</p>
+<pre><code class="python">    def word_similarity(self, w1, w2, name='wpath'):
+        &quot;&quot;&quot; Return similarity score between two words based on WordNet.
+
+        :param w1: first word to be compared which should be contained in WordNet
+        :param w2: second word to be compared which should be contained in WordNet
+        :param name: the name of knowledge-based semantic similarity metrics
+        :return: numerical score indicating degree of similarity between two words. The
+        minimum score is 0. If one of the input words is not contained in WordNet, 0 is given. The up bound of
+        the similarity score depends on the similarity metric you use. Bigger similarity values indicate higher
+        similarity between two words.
+        :rtype : Float
+        &quot;&quot;&quot;
+        s1 = self.word2synset(w1)
+        s2 = self.word2synset(w2)
+        sim_metric = lambda x, y: self.similarity(x, y, name)
+        return self.max_synset_similarity(s1, s2, sim_metric)
+</code></pre>
+
+<p>The word similarity interface is used for computing similarity between words that are contained in KG. As words are ambiguous, they are first mapped to corresponding concepts in KG. Then word similarity is calculated based on maximum semantic similarity between concepts. For those words having no corresponding concepts (out of vocabulary), 0 similarity is returned. User should use word2synset or word2concept function to check if a given word can be mapped to concepts in KG.</p>
+<pre><code class="python">wns = WordNetSimilarity()
+print wns.word2synset('potato')
+[Synset('potato.n.01'), Synset('potato.n.02')]
+print wns.word2synset('potatoz')
+[]
+</code></pre>
+
 <p>To design a new semantic similarity metric in WordNet, you can take the implementation of WPath method as example.</p>
 <pre><code class="Python">def wpath(self, c1, c2, k=0.8):
     lcs = self.least_common_subsumer(c1,c2)
@@ -169,7 +175,7 @@
 </code></pre>
 
 <p>To add new semantic similarity metric in common Taxonomy class, you use the similar interface as previous two examples.</p>
-<pre><code>def wpath(self, c1, c2, k=0.8):
+<pre><code class="python">def wpath(self, c1, c2, k=0.8):
     lcs = self.least_common_subsumer(c1, c2)
     path = self.shortest_path_length(c1, c2) - 1
     weight = k ** self.concept_ic(lcs)
@@ -229,13 +235,13 @@ class DBpediaDataTransform(DataTransform):
       </div>
 
     </section>
-
+    
   </div>
 
-<div class="rst-versions" role="note" style="cursor: pointer">
+  <div class="rst-versions" role="note" style="cursor: pointer">
     <span class="rst-current-version" data-toggle="rst-current-version">
       
-          <a href="https://github.com/gsi-upm/sematch" class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+          <a href="https://github.com/gsi-upm/sematch" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
         <span><a href="../application/" style="color: #fcfcfc;">&laquo; Previous</a></span>
@@ -243,6 +249,7 @@ class DBpediaDataTransform(DataTransform):
       
     </span>
 </div>
+    <script src="../js/theme.js"></script>
 
 </body>
 </html>

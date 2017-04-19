@@ -7,32 +7,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Documentation for Sematch, semantic similarity analysis framework for textual corpus and structural knowledge graphs">
   <meta name="author" content="Ganggao Zhu">
-  
-  <title>Sematch Documentation</title>
-  
-
   <link rel="shortcut icon" href="./img/favicon.ico">
-
-  
+  <title>Home - Sematch Documentation</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="./css/theme.css" type="text/css" />
   <link rel="stylesheet" href="./css/theme_extra.css" type="text/css" />
   <link rel="stylesheet" href="./css/highlight.css">
-
   
   <script>
     // Current page data
-    var mkdocs_page_name = "None";
+    var mkdocs_page_name = "Home";
     var mkdocs_page_input_path = "index.md";
     var mkdocs_page_url = "/";
   </script>
   
   <script src="./js/jquery-2.1.1.min.js"></script>
   <script src="./js/modernizr-2.8.3.min.js"></script>
-  <script type="text/javascript" src="./js/highlight.pack.js"></script>
-  <script src="./js/theme.js"></script> 
-
+  <script type="text/javascript" src="./js/highlight.pack.js"></script> 
   
 </head>
 
@@ -52,68 +44,56 @@
       </div>
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-        <ul class="current">
+	<ul class="current">
+	  
           
-            <li>
-    <li class="toctree-l1 current">
-        <a class="current" href=".">Home</a>
-        
-            <ul>
+            <li class="toctree-l1 current">
+		
+    <a class="current" href=".">Home</a>
+    <ul class="subnav">
             
-                <li class="toctree-l3"><a href="#introduction">Introduction</a></li>
-                
-            
-                <li class="toctree-l3"><a href="#getting-started-20-minutes-to-sematch">Getting started: 20 minutes to Sematch</a></li>
-                
-            
-                <li class="toctree-l3"><a href="#publications">Publications</a></li>
-                
-            
-                <li class="toctree-l3"><a href="#support">Support</a></li>
-                
-            
-                <li class="toctree-l3"><a href="#why-this-name-sematch-and-logo">Why this name, Sematch and Logo?</a></li>
-                
-            
-            </ul>
-        
-    </li>
-<li>
+    <li class="toctree-l2"><a href="#introduction">Introduction</a></li>
+    
+
+    <li class="toctree-l2"><a href="#getting-started-20-minutes-to-sematch">Getting started: 20 minutes to Sematch</a></li>
+    
+
+    <li class="toctree-l2"><a href="#publications">Publications</a></li>
+    
+
+    <li class="toctree-l2"><a href="#support">Support</a></li>
+    
+
+    <li class="toctree-l2"><a href="#why-this-name-sematch-and-logo">Why this name, Sematch and Logo?</a></li>
+    
+
+    </ul>
+	    </li>
           
-            <li>
-    <li class="toctree-l1 ">
-        <a class="" href="similarity/">Similarity</a>
-        
-    </li>
-<li>
+            <li class="toctree-l1">
+		
+    <a class="" href="similarity/">Similarity</a>
+	    </li>
           
-            <li>
-    <li class="toctree-l1 ">
-        <a class="" href="evaluation/">Evaluation</a>
-        
-    </li>
-<li>
+            <li class="toctree-l1">
+		
+    <a class="" href="evaluation/">Evaluation</a>
+	    </li>
           
-            <li>
-    <li class="toctree-l1 ">
-        <a class="" href="nlp/">NLP</a>
-        
-    </li>
-<li>
+            <li class="toctree-l1">
+		
+    <a class="" href="nlp/">NLP</a>
+	    </li>
           
-            <li>
-    <li class="toctree-l1 ">
-        <a class="" href="application/">Application</a>
-        
-    </li>
-<li>
+            <li class="toctree-l1">
+		
+    <a class="" href="application/">Application</a>
+	    </li>
           
-            <li>
-    <li class="toctree-l1 ">
-        <a class="" href="api/">API</a>
-        
-    </li>
-<li>
+            <li class="toctree-l1">
+		
+    <a class="" href="api/">API</a>
+	    </li>
           
         </ul>
       </div>
@@ -140,9 +120,8 @@
     <li>Home</li>
     <li class="wy-breadcrumbs-aside">
       
-        
-          <a href="https://github.com/gsi-upm/sematch" class="icon icon-github"> Edit on GitHub</a>
-        
+        <a href="https://github.com/gsi-upm/sematch/edit/master/docs/index.md"
+          class="icon icon-github"> Edit on GitHub</a>
       
     </li>
   </ul>
@@ -163,11 +142,22 @@
 <hr />
 <h2 id="getting-started-20-minutes-to-sematch">Getting started: 20 minutes to Sematch</h2>
 <p><strong>Install Sematch</strong></p>
+<p>You need to install scientific computing libraries <strong>numpy</strong> and <strong>scipy</strong> first. An example of installing them with pip is shown below.</p>
+<pre><code>pip install numpy scipy
+</code></pre>
+
+<p>Depending on different OS, you can use different ways to install them. After sucessful installation of <strong>numpy</strong> and <strong>scipy</strong>, you can install sematch with following commands.</p>
 <pre><code>pip install sematch
 python -m sematch.download
 </code></pre>
 
-<p>We also provide a <a href="https://github.com/gsi-upm/sematch-demo">Sematch-Demo Server</a>. You can use it for experimenting with main functionalities or take it as an example for using Sematch to develop applications.</p>
+<p>Alternatively, you can use the development version to clone and install Sematch with setuptools. We recommend you to update your pip and setuptools.</p>
+<pre><code>git clone https://github.com/gsi-upm/sematch.git
+cd sematch
+python setup.py install
+</code></pre>
+
+<p>We also provide a <a href="https://github.com/gsi-upm/sematch-demo">Sematch-Demo Server</a>. You can use it for experimenting with main functionalities or take it as an example for using Sematch to develop applications. Please check our <a href="http://gsi-upm.github.io/sematch/">Documentation</a> for more details.</p>
 <p><strong>Computing Word Similarity</strong>.</p>
 <p>The core module of Sematch is measuring semantic similarity between concepts that are represented as concept taxonomies. Word similarity is computed based on the maximum semantic similarity of WordNet concepts. You can use Sematch to compute multilingual word similarity based on WordNet with various of semantic similarity metrics.</p>
 <pre><code class="python">from sematch.semantic.similarity import WordNetSimilarity
@@ -398,13 +388,13 @@ The project is mainly maintained by Ganggao Zhu. You can contact him via gzhu [a
       </div>
 
     </section>
-
+    
   </div>
 
-<div class="rst-versions" role="note" style="cursor: pointer">
+  <div class="rst-versions" role="note" style="cursor: pointer">
     <span class="rst-current-version" data-toggle="rst-current-version">
       
-          <a href="https://github.com/gsi-upm/sematch" class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+          <a href="https://github.com/gsi-upm/sematch" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
       
@@ -412,11 +402,12 @@ The project is mainly maintained by Ganggao Zhu. You can contact him via gzhu [a
       
     </span>
 </div>
+    <script src="./js/theme.js"></script>
 
 </body>
 </html>
 
 <!--
-MkDocs version : 0.15.3
-Build Date UTC : 2017-02-16 18:54:49.459543
+MkDocs version : 0.16.3
+Build Date UTC : 2017-04-19 10:12:04
 -->
