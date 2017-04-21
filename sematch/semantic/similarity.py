@@ -548,6 +548,7 @@ class EntitySimilarity:
         self._stats = StatSPARQL()
         self._yago = YagoTypeSimilarity()
 
+    @memoized
     def similarity(self, entity1, entity2):
         concepts_1 = self._features.type(entity1)
         concepts_1 = [c for c in concepts_1 if c.__contains__('class/yago')]
@@ -565,6 +566,7 @@ class EntitySimilarity:
         score2 = sum([max([self._yago.similarity(syn1, syn2) for syn1 in s1]) for syn2 in s2]) / N2
         return (score1 + score2) / 2.0
 
+    @memoized
     def relatedness(self, entity1, entity2):
         ab = self._stats.entity_share(entity1, entity2)
         if ab == 0:

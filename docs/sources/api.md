@@ -40,25 +40,40 @@ print wns.word2synset('potatoz')
 []
 ```
 
-To design a new semantic similarity metric in WordNet, you can take the implementation of WPath method as example.
+To design a new semantic similarity metric in WordNet, you can take the implementation of WPath method as example. Users only need to import the corresponding similarity classes and assign the names of similarity metrics. While defining new similarity metrics, the corresponding similarity classes are extended to obtain the common semantic resources. The example shows the WPath method in the **NewSim** class with common semantic data of Least Common Subsumer, shortest path length and IC. Then, the function name in the class ('wpath') can be used to call the semantic similarity metric in the word similarity function.
 
 ```Python
-def wpath(self, c1, c2, k=0.8):
-    lcs = self.least_common_subsumer(c1,c2)
-    path = c1.shortest_path_distance(c2)
-    weight = k ** self.synset_ic(lcs)
-    return 1.0 / (1 + path*weight)
+class NewSim(WordNetSimilarity):
+    
+    def __init__(self):
+        WordNetSimilarity.__init__(self)
+
+	def wpath(self, c1, c2, k=0.8):
+    	lcs = self.least_common_subsumer(c1,c2)
+    	path = c1.shortest_path_distance(c2)
+    	weight = k ** self.synset_ic(lcs)
+    	return 1.0 / (1 + path*weight)
+
+sim = NewSim()
+print sim.word_similarity('actor','singer', 'wpath')
 ```
 
 To design a new semantic similarity metric for YAGO concepts, you can not only use corpus based IC **synset_ic**, buth also use **concept_ic** which computes graph-based IC.
 
 ```Python
-def wpath_graph(self, c1, c2, k=0.9):
-    lcs = self.least_common_subsumer(c1, c2)
-    path = c1.shortest_path_distance(c2)
-    yago_lcs = self.synset2yago(lcs)
-    weight = k ** self._graph_ic.concept_ic(yago_lcs)
-    return 1.0 / (1 + path*weight)
+from sematch.semantic.similarity import YagoTypeSimilarity
+
+class NewYAGOSim(YagoTypeSimilarity):
+    
+    def __init__(self):
+        YagoTypeSimilarity.__init__(self)
+        
+	def wpath_graph(self, c1, c2, k=0.8):
+    	lcs = self.least_common_subsumer(c1, c2)
+    	path = c1.shortest_path_distance(c2)
+    	yago_lcs = self.synset2yago(lcs)
+   		weight = k ** self._graph_ic.concept_ic(yago_lcs)
+    	return 1.0 / (1 + path*weight)
 ```
 
 To add new semantic similarity metric in common Taxonomy class, you use the similar interface as previous two examples.
