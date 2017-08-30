@@ -16,7 +16,7 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-from __future__ import division
+from __future__ import division, print_function
 
 from scipy.stats import spearmanr
 from scipy.stats import pearsonr
@@ -34,9 +34,6 @@ from sklearn.metrics import precision_recall_fscore_support
 from sklearn.metrics import accuracy_score
 from nltk import ConfusionMatrix
 
-import sys
-if sys.version_info[0] < 3:
-    from __future__ import print_function
 
 def generate_report(gold, predict, labels, detailed=True):
     """

@@ -15,13 +15,10 @@
 #    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
-
+from __future__ import print_function
 from SPARQLWrapper import SPARQLWrapper, JSON
 from rdflib import RDF, RDFS, OWL
 
-import sys
-if sys.version_info[0] < 3:
-    from __future__ import print_function
 
 class BaseSPARQL:
 
