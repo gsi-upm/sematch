@@ -1,8 +1,8 @@
 networkx==1.11
 nltk==3.2
-numpy==
+numpy
 rdflib==4.0.1
-scikit-learn==
-scipy==
+scikit-learn
+scipy
 SPARQLWrapper==1.5.2
 pytest==3.0.3
