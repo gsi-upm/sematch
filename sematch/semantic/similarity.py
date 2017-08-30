@@ -28,6 +28,7 @@ from sematch.utility import FileIO, memoized
 
 
 import math
+import sys
 from collections import Counter
 
 class ConceptSimilarity:
@@ -242,7 +243,9 @@ class WordNetSimilarity:
         :param lang: the language code defined
         :return: wordnet synsets.
         """
-        return wn.synsets(word.decode('utf-8'), lang=lang, pos=wn.NOUN)
+        if sys.version_info[0] < 3:
+            return wn.synsets(word.decode('utf-8'), lang=lang, pos=wn.NOUN)
+            return wn.synsets(word, lang=lang, pos=wn.NOUN)
 
 
     @memoized

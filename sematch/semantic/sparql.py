@@ -19,6 +19,10 @@
 from SPARQLWrapper import SPARQLWrapper, JSON
 from rdflib import RDF, RDFS, OWL
 
+import sys
+if sys.version_info[0] < 3:
+    from __future__ import print_function
+
 class BaseSPARQL:
 
     """This class implements basic sparql patterns."""
