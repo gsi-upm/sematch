@@ -23,3 +23,15 @@ def test_matcher():
     assert matcher.match_concepts(['http://dbpedia.org/class/yago/Singer110599806']) is not None
     assert matcher.match_entity_type('singer Spain') is not None
 
+def test_sparql():
+    from sematch.semantic.sparql import EntityFeatures, NameSPARQL
+    ef = EntityFeatures()
+    name = NameSPARQL()
+    feature = EntityFeatures()
+    x = name.name2entities('Michael Jordan')[0]
+    y = name.name2entities('Michael I. Jordan')[0]
+    assert x is not None
+    assert y is not None
+    assert feature.features(x) is not None
+    assert feature.features(y) is not None
+    assert ef.type('http://dbpedia.org/resource/Star_Wars') is not None

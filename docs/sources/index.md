@@ -19,19 +19,34 @@ KG based applications also meet similar pipeline in using semantic similarity, f
 
 In KGs, concepts usually denote ontology classes while entities refer to ontology instances. Moreover, those concepts are usually constructed into hierarchical taxonomies, such as DBpedia ontology class, thus quantifying concept similarity in KG relies on similar semantic information (e.g. path length,  depth, least common subsumer, information content) and semantic similarity metrics (e.g. Path, Wu & Palmer,Li,  Resnik, Lin, Jiang & Conrad and WPath). In consequence,  Sematch provides an integrated framework to develop and evaluate semantic similarity metrics for concepts, words, entities and their applications. 
 
-
 ------------------
 
 ## Getting started: 20 minutes to Sematch
 
 **Install Sematch**
 
+You need to install scientific computing libraries **numpy** and **scipy** first. An example of installing them with pip is shown below.
+
+```
+pip install numpy scipy
+```
+
+Depending on different OS, you can use different ways to install them. After sucessful installation of **numpy** and **scipy**, you can install sematch with following commands.
+
 ```
 pip install sematch
 python -m sematch.download
 ```
 
-We also provide a [Sematch-Demo Server](https://github.com/gsi-upm/sematch-demo). You can use it for experimenting with main functionalities or take it as an example for using Sematch to develop applications.
+Alternatively, you can use the development version to clone and install Sematch with setuptools. We recommend you to update your pip and setuptools.
+
+```
+git clone https://github.com/gsi-upm/sematch.git
+cd sematch
+python setup.py install
+```
+
+We also provide a [Sematch-Demo Server](https://github.com/gsi-upm/sematch-demo). You can use it for experimenting with main functionalities or take it as an example for using Sematch to develop applications. Please check our [Documentation](http://gsi-upm.github.io/sematch/) for more details.
 
 **Computing Word Similarity**.
 

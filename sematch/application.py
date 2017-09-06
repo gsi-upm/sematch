@@ -30,7 +30,13 @@ class Matcher:
 
     """This class is used for concept based entity match in DBpedia"""
 
-    def __init__(self, result_limit=5000, expansion=True, show_query=False):
+    def __init__(self, result_limit=5000, expansion=False, show_query=False):
+        """ semantic search of entities and concepts
+
+        :param result_limit: maximumn number of retrieved entities
+        :param expansion: if conduct concept expansion
+        :param show_query: if SPARQL query is shown
+        """
         self._expansion = expansion
         self._show_query = show_query
         self._linker = NameSPARQL()
