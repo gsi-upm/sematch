@@ -15,9 +15,10 @@
 #    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
-
+from __future__ import print_function
 from SPARQLWrapper import SPARQLWrapper, JSON
 from rdflib import RDF, RDFS, OWL
+
 
 class BaseSPARQL:
 
@@ -33,7 +34,7 @@ class BaseSPARQL:
 
     def execution(self, query, show_query=False):
         if show_query:
-            print query
+            print(query)
         self._sparql.setQuery(query)
         results = self._sparql.query().convert()
         #print results

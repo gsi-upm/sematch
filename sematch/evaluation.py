@@ -16,7 +16,7 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-from __future__ import division
+from __future__ import division, print_function
 
 from scipy.stats import spearmanr
 from scipy.stats import pearsonr
@@ -34,6 +34,7 @@ from sklearn.metrics import precision_recall_fscore_support
 from sklearn.metrics import accuracy_score
 from nltk import ConfusionMatrix
 
+
 def generate_report(gold, predict, labels, detailed=True):
     """
     Generate the classification report
@@ -43,15 +44,15 @@ def generate_report(gold, predict, labels, detailed=True):
     :return: none
     """
     if detailed:
-        print 'macro averge: ', precision_recall_fscore_support(gold, predict, average='macro')
-        print 'micro average: ', precision_recall_fscore_support(gold, predict, average='micro')
-        print 'weighted average: ', precision_recall_fscore_support(gold, predict, average='weighted')
+        print('macro averge: %f' % precision_recall_fscore_support(gold, predict, average='macro'))
+        print('micro average: %f' % precision_recall_fscore_support(gold, predict, average='micro'))
+        print('weighted average: %f' % precision_recall_fscore_support(gold, predict, average='weighted'))
     else:
         import warnings
         warnings.filterwarnings("ignore")
-    print 'accuracy: ', accuracy_score(gold, predict)
-    print classification_report(gold, predict, target_names=labels)
-    print ConfusionMatrix(gold, predict)
+    print('accuracy: %f' % accuracy_score(gold, predict))
+    print(classification_report(gold, predict, target_names=labels))
+    print(ConfusionMatrix(gold, predict))
 
 
 class SteigerTest:
@@ -376,7 +377,7 @@ class AspectEvaluation:
         return X, y
 
     def evaluate(self, X, y, classifier, detailed_report=True):
-        print "Evaluating..."
+        print("Evaluating...")
         pred = classifier.classify(X)
         generate_report(list(y), list(pred), list(set(y)), detailed_report)
 
