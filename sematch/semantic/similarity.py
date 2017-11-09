@@ -590,7 +590,7 @@ class EntitySimilarity:
             self.entity_share_stats[(entity1, entity2)] = ab
             self.entity_share_stats[(entity2, entity1)] = ab
         if ab == 0:
-            return 0.
+            return (0., 0.)
 
         a = self.entity_stats.get(entity1)
         if a is None:
