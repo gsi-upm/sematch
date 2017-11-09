@@ -550,6 +550,8 @@ class EntitySimilarity:
         self._features = EntityFeatures()
         self._stats = StatSPARQL()
         self._yago = YagoTypeSimilarity()
+        self.entity_stats = {}
+        self.entity_share_stats = {}
 
     @memoized
     def similarity(self, entity1, entity2):
@@ -582,11 +584,23 @@ class EntitySimilarity:
 
     @memoized
     def di_relatedness(self, entity1, entity2):
-        ab = self._stats.entity_share(entity1, entity2)
+        ab = self.entity_share_stats.get((entity1, entity2))
+        if ab is None:
+            ab = self._stats.entity_share(entity1, entity2)
+            self.entity_share_stats[(entity1, entity2)] = ab
         if ab == 0:
-            return 0
-        a = self._stats.entity_relation(entity1)
-        b = self._stats.entity_relation(entity2)
+            return 0.
+
+        a = self.entity_stats.get(entity1)
+        if a is None:
+            a = self._stats.entity_relation(entity1)
+            self.entity_stats[entity1] = a
+
+        b = self.entity_stats.get(entity2)
+        if b is None:
+            b = self._stats.entity_relation(entity2)
+            self.entity_stats[entity2] = b
+        
         x = math.log(a) - math.log(ab)
         y = math.log(self._stats.entity_N()) - math.log(a)
         return x / y
