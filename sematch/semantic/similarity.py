@@ -580,3 +580,14 @@ class EntitySimilarity:
         y = math.log(self._stats.entity_N()) - math.log(min([a,b]))
         return x / y
 
+    @memoized
+    def di_relatedness(self, entity1, entity2):
+        ab = self._stats.entity_share(entity1, entity2)
+        if ab == 0:
+            return 0
+        a = self._stats.entity_relation(entity1)
+        b = self._stats.entity_relation(entity2)
+        x = math.log(a) - math.log(ab)
+        y = math.log(self._stats.entity_N()) - math.log(a)
+        return x / y
+
