@@ -1,0 +1,4406 @@
+{"text": "place", "label": "RESTAURANT"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "portions", "label": "FOOD"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "Saul", "label": "RESTAURANT"}
+{"text": "foie gras terrine with figs", "label": "FOOD"}
+{"text": "duck confit", "label": "FOOD"}
+{"text": "wine list", "label": "DRINKS"}
+{"text": "wine list", "label": "DRINKS"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "cart attendant", "label": "SERVICE"}
+{"text": "Food", "label": "FOOD"}
+{"text": "Chow fun", "label": "FOOD"}
+{"text": "pork shu mai", "label": "FOOD"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "Fish", "label": "RESTAURANT"}
+{"text": "Service", "label": "SERVICE"}
+{"text": "oysters", "label": "FOOD"}
+{"text": "Restaurant Saul", "label": "RESTAURANT"}
+{"text": "service", "label": "SERVICE"}
+{"text": "decor", "label": "AMBIENCE"}
+{"text": "duck breast special", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "Thai fusion stuff", "label": "FOOD"}
+{"text": "Grilled Chicken special with Edamame Puree", "label": "FOOD"}
+{"text": "Edamame pureed", "label": "FOOD"}
+{"text": "Edamame pureed", "label": "FOOD"}
+{"text": "place", "label": "AMBIENCE"}
+{"text": "decor", "label": "AMBIENCE"}
+{"text": "vent", "label": "AMBIENCE"}
+{"text": "sake list", "label": "DRINKS"}
+{"text": "spicy tuna roll", "label": "FOOD"}
+{"text": "rock shrimp tempura", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "pink pony", "label": "RESTAURANT"}
+{"text": "spot", "label": "RESTAURANT"}
+{"text": "Food", "label": "FOOD"}
+{"text": "Service", "label": "SERVICE"}
+{"text": "Ambiance", "label": "AMBIENCE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "waiter", "label": "SERVICE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "Food", "label": "FOOD"}
+{"text": "Service", "label": "SERVICE"}
+{"text": "sea urchin", "label": "FOOD"}
+{"text": "sushi", "label": "FOOD"}
+{"text": "sushi", "label": "FOOD"}
+{"text": "rice to fish ration", "label": "FOOD"}
+{"text": "half price sushi deal", "label": "FOOD"}
+{"text": "crowd", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "Prix Fixe menu", "label": "FOOD"}
+{"text": "Prix Fixe menu", "label": "FOOD"}
+{"text": "Prix Fixe menu", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "dishes", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "somosas", "label": "FOOD"}
+{"text": "chai", "label": "FOOD"}
+{"text": "chole", "label": "FOOD"}
+{"text": "dhosas", "label": "FOOD"}
+{"text": "dhal", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "kitchen", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "ambience", "label": "AMBIENCE"}
+{"text": "view", "label": "LOCATION"}
+{"text": "service", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "lava cake dessert", "label": "FOOD"}
+{"text": "Cosette", "label": "AMBIENCE"}
+{"text": "restaurant", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "French Onion soup", "label": "FOOD"}
+{"text": "French Onion soup", "label": "FOOD"}
+{"text": "desserts", "label": "FOOD"}
+{"text": "ambience", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "pizza", "label": "FOOD"}
+{"text": "cheese", "label": "FOOD"}
+{"text": "pizza", "label": "FOOD"}
+{"text": "pizza", "label": "FOOD"}
+{"text": "ingredients", "label": "FOOD"}
+{"text": "pizza", "label": "FOOD"}
+{"text": "crust", "label": "FOOD"}
+{"text": "meals", "label": "FOOD"}
+{"text": "seafood", "label": "FOOD"}
+{"text": "wine list", "label": "DRINKS"}
+{"text": "menu", "label": "FOOD"}
+{"text": "ingredients", "label": "FOOD"}
+{"text": "Pastrami", "label": "FOOD"}
+{"text": "portion", "label": "FOOD"}
+{"text": "fried shrimp", "label": "FOOD"}
+{"text": "fried shrimp", "label": "FOOD"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "signs", "label": "RESTAURANT"}
+{"text": "specials menus", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "waitstaff", "label": "SERVICE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "Leon", "label": "RESTAURANT"}
+{"text": "Leon", "label": "AMBIENCE"}
+{"text": "specials", "label": "FOOD"}
+{"text": "atmosphere", "label": "AMBIENCE"}
+{"text": "French bistro fare", "label": "FOOD"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "wine", "label": "DRINKS"}
+{"text": "wine", "label": "DRINKS"}
+{"text": "Zucchero Pomodori", "label": "RESTAURANT"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "service", "label": "SERVICE"}
+{"text": "decor", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "portions", "label": "FOOD"}
+{"text": "Gnocchi", "label": "RESTAURANT"}
+{"text": "place", "label": "AMBIENCE"}
+{"text": "hostess", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "wine", "label": "DRINKS"}
+{"text": "service", "label": "SERVICE"}
+{"text": "wait", "label": "SERVICE"}
+{"text": "glass of wine", "label": "DRINKS"}
+{"text": "service", "label": "SERVICE"}
+{"text": "people", "label": "SERVICE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "pizza", "label": "FOOD"}
+{"text": "atmoshpere", "label": "AMBIENCE"}
+{"text": "pizza", "label": "FOOD"}
+{"text": "lunch", "label": "FOOD"}
+{"text": "Sauce", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "waitress", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "Service", "label": "SERVICE"}
+{"text": "pizza", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "wait", "label": "SERVICE"}
+{"text": "sushi", "label": "FOOD"}
+{"text": "place", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "tuna of gari", "label": "FOOD"}
+{"text": "sushi", "label": "FOOD"}
+{"text": "thai food", "label": "FOOD"}
+{"text": "Planet Thailand", "label": "RESTAURANT"}
+{"text": "menu", "label": "FOOD"}
+{"text": "atmosphere", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "menu", "label": "FOOD"}
+{"text": "rolls", "label": "FOOD"}
+{"text": "rolls", "label": "FOOD"}
+{"text": "sashimi", "label": "FOOD"}
+{"text": "crunchy tuna", "label": "FOOD"}
+{"text": "garden terrace", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "Steak Tartare", "label": "FOOD"}
+{"text": "open kitchen", "label": "AMBIENCE"}
+{"text": "restaurant", "label": "AMBIENCE"}
+{"text": "wine selection", "label": "DRINKS"}
+{"text": "Gigondas", "label": "DRINKS"}
+{"text": "house champagne", "label": "DRINKS"}
+{"text": "vibe", "label": "AMBIENCE"}
+{"text": "French food", "label": "FOOD"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "crust", "label": "FOOD"}
+{"text": "pizza", "label": "FOOD"}
+{"text": "VT's", "label": "RESTAURANT"}
+{"text": "neighborhood", "label": "LOCATION"}
+{"text": "food", "label": "FOOD"}
+{"text": "setting", "label": "AMBIENCE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "Mizu", "label": "RESTAURANT"}
+{"text": "Spicy Scallop roll", "label": "FOOD"}
+{"text": "Moules", "label": "FOOD"}
+{"text": "lobster ravioli", "label": "FOOD"}
+{"text": "maitre d'", "label": "SERVICE"}
+{"text": "dessert", "label": "FOOD"}
+{"text": "dessert", "label": "FOOD"}
+{"text": "dessert", "label": "FOOD"}
+{"text": "drinks", "label": "DRINKS"}
+{"text": "wine selection", "label": "DRINKS"}
+{"text": "chef's specials", "label": "FOOD"}
+{"text": "Service", "label": "SERVICE"}
+{"text": "Downstairs lounge", "label": "AMBIENCE"}
+{"text": "Raga's", "label": "AMBIENCE"}
+{"text": "exotic food", "label": "FOOD"}
+{"text": "exotic food", "label": "FOOD"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "bar", "label": "DRINKS"}
+{"text": "beers", "label": "DRINKS"}
+{"text": "wines", "label": "DRINKS"}
+{"text": "Leon", "label": "RESTAURANT"}
+{"text": "waitress", "label": "SERVICE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "Jekyll and Hyde", "label": "RESTAURANT"}
+{"text": "shows", "label": "AMBIENCE"}
+{"text": "actors", "label": "AMBIENCE"}
+{"text": "server", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "tuna", "label": "FOOD"}
+{"text": "wasabe potatoes", "label": "FOOD"}
+{"text": "outdoor atmosphere", "label": "LOCATION"}
+{"text": "Service", "label": "SERVICE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "pizza", "label": "FOOD"}
+{"text": "fresh mozzarella", "label": "FOOD"}
+{"text": "appetizer selection", "label": "FOOD"}
+{"text": "Wait staff", "label": "SERVICE"}
+{"text": "pie", "label": "FOOD"}
+{"text": "salad", "label": "FOOD"}
+{"text": "dining", "label": "FOOD"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "chicken pot pie", "label": "FOOD"}
+{"text": "cheeseburger", "label": "FOOD"}
+{"text": "cheeseburger", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "bagels", "label": "FOOD"}
+{"text": "1st Ave spot", "label": "RESTAURANT"}
+{"text": "Uni Hand roll", "label": "FOOD"}
+{"text": "sake menu", "label": "DRINKS"}
+{"text": "lobster teriyaki", "label": "FOOD"}
+{"text": "rose special roll", "label": "FOOD"}
+{"text": "Service", "label": "SERVICE"}
+{"text": "Food", "label": "FOOD"}
+{"text": "pork belly", "label": "FOOD"}
+{"text": "Wine list selection", "label": "DRINKS"}
+{"text": "wine-by-the-glass", "label": "DRINKS"}
+{"text": "Traditional French decour", "label": "AMBIENCE"}
+{"text": "hall", "label": "AMBIENCE"}
+{"text": "Cafe Spice", "label": "RESTAURANT"}
+{"text": "Service", "label": "SERVICE"}
+{"text": "Seating", "label": "SERVICE"}
+{"text": "Food", "label": "FOOD"}
+{"text": "raw vegatables in side orders", "label": "FOOD"}
+{"text": "decor", "label": "AMBIENCE"}
+{"text": "semi-private boths", "label": "AMBIENCE"}
+{"text": "Red Eye", "label": "RESTAURANT"}
+{"text": "live jazz band", "label": "AMBIENCE"}
+{"text": "atmosphere", "label": "AMBIENCE"}
+{"text": "meal", "label": "FOOD"}
+{"text": "Red Eye Grill", "label": "RESTAURANT"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "balance of herbs and tomatoes", "label": "FOOD"}
+{"text": "Jekyll and hyde Pub", "label": "RESTAURANT"}
+{"text": "bar", "label": "RESTAURANT"}
+{"text": "server", "label": "SERVICE"}
+{"text": "decor", "label": "AMBIENCE"}
+{"text": "hidden bathrooms", "label": "AMBIENCE"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "Jekyll and Hyde Pub", "label": "RESTAURANT"}
+{"text": "beers", "label": "DRINKS"}
+{"text": "food", "label": "FOOD"}
+{"text": "pumkin tortelini", "label": "FOOD"}
+{"text": "entertainment", "label": "AMBIENCE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "bagel", "label": "FOOD"}
+{"text": "bagel", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "lobster roll", "label": "FOOD"}
+{"text": "lobster", "label": "FOOD"}
+{"text": "pizza", "label": "FOOD"}
+{"text": "santa fe chopped salad", "label": "FOOD"}
+{"text": "fish and chips", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "ambience", "label": "AMBIENCE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "chow fun and chow see", "label": "FOOD"}
+{"text": "scallion pancakes", "label": "FOOD"}
+{"text": "fried dumplings", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "sushi", "label": "FOOD"}
+{"text": "tuna", "label": "FOOD"}
+{"text": "rolls", "label": "FOOD"}
+{"text": "pad penang", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "fresh restaurant", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "chef", "label": "FOOD"}
+{"text": "salads", "label": "FOOD"}
+{"text": "Pam's special fried fish", "label": "FOOD"}
+{"text": "vibe", "label": "AMBIENCE"}
+{"text": "atmosphere", "label": "AMBIENCE"}
+{"text": "Ambience", "label": "AMBIENCE"}
+{"text": "Salads", "label": "FOOD"}
+{"text": "salads", "label": "FOOD"}
+{"text": "Ingredients", "label": "FOOD"}
+{"text": "sushi", "label": "FOOD"}
+{"text": "sushi", "label": "FOOD"}
+{"text": "spicy Tuna roll", "label": "FOOD"}
+{"text": "spicy Tuna roll", "label": "FOOD"}
+{"text": "spicy Tuna roll", "label": "FOOD"}
+{"text": "Yellowtail", "label": "FOOD"}
+{"text": "all you can eat deal", "label": "FOOD"}
+{"text": "all you can eat deal", "label": "FOOD"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "Big Wong", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "atmosphere", "label": "AMBIENCE"}
+{"text": "waiters", "label": "SERVICE"}
+{"text": "congee", "label": "FOOD"}
+{"text": "noodles", "label": "FOOD"}
+{"text": "rice dishes", "label": "FOOD"}
+{"text": "takeout", "label": "SERVICE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "Caesar Salad", "label": "FOOD"}
+{"text": "arugula and goat cheese", "label": "FOOD"}
+{"text": "pasta dish", "label": "FOOD"}
+{"text": "tiramisu chocolate cake", "label": "FOOD"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "place", "label": "AMBIENCE"}
+{"text": "Manager", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "good", "label": "FOOD"}
+{"text": "dishes", "label": "FOOD"}
+{"text": "wine", "label": "DRINKS"}
+{"text": "atmosphere", "label": "AMBIENCE"}
+{"text": "Patis", "label": "RESTAURANT"}
+{"text": "Pastis", "label": "RESTAURANT"}
+{"text": "pizza", "label": "FOOD"}
+{"text": "place", "label": "AMBIENCE"}
+{"text": "raddichio", "label": "FOOD"}
+{"text": "mushroom pizza", "label": "FOOD"}
+{"text": "sangria", "label": "DRINKS"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "Bombay beer", "label": "DRINKS"}
+{"text": "Service", "label": "SERVICE"}
+{"text": "people", "label": "SERVICE"}
+{"text": "place", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "Pizza", "label": "FOOD"}
+{"text": "homemade pasta", "label": "FOOD"}
+{"text": "Ambience", "label": "AMBIENCE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "hanger steak", "label": "FOOD"}
+{"text": "tuna", "label": "FOOD"}
+{"text": "Service", "label": "SERVICE"}
+{"text": "ambience", "label": "AMBIENCE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "filet mignon dish", "label": "FOOD"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "ambience", "label": "AMBIENCE"}
+{"text": "sushi", "label": "FOOD"}
+{"text": "ambient", "label": "AMBIENCE"}
+{"text": "beef and noodle soup dishes", "label": "FOOD"}
+{"text": "meal", "label": "FOOD"}
+{"text": "place", "label": "AMBIENCE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "Pizza", "label": "FOOD"}
+{"text": "wine", "label": "DRINKS"}
+{"text": "service", "label": "SERVICE"}
+{"text": "backyard dining area", "label": "AMBIENCE"}
+{"text": "outdoor restaurants", "label": "AMBIENCE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "place", "label": "AMBIENCE"}
+{"text": "tables", "label": "AMBIENCE"}
+{"text": "menu", "label": "FOOD"}
+{"text": "wine list", "label": "DRINKS"}
+{"text": "wines", "label": "DRINKS"}
+{"text": "wines", "label": "DRINKS"}
+{"text": "Service", "label": "SERVICE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "Teodora", "label": "RESTAURANT"}
+{"text": "meals", "label": "FOOD"}
+{"text": "rosemary or orange flavoring", "label": "FOOD"}
+{"text": "Fish", "label": "FOOD"}
+{"text": "wait staff", "label": "SERVICE"}
+{"text": "place", "label": "AMBIENCE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "dessert", "label": "FOOD"}
+{"text": "expresso", "label": "DRINKS"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "Myagi", "label": "RESTAURANT"}
+{"text": "service", "label": "SERVICE"}
+{"text": "fish", "label": "FOOD"}
+{"text": "tuna tartar appetizer", "label": "FOOD"}
+{"text": "pizza", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "place", "label": "AMBIENCE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "atmosphere", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "dining room", "label": "AMBIENCE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "meal", "label": "FOOD"}
+{"text": "restaurant", "label": "AMBIENCE"}
+{"text": "view", "label": "LOCATION"}
+{"text": "service", "label": "SERVICE"}
+{"text": "ambiance", "label": "AMBIENCE"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "Lobster Bisque", "label": "FOOD"}
+{"text": "New England Chowder", "label": "FOOD"}
+{"text": "Lobster Bisque", "label": "FOOD"}
+{"text": "Prime Rib", "label": "FOOD"}
+{"text": "bottles of Korbett", "label": "DRINKS"}
+{"text": "food", "label": "FOOD"}
+{"text": "chicken vindaloo", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "portions", "label": "FOOD"}
+{"text": "wine list", "label": "DRINKS"}
+{"text": "food", "label": "FOOD"}
+{"text": "selection of wines", "label": "DRINKS"}
+{"text": "Chef's tasting menu", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "place", "label": "AMBIENCE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "prixe fixe tasting menu", "label": "FOOD"}
+{"text": "prixe fixe tasting menu", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "lemon salad", "label": "FOOD"}
+{"text": "menu", "label": "FOOD"}
+{"text": "grilled branzino", "label": "FOOD"}
+{"text": "decor", "label": "AMBIENCE"}
+{"text": "Prune", "label": "RESTAURANT"}
+{"text": "place", "label": "AMBIENCE"}
+{"text": "entertainment", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "portions", "label": "FOOD"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "Jekyll and Hyde", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "portions", "label": "FOOD"}
+{"text": "place", "label": "AMBIENCE"}
+{"text": "characters", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "Jeckll and Hydes", "label": "RESTAURANT"}
+{"text": "Service", "label": "SERVICE"}
+{"text": "Drinks", "label": "DRINKS"}
+{"text": "Food", "label": "FOOD"}
+{"text": "pizza", "label": "FOOD"}
+{"text": "Service", "label": "SERVICE"}
+{"text": "pizza", "label": "FOOD"}
+{"text": "fish", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "Delivery", "label": "SERVICE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "seating", "label": "SERVICE"}
+{"text": "Delivery", "label": "SERVICE"}
+{"text": "sushi", "label": "FOOD"}
+{"text": "bagel", "label": "FOOD"}
+{"text": "bagels", "label": "FOOD"}
+{"text": "bagels", "label": "FOOD"}
+{"text": "salads", "label": "FOOD"}
+{"text": "cream cheeses", "label": "FOOD"}
+{"text": "lox", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "resturant", "label": "RESTAURANT"}
+{"text": "resturant", "label": "AMBIENCE"}
+{"text": "ambiance", "label": "AMBIENCE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "ambience", "label": "AMBIENCE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "Shabu-Shabu Restaurant", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "feel", "label": "AMBIENCE"}
+{"text": "Shabu-Shabu", "label": "FOOD"}
+{"text": "atmosphere", "label": "AMBIENCE"}
+{"text": "owner", "label": "RESTAURANT"}
+{"text": "staff", "label": "RESTAURANT"}
+{"text": "ambiance", "label": "AMBIENCE"}
+{"text": "menu", "label": "FOOD"}
+{"text": "Taxan", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "location", "label": "LOCATION"}
+{"text": "ambience", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "green curry with vegetables", "label": "FOOD"}
+{"text": "quantity", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "ravioli", "label": "FOOD"}
+{"text": "wine", "label": "DRINKS"}
+{"text": "service", "label": "SERVICE"}
+{"text": "trattoria", "label": "AMBIENCE"}
+{"text": "trattoria", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "dishes", "label": "FOOD"}
+{"text": "specials", "label": "FOOD"}
+{"text": "regular menu-fare", "label": "FOOD"}
+{"text": "parmesean porcini souffle", "label": "FOOD"}
+{"text": "lamb glazed with balsamic vinegar", "label": "FOOD"}
+{"text": "candle-light", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "tables", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "wine", "label": "DRINKS"}
+{"text": "food", "label": "FOOD"}
+{"text": "wine", "label": "DRINKS"}
+{"text": "marinara/arrabiatta sauce", "label": "FOOD"}
+{"text": "mozzarella en Carozza", "label": "FOOD"}
+{"text": "back room", "label": "AMBIENCE"}
+{"text": "Emilio", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "wine choices", "label": "DRINKS"}
+{"text": "pizza", "label": "FOOD"}
+{"text": "pepperoni", "label": "FOOD"}
+{"text": "family style salad", "label": "FOOD"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "hostess", "label": "SERVICE"}
+{"text": "waitress", "label": "SERVICE"}
+{"text": "waitress", "label": "SERVICE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "Amma", "label": "RESTAURANT"}
+{"text": "dishes", "label": "FOOD"}
+{"text": "dishes", "label": "FOOD"}
+{"text": "vegetarian dishes", "label": "FOOD"}
+{"text": "non-veg selections", "label": "FOOD"}
+{"text": "Decor", "label": "AMBIENCE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "place", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "sea bass", "label": "FOOD"}
+{"text": "Dal Bukhara", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "kababs", "label": "FOOD"}
+{"text": "Dal Bukhara", "label": "FOOD"}
+{"text": "Haru on Park S", "label": "RESTAURANT"}
+{"text": "fish", "label": "FOOD"}
+{"text": "rice", "label": "FOOD"}
+{"text": "sushi", "label": "FOOD"}
+{"text": "sushi", "label": "FOOD"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "all-u-can-eat sushi", "label": "FOOD"}
+{"text": "menu", "label": "FOOD"}
+{"text": "ingredients", "label": "FOOD"}
+{"text": "fish", "label": "FOOD"}
+{"text": "rice", "label": "FOOD"}
+{"text": "soy sauce", "label": "FOOD"}
+{"text": "rice", "label": "FOOD"}
+{"text": "waitstaffs", "label": "SERVICE"}
+{"text": "Roth's", "label": "RESTAURANT"}
+{"text": "service", "label": "SERVICE"}
+{"text": "dinner", "label": "FOOD"}
+{"text": "eggs benedict", "label": "FOOD"}
+{"text": "meal", "label": "FOOD"}
+{"text": "room", "label": "AMBIENCE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "Planet Thai", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "drinks", "label": "DRINKS"}
+{"text": "atmosphere", "label": "AMBIENCE"}
+{"text": "svc", "label": "SERVICE"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "Pad Thai", "label": "FOOD"}
+{"text": "portions", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "sandwiches", "label": "FOOD"}
+{"text": "sandwiches", "label": "FOOD"}
+{"text": "atmosphere", "label": "AMBIENCE"}
+{"text": "Chennai Garden", "label": "RESTAURANT"}
+{"text": "Indian", "label": "FOOD"}
+{"text": "Indian", "label": "FOOD"}
+{"text": "MEAT dishes", "label": "FOOD"}
+{"text": "seats", "label": "AMBIENCE"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "restaurant", "label": "AMBIENCE"}
+{"text": "cigar bar", "label": "AMBIENCE"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "portion sizes", "label": "FOOD"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "PLACE", "label": "RESTAURANT"}
+{"text": "Food", "label": "FOOD"}
+{"text": "Fish", "label": "FOOD"}
+{"text": "Waitstaff", "label": "SERVICE"}
+{"text": "YUKA", "label": "RESTAURANT"}
+{"text": "seafood", "label": "FOOD"}
+{"text": "Mermaid Inn", "label": "RESTAURANT"}
+{"text": "menu", "label": "FOOD"}
+{"text": "dishes", "label": "FOOD"}
+{"text": "lobster sandwich", "label": "FOOD"}
+{"text": "spaghetti with Scallops and Shrimp", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "ambience", "label": "AMBIENCE"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "seafood", "label": "FOOD"}
+{"text": "lobster sandwich", "label": "FOOD"}
+{"text": "lobster sandwich", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "halibut special", "label": "FOOD"}
+{"text": "steak", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "waiter", "label": "SERVICE"}
+{"text": "waiter", "label": "SERVICE"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "foods", "label": "FOOD"}
+{"text": "foods", "label": "FOOD"}
+{"text": "jelly fish", "label": "FOOD"}
+{"text": "drunken chicken", "label": "FOOD"}
+{"text": "soupy dumplings", "label": "FOOD"}
+{"text": "stir fry blue crab", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "waiters", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "Cheese plate", "label": "FOOD"}
+{"text": "Cheese plate", "label": "FOOD"}
+{"text": "Cheese plate", "label": "FOOD"}
+{"text": "bruschettas", "label": "FOOD"}
+{"text": "paninis", "label": "FOOD"}
+{"text": "tramezzinis", "label": "FOOD"}
+{"text": "asparagus, truffle oil, parmesan bruschetta", "label": "FOOD"}
+{"text": "Wine list", "label": "DRINKS"}
+{"text": "Wine list", "label": "DRINKS"}
+{"text": "specials", "label": "FOOD"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "atmosphere", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "place", "label": "AMBIENCE"}
+{"text": "wait staff", "label": "SERVICE"}
+{"text": "people", "label": "SERVICE"}
+{"text": "Cafe Noir", "label": "RESTAURANT"}
+{"text": "service", "label": "SERVICE"}
+{"text": "waitress", "label": "SERVICE"}
+{"text": "manager", "label": "SERVICE"}
+{"text": "waitress", "label": "SERVICE"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "Cafe Noir", "label": "RESTAURANT"}
+{"text": "Pizza", "label": "FOOD"}
+{"text": "Salads", "label": "FOOD"}
+{"text": "calamari", "label": "FOOD"}
+{"text": "Decor", "label": "AMBIENCE"}
+{"text": "Service", "label": "SERVICE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "ambience", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "thai cuisine", "label": "FOOD"}
+{"text": "customer service", "label": "SERVICE"}
+{"text": "gentleman", "label": "SERVICE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "atmosphere", "label": "AMBIENCE"}
+{"text": "dishes", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "wine list", "label": "DRINKS"}
+{"text": "food", "label": "FOOD"}
+{"text": "drinks", "label": "DRINKS"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "mileau", "label": "AMBIENCE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "Casimir", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "hostess", "label": "SERVICE"}
+{"text": "outside table", "label": "AMBIENCE"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "unisex bathroom", "label": "AMBIENCE"}
+{"text": "caviar", "label": "FOOD"}
+{"text": "waitstaff", "label": "SERVICE"}
+{"text": "waitstaff", "label": "SERVICE"}
+{"text": "caviar", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "ingredients", "label": "FOOD"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "salmon dish", "label": "FOOD"}
+{"text": "Change Mojito", "label": "DRINKS"}
+{"text": "dim sum", "label": "FOOD"}
+{"text": "back patio", "label": "AMBIENCE"}
+{"text": "music", "label": "AMBIENCE"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "place", "label": "AMBIENCE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "buffet", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "dishes", "label": "FOOD"}
+{"text": "Service", "label": "SERVICE"}
+{"text": "cheesecake", "label": "FOOD"}
+{"text": "pastries", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "cheeseburgers", "label": "FOOD"}
+{"text": "burgers", "label": "FOOD"}
+{"text": "pastrami sandwich on a roll", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "place", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "spice", "label": "FOOD"}
+{"text": "Tom Kha soup", "label": "FOOD"}
+{"text": "Thai", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "pesto pizza", "label": "FOOD"}
+{"text": "spicy Italian cheese", "label": "FOOD"}
+{"text": "back garden sitting area", "label": "AMBIENCE"}
+{"text": "lobster sandwich", "label": "FOOD"}
+{"text": "portion", "label": "FOOD"}
+{"text": "french fries", "label": "FOOD"}
+{"text": "scallops", "label": "FOOD"}
+{"text": "sauce", "label": "FOOD"}
+{"text": "martinis", "label": "DRINKS"}
+{"text": "food", "label": "FOOD"}
+{"text": "japanese comfort food", "label": "FOOD"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "menu", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "setting", "label": "AMBIENCE"}
+{"text": "dishes", "label": "FOOD"}
+{"text": "lamb sausages", "label": "FOOD"}
+{"text": "sardines with biscuits", "label": "FOOD"}
+{"text": "large whole shrimp", "label": "FOOD"}
+{"text": "pistachio ice cream", "label": "FOOD"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "delivery", "label": "SERVICE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "sushi", "label": "FOOD"}
+{"text": "ceviche mix (special)", "label": "FOOD"}
+{"text": "crab dumplings", "label": "FOOD"}
+{"text": "assorted sashimi", "label": "FOOD"}
+{"text": "sushi", "label": "FOOD"}
+{"text": "rolls", "label": "FOOD"}
+{"text": "two types of sake", "label": "DRINKS"}
+{"text": "banana tempura", "label": "FOOD"}
+{"text": "spot", "label": "RESTAURANT"}
+{"text": "Thai food", "label": "FOOD"}
+{"text": "delivery", "label": "SERVICE"}
+{"text": "Thai restaurant", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "service", "label": "SERVICE"}
+{"text": "waiter", "label": "SERVICE"}
+{"text": "dishes", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "Gulab Jamun (dessert)", "label": "FOOD"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "Service", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "Guacamole+shrimp appetizer", "label": "FOOD"}
+{"text": "filet", "label": "FOOD"}
+{"text": "frites", "label": "FOOD"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "crowd", "label": "RESTAURANT"}
+{"text": "pizza place", "label": "RESTAURANT"}
+{"text": "pizza", "label": "FOOD"}
+{"text": "crust", "label": "FOOD"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "ingredients", "label": "FOOD"}
+{"text": "menu", "label": "FOOD"}
+{"text": "fish", "label": "FOOD"}
+{"text": "mare", "label": "RESTAURANT"}
+{"text": "pizzeria", "label": "RESTAURANT"}
+{"text": "pizzas", "label": "FOOD"}
+{"text": "Sophia pizza", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "waiter", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "sushi", "label": "FOOD"}
+{"text": "sushi", "label": "FOOD"}
+{"text": "blond wood decor", "label": "AMBIENCE"}
+{"text": "premium sake", "label": "DRINKS"}
+{"text": "service", "label": "SERVICE"}
+{"text": "Mizu", "label": "RESTAURANT"}
+{"text": "kitchen food", "label": "FOOD"}
+{"text": "Sushi", "label": "FOOD"}
+{"text": "rolls", "label": "FOOD"}
+{"text": "cuisine", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "Mizu", "label": "RESTAURANT"}
+{"text": "people", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "Thalia", "label": "AMBIENCE"}
+{"text": "smoked salmon and roe appetizer", "label": "FOOD"}
+{"text": "entree", "label": "FOOD"}
+{"text": "entree", "label": "FOOD"}
+{"text": "dessert", "label": "FOOD"}
+{"text": "menu", "label": "FOOD"}
+{"text": "menu", "label": "FOOD"}
+{"text": "view", "label": "LOCATION"}
+{"text": "food", "label": "FOOD"}
+{"text": "strawberry daiquiries", "label": "DRINKS"}
+{"text": "Taiwanese food", "label": "FOOD"}
+{"text": "Taiwanese food", "label": "FOOD"}
+{"text": "cold appetizer dishes", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "outdoor atmosphere", "label": "AMBIENCE"}
+{"text": "wait staff", "label": "SERVICE"}
+{"text": "scallops", "label": "FOOD"}
+{"text": "mahi mahi (on saffron risotto", "label": "FOOD"}
+{"text": "chicken and mashed potatos", "label": "FOOD"}
+{"text": "crab cakes", "label": "FOOD"}
+{"text": "garden", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "joint", "label": "RESTAURANT"}
+{"text": "selection of thin crust pizza", "label": "FOOD"}
+{"text": "selection of thin crust pizza", "label": "FOOD"}
+{"text": "pizza place", "label": "RESTAURANT"}
+{"text": "Basil slice", "label": "FOOD"}
+{"text": "calzones", "label": "FOOD"}
+{"text": "counter service", "label": "SERVICE"}
+{"text": "PIZZA 33", "label": "RESTAURANT"}
+{"text": "dosas", "label": "FOOD"}
+{"text": "dosas", "label": "FOOD"}
+{"text": "sandwiches", "label": "FOOD"}
+{"text": "sandwiches", "label": "FOOD"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "room", "label": "AMBIENCE"}
+{"text": "clerks", "label": "SERVICE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "atmosphere", "label": "AMBIENCE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "Italian food", "label": "FOOD"}
+{"text": "place", "label": "AMBIENCE"}
+{"text": "restaurant", "label": "LOCATION"}
+{"text": "food", "label": "FOOD"}
+{"text": "basic dishes", "label": "FOOD"}
+{"text": "drinks", "label": "DRINKS"}
+{"text": "place", "label": "LOCATION"}
+{"text": "sushi", "label": "FOOD"}
+{"text": "apppetizers", "label": "FOOD"}
+{"text": "sushimi cucumber roll", "label": "FOOD"}
+{"text": "spreads", "label": "FOOD"}
+{"text": "beverage selections", "label": "DRINKS"}
+{"text": "bagels", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "Pizza 33", "label": "RESTAURANT"}
+{"text": "Pizza", "label": "FOOD"}
+{"text": "Williamsburg spot", "label": "RESTAURANT"}
+{"text": "pizza", "label": "FOOD"}
+{"text": "proprietor", "label": "SERVICE"}
+{"text": "cream cheeses", "label": "FOOD"}
+{"text": "coffee", "label": "DRINKS"}
+{"text": "Bagels", "label": "FOOD"}
+{"text": "manager", "label": "SERVICE"}
+{"text": "bagels", "label": "FOOD"}
+{"text": "turkey burgers", "label": "FOOD"}
+{"text": "soup for the udon", "label": "FOOD"}
+{"text": "sushi", "label": "FOOD"}
+{"text": "rice", "label": "FOOD"}
+{"text": "rice", "label": "FOOD"}
+{"text": "sushi", "label": "FOOD"}
+{"text": "fish", "label": "FOOD"}
+{"text": "Japanese cuisine", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "Food", "label": "FOOD"}
+{"text": "Food", "label": "FOOD"}
+{"text": "location", "label": "LOCATION"}
+{"text": "place", "label": "AMBIENCE"}
+{"text": "bottle", "label": "DRINKS"}
+{"text": "music", "label": "AMBIENCE"}
+{"text": "Pizza", "label": "FOOD"}
+{"text": "Margheritta slice", "label": "FOOD"}
+{"text": "atmoshere", "label": "AMBIENCE"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "Winnie", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "Thai food", "label": "FOOD"}
+{"text": "Pad Thai", "label": "FOOD"}
+{"text": "appetizer menu", "label": "FOOD"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "service", "label": "SERVICE"}
+{"text": "brioche and lollies", "label": "FOOD"}
+{"text": "place", "label": "AMBIENCE"}
+{"text": "Service", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "salmon", "label": "FOOD"}
+{"text": "crab salad", "label": "FOOD"}
+{"text": "spot", "label": "RESTAURANT"}
+{"text": "Lucky Strike", "label": "RESTAURANT"}
+{"text": "wait staff", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "mussels in spicy tomato sauce", "label": "FOOD"}
+{"text": "fries", "label": "FOOD"}
+{"text": "late night atmosphere", "label": "AMBIENCE"}
+{"text": "martini", "label": "DRINKS"}
+{"text": "martini", "label": "DRINKS"}
+{"text": "martini", "label": "DRINKS"}
+{"text": "Vanilla Shanty", "label": "DRINKS"}
+{"text": "setting", "label": "AMBIENCE"}
+{"text": "music", "label": "AMBIENCE"}
+{"text": "in-house lady DJ", "label": "AMBIENCE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "Suan", "label": "RESTAURANT"}
+{"text": "location", "label": "LOCATION"}
+{"text": "Suan", "label": "RESTAURANT"}
+{"text": "Thai", "label": "FOOD"}
+{"text": "noodles with shrimp and chicken and coconut juice", "label": "FOOD"}
+{"text": "Suan", "label": "RESTAURANT"}
+{"text": "terrace", "label": "AMBIENCE"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "Indian food", "label": "FOOD"}
+{"text": "chef", "label": "FOOD"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "setting", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "balsamic vinegar over icecream", "label": "FOOD"}
+{"text": "Go Go Hamburgers", "label": "FOOD"}
+{"text": "dim sum", "label": "FOOD"}
+{"text": "dim sum", "label": "FOOD"}
+{"text": "wait", "label": "SERVICE"}
+{"text": "atmosphere", "label": "AMBIENCE"}
+{"text": "turnip cake", "label": "FOOD"}
+{"text": "roast pork buns", "label": "FOOD"}
+{"text": "egg custards", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "braised lamb shank in red wine", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "atmosphere", "label": "AMBIENCE"}
+{"text": "meal", "label": "FOOD"}
+{"text": "restaurant", "label": "AMBIENCE"}
+{"text": "interior decor", "label": "AMBIENCE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "pad se ew chicken", "label": "FOOD"}
+{"text": "pad thai", "label": "FOOD"}
+{"text": "Ginger House", "label": "RESTAURANT"}
+{"text": "fried dumplings", "label": "FOOD"}
+{"text": "Chinese restaurant", "label": "RESTAURANT"}
+{"text": "customer service", "label": "SERVICE"}
+{"text": "management", "label": "SERVICE"}
+{"text": "bagels", "label": "FOOD"}
+{"text": "Spreads", "label": "FOOD"}
+{"text": "toppings", "label": "FOOD"}
+{"text": "Spreads", "label": "FOOD"}
+{"text": "toppings", "label": "FOOD"}
+{"text": "Service", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "ambience", "label": "AMBIENCE"}
+{"text": "Rao", "label": "RESTAURANT"}
+{"text": "indian cuisine", "label": "FOOD"}
+{"text": "shrimp appetizers", "label": "FOOD"}
+{"text": "ambience", "label": "AMBIENCE"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "eats", "label": "FOOD"}
+{"text": "eats", "label": "FOOD"}
+{"text": "indian food", "label": "FOOD"}
+{"text": "cheff", "label": "FOOD"}
+{"text": "place", "label": "AMBIENCE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "bagels", "label": "FOOD"}
+{"text": "bagels", "label": "FOOD"}
+{"text": "bagels", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "baked clams octopus", "label": "FOOD"}
+{"text": "lamb", "label": "FOOD"}
+{"text": "dessert", "label": "FOOD"}
+{"text": "waiter", "label": "SERVICE"}
+{"text": "place", "label": "AMBIENCE"}
+{"text": "bar scene", "label": "AMBIENCE"}
+{"text": "Appetizers", "label": "FOOD"}
+{"text": "waiter", "label": "SERVICE"}
+{"text": "potato stuff kanish", "label": "FOOD"}
+{"text": "salmon", "label": "FOOD"}
+{"text": "chicken", "label": "FOOD"}
+{"text": "servings for main entree", "label": "FOOD"}
+{"text": "Dessert", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "restaurant", "label": "AMBIENCE"}
+{"text": "portions", "label": "FOOD"}
+{"text": "veal", "label": "FOOD"}
+{"text": "anti-pasta", "label": "FOOD"}
+{"text": "calamari", "label": "FOOD"}
+{"text": "pasta mains", "label": "FOOD"}
+{"text": "pasta mains", "label": "FOOD"}
+{"text": "wine list", "label": "DRINKS"}
+{"text": "meal", "label": "FOOD"}
+{"text": "measures of liquers", "label": "DRINKS"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "Lucky Strike", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "decor", "label": "AMBIENCE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "spot", "label": "RESTAURANT"}
+{"text": "SEASONAL beer", "label": "DRINKS"}
+{"text": "spot", "label": "RESTAURANT"}
+{"text": "Heartland Brewery", "label": "RESTAURANT"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "restaurant", "label": "AMBIENCE"}
+{"text": "bar", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "beer", "label": "DRINKS"}
+{"text": "beer", "label": "DRINKS"}
+{"text": "shrimp scampi", "label": "FOOD"}
+{"text": "antipasti", "label": "FOOD"}
+{"text": "Corona", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "waiters", "label": "SERVICE"}
+{"text": "atomosphere", "label": "AMBIENCE"}
+{"text": "Service", "label": "SERVICE"}
+{"text": "Food", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "porcini mushroom pasta special", "label": "FOOD"}
+{"text": "seafood tagliatelle", "label": "FOOD"}
+{"text": "tiramisu", "label": "FOOD"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "BBQ ribs", "label": "FOOD"}
+{"text": "BBQ ribs", "label": "FOOD"}
+{"text": "rice dishes", "label": "FOOD"}
+{"text": "congee (rice porridge)", "label": "FOOD"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "decor", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "main dining room", "label": "AMBIENCE"}
+{"text": "ceiling", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "patio", "label": "AMBIENCE"}
+{"text": "Suan", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "hot sauce", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "drink", "label": "DRINKS"}
+{"text": "cheescake", "label": "FOOD"}
+{"text": "spot", "label": "RESTAURANT"}
+{"text": "spot", "label": "RESTAURANT"}
+{"text": "outdoor seating", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "wines", "label": "DRINKS"}
+{"text": "wines", "label": "DRINKS"}
+{"text": "ambiance", "label": "AMBIENCE"}
+{"text": "atmosphere", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "chicken casserole", "label": "FOOD"}
+{"text": "chicken casserole", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "chicken", "label": "FOOD"}
+{"text": "beef", "label": "FOOD"}
+{"text": "lamb dishes", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "dessert", "label": "FOOD"}
+{"text": "Reuben sandwich", "label": "FOOD"}
+{"text": "Bloom's", "label": "RESTAURANT"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "Bloom's", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "sauces", "label": "FOOD"}
+{"text": "Pizza", "label": "FOOD"}
+{"text": "Ravioli", "label": "FOOD"}
+{"text": "wines by the glass", "label": "DRINKS"}
+{"text": "Service", "label": "SERVICE"}
+{"text": "setting/atmosphere", "label": "AMBIENCE"}
+{"text": "Food", "label": "FOOD"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "Pakistani food", "label": "FOOD"}
+{"text": "People", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "Faan", "label": "RESTAURANT"}
+{"text": "pad thai", "label": "FOOD"}
+{"text": "design", "label": "AMBIENCE"}
+{"text": "atmosphere", "label": "AMBIENCE"}
+{"text": "bottles of wine", "label": "DRINKS"}
+{"text": "bottles of wine", "label": "DRINKS"}
+{"text": "food", "label": "FOOD"}
+{"text": "mussles", "label": "FOOD"}
+{"text": "seabass", "label": "FOOD"}
+{"text": "goat cheese salad", "label": "FOOD"}
+{"text": "penne w/ chicken", "label": "FOOD"}
+{"text": "atmosphere", "label": "AMBIENCE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "desert", "label": "FOOD"}
+{"text": "jukebox", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "pastas", "label": "FOOD"}
+{"text": "pizza", "label": "FOOD"}
+{"text": "vibe", "label": "AMBIENCE"}
+{"text": "owner", "label": "SERVICE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "drinks", "label": "DRINKS"}
+{"text": "drinks", "label": "DRINKS"}
+{"text": "drinks", "label": "DRINKS"}
+{"text": "Usha", "label": "SERVICE"}
+{"text": "sassy lassi", "label": "DRINKS"}
+{"text": "roti rolls", "label": "FOOD"}
+{"text": "Unda (Egg) rolls", "label": "FOOD"}
+{"text": "spices", "label": "FOOD"}
+{"text": "onions", "label": "FOOD"}
+{"text": "eggs", "label": "FOOD"}
+{"text": "roti", "label": "FOOD"}
+{"text": "Toons", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "Thai food", "label": "FOOD"}
+{"text": "decor", "label": "AMBIENCE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "portions", "label": "FOOD"}
+{"text": "drumsticks over rice", "label": "FOOD"}
+{"text": "sour spicy soup", "label": "FOOD"}
+{"text": "Beef noodle soup", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "resturant", "label": "AMBIENCE"}
+{"text": "Taiwanese food", "label": "FOOD"}
+{"text": "Rao's", "label": "RESTAURANT"}
+{"text": "service", "label": "SERVICE"}
+{"text": "atmosphere", "label": "AMBIENCE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "outdoor seating", "label": "AMBIENCE"}
+{"text": "Indoor", "label": "AMBIENCE"}
+{"text": "portion sizes", "label": "FOOD"}
+{"text": "sushi", "label": "FOOD"}
+{"text": "Staff", "label": "SERVICE"}
+{"text": "dumplings", "label": "FOOD"}
+{"text": "decor", "label": "AMBIENCE"}
+{"text": "$10 10-piece dim sum combo", "label": "FOOD"}
+{"text": "decor", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "portions", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "crabmeat lasagna", "label": "FOOD"}
+{"text": "chocolate bread pudding", "label": "FOOD"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "Indian food", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "owner", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "egg noodles in the beef broth with shrimp dumplings and slices of BBQ roast pork", "label": "FOOD"}
+{"text": "dish", "label": "FOOD"}
+{"text": "congee", "label": "FOOD"}
+{"text": "Ow Ley Soh", "label": "FOOD"}
+{"text": "Chinese food", "label": "FOOD"}
+{"text": "Chinese food", "label": "FOOD"}
+{"text": "Service", "label": "SERVICE"}
+{"text": "Big Wong", "label": "RESTAURANT"}
+{"text": "jazz duo", "label": "AMBIENCE"}
+{"text": "music", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "wine by the glass", "label": "DRINKS"}
+{"text": "Japanese Tapas", "label": "FOOD"}
+{"text": "drinks", "label": "DRINKS"}
+{"text": "service", "label": "SERVICE"}
+{"text": "Atmosphere", "label": "AMBIENCE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "Yakitori (bbq meats)", "label": "FOOD"}
+{"text": "fish", "label": "FOOD"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "sushi chef", "label": "RESTAURANT"}
+{"text": "fish", "label": "FOOD"}
+{"text": "fish", "label": "FOOD"}
+{"text": "chef", "label": "FOOD"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "decor", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "Rice Avenue", "label": "AMBIENCE"}
+{"text": "Rice Avenue", "label": "LOCATION"}
+{"text": "Rice Avenue", "label": "RESTAURANT"}
+{"text": "waiter", "label": "SERVICE"}
+{"text": "waiter", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "wait-staff", "label": "SERVICE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "management", "label": "SERVICE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "decor", "label": "AMBIENCE"}
+{"text": "Baluchi's", "label": "RESTAURANT"}
+{"text": "manager", "label": "SERVICE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "nigiri", "label": "FOOD"}
+{"text": "all you can eat sushi", "label": "FOOD"}
+{"text": "Areo", "label": "RESTAURANT"}
+{"text": "servers", "label": "SERVICE"}
+{"text": "vibe", "label": "AMBIENCE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "Food", "label": "FOOD"}
+{"text": "view of the new york city skiline", "label": "LOCATION"}
+{"text": "table by the window", "label": "LOCATION"}
+{"text": "service", "label": "SERVICE"}
+{"text": "place", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "Personal pans", "label": "FOOD"}
+{"text": "delivery guys", "label": "SERVICE"}
+{"text": "delivery guys", "label": "SERVICE"}
+{"text": "scene", "label": "AMBIENCE"}
+{"text": "place", "label": "AMBIENCE"}
+{"text": "location", "label": "LOCATION"}
+{"text": "pizza", "label": "FOOD"}
+{"text": "pizza", "label": "FOOD"}
+{"text": "penne a la vodka", "label": "FOOD"}
+{"text": "pasta penne", "label": "FOOD"}
+{"text": "pasta penne", "label": "FOOD"}
+{"text": "La Rosa", "label": "FOOD"}
+{"text": "wines", "label": "DRINKS"}
+{"text": "service", "label": "SERVICE"}
+{"text": "decor", "label": "AMBIENCE"}
+{"text": "selection", "label": "FOOD"}
+{"text": "spot", "label": "RESTAURANT"}
+{"text": "service", "label": "SERVICE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "wine list", "label": "DRINKS"}
+{"text": "atmosphere", "label": "AMBIENCE"}
+{"text": "mussels", "label": "FOOD"}
+{"text": "dessert", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "host", "label": "SERVICE"}
+{"text": "crew", "label": "SERVICE"}
+{"text": "Dining Garden", "label": "AMBIENCE"}
+{"text": "Jazz Bar", "label": "AMBIENCE"}
+{"text": "Thin Crust Pizzas", "label": "FOOD"}
+{"text": "Lasagna Menu", "label": "FOOD"}
+{"text": "PLACE", "label": "RESTAURANT"}
+{"text": "meal", "label": "FOOD"}
+{"text": "dumplings", "label": "FOOD"}
+{"text": "BBQ Salmon", "label": "FOOD"}
+{"text": "Sea Bass", "label": "FOOD"}
+{"text": "Crispy Duck", "label": "FOOD"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "portions", "label": "FOOD"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "Saul", "label": "RESTAURANT"}
+{"text": "foie gras terrine with figs", "label": "FOOD"}
+{"text": "duck confit", "label": "FOOD"}
+{"text": "wine list", "label": "DRINKS"}
+{"text": "wine list", "label": "DRINKS"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "cart attendant", "label": "SERVICE"}
+{"text": "Food", "label": "FOOD"}
+{"text": "Chow fun", "label": "FOOD"}
+{"text": "pork shu mai", "label": "FOOD"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "Fish", "label": "RESTAURANT"}
+{"text": "Service", "label": "SERVICE"}
+{"text": "oysters", "label": "FOOD"}
+{"text": "Restaurant Saul", "label": "RESTAURANT"}
+{"text": "service", "label": "SERVICE"}
+{"text": "decor", "label": "AMBIENCE"}
+{"text": "duck breast special", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "Thai fusion stuff", "label": "FOOD"}
+{"text": "Grilled Chicken special with Edamame Puree", "label": "FOOD"}
+{"text": "Edamame pureed", "label": "FOOD"}
+{"text": "Edamame pureed", "label": "FOOD"}
+{"text": "place", "label": "AMBIENCE"}
+{"text": "decor", "label": "AMBIENCE"}
+{"text": "vent", "label": "AMBIENCE"}
+{"text": "sake list", "label": "DRINKS"}
+{"text": "spicy tuna roll", "label": "FOOD"}
+{"text": "rock shrimp tempura", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "pink pony", "label": "RESTAURANT"}
+{"text": "spot", "label": "RESTAURANT"}
+{"text": "Food", "label": "FOOD"}
+{"text": "Service", "label": "SERVICE"}
+{"text": "Ambiance", "label": "AMBIENCE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "waiter", "label": "SERVICE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "Food", "label": "FOOD"}
+{"text": "Service", "label": "SERVICE"}
+{"text": "sea urchin", "label": "FOOD"}
+{"text": "sushi", "label": "FOOD"}
+{"text": "sushi", "label": "FOOD"}
+{"text": "rice to fish ration", "label": "FOOD"}
+{"text": "half price sushi deal", "label": "FOOD"}
+{"text": "half price sushi deal", "label": "FOOD"}
+{"text": "crowd", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "Prix Fixe menu", "label": "FOOD"}
+{"text": "Prix Fixe menu", "label": "FOOD"}
+{"text": "Prix Fixe menu", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "dishes", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "somosas", "label": "FOOD"}
+{"text": "chai", "label": "FOOD"}
+{"text": "chole", "label": "FOOD"}
+{"text": "dhosas", "label": "FOOD"}
+{"text": "dhal", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "kitchen", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "ambience", "label": "AMBIENCE"}
+{"text": "view", "label": "LOCATION"}
+{"text": "service", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "lava cake dessert", "label": "FOOD"}
+{"text": "Cosette", "label": "AMBIENCE"}
+{"text": "restaurant", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "French Onion soup", "label": "FOOD"}
+{"text": "French Onion soup", "label": "FOOD"}
+{"text": "desserts", "label": "FOOD"}
+{"text": "ambience", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "pizza", "label": "FOOD"}
+{"text": "cheese", "label": "FOOD"}
+{"text": "pizza", "label": "FOOD"}
+{"text": "pizza", "label": "FOOD"}
+{"text": "ingredients", "label": "FOOD"}
+{"text": "pizza", "label": "FOOD"}
+{"text": "crust", "label": "FOOD"}
+{"text": "meals", "label": "FOOD"}
+{"text": "seafood", "label": "FOOD"}
+{"text": "wine list", "label": "DRINKS"}
+{"text": "menu", "label": "FOOD"}
+{"text": "ingredients", "label": "FOOD"}
+{"text": "Pastrami", "label": "FOOD"}
+{"text": "portion", "label": "FOOD"}
+{"text": "fried shrimp", "label": "FOOD"}
+{"text": "fried shrimp", "label": "FOOD"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "signs", "label": "RESTAURANT"}
+{"text": "specials menus", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "waitstaff", "label": "SERVICE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "Leon", "label": "RESTAURANT"}
+{"text": "Leon", "label": "AMBIENCE"}
+{"text": "specials", "label": "FOOD"}
+{"text": "atmosphere", "label": "AMBIENCE"}
+{"text": "French bistro fare", "label": "FOOD"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "wine", "label": "DRINKS"}
+{"text": "wine", "label": "DRINKS"}
+{"text": "Zucchero Pomodori", "label": "RESTAURANT"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "service", "label": "SERVICE"}
+{"text": "decor", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "portions", "label": "FOOD"}
+{"text": "Gnocchi", "label": "RESTAURANT"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "hostess", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "wine", "label": "DRINKS"}
+{"text": "service", "label": "SERVICE"}
+{"text": "wait", "label": "SERVICE"}
+{"text": "glass of wine", "label": "DRINKS"}
+{"text": "service", "label": "SERVICE"}
+{"text": "people", "label": "SERVICE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "pizza", "label": "FOOD"}
+{"text": "atmoshpere", "label": "AMBIENCE"}
+{"text": "pizza", "label": "FOOD"}
+{"text": "toppings", "label": "FOOD"}
+{"text": "lunch", "label": "FOOD"}
+{"text": "Sauce", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "waitress", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "Service", "label": "SERVICE"}
+{"text": "pizza", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "wait", "label": "SERVICE"}
+{"text": "block", "label": "LOCATION"}
+{"text": "sushi", "label": "FOOD"}
+{"text": "place", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "tuna of gari", "label": "FOOD"}
+{"text": "sushi", "label": "FOOD"}
+{"text": "thai food", "label": "FOOD"}
+{"text": "Planet Thailand", "label": "RESTAURANT"}
+{"text": "menu", "label": "FOOD"}
+{"text": "atmosphere", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "menu", "label": "FOOD"}
+{"text": "rolls", "label": "FOOD"}
+{"text": "rolls", "label": "FOOD"}
+{"text": "sashimi", "label": "FOOD"}
+{"text": "crunchy tuna", "label": "FOOD"}
+{"text": "garden terrace", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "Steak Tartare", "label": "FOOD"}
+{"text": "open kitchen", "label": "AMBIENCE"}
+{"text": "restaurant", "label": "AMBIENCE"}
+{"text": "wine selection", "label": "DRINKS"}
+{"text": "Gigondas", "label": "DRINKS"}
+{"text": "house champagne", "label": "DRINKS"}
+{"text": "vibe", "label": "AMBIENCE"}
+{"text": "French food", "label": "FOOD"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "crust", "label": "FOOD"}
+{"text": "pizza", "label": "FOOD"}
+{"text": "VT's", "label": "RESTAURANT"}
+{"text": "neighborhood", "label": "LOCATION"}
+{"text": "food", "label": "FOOD"}
+{"text": "setting", "label": "AMBIENCE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "Mizu", "label": "RESTAURANT"}
+{"text": "Spicy Scallop roll", "label": "FOOD"}
+{"text": "Moules", "label": "FOOD"}
+{"text": "lobster ravioli", "label": "FOOD"}
+{"text": "maitre d'", "label": "SERVICE"}
+{"text": "dessert", "label": "FOOD"}
+{"text": "dessert", "label": "FOOD"}
+{"text": "drinks", "label": "DRINKS"}
+{"text": "wine selection", "label": "DRINKS"}
+{"text": "chef's specials", "label": "FOOD"}
+{"text": "Service", "label": "SERVICE"}
+{"text": "Downstairs lounge", "label": "AMBIENCE"}
+{"text": "Raga's", "label": "AMBIENCE"}
+{"text": "exotic food", "label": "FOOD"}
+{"text": "exotic food", "label": "FOOD"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "bar", "label": "DRINKS"}
+{"text": "beers", "label": "DRINKS"}
+{"text": "wines", "label": "DRINKS"}
+{"text": "Leon", "label": "RESTAURANT"}
+{"text": "waitress", "label": "SERVICE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "Jekyll and Hyde", "label": "RESTAURANT"}
+{"text": "shows", "label": "AMBIENCE"}
+{"text": "actors", "label": "AMBIENCE"}
+{"text": "server", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "tuna", "label": "FOOD"}
+{"text": "wasabe potatoes", "label": "FOOD"}
+{"text": "outdoor atmosphere", "label": "LOCATION"}
+{"text": "Service", "label": "SERVICE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "pizza", "label": "FOOD"}
+{"text": "fresh mozzarella", "label": "FOOD"}
+{"text": "appetizer selection", "label": "FOOD"}
+{"text": "Wait staff", "label": "SERVICE"}
+{"text": "pie", "label": "FOOD"}
+{"text": "salad", "label": "FOOD"}
+{"text": "dining", "label": "FOOD"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "chicken pot pie", "label": "FOOD"}
+{"text": "cheeseburger", "label": "FOOD"}
+{"text": "cheeseburger", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "bagels", "label": "FOOD"}
+{"text": "1st Ave spot", "label": "RESTAURANT"}
+{"text": "Uni Hand roll", "label": "FOOD"}
+{"text": "sake menu", "label": "DRINKS"}
+{"text": "lobster teriyaki", "label": "FOOD"}
+{"text": "rose special roll", "label": "FOOD"}
+{"text": "Service", "label": "SERVICE"}
+{"text": "Food", "label": "FOOD"}
+{"text": "pork belly", "label": "FOOD"}
+{"text": "Wine list selection", "label": "DRINKS"}
+{"text": "wine-by-the-glass", "label": "DRINKS"}
+{"text": "Traditional French decour", "label": "AMBIENCE"}
+{"text": "hall", "label": "AMBIENCE"}
+{"text": "Cafe Spice", "label": "RESTAURANT"}
+{"text": "Service", "label": "SERVICE"}
+{"text": "Seating", "label": "SERVICE"}
+{"text": "Food", "label": "FOOD"}
+{"text": "raw vegatables in side orders", "label": "FOOD"}
+{"text": "decor", "label": "AMBIENCE"}
+{"text": "semi-private boths", "label": "AMBIENCE"}
+{"text": "Red Eye", "label": "RESTAURANT"}
+{"text": "live jazz band", "label": "AMBIENCE"}
+{"text": "atmosphere", "label": "AMBIENCE"}
+{"text": "meal", "label": "FOOD"}
+{"text": "Red Eye Grill", "label": "RESTAURANT"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "restaurant", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "balance of herbs and tomatoes", "label": "FOOD"}
+{"text": "Jekyll and hyde Pub", "label": "RESTAURANT"}
+{"text": "bar", "label": "RESTAURANT"}
+{"text": "server", "label": "SERVICE"}
+{"text": "decor", "label": "AMBIENCE"}
+{"text": "hidden bathrooms", "label": "AMBIENCE"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "Jekyll and Hyde Pub", "label": "RESTAURANT"}
+{"text": "beers", "label": "DRINKS"}
+{"text": "food", "label": "FOOD"}
+{"text": "pumkin tortelini", "label": "FOOD"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "bagel", "label": "FOOD"}
+{"text": "bagel", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "lobster roll", "label": "FOOD"}
+{"text": "lobster", "label": "FOOD"}
+{"text": "pizza", "label": "FOOD"}
+{"text": "santa fe chopped salad", "label": "FOOD"}
+{"text": "fish and chips", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "ambience", "label": "AMBIENCE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "chow fun and chow see", "label": "FOOD"}
+{"text": "scallion pancakes", "label": "FOOD"}
+{"text": "fried dumplings", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "sushi", "label": "FOOD"}
+{"text": "tuna", "label": "FOOD"}
+{"text": "rolls", "label": "FOOD"}
+{"text": "pad penang", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "fresh restaurant", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "chef", "label": "FOOD"}
+{"text": "salads", "label": "FOOD"}
+{"text": "Pam's special fried fish", "label": "FOOD"}
+{"text": "vibe", "label": "AMBIENCE"}
+{"text": "atmosphere", "label": "AMBIENCE"}
+{"text": "Ambience", "label": "AMBIENCE"}
+{"text": "Salads", "label": "FOOD"}
+{"text": "salads", "label": "FOOD"}
+{"text": "Ingredients", "label": "FOOD"}
+{"text": "sushi", "label": "FOOD"}
+{"text": "sushi", "label": "FOOD"}
+{"text": "spicy Tuna roll", "label": "FOOD"}
+{"text": "spicy Tuna roll", "label": "FOOD"}
+{"text": "spicy Tuna roll", "label": "FOOD"}
+{"text": "Yellowtail", "label": "FOOD"}
+{"text": "all you can eat deal", "label": "FOOD"}
+{"text": "all you can eat deal", "label": "FOOD"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "Big Wong", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "atmosphere", "label": "AMBIENCE"}
+{"text": "waiters", "label": "SERVICE"}
+{"text": "congee", "label": "FOOD"}
+{"text": "noodles", "label": "FOOD"}
+{"text": "rice dishes", "label": "FOOD"}
+{"text": "takeout", "label": "SERVICE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "Caesar Salad", "label": "FOOD"}
+{"text": "arugula and goat cheese", "label": "FOOD"}
+{"text": "pasta dish", "label": "FOOD"}
+{"text": "tiramisu", "label": "FOOD"}
+{"text": "chocolate cake", "label": "FOOD"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "place", "label": "AMBIENCE"}
+{"text": "Manager", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "good", "label": "FOOD"}
+{"text": "dishes", "label": "FOOD"}
+{"text": "wine", "label": "DRINKS"}
+{"text": "atmosphere", "label": "AMBIENCE"}
+{"text": "Patis", "label": "RESTAURANT"}
+{"text": "Pastis", "label": "RESTAURANT"}
+{"text": "pizza", "label": "FOOD"}
+{"text": "place", "label": "AMBIENCE"}
+{"text": "raddichio", "label": "FOOD"}
+{"text": "mushroom pizza", "label": "FOOD"}
+{"text": "sangria", "label": "DRINKS"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "Bombay beer", "label": "DRINKS"}
+{"text": "Service", "label": "SERVICE"}
+{"text": "people", "label": "SERVICE"}
+{"text": "place", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "Pizza", "label": "FOOD"}
+{"text": "homemade pasta", "label": "FOOD"}
+{"text": "Ambience", "label": "AMBIENCE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "hanger steak", "label": "FOOD"}
+{"text": "tuna", "label": "FOOD"}
+{"text": "Service", "label": "SERVICE"}
+{"text": "ambience", "label": "AMBIENCE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "filet mignon dish", "label": "FOOD"}
+{"text": "restaurant", "label": "AMBIENCE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "ambience", "label": "AMBIENCE"}
+{"text": "sushi", "label": "FOOD"}
+{"text": "ambient", "label": "AMBIENCE"}
+{"text": "beef and noodle soup dishes", "label": "FOOD"}
+{"text": "meal", "label": "FOOD"}
+{"text": "place", "label": "AMBIENCE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "Pizza", "label": "FOOD"}
+{"text": "wine", "label": "DRINKS"}
+{"text": "service", "label": "SERVICE"}
+{"text": "backyard dining area", "label": "AMBIENCE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "place", "label": "AMBIENCE"}
+{"text": "tables", "label": "AMBIENCE"}
+{"text": "menu", "label": "FOOD"}
+{"text": "wine list", "label": "DRINKS"}
+{"text": "wines", "label": "DRINKS"}
+{"text": "wines", "label": "DRINKS"}
+{"text": "Service", "label": "SERVICE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "Teodora", "label": "RESTAURANT"}
+{"text": "meals", "label": "FOOD"}
+{"text": "rosemary or orange flavoring", "label": "FOOD"}
+{"text": "Fish", "label": "FOOD"}
+{"text": "wait staff", "label": "SERVICE"}
+{"text": "place", "label": "AMBIENCE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "dessert", "label": "FOOD"}
+{"text": "expresso", "label": "DRINKS"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "Myagi", "label": "RESTAURANT"}
+{"text": "service", "label": "SERVICE"}
+{"text": "fish", "label": "FOOD"}
+{"text": "tuna tartar appetizer", "label": "FOOD"}
+{"text": "pizza", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "place", "label": "AMBIENCE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "atmosphere", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "dining room", "label": "AMBIENCE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "meal", "label": "FOOD"}
+{"text": "restaurant", "label": "AMBIENCE"}
+{"text": "view", "label": "LOCATION"}
+{"text": "service", "label": "SERVICE"}
+{"text": "ambiance", "label": "AMBIENCE"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "Lobster Bisque", "label": "FOOD"}
+{"text": "New England Chowder", "label": "FOOD"}
+{"text": "Lobster Bisque", "label": "FOOD"}
+{"text": "Prime Rib", "label": "FOOD"}
+{"text": "bottles of Korbett", "label": "DRINKS"}
+{"text": "food", "label": "FOOD"}
+{"text": "chicken vindaloo", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "portions", "label": "FOOD"}
+{"text": "servers", "label": "SERVICE"}
+{"text": "wine list", "label": "DRINKS"}
+{"text": "food", "label": "FOOD"}
+{"text": "selection of wines", "label": "DRINKS"}
+{"text": "Chef's tasting menu", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "place", "label": "AMBIENCE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "prixe fixe tasting menu", "label": "FOOD"}
+{"text": "prixe fixe tasting menu", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "lemon salad", "label": "FOOD"}
+{"text": "menu", "label": "FOOD"}
+{"text": "grilled branzino", "label": "FOOD"}
+{"text": "decor", "label": "AMBIENCE"}
+{"text": "Prune", "label": "RESTAURANT"}
+{"text": "place", "label": "AMBIENCE"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "portions", "label": "FOOD"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "Jekyll and Hyde", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "portions", "label": "FOOD"}
+{"text": "place", "label": "AMBIENCE"}
+{"text": "characters", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "Jeckll and Hydes", "label": "RESTAURANT"}
+{"text": "Service", "label": "SERVICE"}
+{"text": "Drinks", "label": "DRINKS"}
+{"text": "Food", "label": "FOOD"}
+{"text": "pizza", "label": "FOOD"}
+{"text": "Service", "label": "SERVICE"}
+{"text": "pizza", "label": "FOOD"}
+{"text": "iced tea", "label": "DRINKS"}
+{"text": "fish", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "Delivery", "label": "SERVICE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "seating", "label": "SERVICE"}
+{"text": "Delivery", "label": "SERVICE"}
+{"text": "sushi", "label": "FOOD"}
+{"text": "bagel", "label": "FOOD"}
+{"text": "bagels", "label": "FOOD"}
+{"text": "bagels", "label": "FOOD"}
+{"text": "salads", "label": "FOOD"}
+{"text": "cream cheeses", "label": "FOOD"}
+{"text": "lox", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "resturant", "label": "RESTAURANT"}
+{"text": "resturant", "label": "AMBIENCE"}
+{"text": "ambiance", "label": "AMBIENCE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "ambience", "label": "AMBIENCE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "Shabu-Shabu Restaurant", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "feel", "label": "AMBIENCE"}
+{"text": "Shabu-Shabu", "label": "FOOD"}
+{"text": "atmosphere", "label": "AMBIENCE"}
+{"text": "owner", "label": "RESTAURANT"}
+{"text": "staff", "label": "RESTAURANT"}
+{"text": "ambiance", "label": "AMBIENCE"}
+{"text": "menu", "label": "FOOD"}
+{"text": "Taxan", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "location", "label": "LOCATION"}
+{"text": "ambience", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "green curry with vegetables", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "ravioli", "label": "FOOD"}
+{"text": "wine", "label": "DRINKS"}
+{"text": "service", "label": "SERVICE"}
+{"text": "trattoria", "label": "AMBIENCE"}
+{"text": "trattoria", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "dishes", "label": "FOOD"}
+{"text": "specials", "label": "FOOD"}
+{"text": "regular menu-fare", "label": "FOOD"}
+{"text": "parmesean porcini souffle", "label": "FOOD"}
+{"text": "lamb glazed with balsamic vinegar", "label": "FOOD"}
+{"text": "candle-light", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "tables", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "wine", "label": "DRINKS"}
+{"text": "food", "label": "FOOD"}
+{"text": "wine", "label": "DRINKS"}
+{"text": "marinara/arrabiatta sauce", "label": "FOOD"}
+{"text": "mozzarella en Carozza", "label": "FOOD"}
+{"text": "back room", "label": "AMBIENCE"}
+{"text": "Emilio", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "wine choices", "label": "DRINKS"}
+{"text": "pizza", "label": "FOOD"}
+{"text": "pepperoni", "label": "FOOD"}
+{"text": "family style salad", "label": "FOOD"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "hostess", "label": "SERVICE"}
+{"text": "waitress", "label": "SERVICE"}
+{"text": "waitress", "label": "SERVICE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "Amma", "label": "RESTAURANT"}
+{"text": "dishes", "label": "FOOD"}
+{"text": "dishes", "label": "FOOD"}
+{"text": "vegetarian dishes", "label": "FOOD"}
+{"text": "non-veg selections", "label": "FOOD"}
+{"text": "Decor", "label": "AMBIENCE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "sea bass", "label": "FOOD"}
+{"text": "Dal Bukhara", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "kababs", "label": "FOOD"}
+{"text": "Dal Bukhara", "label": "FOOD"}
+{"text": "Haru on Park S", "label": "RESTAURANT"}
+{"text": "fish", "label": "FOOD"}
+{"text": "rice", "label": "FOOD"}
+{"text": "sushi", "label": "FOOD"}
+{"text": "sushi", "label": "FOOD"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "all-u-can-eat sushi", "label": "FOOD"}
+{"text": "menu", "label": "FOOD"}
+{"text": "ingredients", "label": "FOOD"}
+{"text": "fish", "label": "FOOD"}
+{"text": "rice", "label": "FOOD"}
+{"text": "soy sauce", "label": "FOOD"}
+{"text": "rice", "label": "FOOD"}
+{"text": "waitstaffs", "label": "SERVICE"}
+{"text": "Roth's", "label": "RESTAURANT"}
+{"text": "service", "label": "SERVICE"}
+{"text": "dinner", "label": "FOOD"}
+{"text": "eggs benedict", "label": "FOOD"}
+{"text": "meal", "label": "FOOD"}
+{"text": "room", "label": "AMBIENCE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "Planet Thai", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "drinks", "label": "DRINKS"}
+{"text": "atmosphere", "label": "AMBIENCE"}
+{"text": "svc", "label": "SERVICE"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "Pad Thai", "label": "FOOD"}
+{"text": "portions", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "sandwiches", "label": "FOOD"}
+{"text": "sandwiches", "label": "FOOD"}
+{"text": "atmosphere", "label": "AMBIENCE"}
+{"text": "Chennai Garden", "label": "RESTAURANT"}
+{"text": "Indian", "label": "FOOD"}
+{"text": "Indian", "label": "FOOD"}
+{"text": "dishes", "label": "FOOD"}
+{"text": "seats", "label": "AMBIENCE"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "restaurant", "label": "AMBIENCE"}
+{"text": "cigar bar", "label": "AMBIENCE"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "portion sizes", "label": "FOOD"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "PLACE", "label": "RESTAURANT"}
+{"text": "Food", "label": "FOOD"}
+{"text": "Fish", "label": "FOOD"}
+{"text": "Waitstaff", "label": "SERVICE"}
+{"text": "YUKA", "label": "RESTAURANT"}
+{"text": "seafood", "label": "FOOD"}
+{"text": "Mermaid Inn", "label": "RESTAURANT"}
+{"text": "menu", "label": "FOOD"}
+{"text": "dishes", "label": "FOOD"}
+{"text": "lobster sandwich", "label": "FOOD"}
+{"text": "spaghetti with Scallops and Shrimp", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "ambience", "label": "AMBIENCE"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "seafood", "label": "FOOD"}
+{"text": "seafood", "label": "FOOD"}
+{"text": "lobster sandwich", "label": "FOOD"}
+{"text": "lobster sandwich", "label": "FOOD"}
+{"text": "lobster sandwich", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "halibut special", "label": "FOOD"}
+{"text": "steak", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "waiter", "label": "SERVICE"}
+{"text": "waiter", "label": "SERVICE"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "foods", "label": "FOOD"}
+{"text": "foods", "label": "FOOD"}
+{"text": "jelly fish", "label": "FOOD"}
+{"text": "drunken chicken", "label": "FOOD"}
+{"text": "soupy dumplings", "label": "FOOD"}
+{"text": "stir fry blue crab", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "waiters", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "Cheese plate", "label": "FOOD"}
+{"text": "Cheese plate", "label": "FOOD"}
+{"text": "Cheese plate", "label": "FOOD"}
+{"text": "bruschettas", "label": "FOOD"}
+{"text": "paninis", "label": "FOOD"}
+{"text": "tramezzinis", "label": "FOOD"}
+{"text": "asparagus, truffle oil, parmesan bruschetta", "label": "FOOD"}
+{"text": "Wine list", "label": "DRINKS"}
+{"text": "Wine list", "label": "DRINKS"}
+{"text": "specials", "label": "FOOD"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "atmosphere", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "place", "label": "AMBIENCE"}
+{"text": "wait staff", "label": "SERVICE"}
+{"text": "people", "label": "SERVICE"}
+{"text": "Cafe Noir", "label": "RESTAURANT"}
+{"text": "service", "label": "SERVICE"}
+{"text": "waitress", "label": "SERVICE"}
+{"text": "manager", "label": "SERVICE"}
+{"text": "waitress", "label": "SERVICE"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "Cafe Noir", "label": "RESTAURANT"}
+{"text": "Pizza", "label": "FOOD"}
+{"text": "Salads", "label": "FOOD"}
+{"text": "calamari", "label": "FOOD"}
+{"text": "Decor", "label": "AMBIENCE"}
+{"text": "Service", "label": "SERVICE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "ambience", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "thai cuisine", "label": "FOOD"}
+{"text": "customer service", "label": "SERVICE"}
+{"text": "gentleman", "label": "SERVICE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "atmosphere", "label": "AMBIENCE"}
+{"text": "dishes", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "wine list", "label": "DRINKS"}
+{"text": "food", "label": "FOOD"}
+{"text": "drinks", "label": "DRINKS"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "mileau", "label": "AMBIENCE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "Casimir", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "hostess", "label": "SERVICE"}
+{"text": "outside table", "label": "AMBIENCE"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "unisex bathroom", "label": "AMBIENCE"}
+{"text": "caviar", "label": "FOOD"}
+{"text": "waitstaff", "label": "SERVICE"}
+{"text": "waitstaff", "label": "SERVICE"}
+{"text": "caviar", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "ingredients", "label": "FOOD"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "salmon dish", "label": "FOOD"}
+{"text": "Change Mojito", "label": "DRINKS"}
+{"text": "dim sum", "label": "FOOD"}
+{"text": "back patio", "label": "AMBIENCE"}
+{"text": "music", "label": "AMBIENCE"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "place", "label": "AMBIENCE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "buffet", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "dishes", "label": "FOOD"}
+{"text": "Service", "label": "SERVICE"}
+{"text": "cheesecake", "label": "FOOD"}
+{"text": "pastries", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "cheeseburgers", "label": "FOOD"}
+{"text": "burgers", "label": "FOOD"}
+{"text": "pastrami sandwich on a roll", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "place", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "spice", "label": "FOOD"}
+{"text": "Tom Kha soup", "label": "FOOD"}
+{"text": "Thai", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "pesto pizza", "label": "FOOD"}
+{"text": "spicy Italian cheese", "label": "FOOD"}
+{"text": "back garden sitting area", "label": "AMBIENCE"}
+{"text": "lobster sandwich", "label": "FOOD"}
+{"text": "portion", "label": "FOOD"}
+{"text": "french fries", "label": "FOOD"}
+{"text": "scallops", "label": "FOOD"}
+{"text": "sauce", "label": "FOOD"}
+{"text": "martinis", "label": "DRINKS"}
+{"text": "food", "label": "FOOD"}
+{"text": "japanese comfort food", "label": "FOOD"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "menu", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "setting", "label": "AMBIENCE"}
+{"text": "dishes", "label": "FOOD"}
+{"text": "lamb sausages", "label": "FOOD"}
+{"text": "sardines with biscuits", "label": "FOOD"}
+{"text": "large whole shrimp", "label": "FOOD"}
+{"text": "pistachio ice cream", "label": "FOOD"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "delivery", "label": "SERVICE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "sushi", "label": "FOOD"}
+{"text": "ceviche mix (special)", "label": "FOOD"}
+{"text": "crab dumplings", "label": "FOOD"}
+{"text": "assorted sashimi", "label": "FOOD"}
+{"text": "sushi", "label": "FOOD"}
+{"text": "rolls", "label": "FOOD"}
+{"text": "sake", "label": "DRINKS"}
+{"text": "banana tempura", "label": "FOOD"}
+{"text": "spot", "label": "RESTAURANT"}
+{"text": "Thai food", "label": "FOOD"}
+{"text": "delivery", "label": "SERVICE"}
+{"text": "Thai restaurant", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "service", "label": "SERVICE"}
+{"text": "waiter", "label": "SERVICE"}
+{"text": "dishes", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "Gulab Jamun (dessert)", "label": "FOOD"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "Service", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "Guacamole+shrimp appetizer", "label": "FOOD"}
+{"text": "filet", "label": "FOOD"}
+{"text": "frites", "label": "FOOD"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "crowd", "label": "RESTAURANT"}
+{"text": "pizza place", "label": "RESTAURANT"}
+{"text": "pizza", "label": "FOOD"}
+{"text": "crust", "label": "FOOD"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "ingredients", "label": "FOOD"}
+{"text": "menu", "label": "FOOD"}
+{"text": "fish", "label": "FOOD"}
+{"text": "mare", "label": "RESTAURANT"}
+{"text": "pizzeria", "label": "RESTAURANT"}
+{"text": "pizzas", "label": "FOOD"}
+{"text": "pizzas", "label": "FOOD"}
+{"text": "Sophia pizza", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "waiter", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "sushi", "label": "FOOD"}
+{"text": "sushi", "label": "FOOD"}
+{"text": "blond wood decor", "label": "AMBIENCE"}
+{"text": "premium sake", "label": "DRINKS"}
+{"text": "service", "label": "SERVICE"}
+{"text": "Mizu", "label": "RESTAURANT"}
+{"text": "kitchen food", "label": "FOOD"}
+{"text": "Sushi", "label": "FOOD"}
+{"text": "rolls", "label": "FOOD"}
+{"text": "cuisine", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "Mizu", "label": "RESTAURANT"}
+{"text": "people", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "Thalia", "label": "AMBIENCE"}
+{"text": "smoked salmon and roe appetizer", "label": "FOOD"}
+{"text": "entree", "label": "FOOD"}
+{"text": "entree", "label": "FOOD"}
+{"text": "dessert", "label": "FOOD"}
+{"text": "menu", "label": "FOOD"}
+{"text": "menu", "label": "FOOD"}
+{"text": "view", "label": "LOCATION"}
+{"text": "food", "label": "FOOD"}
+{"text": "strawberry daiquiries", "label": "DRINKS"}
+{"text": "Taiwanese food", "label": "FOOD"}
+{"text": "Taiwanese food", "label": "FOOD"}
+{"text": "cold appetizer dishes", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "outdoor atmosphere", "label": "AMBIENCE"}
+{"text": "wait staff", "label": "SERVICE"}
+{"text": "scallops", "label": "FOOD"}
+{"text": "mahi mahi (on saffron risotto", "label": "FOOD"}
+{"text": "chicken and mashed potatos", "label": "FOOD"}
+{"text": "crab cakes", "label": "FOOD"}
+{"text": "garden", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "joint", "label": "RESTAURANT"}
+{"text": "selection of thin crust pizza", "label": "FOOD"}
+{"text": "selection of thin crust pizza", "label": "FOOD"}
+{"text": "pizza place", "label": "RESTAURANT"}
+{"text": "Basil slice", "label": "FOOD"}
+{"text": "calzones", "label": "FOOD"}
+{"text": "counter service", "label": "SERVICE"}
+{"text": "PIZZA 33", "label": "RESTAURANT"}
+{"text": "dosas", "label": "FOOD"}
+{"text": "dosas", "label": "FOOD"}
+{"text": "sandwiches", "label": "FOOD"}
+{"text": "sandwiches", "label": "FOOD"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "room", "label": "AMBIENCE"}
+{"text": "clerks", "label": "SERVICE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "atmosphere", "label": "AMBIENCE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "Italian food", "label": "FOOD"}
+{"text": "place", "label": "AMBIENCE"}
+{"text": "restaurant", "label": "LOCATION"}
+{"text": "food", "label": "FOOD"}
+{"text": "basic dishes", "label": "FOOD"}
+{"text": "drinks", "label": "DRINKS"}
+{"text": "place", "label": "LOCATION"}
+{"text": "sushi", "label": "FOOD"}
+{"text": "apppetizers", "label": "FOOD"}
+{"text": "sushimi cucumber roll", "label": "FOOD"}
+{"text": "spreads", "label": "FOOD"}
+{"text": "beverage selections", "label": "DRINKS"}
+{"text": "bagels", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "Pizza 33", "label": "RESTAURANT"}
+{"text": "Pizza", "label": "FOOD"}
+{"text": "Williamsburg spot", "label": "RESTAURANT"}
+{"text": "pizza", "label": "FOOD"}
+{"text": "proprietor", "label": "SERVICE"}
+{"text": "cream cheeses", "label": "FOOD"}
+{"text": "coffee", "label": "DRINKS"}
+{"text": "Bagels", "label": "FOOD"}
+{"text": "manager", "label": "SERVICE"}
+{"text": "bagels", "label": "FOOD"}
+{"text": "turkey burgers", "label": "FOOD"}
+{"text": "Japanese food", "label": "FOOD"}
+{"text": "soup for the udon", "label": "FOOD"}
+{"text": "sushi", "label": "FOOD"}
+{"text": "rice", "label": "FOOD"}
+{"text": "rice", "label": "FOOD"}
+{"text": "sushi", "label": "FOOD"}
+{"text": "fish", "label": "FOOD"}
+{"text": "Japanese cuisine", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "Food", "label": "FOOD"}
+{"text": "Food", "label": "FOOD"}
+{"text": "location", "label": "LOCATION"}
+{"text": "place", "label": "AMBIENCE"}
+{"text": "bottle minimun", "label": "DRINKS"}
+{"text": "music", "label": "AMBIENCE"}
+{"text": "Pizza", "label": "FOOD"}
+{"text": "Margheritta slice", "label": "FOOD"}
+{"text": "atmoshere", "label": "AMBIENCE"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "Winnie", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "Thai food", "label": "FOOD"}
+{"text": "Pad Thai", "label": "FOOD"}
+{"text": "appetizer menu", "label": "FOOD"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "service", "label": "SERVICE"}
+{"text": "brioche and lollies", "label": "FOOD"}
+{"text": "place", "label": "AMBIENCE"}
+{"text": "Service", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "salmon", "label": "FOOD"}
+{"text": "crab salad", "label": "FOOD"}
+{"text": "spot", "label": "RESTAURANT"}
+{"text": "Lucky Strike", "label": "RESTAURANT"}
+{"text": "wait staff", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "mussels in spicy tomato sauce", "label": "FOOD"}
+{"text": "fries", "label": "FOOD"}
+{"text": "late night atmosphere", "label": "AMBIENCE"}
+{"text": "martini", "label": "DRINKS"}
+{"text": "martini", "label": "DRINKS"}
+{"text": "martini", "label": "DRINKS"}
+{"text": "Vanilla Shanty", "label": "DRINKS"}
+{"text": "setting", "label": "AMBIENCE"}
+{"text": "music", "label": "AMBIENCE"}
+{"text": "in-house lady DJ", "label": "AMBIENCE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "Suan", "label": "RESTAURANT"}
+{"text": "location", "label": "LOCATION"}
+{"text": "Suan", "label": "RESTAURANT"}
+{"text": "Thai", "label": "FOOD"}
+{"text": "noodles with shrimp and chicken and coconut juice", "label": "FOOD"}
+{"text": "Suan", "label": "RESTAURANT"}
+{"text": "terrace", "label": "AMBIENCE"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "Indian food", "label": "FOOD"}
+{"text": "chef", "label": "FOOD"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "setting", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "balsamic vinegar over icecream", "label": "FOOD"}
+{"text": "Go Go Hamburgers", "label": "FOOD"}
+{"text": "dim sum", "label": "FOOD"}
+{"text": "dim sum", "label": "FOOD"}
+{"text": "wait", "label": "SERVICE"}
+{"text": "atmosphere", "label": "AMBIENCE"}
+{"text": "turnip cake", "label": "FOOD"}
+{"text": "roast pork buns", "label": "FOOD"}
+{"text": "egg custards", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "braised lamb shank in red wine", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "atmosphere", "label": "AMBIENCE"}
+{"text": "meal", "label": "FOOD"}
+{"text": "restaurant", "label": "AMBIENCE"}
+{"text": "interior decor", "label": "AMBIENCE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "pad se ew chicken", "label": "FOOD"}
+{"text": "pad thai", "label": "FOOD"}
+{"text": "Ginger House", "label": "RESTAURANT"}
+{"text": "fried dumplings", "label": "FOOD"}
+{"text": "Chinese restaurant", "label": "RESTAURANT"}
+{"text": "customer service", "label": "SERVICE"}
+{"text": "management", "label": "SERVICE"}
+{"text": "bagels", "label": "FOOD"}
+{"text": "Spreads", "label": "FOOD"}
+{"text": "toppings", "label": "FOOD"}
+{"text": "Spreads", "label": "FOOD"}
+{"text": "toppings", "label": "FOOD"}
+{"text": "Service", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "ambience", "label": "AMBIENCE"}
+{"text": "Rao", "label": "RESTAURANT"}
+{"text": "indian cuisine", "label": "FOOD"}
+{"text": "shrimp appetizers", "label": "FOOD"}
+{"text": "ambience", "label": "AMBIENCE"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "eats", "label": "FOOD"}
+{"text": "eats", "label": "FOOD"}
+{"text": "indian food", "label": "FOOD"}
+{"text": "cheff", "label": "FOOD"}
+{"text": "place", "label": "AMBIENCE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "bagels", "label": "FOOD"}
+{"text": "bagels", "label": "FOOD"}
+{"text": "bagels", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "baked clams octopus", "label": "FOOD"}
+{"text": "lamb", "label": "FOOD"}
+{"text": "dessert", "label": "FOOD"}
+{"text": "waiter", "label": "SERVICE"}
+{"text": "place", "label": "AMBIENCE"}
+{"text": "bar scene", "label": "AMBIENCE"}
+{"text": "Appetizers", "label": "FOOD"}
+{"text": "waiter", "label": "SERVICE"}
+{"text": "potato stuff kanish", "label": "FOOD"}
+{"text": "salmon", "label": "FOOD"}
+{"text": "chicken", "label": "FOOD"}
+{"text": "servings for main entree", "label": "FOOD"}
+{"text": "Dessert", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "feel", "label": "AMBIENCE"}
+{"text": "portions", "label": "FOOD"}
+{"text": "veal", "label": "FOOD"}
+{"text": "anti-pasta", "label": "FOOD"}
+{"text": "calamari", "label": "FOOD"}
+{"text": "pasta mains", "label": "FOOD"}
+{"text": "pasta mains", "label": "FOOD"}
+{"text": "wine list", "label": "DRINKS"}
+{"text": "meal", "label": "FOOD"}
+{"text": "measures of liquers", "label": "DRINKS"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "Lucky Strike", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "decor", "label": "AMBIENCE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "spot", "label": "RESTAURANT"}
+{"text": "SEASONAL beer", "label": "DRINKS"}
+{"text": "spot", "label": "RESTAURANT"}
+{"text": "Heartland Brewery", "label": "RESTAURANT"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "restaurant", "label": "AMBIENCE"}
+{"text": "bar", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "beer", "label": "DRINKS"}
+{"text": "beer", "label": "DRINKS"}
+{"text": "shrimp scampi", "label": "FOOD"}
+{"text": "antipasti", "label": "FOOD"}
+{"text": "Corona", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "waiters", "label": "SERVICE"}
+{"text": "atomosphere", "label": "AMBIENCE"}
+{"text": "Service", "label": "SERVICE"}
+{"text": "Service", "label": "SERVICE"}
+{"text": "Food", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "porcini mushroom pasta special", "label": "FOOD"}
+{"text": "seafood tagliatelle", "label": "FOOD"}
+{"text": "tiramisu", "label": "FOOD"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "BBQ ribs", "label": "FOOD"}
+{"text": "BBQ ribs", "label": "FOOD"}
+{"text": "rice dishes", "label": "FOOD"}
+{"text": "congee (rice porridge)", "label": "FOOD"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "decor", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "main dining room", "label": "AMBIENCE"}
+{"text": "ceiling", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "patio", "label": "AMBIENCE"}
+{"text": "Suan", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "hot sauce", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "drink", "label": "DRINKS"}
+{"text": "cheescake", "label": "FOOD"}
+{"text": "spot", "label": "RESTAURANT"}
+{"text": "spot", "label": "RESTAURANT"}
+{"text": "outdoor seating", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "selecion of wines", "label": "DRINKS"}
+{"text": "selecion of wines", "label": "DRINKS"}
+{"text": "ambiance", "label": "AMBIENCE"}
+{"text": "atmosphere", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "chicken casserole", "label": "FOOD"}
+{"text": "chicken casserole", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "chicken", "label": "FOOD"}
+{"text": "beef", "label": "FOOD"}
+{"text": "lamb dishes", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "dessert", "label": "FOOD"}
+{"text": "Reuben sandwich", "label": "FOOD"}
+{"text": "Bloom's", "label": "RESTAURANT"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "Bloom's", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "sauces", "label": "FOOD"}
+{"text": "Pizza", "label": "FOOD"}
+{"text": "Ravioli", "label": "FOOD"}
+{"text": "wines by the glass", "label": "DRINKS"}
+{"text": "Service", "label": "SERVICE"}
+{"text": "setting/atmosphere", "label": "AMBIENCE"}
+{"text": "Food", "label": "FOOD"}
+{"text": "Food", "label": "FOOD"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "Pakistani food", "label": "FOOD"}
+{"text": "People", "label": "SERVICE"}
+{"text": "decor", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "Faan", "label": "RESTAURANT"}
+{"text": "pad thai", "label": "FOOD"}
+{"text": "design", "label": "AMBIENCE"}
+{"text": "atmosphere", "label": "AMBIENCE"}
+{"text": "bottles of wine", "label": "DRINKS"}
+{"text": "bottles of wine", "label": "DRINKS"}
+{"text": "food", "label": "FOOD"}
+{"text": "mussles", "label": "FOOD"}
+{"text": "seabass", "label": "FOOD"}
+{"text": "goat cheese salad", "label": "FOOD"}
+{"text": "penne w/ chicken", "label": "FOOD"}
+{"text": "atmosphere", "label": "AMBIENCE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "desert", "label": "FOOD"}
+{"text": "jukebox", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "pastas", "label": "FOOD"}
+{"text": "pizza", "label": "FOOD"}
+{"text": "vibe", "label": "AMBIENCE"}
+{"text": "owner", "label": "SERVICE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "drinks", "label": "DRINKS"}
+{"text": "drinks", "label": "DRINKS"}
+{"text": "drinks", "label": "DRINKS"}
+{"text": "Usha", "label": "SERVICE"}
+{"text": "sassy lassi", "label": "DRINKS"}
+{"text": "roti rolls", "label": "FOOD"}
+{"text": "Unda (Egg) rolls", "label": "FOOD"}
+{"text": "spices", "label": "FOOD"}
+{"text": "onions", "label": "FOOD"}
+{"text": "eggs", "label": "FOOD"}
+{"text": "roti", "label": "FOOD"}
+{"text": "Toons", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "Thai food", "label": "FOOD"}
+{"text": "decor", "label": "AMBIENCE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "portions", "label": "FOOD"}
+{"text": "drumsticks over rice", "label": "FOOD"}
+{"text": "sour spicy soup", "label": "FOOD"}
+{"text": "Beef noodle soup", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "resturant", "label": "AMBIENCE"}
+{"text": "Taiwanese food", "label": "FOOD"}
+{"text": "Rao's", "label": "RESTAURANT"}
+{"text": "service", "label": "SERVICE"}
+{"text": "atmosphere", "label": "AMBIENCE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "outdoor seating", "label": "AMBIENCE"}
+{"text": "Indoor", "label": "AMBIENCE"}
+{"text": "portion", "label": "FOOD"}
+{"text": "sushi", "label": "FOOD"}
+{"text": "Staff", "label": "SERVICE"}
+{"text": "dumplings", "label": "FOOD"}
+{"text": "decor", "label": "AMBIENCE"}
+{"text": "$10 10-piece dim sum combo", "label": "FOOD"}
+{"text": "decor", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "portions", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "crabmeat lasagna", "label": "FOOD"}
+{"text": "chocolate bread pudding", "label": "FOOD"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "Indian food", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "owner", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "egg noodles in the beef broth with shrimp dumplings and slices of BBQ roast pork", "label": "FOOD"}
+{"text": "dish", "label": "FOOD"}
+{"text": "congee", "label": "FOOD"}
+{"text": "Ow Ley Soh", "label": "FOOD"}
+{"text": "Chinese food", "label": "FOOD"}
+{"text": "Chinese food", "label": "FOOD"}
+{"text": "Service", "label": "SERVICE"}
+{"text": "Big Wong", "label": "RESTAURANT"}
+{"text": "jazz duo", "label": "AMBIENCE"}
+{"text": "music", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "wine by the glass", "label": "DRINKS"}
+{"text": "Japanese Tapas", "label": "FOOD"}
+{"text": "drinks", "label": "DRINKS"}
+{"text": "service", "label": "SERVICE"}
+{"text": "Atmosphere", "label": "AMBIENCE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "Yakitori (bbq meats)", "label": "FOOD"}
+{"text": "fish", "label": "FOOD"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "sushi chef", "label": "RESTAURANT"}
+{"text": "fish", "label": "FOOD"}
+{"text": "fish", "label": "FOOD"}
+{"text": "chef", "label": "FOOD"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "decor", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "Rice Avenue", "label": "AMBIENCE"}
+{"text": "Rice Avenue", "label": "LOCATION"}
+{"text": "Rice Avenue", "label": "RESTAURANT"}
+{"text": "waiter", "label": "SERVICE"}
+{"text": "waiter", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "wait-staff", "label": "SERVICE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "management", "label": "SERVICE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "decor", "label": "AMBIENCE"}
+{"text": "Baluchi's", "label": "RESTAURANT"}
+{"text": "manager", "label": "SERVICE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "nigiri", "label": "FOOD"}
+{"text": "all you can eat sushi", "label": "FOOD"}
+{"text": "Areo", "label": "RESTAURANT"}
+{"text": "servers", "label": "SERVICE"}
+{"text": "vibe", "label": "AMBIENCE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "Food", "label": "FOOD"}
+{"text": "view of the new york city skiline", "label": "LOCATION"}
+{"text": "service", "label": "SERVICE"}
+{"text": "place", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "Personal pans", "label": "FOOD"}
+{"text": "delivery guys", "label": "SERVICE"}
+{"text": "delivery guys", "label": "SERVICE"}
+{"text": "scene", "label": "AMBIENCE"}
+{"text": "place", "label": "AMBIENCE"}
+{"text": "location", "label": "LOCATION"}
+{"text": "pizza", "label": "FOOD"}
+{"text": "pizza", "label": "FOOD"}
+{"text": "penne a la vodka", "label": "FOOD"}
+{"text": "pasta penne", "label": "FOOD"}
+{"text": "pasta penne", "label": "FOOD"}
+{"text": "La Rosa", "label": "FOOD"}
+{"text": "wines", "label": "DRINKS"}
+{"text": "service", "label": "SERVICE"}
+{"text": "decor", "label": "AMBIENCE"}
+{"text": "selection", "label": "FOOD"}
+{"text": "spot", "label": "RESTAURANT"}
+{"text": "service", "label": "SERVICE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "wine list", "label": "DRINKS"}
+{"text": "atmosphere", "label": "AMBIENCE"}
+{"text": "mussels", "label": "FOOD"}
+{"text": "dessert", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "Vittorio", "label": "SERVICE"}
+{"text": "crew", "label": "SERVICE"}
+{"text": "Dining Garden", "label": "AMBIENCE"}
+{"text": "Jazz Bar", "label": "AMBIENCE"}
+{"text": "Thin Crust Pizzas", "label": "FOOD"}
+{"text": "Lasagna Menu", "label": "FOOD"}
+{"text": "PLACE", "label": "RESTAURANT"}
+{"text": "meal", "label": "FOOD"}
+{"text": "dumplings", "label": "FOOD"}
+{"text": "BBQ Salmon", "label": "FOOD"}
+{"text": "Sea Bass", "label": "FOOD"}
+{"text": "Crispy Duck", "label": "FOOD"}
+{"text": "Al Di La", "label": "RESTAURANT"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "pastas", "label": "FOOD"}
+{"text": "risottos", "label": "FOOD"}
+{"text": "sepia", "label": "FOOD"}
+{"text": "braised rabbit", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "fish and chips", "label": "FOOD"}
+{"text": "Dog", "label": "FOOD"}
+{"text": "dog", "label": "FOOD"}
+{"text": "establishment", "label": "RESTAURANT"}
+{"text": "Cypriot restaurant", "label": "RESTAURANT"}
+{"text": "pork souvlaki", "label": "FOOD"}
+{"text": "Pizza", "label": "FOOD"}
+{"text": "restaurant", "label": "AMBIENCE"}
+{"text": "eggplant pizza", "label": "FOOD"}
+{"text": "pastas", "label": "FOOD"}
+{"text": "half/half pizza", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "interior", "label": "AMBIENCE"}
+{"text": "space", "label": "AMBIENCE"}
+{"text": "meal", "label": "FOOD"}
+{"text": "meal", "label": "FOOD"}
+{"text": "sake", "label": "DRINKS"}
+{"text": "Sushi", "label": "FOOD"}
+{"text": "sashimi", "label": "FOOD"}
+{"text": "rolls", "label": "FOOD"}
+{"text": "rolls", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "Delivery", "label": "SERVICE"}
+{"text": "Delivery guy", "label": "SERVICE"}
+{"text": "Sushi", "label": "FOOD"}
+{"text": "sushi", "label": "FOOD"}
+{"text": "sashimi", "label": "FOOD"}
+{"text": "millennium roll", "label": "FOOD"}
+{"text": "place", "label": "LOCATION"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "waiter", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "views of the city", "label": "LOCATION"}
+{"text": "place", "label": "AMBIENCE"}
+{"text": "atmosphere", "label": "AMBIENCE"}
+{"text": "Place", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "seafood spaghetti", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "wait staff", "label": "SERVICE"}
+{"text": "space", "label": "RESTAURANT"}
+{"text": "indo-chinese food", "label": "FOOD"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "chicken pasta", "label": "FOOD"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "lobster", "label": "FOOD"}
+{"text": "restaraunt", "label": "RESTAURANT"}
+{"text": "pizza", "label": "FOOD"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "service", "label": "SERVICE"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "restaurant", "label": "AMBIENCE"}
+{"text": "vitello alla marsala", "label": "FOOD"}
+{"text": "veal", "label": "FOOD"}
+{"text": "mushrooms", "label": "FOOD"}
+{"text": "potato balls", "label": "FOOD"}
+{"text": "PLACE", "label": "RESTAURANT"}
+{"text": "bartender", "label": "SERVICE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "waitresses", "label": "SERVICE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "japanese food", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "Chicken teriyaki", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "waitress", "label": "SERVICE"}
+{"text": "dessert", "label": "FOOD"}
+{"text": "The Four Seasons", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "The Four Seasons", "label": "RESTAURANT"}
+{"text": "dinner", "label": "FOOD"}
+{"text": "Red Dragon Roll", "label": "FOOD"}
+{"text": "Yamato", "label": "RESTAURANT"}
+{"text": "Red Dragon Roll", "label": "FOOD"}
+{"text": "Seafood Dynamite", "label": "FOOD"}
+{"text": "Sushi", "label": "FOOD"}
+{"text": "spot", "label": "AMBIENCE"}
+{"text": "sushi", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "back garden area", "label": "AMBIENCE"}
+{"text": "rolls", "label": "FOOD"}
+{"text": "japanese food", "label": "FOOD"}
+{"text": "japanese food", "label": "FOOD"}
+{"text": "Dancing, White River and Millenium rolls", "label": "FOOD"}
+{"text": "PLACE", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "quesadilla", "label": "FOOD"}
+{"text": "quesadilla", "label": "FOOD"}
+{"text": "guacamole", "label": "FOOD"}
+{"text": "guacamole", "label": "FOOD"}
+{"text": "margaritas", "label": "DRINKS"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "Indian Food", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "place", "label": "AMBIENCE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "indian place", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "drink menu", "label": "DRINKS"}
+{"text": "place", "label": "AMBIENCE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "Voss bottles of water", "label": "DRINKS"}
+{"text": "Food", "label": "FOOD"}
+{"text": "view of river and NYC", "label": "LOCATION"}
+{"text": "survice", "label": "SERVICE"}
+{"text": "Egyptian restaurant", "label": "AMBIENCE"}
+{"text": "baba ganoush", "label": "FOOD"}
+{"text": "belly dancers", "label": "AMBIENCE"}
+{"text": "hookah", "label": "AMBIENCE"}
+{"text": "Raymond", "label": "SERVICE"}
+{"text": "Pacifico", "label": "RESTAURANT"}
+{"text": "drinks", "label": "DRINKS"}
+{"text": "Raymond", "label": "SERVICE"}
+{"text": "omlette for brunch", "label": "FOOD"}
+{"text": "spinach", "label": "FOOD"}
+{"text": "quacamole", "label": "FOOD"}
+{"text": "wings with chimmichuri", "label": "FOOD"}
+{"text": "chicken in the salads", "label": "FOOD"}
+{"text": "portobello and asparagus mole", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "people", "label": "SERVICE"}
+{"text": "Indian Restaurant", "label": "RESTAURANT"}
+{"text": "Decor", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "gyros", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "gyro meat", "label": "FOOD"}
+{"text": "sausages", "label": "FOOD"}
+{"text": "ingredients", "label": "FOOD"}
+{"text": "Greek and Cypriot dishes", "label": "FOOD"}
+{"text": "gyro", "label": "FOOD"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "veal", "label": "FOOD"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "booths", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "dishes", "label": "FOOD"}
+{"text": "dish", "label": "FOOD"}
+{"text": "Water's Edge", "label": "RESTAURANT"}
+{"text": "atmosphere", "label": "AMBIENCE"}
+{"text": "rooms", "label": "AMBIENCE"}
+{"text": "views", "label": "LOCATION"}
+{"text": "food", "label": "FOOD"}
+{"text": "Service", "label": "SERVICE"}
+{"text": "Paul", "label": "SERVICE"}
+{"text": "Water's Edge", "label": "RESTAURANT"}
+{"text": "Service", "label": "SERVICE"}
+{"text": "bathroom", "label": "AMBIENCE"}
+{"text": "view", "label": "LOCATION"}
+{"text": "food", "label": "FOOD"}
+{"text": "bar drinks", "label": "DRINKS"}
+{"text": "stuff tilapia", "label": "FOOD"}
+{"text": "dessert", "label": "FOOD"}
+{"text": "mens bathroom", "label": "AMBIENCE"}
+{"text": "wine list", "label": "DRINKS"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "bread", "label": "FOOD"}
+{"text": "appetizer of olives", "label": "FOOD"}
+{"text": "main course", "label": "FOOD"}
+{"text": "fish", "label": "FOOD"}
+{"text": "filet", "label": "FOOD"}
+{"text": "pear torte", "label": "FOOD"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "waitress", "label": "SERVICE"}
+{"text": "location", "label": "RESTAURANT"}
+{"text": "location", "label": "RESTAURANT"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "restaurant", "label": "AMBIENCE"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "seating", "label": "AMBIENCE"}
+{"text": "boths", "label": "AMBIENCE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "service button", "label": "SERVICE"}
+{"text": "waiter", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "looks", "label": "AMBIENCE"}
+{"text": "meals", "label": "FOOD"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "restaurant", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "Greg", "label": "SERVICE"}
+{"text": "server", "label": "SERVICE"}
+{"text": "runner", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "bev", "label": "DRINKS"}
+{"text": "servers", "label": "SERVICE"}
+{"text": "dogs", "label": "FOOD"}
+{"text": "toppings", "label": "FOOD"}
+{"text": "trimmings", "label": "FOOD"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "hot dog", "label": "FOOD"}
+{"text": "Casa La Femme", "label": "RESTAURANT"}
+{"text": "decor", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "cocktail with Citrus Vodka and lemon and lime juice and mint leaves", "label": "DRINKS"}
+{"text": "Food", "label": "FOOD"}
+{"text": "belly dancing show", "label": "AMBIENCE"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "menu", "label": "FOOD"}
+{"text": "waiter", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "mushroom sauce", "label": "FOOD"}
+{"text": "manager", "label": "SERVICE"}
+{"text": "manager", "label": "SERVICE"}
+{"text": "manager", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "customer service", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "atmosphere", "label": "AMBIENCE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "Sushi", "label": "FOOD"}
+{"text": "rolls", "label": "FOOD"}
+{"text": "rolls", "label": "FOOD"}
+{"text": "Yamato", "label": "RESTAURANT"}
+{"text": "rolls", "label": "FOOD"}
+{"text": "triple color and norwegetan rolls", "label": "FOOD"}
+{"text": "triple color and norwegetan rolls", "label": "FOOD"}
+{"text": "dessert", "label": "FOOD"}
+{"text": "special roll", "label": "FOOD"}
+{"text": "regular roll", "label": "FOOD"}
+{"text": "banana chocolate dessert", "label": "FOOD"}
+{"text": "green tea tempura", "label": "FOOD"}
+{"text": "appetizers", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "interior", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "modern Japanese", "label": "FOOD"}
+{"text": "atmosphere", "label": "AMBIENCE"}
+{"text": "scheme of mirrors", "label": "AMBIENCE"}
+{"text": "modern Japanese food", "label": "FOOD"}
+{"text": "mirrors", "label": "AMBIENCE"}
+{"text": "Indo Chinese food", "label": "FOOD"}
+{"text": "place", "label": "AMBIENCE"}
+{"text": "Chinese style Indian food", "label": "FOOD"}
+{"text": "chicken lollipop", "label": "FOOD"}
+{"text": "dishes", "label": "FOOD"}
+{"text": "Chilli Chicken", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "chef", "label": "SERVICE"}
+{"text": "vegetarian dish", "label": "FOOD"}
+{"text": "vegetarian dish", "label": "FOOD"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "meal", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "wine list", "label": "DRINKS"}
+{"text": "service", "label": "SERVICE"}
+{"text": "neighborhood", "label": "LOCATION"}
+{"text": "Patsy's Pizza", "label": "RESTAURANT"}
+{"text": "pizza", "label": "FOOD"}
+{"text": "hot dogs", "label": "FOOD"}
+{"text": "hot dogs", "label": "FOOD"}
+{"text": "toppings", "label": "FOOD"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "dishes", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "dish", "label": "FOOD"}
+{"text": "decor", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "indian chinese food", "label": "FOOD"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "place", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "Indian Chinese", "label": "FOOD"}
+{"text": "Village Underground", "label": "RESTAURANT"}
+{"text": "martinis", "label": "DRINKS"}
+{"text": "martinis", "label": "DRINKS"}
+{"text": "SERVICE", "label": "SERVICE"}
+{"text": "waiters", "label": "SERVICE"}
+{"text": "DJ", "label": "AMBIENCE"}
+{"text": "menu", "label": "FOOD"}
+{"text": "establishment", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "dinner for two", "label": "FOOD"}
+{"text": "appetizers", "label": "FOOD"}
+{"text": "entree", "label": "FOOD"}
+{"text": "environment", "label": "AMBIENCE"}
+{"text": "place", "label": "AMBIENCE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "Vanison", "label": "FOOD"}
+{"text": "Bison", "label": "FOOD"}
+{"text": "Dessert", "label": "FOOD"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "The Four Seasons", "label": "RESTAURANT"}
+{"text": "The Four Seasons", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "dessserts", "label": "FOOD"}
+{"text": "environment", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "Service", "label": "SERVICE"}
+{"text": "Casa La Femme", "label": "RESTAURANT"}
+{"text": "Casa La Femme", "label": "RESTAURANT"}
+{"text": "Casa La Femme", "label": "RESTAURANT"}
+{"text": "wait", "label": "SERVICE"}
+{"text": "place", "label": "AMBIENCE"}
+{"text": "hostess", "label": "SERVICE"}
+{"text": "drinks", "label": "DRINKS"}
+{"text": "drinks", "label": "DRINKS"}
+{"text": "waiter", "label": "SERVICE"}
+{"text": "waiter", "label": "SERVICE"}
+{"text": "waiter", "label": "SERVICE"}
+{"text": "chicken", "label": "FOOD"}
+{"text": "dinner", "label": "FOOD"}
+{"text": "dinner", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "meal", "label": "FOOD"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "menu", "label": "FOOD"}
+{"text": "beer", "label": "DRINKS"}
+{"text": "selection of bottled beer", "label": "DRINKS"}
+{"text": "fried oysters and clams", "label": "FOOD"}
+{"text": "fried oysters and clams", "label": "FOOD"}
+{"text": "lobster knuckles", "label": "FOOD"}
+{"text": "lobster knuckles", "label": "FOOD"}
+{"text": "\"salt encrusted shrimp\" appetizer", "label": "FOOD"}
+{"text": "Thai style Fried Sea Bass", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "grilled Mahi Mahi", "label": "FOOD"}
+{"text": "grilled Mahi Mahi", "label": "FOOD"}
+{"text": "lobster roll", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "Service", "label": "SERVICE"}
+{"text": "Indian food", "label": "FOOD"}
+{"text": "Food", "label": "FOOD"}
+{"text": "Indian food", "label": "FOOD"}
+{"text": "Indian food", "label": "FOOD"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "chicken tikka masala", "label": "FOOD"}
+{"text": "feel", "label": "AMBIENCE"}
+{"text": "waiters", "label": "SERVICE"}
+{"text": "Indian food", "label": "FOOD"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "Bukhara Grill", "label": "RESTAURANT"}
+{"text": "lunch buffet", "label": "FOOD"}
+{"text": "lunch buffet", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "dinner", "label": "FOOD"}
+{"text": "Bukhara", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "kimchee", "label": "FOOD"}
+{"text": "Korean fair", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "meal", "label": "FOOD"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "place", "label": "AMBIENCE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "four course prix fix menu", "label": "FOOD"}
+{"text": "white organza tent", "label": "AMBIENCE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "waiter", "label": "SERVICE"}
+{"text": "Casa La Femme", "label": "RESTAURANT"}
+{"text": "bibimbap", "label": "FOOD"}
+{"text": "stone bowl", "label": "FOOD"}
+{"text": "stone bowl", "label": "FOOD"}
+{"text": "nakgi-bokum", "label": "FOOD"}
+{"text": "stir-fried squid", "label": "FOOD"}
+{"text": "sauce", "label": "FOOD"}
+{"text": "side dishes", "label": "FOOD"}
+{"text": "side dishes", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "dish", "label": "FOOD"}
+{"text": "risotto", "label": "FOOD"}
+{"text": "farro salad", "label": "FOOD"}
+{"text": "mashed yukon potatoes", "label": "FOOD"}
+{"text": "east village pizza", "label": "RESTAURANT"}
+{"text": "margherita pizza", "label": "FOOD"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "slice of NYC pizza", "label": "FOOD"}
+{"text": "crust", "label": "FOOD"}
+{"text": "sauce", "label": "FOOD"}
+{"text": "cheese", "label": "FOOD"}
+{"text": "margherita pizza", "label": "FOOD"}
+{"text": "Restaurant", "label": "AMBIENCE"}
+{"text": "modern Japanese brasserie", "label": "RESTAURANT"}
+{"text": "modern Japanese brasserie", "label": "AMBIENCE"}
+{"text": "spot", "label": "LOCATION"}
+{"text": "unmarked wooden doors", "label": "AMBIENCE"}
+{"text": "d\u00e9cor", "label": "AMBIENCE"}
+{"text": "private booths", "label": "AMBIENCE"}
+{"text": "glass ceilings", "label": "AMBIENCE"}
+{"text": "waiter", "label": "SERVICE"}
+{"text": "BBE $29 fixe prix menu", "label": "FOOD"}
+{"text": "BBE $29 fixe prix menu", "label": "FOOD"}
+{"text": "sashimi amuse bouche", "label": "FOOD"}
+{"text": "Grilled Black Cod", "label": "FOOD"}
+{"text": "Grilled Salmon dish", "label": "FOOD"}
+{"text": "sake\u2019s", "label": "DRINKS"}
+{"text": "frozen black sesame mousse", "label": "FOOD"}
+{"text": "matcha (powdered green tea) and blueberry cheesecake", "label": "FOOD"}
+{"text": "brasserie", "label": "RESTAURANT"}
+{"text": "brasserie", "label": "RESTAURANT"}
+{"text": "Zenkichi", "label": "RESTAURANT"}
+{"text": "Zenkichi", "label": "AMBIENCE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "drinks", "label": "DRINKS"}
+{"text": "pita bread", "label": "FOOD"}
+{"text": "Shabu Shabu", "label": "FOOD"}
+{"text": "dishes", "label": "FOOD"}
+{"text": "Shabu Shabu", "label": "FOOD"}
+{"text": "meat", "label": "FOOD"}
+{"text": "sauces", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "meal", "label": "FOOD"}
+{"text": "kimchi", "label": "FOOD"}
+{"text": "salad", "label": "FOOD"}
+{"text": "Korean food", "label": "FOOD"}
+{"text": "fusion twists", "label": "FOOD"}
+{"text": "pork belly tacos", "label": "FOOD"}
+{"text": "hot dogs", "label": "FOOD"}
+{"text": "pork croquette sandwich", "label": "FOOD"}
+{"text": "bun", "label": "FOOD"}
+{"text": "view", "label": "LOCATION"}
+{"text": "food", "label": "FOOD"}
+{"text": "family seafood entree", "label": "FOOD"}
+{"text": "main entree", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "decor", "label": "AMBIENCE"}
+{"text": "mirrored walls", "label": "AMBIENCE"}
+{"text": "place", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "japanese tapas", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "Food", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "sitting space", "label": "AMBIENCE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "place", "label": "AMBIENCE"}
+{"text": "Pacifico", "label": "RESTAURANT"}
+{"text": "atmosphere", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "margaritas", "label": "DRINKS"}
+{"text": "waitress", "label": "SERVICE"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "patio", "label": "AMBIENCE"}
+{"text": "servers", "label": "SERVICE"}
+{"text": "server", "label": "SERVICE"}
+{"text": "appetizer", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "fit-out", "label": "AMBIENCE"}
+{"text": "furnishings", "label": "AMBIENCE"}
+{"text": "wine list", "label": "DRINKS"}
+{"text": "palce", "label": "RESTAURANT"}
+{"text": "meals", "label": "FOOD"}
+{"text": "chicken", "label": "FOOD"}
+{"text": "spinach", "label": "FOOD"}
+{"text": "salmon", "label": "FOOD"}
+{"text": "salmon", "label": "FOOD"}
+{"text": "waitress", "label": "SERVICE"}
+{"text": "spinach", "label": "FOOD"}
+{"text": "manager", "label": "SERVICE"}
+{"text": "manager", "label": "SERVICE"}
+{"text": "drinks", "label": "DRINKS"}
+{"text": "appetizers", "label": "FOOD"}
+{"text": "STAFF", "label": "SERVICE"}
+{"text": "margherita pizza", "label": "FOOD"}
+{"text": "pizza", "label": "FOOD"}
+{"text": "crust", "label": "FOOD"}
+{"text": "pizza", "label": "FOOD"}
+{"text": "Restaurant", "label": "RESTAURANT"}
+{"text": "decor", "label": "AMBIENCE"}
+{"text": "pita", "label": "FOOD"}
+{"text": "hummus", "label": "FOOD"}
+{"text": "grilled octopus", "label": "FOOD"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "scene", "label": "AMBIENCE"}
+{"text": "decor", "label": "AMBIENCE"}
+{"text": "eggplant", "label": "FOOD"}
+{"text": "eggplant", "label": "FOOD"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "Hot Dogs", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "Bark", "label": "RESTAURANT"}
+{"text": "hot dogs", "label": "FOOD"}
+{"text": "Slamwich", "label": "FOOD"}
+{"text": "Bark", "label": "RESTAURANT"}
+{"text": "menu", "label": "FOOD"}
+{"text": "spot", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "front of house staff", "label": "SERVICE"}
+{"text": "waiters", "label": "SERVICE"}
+{"text": "front of house staff", "label": "SERVICE"}
+{"text": "fish dishes", "label": "FOOD"}
+{"text": "BFC", "label": "RESTAURANT"}
+{"text": "front of house staff", "label": "SERVICE"}
+{"text": "girl", "label": "SERVICE"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "girl", "label": "SERVICE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "Maitre-D", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "maitre-D", "label": "SERVICE"}
+{"text": "bottle of wine", "label": "DRINKS"}
+{"text": "frontman", "label": "SERVICE"}
+{"text": "maitre-D", "label": "SERVICE"}
+{"text": "meal", "label": "FOOD"}
+{"text": "Mussles", "label": "FOOD"}
+{"text": "calamari", "label": "FOOD"}
+{"text": "Lamb special", "label": "FOOD"}
+{"text": "flank steak", "label": "FOOD"}
+{"text": "The Four Seasons restaurant", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "environment", "label": "AMBIENCE"}
+{"text": "Hot Dogs", "label": "FOOD"}
+{"text": "Bark", "label": "RESTAURANT"}
+{"text": "hot dog", "label": "FOOD"}
+{"text": "hot dog", "label": "FOOD"}
+{"text": "hot dog", "label": "FOOD"}
+{"text": "Atmosphere", "label": "AMBIENCE"}
+{"text": "fish tacos", "label": "FOOD"}
+{"text": "atmosphere", "label": "AMBIENCE"}
+{"text": "fire place", "label": "AMBIENCE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "management", "label": "SERVICE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "Casa la Femme", "label": "RESTAURANT"}
+{"text": "manager", "label": "SERVICE"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "wait", "label": "SERVICE"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "bread", "label": "FOOD"}
+{"text": "salad", "label": "FOOD"}
+{"text": "salad", "label": "FOOD"}
+{"text": "pasta", "label": "FOOD"}
+{"text": "pasta", "label": "FOOD"}
+{"text": "pasta", "label": "FOOD"}
+{"text": "hostess", "label": "SERVICE"}
+{"text": "bartender", "label": "SERVICE"}
+{"text": "waitress", "label": "SERVICE"}
+{"text": "waitress", "label": "SERVICE"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "customer service", "label": "SERVICE"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "space", "label": "AMBIENCE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "waitress", "label": "SERVICE"}
+{"text": "waiter", "label": "SERVICE"}
+{"text": "waiter", "label": "SERVICE"}
+{"text": "waitress", "label": "SERVICE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "Al Di La", "label": "RESTAURANT"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "pastas", "label": "FOOD"}
+{"text": "risottos", "label": "FOOD"}
+{"text": "sepia", "label": "FOOD"}
+{"text": "braised rabbit", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "fish and chips", "label": "FOOD"}
+{"text": "Dog", "label": "FOOD"}
+{"text": "dog", "label": "FOOD"}
+{"text": "establishment", "label": "RESTAURANT"}
+{"text": "Cypriot restaurant", "label": "RESTAURANT"}
+{"text": "pork souvlaki", "label": "FOOD"}
+{"text": "Pizza", "label": "FOOD"}
+{"text": "restaurant", "label": "AMBIENCE"}
+{"text": "eggplant pizza", "label": "FOOD"}
+{"text": "pastas", "label": "FOOD"}
+{"text": "half/half pizza", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "interior", "label": "AMBIENCE"}
+{"text": "space", "label": "AMBIENCE"}
+{"text": "meal", "label": "FOOD"}
+{"text": "meal", "label": "FOOD"}
+{"text": "sake", "label": "DRINKS"}
+{"text": "Sushi", "label": "FOOD"}
+{"text": "sashimi", "label": "FOOD"}
+{"text": "rolls", "label": "FOOD"}
+{"text": "rolls", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "Delivery", "label": "SERVICE"}
+{"text": "Delivery guy", "label": "SERVICE"}
+{"text": "Sushi", "label": "FOOD"}
+{"text": "sushi", "label": "FOOD"}
+{"text": "sashimi", "label": "FOOD"}
+{"text": "millennium roll", "label": "FOOD"}
+{"text": "place", "label": "LOCATION"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "waiter", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "views of the city", "label": "LOCATION"}
+{"text": "place", "label": "AMBIENCE"}
+{"text": "atmosphere", "label": "AMBIENCE"}
+{"text": "Place", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "seafood spaghetti", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "wait staff", "label": "SERVICE"}
+{"text": "space", "label": "AMBIENCE"}
+{"text": "space", "label": "RESTAURANT"}
+{"text": "indo-chinese food", "label": "FOOD"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "chicken pasta", "label": "FOOD"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "lobster", "label": "FOOD"}
+{"text": "restaraunt", "label": "RESTAURANT"}
+{"text": "pizza", "label": "FOOD"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "service", "label": "SERVICE"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "restaurant", "label": "AMBIENCE"}
+{"text": "vitello alla marsala", "label": "FOOD"}
+{"text": "veal", "label": "FOOD"}
+{"text": "mushrooms", "label": "FOOD"}
+{"text": "potato balls", "label": "FOOD"}
+{"text": "PLACE", "label": "RESTAURANT"}
+{"text": "bartender", "label": "SERVICE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "waitresses", "label": "SERVICE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "japanese food", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "Chicken teriyaki", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "waitress", "label": "SERVICE"}
+{"text": "dessert", "label": "FOOD"}
+{"text": "The Four Seasons", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "The Four Seasons", "label": "RESTAURANT"}
+{"text": "dinner", "label": "FOOD"}
+{"text": "Red Dragon Roll", "label": "FOOD"}
+{"text": "Yamato", "label": "RESTAURANT"}
+{"text": "Red Dragon Roll", "label": "FOOD"}
+{"text": "Seafood Dynamite", "label": "FOOD"}
+{"text": "Sushi", "label": "FOOD"}
+{"text": "spot", "label": "AMBIENCE"}
+{"text": "sushi", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "back garden area", "label": "AMBIENCE"}
+{"text": "rolls", "label": "FOOD"}
+{"text": "japanese food", "label": "FOOD"}
+{"text": "japanese food", "label": "FOOD"}
+{"text": "Dancing, White River and Millenium rolls", "label": "FOOD"}
+{"text": "PLACE", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "quesadilla", "label": "FOOD"}
+{"text": "quesadilla", "label": "FOOD"}
+{"text": "guacamole", "label": "FOOD"}
+{"text": "guacamole", "label": "FOOD"}
+{"text": "margaritas", "label": "DRINKS"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "Indian Food", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "place", "label": "AMBIENCE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "indian place", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "drink menu", "label": "DRINKS"}
+{"text": "place", "label": "AMBIENCE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "Voss bottles of water", "label": "DRINKS"}
+{"text": "Food", "label": "FOOD"}
+{"text": "view of river and NYC", "label": "LOCATION"}
+{"text": "survice", "label": "SERVICE"}
+{"text": "Egyptian restaurant", "label": "AMBIENCE"}
+{"text": "baba ganoush", "label": "FOOD"}
+{"text": "belly dancers", "label": "AMBIENCE"}
+{"text": "hookah", "label": "AMBIENCE"}
+{"text": "Raymond", "label": "SERVICE"}
+{"text": "Pacifico", "label": "RESTAURANT"}
+{"text": "drinks", "label": "DRINKS"}
+{"text": "Raymond", "label": "SERVICE"}
+{"text": "omlette for brunch", "label": "FOOD"}
+{"text": "spinach", "label": "FOOD"}
+{"text": "quacamole", "label": "FOOD"}
+{"text": "wings with chimmichuri", "label": "FOOD"}
+{"text": "chicken in the salads", "label": "FOOD"}
+{"text": "portobello and asparagus mole", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "people", "label": "SERVICE"}
+{"text": "Indian Restaurant", "label": "RESTAURANT"}
+{"text": "Decor", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "gyros", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "gyro meat", "label": "FOOD"}
+{"text": "sausages", "label": "FOOD"}
+{"text": "ingredients", "label": "FOOD"}
+{"text": "Greek and Cypriot dishes", "label": "FOOD"}
+{"text": "gyro", "label": "FOOD"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "veal", "label": "FOOD"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "booths", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "dishes", "label": "FOOD"}
+{"text": "dish", "label": "FOOD"}
+{"text": "Water's Edge", "label": "RESTAURANT"}
+{"text": "atmosphere", "label": "AMBIENCE"}
+{"text": "rooms", "label": "AMBIENCE"}
+{"text": "views", "label": "LOCATION"}
+{"text": "food", "label": "FOOD"}
+{"text": "Service", "label": "SERVICE"}
+{"text": "Paul", "label": "SERVICE"}
+{"text": "Water's Edge", "label": "RESTAURANT"}
+{"text": "Service", "label": "SERVICE"}
+{"text": "bathroom", "label": "AMBIENCE"}
+{"text": "view", "label": "LOCATION"}
+{"text": "food", "label": "FOOD"}
+{"text": "bar drinks", "label": "DRINKS"}
+{"text": "stuff tilapia", "label": "FOOD"}
+{"text": "dessert", "label": "FOOD"}
+{"text": "mens bathroom", "label": "AMBIENCE"}
+{"text": "wine list", "label": "DRINKS"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "bread", "label": "FOOD"}
+{"text": "appetizer of olives", "label": "FOOD"}
+{"text": "appetizer of olives", "label": "FOOD"}
+{"text": "main course", "label": "FOOD"}
+{"text": "fish", "label": "FOOD"}
+{"text": "filet", "label": "FOOD"}
+{"text": "pear torte", "label": "FOOD"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "waitress", "label": "SERVICE"}
+{"text": "location", "label": "RESTAURANT"}
+{"text": "location", "label": "RESTAURANT"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "restaurant", "label": "AMBIENCE"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "seating", "label": "AMBIENCE"}
+{"text": "boths", "label": "AMBIENCE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "service button", "label": "SERVICE"}
+{"text": "waiter", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "looks", "label": "AMBIENCE"}
+{"text": "meals", "label": "FOOD"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "restaurant", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "Greg", "label": "SERVICE"}
+{"text": "server", "label": "SERVICE"}
+{"text": "runner", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "bev", "label": "DRINKS"}
+{"text": "servers", "label": "SERVICE"}
+{"text": "dogs", "label": "FOOD"}
+{"text": "toppings", "label": "FOOD"}
+{"text": "trimmings", "label": "FOOD"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "hot dog", "label": "FOOD"}
+{"text": "Casa La Femme", "label": "RESTAURANT"}
+{"text": "decor", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "cocktail with Citrus Vodka and lemon and lime juice and mint leaves", "label": "DRINKS"}
+{"text": "Food", "label": "FOOD"}
+{"text": "belly dancing show", "label": "AMBIENCE"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "menu", "label": "FOOD"}
+{"text": "waiter", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "mushroom sauce", "label": "FOOD"}
+{"text": "manager", "label": "SERVICE"}
+{"text": "manager", "label": "SERVICE"}
+{"text": "manager", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "customer service", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "atmosphere", "label": "AMBIENCE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "Sushi", "label": "FOOD"}
+{"text": "rolls", "label": "FOOD"}
+{"text": "rolls", "label": "FOOD"}
+{"text": "Yamato", "label": "RESTAURANT"}
+{"text": "rolls", "label": "FOOD"}
+{"text": "triple color and norwegetan rolls", "label": "FOOD"}
+{"text": "triple color and norwegetan rolls", "label": "FOOD"}
+{"text": "dessert", "label": "FOOD"}
+{"text": "special roll", "label": "FOOD"}
+{"text": "regular roll", "label": "FOOD"}
+{"text": "banana chocolate dessert", "label": "FOOD"}
+{"text": "green tea tempura", "label": "FOOD"}
+{"text": "appetizers", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "interior", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "modern Japanese", "label": "FOOD"}
+{"text": "atmosphere", "label": "AMBIENCE"}
+{"text": "scheme of mirrors", "label": "AMBIENCE"}
+{"text": "modern Japanese food", "label": "FOOD"}
+{"text": "mirrors", "label": "AMBIENCE"}
+{"text": "Indo Chinese food", "label": "FOOD"}
+{"text": "place", "label": "AMBIENCE"}
+{"text": "Chinese style Indian food", "label": "FOOD"}
+{"text": "chicken lollipop", "label": "FOOD"}
+{"text": "dishes", "label": "FOOD"}
+{"text": "Chilli Chicken", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "chef", "label": "SERVICE"}
+{"text": "vegetarian dish", "label": "FOOD"}
+{"text": "vegetarian dish", "label": "FOOD"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "meal", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "wine list", "label": "DRINKS"}
+{"text": "service", "label": "SERVICE"}
+{"text": "neighborhood", "label": "LOCATION"}
+{"text": "Patsy's Pizza", "label": "RESTAURANT"}
+{"text": "pizza", "label": "FOOD"}
+{"text": "hot dogs", "label": "FOOD"}
+{"text": "hot dogs", "label": "FOOD"}
+{"text": "toppings", "label": "FOOD"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "dishes", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "dish", "label": "FOOD"}
+{"text": "decor", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "indian chinese food", "label": "FOOD"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "place", "label": "AMBIENCE"}
+{"text": "place", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "Indian Chinese", "label": "FOOD"}
+{"text": "Village Underground", "label": "RESTAURANT"}
+{"text": "martinis", "label": "DRINKS"}
+{"text": "martinis", "label": "DRINKS"}
+{"text": "SERVICE", "label": "SERVICE"}
+{"text": "waiters", "label": "SERVICE"}
+{"text": "DJ", "label": "AMBIENCE"}
+{"text": "menu", "label": "FOOD"}
+{"text": "establishment", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "dinner for two", "label": "FOOD"}
+{"text": "appetizers", "label": "FOOD"}
+{"text": "entree", "label": "FOOD"}
+{"text": "environment", "label": "AMBIENCE"}
+{"text": "place", "label": "AMBIENCE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "Vanison", "label": "FOOD"}
+{"text": "Bison", "label": "FOOD"}
+{"text": "Dessert", "label": "FOOD"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "The Four Seasons", "label": "RESTAURANT"}
+{"text": "The Four Seasons", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "dessserts", "label": "FOOD"}
+{"text": "environment", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "Service", "label": "SERVICE"}
+{"text": "Casa La Femme", "label": "RESTAURANT"}
+{"text": "Casa La Femme", "label": "RESTAURANT"}
+{"text": "Casa La Femme", "label": "RESTAURANT"}
+{"text": "wait", "label": "SERVICE"}
+{"text": "place", "label": "AMBIENCE"}
+{"text": "hostess", "label": "SERVICE"}
+{"text": "drinks", "label": "DRINKS"}
+{"text": "drinks", "label": "DRINKS"}
+{"text": "waiter", "label": "SERVICE"}
+{"text": "waiter", "label": "SERVICE"}
+{"text": "waiter", "label": "SERVICE"}
+{"text": "chicken", "label": "FOOD"}
+{"text": "dinner", "label": "FOOD"}
+{"text": "dinner", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "meal", "label": "FOOD"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "menu", "label": "FOOD"}
+{"text": "beer", "label": "DRINKS"}
+{"text": "selection of bottled beer", "label": "DRINKS"}
+{"text": "fried oysters and clams", "label": "FOOD"}
+{"text": "fried oysters and clams", "label": "FOOD"}
+{"text": "lobster knuckles", "label": "FOOD"}
+{"text": "lobster knuckles", "label": "FOOD"}
+{"text": "\"salt encrusted shrimp\" appetizer", "label": "FOOD"}
+{"text": "Thai style Fried Sea Bass", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "grilled Mahi Mahi", "label": "FOOD"}
+{"text": "grilled Mahi Mahi", "label": "FOOD"}
+{"text": "lobster roll", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "Service", "label": "SERVICE"}
+{"text": "Indian food", "label": "FOOD"}
+{"text": "Food", "label": "FOOD"}
+{"text": "Indian food", "label": "FOOD"}
+{"text": "Indian food", "label": "FOOD"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "chicken tikka masala", "label": "FOOD"}
+{"text": "feel", "label": "AMBIENCE"}
+{"text": "waiters", "label": "SERVICE"}
+{"text": "Indian food", "label": "FOOD"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "Bukhara Grill", "label": "RESTAURANT"}
+{"text": "lunch buffet", "label": "FOOD"}
+{"text": "lunch buffet", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "dinner", "label": "FOOD"}
+{"text": "Bukhara", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "kimchee", "label": "FOOD"}
+{"text": "Korean fair", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "meal", "label": "FOOD"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "place", "label": "AMBIENCE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "four course prix fix menu", "label": "FOOD"}
+{"text": "white organza tent", "label": "AMBIENCE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "waiter", "label": "SERVICE"}
+{"text": "Casa La Femme", "label": "RESTAURANT"}
+{"text": "bibimbap", "label": "FOOD"}
+{"text": "stone bowl", "label": "FOOD"}
+{"text": "stone bowl", "label": "FOOD"}
+{"text": "nakgi-bokum", "label": "FOOD"}
+{"text": "stir-fried squid", "label": "FOOD"}
+{"text": "sauce", "label": "FOOD"}
+{"text": "side dishes", "label": "FOOD"}
+{"text": "side dishes", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "dish", "label": "FOOD"}
+{"text": "risotto", "label": "FOOD"}
+{"text": "farro salad", "label": "FOOD"}
+{"text": "mashed yukon potatoes", "label": "FOOD"}
+{"text": "east village pizza", "label": "RESTAURANT"}
+{"text": "margherita pizza", "label": "FOOD"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "slice of NYC pizza", "label": "FOOD"}
+{"text": "crust", "label": "FOOD"}
+{"text": "sauce", "label": "FOOD"}
+{"text": "cheese", "label": "FOOD"}
+{"text": "margherita pizza", "label": "FOOD"}
+{"text": "Restaurant", "label": "AMBIENCE"}
+{"text": "modern Japanese brasserie", "label": "RESTAURANT"}
+{"text": "modern Japanese brasserie", "label": "AMBIENCE"}
+{"text": "spot", "label": "LOCATION"}
+{"text": "unmarked wooden doors", "label": "AMBIENCE"}
+{"text": "d\u00e9cor", "label": "AMBIENCE"}
+{"text": "private booths", "label": "AMBIENCE"}
+{"text": "glass ceilings", "label": "AMBIENCE"}
+{"text": "waiter", "label": "SERVICE"}
+{"text": "BBE $29 fixe prix menu", "label": "FOOD"}
+{"text": "BBE $29 fixe prix menu", "label": "FOOD"}
+{"text": "sashimi amuse bouche", "label": "FOOD"}
+{"text": "Grilled Black Cod", "label": "FOOD"}
+{"text": "Grilled Salmon dish", "label": "FOOD"}
+{"text": "entrees", "label": "FOOD"}
+{"text": "sake\u2019s", "label": "DRINKS"}
+{"text": "frozen black sesame mousse", "label": "FOOD"}
+{"text": "matcha (powdered green tea) and blueberry cheesecake", "label": "FOOD"}
+{"text": "brasserie", "label": "RESTAURANT"}
+{"text": "brasserie", "label": "RESTAURANT"}
+{"text": "Zenkichi", "label": "RESTAURANT"}
+{"text": "Zenkichi", "label": "AMBIENCE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "drinks", "label": "DRINKS"}
+{"text": "pita bread", "label": "FOOD"}
+{"text": "Shabu Shabu", "label": "FOOD"}
+{"text": "dishes", "label": "FOOD"}
+{"text": "Shabu Shabu", "label": "FOOD"}
+{"text": "meat", "label": "FOOD"}
+{"text": "sauces", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "meal", "label": "FOOD"}
+{"text": "kimchi", "label": "FOOD"}
+{"text": "salad", "label": "FOOD"}
+{"text": "Korean food", "label": "FOOD"}
+{"text": "fusion twists", "label": "FOOD"}
+{"text": "pork belly tacos", "label": "FOOD"}
+{"text": "hot dogs", "label": "FOOD"}
+{"text": "pork croquette sandwich", "label": "FOOD"}
+{"text": "bun", "label": "FOOD"}
+{"text": "view", "label": "LOCATION"}
+{"text": "food", "label": "FOOD"}
+{"text": "family seafood entree", "label": "FOOD"}
+{"text": "main entree", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "decor", "label": "AMBIENCE"}
+{"text": "mirrored walls", "label": "AMBIENCE"}
+{"text": "place", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "japanese tapas", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "Food", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "sitting space", "label": "AMBIENCE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "place", "label": "AMBIENCE"}
+{"text": "Pacifico", "label": "RESTAURANT"}
+{"text": "atmosphere", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "margaritas", "label": "DRINKS"}
+{"text": "waitress", "label": "SERVICE"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "patio", "label": "AMBIENCE"}
+{"text": "servers", "label": "SERVICE"}
+{"text": "server", "label": "SERVICE"}
+{"text": "appetizer", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "fit-out", "label": "AMBIENCE"}
+{"text": "furnishings", "label": "AMBIENCE"}
+{"text": "wine list", "label": "DRINKS"}
+{"text": "palce", "label": "RESTAURANT"}
+{"text": "meals", "label": "FOOD"}
+{"text": "chicken", "label": "FOOD"}
+{"text": "spinach", "label": "FOOD"}
+{"text": "salmon", "label": "FOOD"}
+{"text": "salmon", "label": "FOOD"}
+{"text": "waitress", "label": "SERVICE"}
+{"text": "spinach", "label": "FOOD"}
+{"text": "manager", "label": "SERVICE"}
+{"text": "manager", "label": "SERVICE"}
+{"text": "drinks", "label": "DRINKS"}
+{"text": "appetizers", "label": "FOOD"}
+{"text": "STAFF", "label": "SERVICE"}
+{"text": "margherita pizza", "label": "FOOD"}
+{"text": "pizza", "label": "FOOD"}
+{"text": "crust", "label": "FOOD"}
+{"text": "pizza", "label": "FOOD"}
+{"text": "Restaurant", "label": "RESTAURANT"}
+{"text": "decor", "label": "AMBIENCE"}
+{"text": "pita", "label": "FOOD"}
+{"text": "hummus", "label": "FOOD"}
+{"text": "grilled octopus", "label": "FOOD"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "scene", "label": "AMBIENCE"}
+{"text": "decor", "label": "AMBIENCE"}
+{"text": "eggplant", "label": "FOOD"}
+{"text": "eggplant", "label": "FOOD"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "Hot Dogs", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "Bark", "label": "RESTAURANT"}
+{"text": "hot dogs", "label": "FOOD"}
+{"text": "Slamwich", "label": "FOOD"}
+{"text": "Bark", "label": "RESTAURANT"}
+{"text": "menu", "label": "FOOD"}
+{"text": "spot", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "front of house staff", "label": "SERVICE"}
+{"text": "waiters", "label": "SERVICE"}
+{"text": "front of house staff", "label": "SERVICE"}
+{"text": "fish dishes", "label": "FOOD"}
+{"text": "BFC", "label": "RESTAURANT"}
+{"text": "front of house staff", "label": "SERVICE"}
+{"text": "girl", "label": "SERVICE"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "girl", "label": "SERVICE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "Maitre-D", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "maitre-D", "label": "SERVICE"}
+{"text": "bottle of wine", "label": "DRINKS"}
+{"text": "frontman", "label": "SERVICE"}
+{"text": "maitre-D", "label": "SERVICE"}
+{"text": "meal", "label": "FOOD"}
+{"text": "Mussles", "label": "FOOD"}
+{"text": "calamari", "label": "FOOD"}
+{"text": "Lamb special", "label": "FOOD"}
+{"text": "flank steak", "label": "FOOD"}
+{"text": "The Four Seasons restaurant", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "environment", "label": "AMBIENCE"}
+{"text": "Hot Dogs", "label": "FOOD"}
+{"text": "Bark", "label": "RESTAURANT"}
+{"text": "hot dog", "label": "FOOD"}
+{"text": "hot dog", "label": "FOOD"}
+{"text": "hot dog", "label": "FOOD"}
+{"text": "Atmosphere", "label": "AMBIENCE"}
+{"text": "fish tacos", "label": "FOOD"}
+{"text": "atmosphere", "label": "AMBIENCE"}
+{"text": "fire place", "label": "AMBIENCE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "management", "label": "SERVICE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "Casa la Femme", "label": "RESTAURANT"}
+{"text": "manager", "label": "SERVICE"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "wait", "label": "SERVICE"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "bread", "label": "FOOD"}
+{"text": "salad", "label": "FOOD"}
+{"text": "salad", "label": "FOOD"}
+{"text": "pasta", "label": "FOOD"}
+{"text": "pasta", "label": "FOOD"}
+{"text": "pasta", "label": "FOOD"}
+{"text": "hostess", "label": "SERVICE"}
+{"text": "bartender", "label": "SERVICE"}
+{"text": "waitress", "label": "SERVICE"}
+{"text": "waitress", "label": "SERVICE"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "customer service", "label": "SERVICE"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "space", "label": "AMBIENCE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "waitress", "label": "SERVICE"}
+{"text": "waiter", "label": "SERVICE"}
+{"text": "waiter", "label": "SERVICE"}
+{"text": "waitress", "label": "SERVICE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "sushi", "label": "FOOD"}
+{"text": "portions", "label": "FOOD"}
+{"text": "Green Tea creme brulee", "label": "FOOD"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "sushi", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "owner", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "meal", "label": "FOOD"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "onion rings", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "lemon chicken", "label": "FOOD"}
+{"text": "honey walnut prawns", "label": "FOOD"}
+{"text": "honey walnut prawns", "label": "FOOD"}
+{"text": "ambience", "label": "AMBIENCE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "Service", "label": "SERVICE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "waiter", "label": "SERVICE"}
+{"text": "manager", "label": "SERVICE"}
+{"text": "Italian Food", "label": "FOOD"}
+{"text": "Mioposto", "label": "RESTAURANT"}
+{"text": "Italian restaurant", "label": "RESTAURANT"}
+{"text": "wine list", "label": "DRINKS"}
+{"text": "food", "label": "FOOD"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "meal", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "ambiance", "label": "AMBIENCE"}
+{"text": "wine list", "label": "DRINKS"}
+{"text": "food", "label": "FOOD"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "Kafta plate", "label": "FOOD"}
+{"text": "meal", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "place", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "atmosphere", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "Rice", "label": "FOOD"}
+{"text": "tuna", "label": "FOOD"}
+{"text": "fish", "label": "FOOD"}
+{"text": "fish", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "fish", "label": "FOOD"}
+{"text": "rolls", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "waiter", "label": "SERVICE"}
+{"text": "staff members", "label": "SERVICE"}
+{"text": "sushi", "label": "FOOD"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "miso soup", "label": "FOOD"}
+{"text": "rolls", "label": "FOOD"}
+{"text": "sashimi", "label": "FOOD"}
+{"text": "apps", "label": "FOOD"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "portions", "label": "FOOD"}
+{"text": "space", "label": "AMBIENCE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "waiters", "label": "SERVICE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "bus boy", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "salsa", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "margaritas", "label": "DRINKS"}
+{"text": "waitress", "label": "SERVICE"}
+{"text": "pizza place", "label": "RESTAURANT"}
+{"text": "pizza", "label": "FOOD"}
+{"text": "Sushi", "label": "FOOD"}
+{"text": "calamari", "label": "FOOD"}
+{"text": "deck", "label": "AMBIENCE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "music", "label": "AMBIENCE"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "bar", "label": "RESTAURANT"}
+{"text": "bartender", "label": "SERVICE"}
+{"text": "pizza", "label": "FOOD"}
+{"text": "draft and bottle selection", "label": "DRINKS"}
+{"text": "jukebox's", "label": "AMBIENCE"}
+{"text": "food", "label": "FOOD"}
+{"text": "bartenders", "label": "SERVICE"}
+{"text": "owners", "label": "SERVICE"}
+{"text": "beer selection", "label": "DRINKS"}
+{"text": "upstairs", "label": "AMBIENCE"}
+{"text": "balconey", "label": "RESTAURANT"}
+{"text": "sushi", "label": "FOOD"}
+{"text": "fish", "label": "FOOD"}
+{"text": "Jellyfish", "label": "FOOD"}
+{"text": "Horse Mackerel", "label": "FOOD"}
+{"text": "Blue Fin Tuna", "label": "FOOD"}
+{"text": "Sake Ikura roll", "label": "FOOD"}
+{"text": "pieces", "label": "FOOD"}
+{"text": "decor", "label": "AMBIENCE"}
+{"text": "crowd", "label": "RESTAURANT"}
+{"text": "service", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "menu", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "Service", "label": "SERVICE"}
+{"text": "Drinks", "label": "DRINKS"}
+{"text": "drinks", "label": "DRINKS"}
+{"text": "food", "label": "FOOD"}
+{"text": "ambience", "label": "AMBIENCE"}
+{"text": "pumpkin ravioli", "label": "FOOD"}
+{"text": "goat cheese gnocchi", "label": "FOOD"}
+{"text": "goat cheese gnocchi", "label": "FOOD"}
+{"text": "filet mignon on top of spinach and mashed potatoes", "label": "FOOD"}
+{"text": "ambiance", "label": "AMBIENCE"}
+{"text": "artwork", "label": "AMBIENCE"}
+{"text": "music", "label": "AMBIENCE"}
+{"text": "Indian food", "label": "FOOD"}
+{"text": "chicken curry", "label": "FOOD"}
+{"text": "chicken tikka masala", "label": "FOOD"}
+{"text": "chana masala (garbanzo beans)", "label": "FOOD"}
+{"text": "location", "label": "LOCATION"}
+{"text": "food", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "menu", "label": "FOOD"}
+{"text": "saag", "label": "FOOD"}
+{"text": "paneer", "label": "FOOD"}
+{"text": "korma", "label": "FOOD"}
+{"text": "delivery", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "meal", "label": "FOOD"}
+{"text": "lamb korma", "label": "FOOD"}
+{"text": "saag paneer", "label": "FOOD"}
+{"text": "samosas", "label": "FOOD"}
+{"text": "naan", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "naan", "label": "FOOD"}
+{"text": "bhartha", "label": "FOOD"}
+{"text": "chickpeas", "label": "FOOD"}
+{"text": "fajita salad", "label": "FOOD"}
+{"text": "colorado", "label": "FOOD"}
+{"text": "fajitas", "label": "FOOD"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "environment", "label": "AMBIENCE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "decor", "label": "AMBIENCE"}
+{"text": "customer service", "label": "SERVICE"}
+{"text": "manager", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "atmosphere", "label": "AMBIENCE"}
+{"text": "lunch spot", "label": "RESTAURANT"}
+{"text": "mexican spot", "label": "RESTAURANT"}
+{"text": "service", "label": "SERVICE"}
+{"text": "taco salads", "label": "FOOD"}
+{"text": "burritos", "label": "FOOD"}
+{"text": "enchiladas", "label": "FOOD"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "margaritas", "label": "DRINKS"}
+{"text": "Lebanese Food", "label": "FOOD"}
+{"text": "Open Sesame", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "chicken shawarma", "label": "FOOD"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "decor", "label": "AMBIENCE"}
+{"text": "OPEN SESAME", "label": "RESTAURANT"}
+{"text": "Hummus", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "lunch", "label": "FOOD"}
+{"text": "Dinners", "label": "FOOD"}
+{"text": "open sesame combo plate", "label": "FOOD"}
+{"text": "open sesame combo plate", "label": "FOOD"}
+{"text": "side of potatoes", "label": "FOOD"}
+{"text": "labne (yogurt dip)", "label": "FOOD"}
+{"text": "hummus", "label": "FOOD"}
+{"text": "hummus", "label": "FOOD"}
+{"text": "seating", "label": "RESTAURANT"}
+{"text": "service", "label": "SERVICE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "beer", "label": "DRINKS"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "beer", "label": "DRINKS"}
+{"text": "meal", "label": "FOOD"}
+{"text": "band", "label": "AMBIENCE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "shoe string onions", "label": "FOOD"}
+{"text": "goat cheese pizza", "label": "FOOD"}
+{"text": "grilled asparagus", "label": "FOOD"}
+{"text": "fried brie with fruit", "label": "FOOD"}
+{"text": "beer", "label": "DRINKS"}
+{"text": "waiter", "label": "SERVICE"}
+{"text": "band", "label": "AMBIENCE"}
+{"text": "Winelist", "label": "DRINKS"}
+{"text": "wine list", "label": "DRINKS"}
+{"text": "sommelier", "label": "SERVICE"}
+{"text": "wine", "label": "DRINKS"}
+{"text": "PLACE", "label": "RESTAURANT"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "potions", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "owners", "label": "SERVICE"}
+{"text": "establishment", "label": "RESTAURANT"}
+{"text": "Scooner or Later", "label": "RESTAURANT"}
+{"text": "Scooner or Later", "label": "RESTAURANT"}
+{"text": "Place", "label": "AMBIENCE"}
+{"text": "Pizza", "label": "FOOD"}
+{"text": "Coffee", "label": "DRINKS"}
+{"text": "pizza menu", "label": "FOOD"}
+{"text": "pizza menu", "label": "FOOD"}
+{"text": "coffe", "label": "DRINKS"}
+{"text": "ambience", "label": "AMBIENCE"}
+{"text": "place", "label": "AMBIENCE"}
+{"text": "servers behind the counter", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "Ray's", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "location", "label": "LOCATION"}
+{"text": "service", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "Food", "label": "FOOD"}
+{"text": "Food", "label": "FOOD"}
+{"text": "kafta plate", "label": "FOOD"}
+{"text": "Atmosphere", "label": "AMBIENCE"}
+{"text": "Service", "label": "SERVICE"}
+{"text": "waitress", "label": "SERVICE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "FOOD", "label": "FOOD"}
+{"text": "PEOPLE", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "atmosphere", "label": "AMBIENCE"}
+{"text": "Eggs", "label": "FOOD"}
+{"text": "pancakes", "label": "FOOD"}
+{"text": "potatoes", "label": "FOOD"}
+{"text": "fresh fruit", "label": "FOOD"}
+{"text": "yogurt", "label": "FOOD"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "meal", "label": "FOOD"}
+{"text": "fish on the omikase platter", "label": "FOOD"}
+{"text": "waitstaff", "label": "SERVICE"}
+{"text": "waiter", "label": "SERVICE"}
+{"text": "sake", "label": "DRINKS"}
+{"text": "sushi", "label": "FOOD"}
+{"text": "nigiri", "label": "FOOD"}
+{"text": "sashmi", "label": "FOOD"}
+{"text": "rolls", "label": "FOOD"}
+{"text": "oyster roll", "label": "FOOD"}
+{"text": "sushi", "label": "FOOD"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "Chuwam Mushi", "label": "FOOD"}
+{"text": "Sushi", "label": "FOOD"}
+{"text": "Sushi", "label": "FOOD"}
+{"text": "Sushi place", "label": "RESTAURANT"}
+{"text": "house special roll", "label": "FOOD"}
+{"text": "spot", "label": "AMBIENCE"}
+{"text": "Murphy's", "label": "RESTAURANT"}
+{"text": "Brunch", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "egg white omelet", "label": "FOOD"}
+{"text": "spot", "label": "RESTAURANT"}
+{"text": "spot", "label": "AMBIENCE"}
+{"text": "desserts", "label": "FOOD"}
+{"text": "wine list", "label": "DRINKS"}
+{"text": "ambiance", "label": "AMBIENCE"}
+{"text": "Mexican place", "label": "RESTAURANT"}
+{"text": "enchiladas", "label": "FOOD"}
+{"text": "chicken soup", "label": "FOOD"}
+{"text": "specials", "label": "FOOD"}
+{"text": "cooks", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "sushi", "label": "FOOD"}
+{"text": "wait staff", "label": "SERVICE"}
+{"text": "atmosphere", "label": "AMBIENCE"}
+{"text": "Space", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "employees", "label": "SERVICE"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "Caesar salad", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "Margaritas", "label": "DRINKS"}
+{"text": "portions", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "margaritas", "label": "DRINKS"}
+{"text": "service", "label": "SERVICE"}
+{"text": "art on the walls", "label": "AMBIENCE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "meal", "label": "FOOD"}
+{"text": "indain food", "label": "FOOD"}
+{"text": "lunch menu", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "ingrediants", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "fish", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "selection", "label": "FOOD"}
+{"text": "sushi", "label": "FOOD"}
+{"text": "waiters", "label": "SERVICE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "brunch food", "label": "FOOD"}
+{"text": "regular menu", "label": "FOOD"}
+{"text": "sushi", "label": "FOOD"}
+{"text": "fish", "label": "FOOD"}
+{"text": "sake", "label": "DRINKS"}
+{"text": "SOHO location", "label": "LOCATION"}
+{"text": "Salmon", "label": "FOOD"}
+{"text": "Tuna", "label": "FOOD"}
+{"text": "Fluke", "label": "FOOD"}
+{"text": "Yellow Tail", "label": "FOOD"}
+{"text": "Cod", "label": "FOOD"}
+{"text": "Mackeral", "label": "FOOD"}
+{"text": "Jellyfish", "label": "FOOD"}
+{"text": "Sea Urchin", "label": "FOOD"}
+{"text": "Shrimp", "label": "FOOD"}
+{"text": "Lobster", "label": "FOOD"}
+{"text": "Sea Bream", "label": "FOOD"}
+{"text": "Trout", "label": "FOOD"}
+{"text": "Milk Fish", "label": "FOOD"}
+{"text": "Blue Fin Tuna", "label": "FOOD"}
+{"text": "Eel", "label": "FOOD"}
+{"text": "Crab", "label": "FOOD"}
+{"text": "Sardine", "label": "FOOD"}
+{"text": "Monk Fish", "label": "FOOD"}
+{"text": "Roe", "label": "FOOD"}
+{"text": "Scallop", "label": "FOOD"}
+{"text": "Oysters", "label": "FOOD"}
+{"text": "Toro", "label": "FOOD"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "BLUE RIBBON SUSHI", "label": "RESTAURANT"}
+{"text": "tuna", "label": "FOOD"}
+{"text": "Blue Ribbon", "label": "RESTAURANT"}
+{"text": "sushi", "label": "FOOD"}
+{"text": "sushi", "label": "FOOD"}
+{"text": "setting", "label": "AMBIENCE"}
+{"text": "rolls", "label": "FOOD"}
+{"text": "smoked yellowtail", "label": "FOOD"}
+{"text": "Chef's Choice for sushi", "label": "FOOD"}
+{"text": "customer service", "label": "SERVICE"}
+{"text": "pizza", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "pizza", "label": "FOOD"}
+{"text": "pizza", "label": "FOOD"}
+{"text": "location", "label": "LOCATION"}
+{"text": "Mioposto", "label": "RESTAURANT"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "waiting staff", "label": "SERVICE"}
+{"text": "wait", "label": "SERVICE"}
+{"text": "Seafood", "label": "FOOD"}
+{"text": "appetizer of oysters, lobster, crab (small size)", "label": "FOOD"}
+{"text": "Seabass on lobster risotto", "label": "FOOD"}
+{"text": "Caesar salad", "label": "FOOD"}
+{"text": "bottle of wine", "label": "DRINKS"}
+{"text": "dessert", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "waitress", "label": "SERVICE"}
+{"text": "owner", "label": "SERVICE"}
+{"text": "PLACE", "label": "RESTAURANT"}
+{"text": "atmosphere", "label": "AMBIENCE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "bar keep", "label": "SERVICE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "Crab Cakes", "label": "FOOD"}
+{"text": "cakes", "label": "FOOD"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "seasonal fish", "label": "FOOD"}
+{"text": "seafood", "label": "FOOD"}
+{"text": "waterfront setting", "label": "AMBIENCE"}
+{"text": "Pizza", "label": "FOOD"}
+{"text": "Service", "label": "SERVICE"}
+{"text": "pizza", "label": "FOOD"}
+{"text": "mushroom pizza", "label": "FOOD"}
+{"text": "caeser salad", "label": "FOOD"}
+{"text": "servers", "label": "SERVICE"}
+{"text": "young woman", "label": "SERVICE"}
+{"text": "waitstaff", "label": "SERVICE"}
+{"text": "Management", "label": "SERVICE"}
+{"text": "pizza", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "service", "label": "SERVICE"}
+{"text": "Breakfast", "label": "FOOD"}
+{"text": "breakfast", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "bloody mary", "label": "DRINKS"}
+{"text": "breakfast", "label": "FOOD"}
+{"text": "crab eggs benedict", "label": "FOOD"}
+{"text": "menu items", "label": "FOOD"}
+{"text": "chinese food", "label": "FOOD"}
+{"text": "ambiance", "label": "AMBIENCE"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "prawns", "label": "FOOD"}
+{"text": "batter", "label": "FOOD"}
+{"text": "walnuts", "label": "FOOD"}
+{"text": "honey walnyt prawns", "label": "FOOD"}
+{"text": "brocollis", "label": "FOOD"}
+{"text": "scallops", "label": "FOOD"}
+{"text": "prawns", "label": "FOOD"}
+{"text": "brocolli", "label": "FOOD"}
+{"text": "mango ginger creme brulee", "label": "FOOD"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "portions", "label": "FOOD"}
+{"text": "sushi", "label": "FOOD"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "sushi", "label": "FOOD"}
+{"text": "sushi", "label": "FOOD"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "service", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "Food", "label": "FOOD"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "restaurant", "label": "AMBIENCE"}
+{"text": "location", "label": "LOCATION"}
+{"text": "feel", "label": "AMBIENCE"}
+{"text": "glass walls", "label": "AMBIENCE"}
+{"text": "Spanish Mackeral special appetizer", "label": "FOOD"}
+{"text": "box sushi", "label": "FOOD"}
+{"text": "eel with avodcao", "label": "FOOD"}
+{"text": "omikase", "label": "FOOD"}
+{"text": "omikase", "label": "FOOD"}
+{"text": "specialty rolls", "label": "FOOD"}
+{"text": "selection of sakes", "label": "DRINKS"}
+{"text": "Green tea creme brulee", "label": "FOOD"}
+{"text": "sushi", "label": "FOOD"}
+{"text": "sushi", "label": "FOOD"}
+{"text": "customer service", "label": "SERVICE"}
+{"text": "location along the marina in Long Beach", "label": "LOCATION"}
+{"text": "food", "label": "FOOD"}
+{"text": "customer service", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "restaurant staff", "label": "SERVICE"}
+{"text": "waitress", "label": "SERVICE"}
+{"text": "manager", "label": "SERVICE"}
+{"text": "manager", "label": "SERVICE"}
+{"text": "sushi", "label": "FOOD"}
+{"text": "fish", "label": "FOOD"}
+{"text": "fish", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "sake selection", "label": "DRINKS"}
+{"text": "Dungeness crabs", "label": "FOOD"}
+{"text": "seafood dinners", "label": "FOOD"}
+{"text": "Rays", "label": "RESTAURANT"}
+{"text": "Dungeness crabs", "label": "FOOD"}
+{"text": "black cod in sake kasu", "label": "FOOD"}
+{"text": "dessert of a port and chocolate tasting", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "Breakfast", "label": "FOOD"}
+{"text": "drinks", "label": "DRINKS"}
+{"text": "corn beef hash", "label": "FOOD"}
+{"text": "coffee", "label": "DRINKS"}
+{"text": "B Fast burritos", "label": "FOOD"}
+{"text": "menu", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "Standby", "label": "RESTAURANT"}
+{"text": "spot", "label": "RESTAURANT"}
+{"text": "music", "label": "AMBIENCE"}
+{"text": "bar tenders", "label": "DRINKS"}
+{"text": "atmosphere", "label": "AMBIENCE"}
+{"text": "cheese fries", "label": "FOOD"}
+{"text": "Food", "label": "FOOD"}
+{"text": "Service", "label": "SERVICE"}
+{"text": "price fixed pre-show dinner", "label": "FOOD"}
+{"text": "wood decor", "label": "AMBIENCE"}
+{"text": "music", "label": "AMBIENCE"}
+{"text": "subwoofer to the sound system", "label": "AMBIENCE"}
+{"text": "shellfish and shrimp appetizer", "label": "FOOD"}
+{"text": "seafood", "label": "FOOD"}
+{"text": "seafood", "label": "FOOD"}
+{"text": "asparagus", "label": "FOOD"}
+{"text": "9 oz steak", "label": "FOOD"}
+{"text": "steak", "label": "FOOD"}
+{"text": "peppercorn sauce", "label": "FOOD"}
+{"text": "red wine reduction", "label": "FOOD"}
+{"text": "steak", "label": "FOOD"}
+{"text": "desert", "label": "FOOD"}
+{"text": "dinner", "label": "FOOD"}
+{"text": "servers", "label": "SERVICE"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "sake", "label": "DRINKS"}
+{"text": "food", "label": "FOOD"}
+{"text": "sake", "label": "DRINKS"}
+{"text": "Server", "label": "SERVICE"}
+{"text": "lobster 3 ways", "label": "FOOD"}
+{"text": "waiter", "label": "SERVICE"}
+{"text": "feel", "label": "AMBIENCE"}
+{"text": "bathroom stall", "label": "RESTAURANT"}
+{"text": "menu", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "pizza joint", "label": "RESTAURANT"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "pizza", "label": "FOOD"}
+{"text": "salads", "label": "FOOD"}
+{"text": "wait staff", "label": "SERVICE"}
+{"text": "cooks", "label": "SERVICE"}
+{"text": "decor", "label": "AMBIENCE"}
+{"text": "feeling", "label": "AMBIENCE"}
+{"text": "Mioposto Caf\u00e9", "label": "RESTAURANT"}
+{"text": "pizza\u2019s", "label": "FOOD"}
+{"text": "menu", "label": "FOOD"}
+{"text": "menu", "label": "FOOD"}
+{"text": "pizza\u2019s", "label": "FOOD"}
+{"text": "pizza\u2019s", "label": "FOOD"}
+{"text": "Pizza Ensalata", "label": "FOOD"}
+{"text": "pizza\u2019s", "label": "FOOD"}
+{"text": "crust", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "staff", "label": "SERVICE"}
+{"text": "atmosphere", "label": "AMBIENCE"}
+{"text": "pancakes", "label": "FOOD"}
+{"text": "menu", "label": "FOOD"}
+{"text": "breakfast", "label": "FOOD"}
+{"text": "eats", "label": "FOOD"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "fish", "label": "FOOD"}
+{"text": "chef special dinner", "label": "FOOD"}
+{"text": "chef special dinner", "label": "FOOD"}
+{"text": "plate", "label": "FOOD"}
+{"text": "exotic fish", "label": "FOOD"}
+{"text": "exotic fish", "label": "FOOD"}
+{"text": "atmosphere", "label": "AMBIENCE"}
+{"text": "honwy walnut prawns", "label": "FOOD"}
+{"text": "service", "label": "SERVICE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "coffee", "label": "DRINKS"}
+{"text": "food", "label": "FOOD"}
+{"text": "restaurant", "label": "RESTAURANT"}
+{"text": "food", "label": "FOOD"}
+{"text": "food", "label": "FOOD"}
+{"text": "decor", "label": "AMBIENCE"}
+{"text": "music", "label": "AMBIENCE"}
+{"text": "atmosphere", "label": "AMBIENCE"}
+{"text": "vibe", "label": "AMBIENCE"}
+{"text": "people", "label": "RESTAURANT"}
+{"text": "server", "label": "SERVICE"}
+{"text": "Open Sesame", "label": "RESTAURANT"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "menu", "label": "FOOD"}
+{"text": "waiters", "label": "SERVICE"}
+{"text": "sushi", "label": "FOOD"}
+{"text": "portions", "label": "FOOD"}
+{"text": "sushi dishes", "label": "FOOD"}
+{"text": "pepperoni", "label": "FOOD"}
+{"text": "pepperoni's", "label": "FOOD"}
+{"text": "pizza", "label": "FOOD"}
+{"text": "Balcony", "label": "AMBIENCE"}
+{"text": "Food", "label": "FOOD"}
+{"text": "Portions", "label": "FOOD"}
+{"text": "menu selection", "label": "FOOD"}
+{"text": "appetizer", "label": "FOOD"}
+{"text": "Creme Brulee", "label": "FOOD"}
+{"text": "Indoor ambience", "label": "AMBIENCE"}
+{"text": "balcony", "label": "AMBIENCE"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "service", "label": "SERVICE"}
+{"text": "server", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "table", "label": "AMBIENCE"}
+{"text": "service", "label": "SERVICE"}
+{"text": "waiters", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "filet mignon", "label": "FOOD"}
+{"text": "portions", "label": "FOOD"}
+{"text": "music", "label": "AMBIENCE"}
+{"text": "restroom", "label": "RESTAURANT"}
+{"text": "bathroom", "label": "RESTAURANT"}
+{"text": "place", "label": "RESTAURANT"}
+{"text": "service", "label": "SERVICE"}
+{"text": "chips  and salsa", "label": "FOOD"}
+{"text": "atmosphere", "label": "AMBIENCE"}
+{"text": "decor", "label": "AMBIENCE"}
+{"text": "Raouls chicken vegetable soup", "label": "FOOD"}
+{"text": "catering", "label": "FOOD"}
+{"text": "Drinks", "label": "DRINKS"}
+{"text": "Service", "label": "SERVICE"}
+{"text": "Snooze", "label": "AMBIENCE"}
+{"text": "menu", "label": "FOOD"}
+{"text": "Snooze", "label": "RESTAURANT"}
+{"text": "orange juice", "label": "DRINKS"}
+{"text": "juice", "label": "DRINKS"}
+{"text": "juice", "label": "DRINKS"}
+{"text": "menu", "label": "FOOD"}
+{"text": "pancakes", "label": "FOOD"}
+{"text": "pancakes", "label": "FOOD"}
+{"text": "pancakes", "label": "FOOD"}
+{"text": "pancakes", "label": "FOOD"}
+{"text": "pancakes", "label": "FOOD"}
+{"text": "eggs", "label": "FOOD"}
+{"text": "meal", "label": "FOOD"}
+{"text": "dish", "label": "FOOD"}
+{"text": "manager", "label": "SERVICE"}
+{"text": "pancakes", "label": "FOOD"}
+{"text": "pancakes", "label": "FOOD"}
+{"text": "breakfast burrito", "label": "FOOD"}
+{"text": "orange juice", "label": "DRINKS"}
+{"text": "iced tea", "label": "DRINKS"}
+{"text": "view", "label": "LOCATION"}
+{"text": "Ray's Boathouse", "label": "RESTAURANT"}
+{"text": "Sound views", "label": "LOCATION"}
+{"text": "views", "label": "LOCATION"}
+{"text": "Ray's", "label": "RESTAURANT"}
+{"text": "Brooke", "label": "SERVICE"}
+{"text": "white gulf prawns", "label": "FOOD"}
+{"text": "manila clams", "label": "FOOD"}
+{"text": "soy dressing", "label": "FOOD"}
+{"text": "butter sauce", "label": "FOOD"}
+{"text": "Shilshole Sampler", "label": "FOOD"}
+{"text": "Shilshole Sampler", "label": "FOOD"}
+{"text": "seared Alaskan sea scallops", "label": "FOOD"}
+{"text": "seared Alaskan sea scallops", "label": "FOOD"}
+{"text": "scallops", "label": "FOOD"}
+{"text": "scallops", "label": "FOOD"}
+{"text": "grilled Alaskan King Salmon", "label": "FOOD"}
+{"text": "creamed Washington russet potatoes", "label": "FOOD"}
+{"text": "green beans", "label": "FOOD"}
+{"text": "plate", "label": "FOOD"}
+{"text": "server", "label": "SERVICE"}
+{"text": "Ray's", "label": "RESTAURANT"}
+{"text": "Ray's Boathouse", "label": "RESTAURANT"}
+{"text": "server", "label": "SERVICE"}
+{"text": "food", "label": "FOOD"}
+{"text": "view", "label": "LOCATION"}

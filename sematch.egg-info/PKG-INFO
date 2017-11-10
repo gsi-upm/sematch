@@ -1,6 +1,6 @@
 Metadata-Version: 1.1
 Name: sematch
-Version: 1.0.3
+Version: 1.0.4
 Summary: Semantic similarity framework for knowledge graphs
 Home-page: https://github.com/gsi-upm/sematch
 Author: Ganggao Zhu
@@ -12,9 +12,9 @@ Description: ![logo](docs/sources/img/logo.png)
         
         # Introduction
         
-        Sematch is an integrated framework for the development, evaluation, and application of semantic similarity for Knowledge Graphs (KGs). It is easy to use Sematch to compute semantic similarity scores of concepts, words and entities. Sematch focuses on specific knowledge-based semantic similarity metrics that rely on structural knowledge in taxonomy (e.g. depth, path length, least common subsumer), and statistical information contents (corpus-IC and graph-IC). Knowledge-based approaches are different from their conterpart corpus-based approaches, which are mainly based on word coocurrence (e.g. Pointwise Mutual Information) or distributional semantics (Latent Semantic Analysis, Word2Vec, GLOVE and etc). Knowledge-based approaches are usually used for structual KGs, while corpus-based approaches are normally applied in textual corpora.
+        Sematch is an integrated framework for the development, evaluation, and application of semantic similarity for Knowledge Graphs (KGs). It is easy to use Sematch to compute semantic similarity scores of concepts, words and entities. Sematch focuses on specific knowledge-based semantic similarity metrics that rely on structural knowledge in taxonomy (e.g. depth, path length, least common subsumer), and statistical information contents (corpus-IC and graph-IC). Knowledge-based approaches differ from their counterpart corpus-based approaches relying on co-occurrence (e.g. Pointwise Mutual Information) or distributional similarity (Latent Semantic Analysis, Word2Vec, GLOVE and etc). Knowledge-based approaches are usually used for structural KGs, while corpus-based approaches are normally applied in textual corpora.
         
-        In text analysis applications, a common pipeline is adolpted in using semantic similarity from concept level, to word and sentence level. For example, word similarity is first computed based on similarity scores of WordNet concepts, and sentence similarity is computed by composing word similarity scores. Finally, document similarity could be computed by identifying important sentences, e.g. TextRank. 
+        In text analysis applications, a common pipeline is adopted in using semantic similarity from concept level, to word and sentence level. For example, word similarity is first computed based on similarity scores of WordNet concepts, and sentence similarity is computed by composing word similarity scores. Finally, document similarity could be computed by identifying important sentences, e.g. TextRank.
         
         ![logo](docs/sources/img/sematch-motivation.jpg)
         
@@ -34,16 +34,32 @@ Description: ![logo](docs/sources/img/logo.png)
         
         ### Install Sematch
         
+        You need to install scientific computing libraries **numpy** and **scipy** first. An example of installing them with pip is shown below.
+        
+        ```
+        pip install numpy scipy
+        ```
+        
+        Depending on different OS, you can use different ways to install them. After sucessful installation of **numpy** and **scipy**, you can install sematch with following commands.
+        
         ```
         pip install sematch
         python -m sematch.download
+        ```
+        
+        Alternatively, you can use the development version to clone and install Sematch with setuptools. We recommend you to update your pip and setuptools.
+        
+        ```
+        git clone https://github.com/gsi-upm/sematch.git
+        cd sematch
+        python setup.py install
         ```
         
         We also provide a [Sematch-Demo Server](https://github.com/gsi-upm/sematch-demo). You can use it for experimenting with main functionalities or take it as an example for using Sematch to develop applications. Please check our [Documentation](http://gsi-upm.github.io/sematch/) for more details.
         
         ### Computing Word Similarity
         
-        The core module of Sematch is measuring semantic similarity between concepts that are represented as concept taxonomies. Word similarity is computed based on the maximum semantic similarity of WordNet concepts. You can use Sematch to compute multilingual word similarity based on WordNet with various of semantic similarity metrics.
+        The core module of Sematch is measuring semantic similarity between concepts that are represented as concept taxonomies. Word similarity is computed based on the maximum semantic similarity of WordNet concepts. You can use Sematch to compute multi-lingual word similarity based on WordNet with various of semantic similarity metrics.
         
         ```python
         from sematch.semantic.similarity import WordNetSimilarity
@@ -93,7 +109,7 @@ Description: ![logo](docs/sources/img/logo.png)
         concept.similarity('http://dbpedia.org/ontology/Actor','http://dbpedia.org/ontology/Film', 'wpath')
         ```
         
-        ### Computing semantic similarity of DBpedia entities.
+        ### Computing semantic similarity and relatedness of DBpedia entities.
         
         ```python
         from sematch.semantic.similarity import EntitySimilarity
@@ -102,6 +118,20 @@ Description: ![logo](docs/sources/img/logo.png)
         sim.similarity('http://dbpedia.org/resource/Apple_Inc.','http://dbpedia.org/resource/Steve_Jobs')#0.0904545454545
         sim.relatedness('http://dbpedia.org/resource/Madrid','http://dbpedia.org/resource/Barcelona')#0.457984139871
         sim.relatedness('http://dbpedia.org/resource/Apple_Inc.','http://dbpedia.org/resource/Steve_Jobs')#0.465991132787
+        ```
+        
+        ### Computing directed relatedness of DBpedia entities.
+        
+        ```python
+        from sematch.semantic.similarity import EntitySimilarity
+        sim = EntitySimilarity()
+        sim.di_relatedness('http://dbpedia.org/resource/Cristiano_Ronaldo','http://dbpedia.org/resource/Madrid')#0.09759
+        sim.di_relatedness('http://dbpedia.org/resource/Arun_Jaitley', 'http://dbpedia.org/resource/Narendra_Modi')#0.01358
+        sim.di_relatedness('http://dbpedia.org/resource/Sachin_Tendulkar', 'http://dbpedia.org/resource/Cricket')#0.06920
+        
+        sim.di_relatedness('http://dbpedia.org/resource/Madrid','http://dbpedia.org/resource/Cristiano_Ronaldo')#0.61543
+        sim.di_relatedness('http://dbpedia.org/resource/Narendra_Modi', 'http://dbpedia.org/resource/Arun_Jaitley')#0.21199
+        sim.di_relatedness('http://dbpedia.org/resource/Cricket', 'http://dbpedia.org/resource/Sachin_Tendulkar')#0.78480
         ```
         
         ### Evaluate semantic similarity metrics with word similarity datasets
@@ -225,11 +255,11 @@ Description: ![logo](docs/sources/img/logo.png)
         
         ## Publications
         
-        - Zhu, Ganggao, and Carlos A. Iglesias. ["Computing Semantic Similarity of Concepts in Knowledge Graphs."](http://ieeexplore.ieee.org/document/7572993/) IEEE Transactions on Knowledge and Data Engineering 29.1 (2017): 72-85.
+        - Ganggao Zhu, and Carlos A. Iglesias. ["Computing Semantic Similarity of Concepts in Knowledge Graphs."](http://ieeexplore.ieee.org/document/7572993/) IEEE Transactions on Knowledge and Data Engineering 29.1 (2017): 72-85.
         
         - Oscar Araque, Ganggao Zhu, Manuel Garcia-Amado and Carlos A. Iglesias [Mining the Opinionated Web: Classification and Detection of Aspect Contexts for Aspect Based Sentiment Analysis](http://sentic.net/sentire2016araque.pdf),  ICDM sentire, 2016.
         
-        - Zhu, Ganggao, and Carlos Angel Iglesias. "Sematch: Semantic Entity Search from Knowledge Graph." SumPre-HSWI@ ESWC. 2015.
+        - Ganggao Zhu, and Carlos Angel Iglesias. "Sematch: Semantic Entity Search from Knowledge Graph." SumPre-HSWI@ ESWC. 2015.
         
         
         ------------------
@@ -252,6 +282,7 @@ Description: ![logo](docs/sources/img/logo.png)
         
         
         ![GSI Logo](http://vps161.cesvima.upm.es/images/stories/logos/gsi.png)
+        
 Keywords: semantic similarity,taxonomy,knowledge graph,semantic analysis,knowledge base,WordNet,DBpedia,YAGO,ontology
 Platform: UNKNOWN
 Classifier: Development Status :: 5 - Production/Stable

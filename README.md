@@ -101,7 +101,7 @@ concept.similarity('http://dbpedia.org/ontology/Actor','http://dbpedia.org/ontol
 concept.similarity('http://dbpedia.org/ontology/Actor','http://dbpedia.org/ontology/Film', 'wpath')
 ```
 
-### Computing semantic similarity of DBpedia entities.
+### Computing semantic similarity and relatedness of DBpedia entities.
 
 ```python
 from sematch.semantic.similarity import EntitySimilarity
@@ -110,6 +110,20 @@ sim.similarity('http://dbpedia.org/resource/Madrid','http://dbpedia.org/resource
 sim.similarity('http://dbpedia.org/resource/Apple_Inc.','http://dbpedia.org/resource/Steve_Jobs')#0.0904545454545
 sim.relatedness('http://dbpedia.org/resource/Madrid','http://dbpedia.org/resource/Barcelona')#0.457984139871
 sim.relatedness('http://dbpedia.org/resource/Apple_Inc.','http://dbpedia.org/resource/Steve_Jobs')#0.465991132787
+```
+
+### Computing directed relatedness of DBpedia entities.
+
+```python
+from sematch.semantic.similarity import EntitySimilarity
+sim = EntitySimilarity()
+sim.di_relatedness('http://dbpedia.org/resource/Cristiano_Ronaldo','http://dbpedia.org/resource/Madrid')#0.09759
+sim.di_relatedness('http://dbpedia.org/resource/Arun_Jaitley', 'http://dbpedia.org/resource/Narendra_Modi')#0.01358
+sim.di_relatedness('http://dbpedia.org/resource/Sachin_Tendulkar', 'http://dbpedia.org/resource/Cricket')#0.06920
+
+sim.di_relatedness('http://dbpedia.org/resource/Madrid','http://dbpedia.org/resource/Cristiano_Ronaldo')#0.61543
+sim.di_relatedness('http://dbpedia.org/resource/Narendra_Modi', 'http://dbpedia.org/resource/Arun_Jaitley')#0.21199
+sim.di_relatedness('http://dbpedia.org/resource/Cricket', 'http://dbpedia.org/resource/Sachin_Tendulkar')#0.78480
 ```
 
 ### Evaluate semantic similarity metrics with word similarity datasets
