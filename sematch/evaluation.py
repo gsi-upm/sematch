@@ -177,7 +177,7 @@ class WordSimDataset:
         data = FileIO.read_list_file('dataset/wordsim/%s.txt' % dataset_name)
         #print "dataset ", dataset_name, " ", len(data), " word pairs"
         word_pairs = map(lambda x: (x.split()[0], x.split()[1]), data)
-        human = map(float, map(lambda x: x.split()[2], data))
+        human = list(map(float, map(lambda x: x.split()[2], data)))
         return word_pairs, human
 
     def load_result(self, sim_name, dataset_name):
@@ -307,7 +307,7 @@ class WordSimEvaluation:
         """
         word_pairs, human = self._dataset.load_dataset(dataset_name)
         sim_values = [sim_func(w1, w2) for w1, w2 in word_pairs]
-        sim_values = map(lambda x: round(x, 3), sim_values)
+        sim_values = list(map(lambda x: round(x, 3), sim_values))
         cor = self._correlation(sim_values, human)[0]
         cor = round(cor, 3)
         if save_results:
