@@ -68,3 +68,5 @@ def test_language():
     assert wns.languages('English') is not None
     assert wns.languages('chinese_simplified') is not None
     assert wns.languages('spanish') is not None
+
+
