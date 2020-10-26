@@ -24,6 +24,8 @@ from sematch.nlp import word_tokenize, word_process, Extraction
 import numpy as np
 import itertools
 from collections import Counter
+import six
+from six.moves import xrange
 
 
 class Matcher:
@@ -148,7 +150,7 @@ class SimClassifier:
         Compute the weight for each feature token in each category
         The weight is computed as token_count / total_feature_count
         '''
-        print "Training..."
+        print("Training...")
         cat_word = {}
         for sent, cat in corpus:
             cat_word.setdefault(cat, []).extend(word_process(word_tokenize(sent)))
@@ -156,7 +158,7 @@ class SimClassifier:
         labels = features.keys()
         cat_features = {}
         feature_weights = {}
-        for c, f in features.iteritems():
+        for c, f in six.iteritems(features):
             w_c_pairs = f.most_common(feature_num)
             words, counts = zip(*w_c_pairs)
             cat_features[c] = words
@@ -282,7 +284,7 @@ class TextPreprocessor(BaseEstimator, TransformerMixin):
             cat_word.setdefault(cat, []).extend(word_process(word_tokenize(sent)))
         features = {cat: Counter(cat_word[cat]) for cat in cat_word}
         feature_words = []
-        for c, f in features.iteritems():
+        for c, f in six.iteritems(features):
             words, counts = zip(*f.most_common(feature_num))
             feature_words.extend(list(words))
         feature_words = set(feature_words)

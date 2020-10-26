@@ -111,7 +111,7 @@ class Extraction:
         chunks = nltk.chunk.tree2conlltags(self._chunker.parse(tags))
         # join constituent chunk words into a single chunked phrase
         return [' '.join(word for word, pos, chunk in group)
-                  for key, group in itertools.groupby(chunks, lambda (word, pos, chunk): chunk != 'O') if key]
+                  for key, group in itertools.groupby(chunks, lambda word, pos, chunk: chunk != 'O') if key]
 
     def extract_chunks_doc(self, text):
         """
