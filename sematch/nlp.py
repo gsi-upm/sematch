@@ -33,7 +33,9 @@ reg_tokenizer = nltk.RegexpTokenizer(r'\w+')
 word_pattern = re.compile('[a-zA-Z]+')
 
 def word_tokenize(text):
-    tokens = reg_tokenizer.tokenize(text.encode('utf-8').translate(None, string.punctuation))
+    trans = str.maketrans(dict.fromkeys(string.punctuation))
+    res = text.translate(trans)
+    tokens = reg_tokenizer.tokenize(res)
     return list(filter(lambda token: word_pattern.match(token) and len(token) >= 1, tokens))
 
 def sent_tokenize(text):
@@ -206,7 +208,7 @@ class RAKE:
 
     def extract(self, text, ratio=3):
         phrases = self.ranking_phrases(self.candidate_phrases(text))
-        phrases = Counter(phrases).most_common(len(phrases.keys()) / ratio)
+        phrases = Counter(phrases).most_common(int(len(phrases.keys()) / ratio))
         phrases, _ = zip(*phrases)
         return phrases
 
@@ -276,7 +278,7 @@ class EntityFeature:
         entity_features = {e['dbr']: (e['desc'], e['cat']) for e in entity_features}
         features = []
         for i, can in enumerate(candidates):
-            print i, " ", can
+            print(i, " ", can)
             data = {}
             data['dbr'] = can
             data['desc'] = entity_features[can][0] if can in entity_features else None

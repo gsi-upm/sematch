@@ -176,7 +176,7 @@ class WordSimDataset:
         :return: word pairs and huamn ratings
         """
         data = FileIO.read_list_file('dataset/wordsim/%s.txt' % dataset_name)
-        #print "dataset ", dataset_name, " ", len(data), " word pairs"
+        #print("dataset ", dataset_name, " ", len(data), " word pairs")
         word_pairs = map(lambda x: (x.split()[0], x.split()[1]), data)
         human = list(map(float, map(lambda x: x.split()[2], data)))
         return word_pairs, human

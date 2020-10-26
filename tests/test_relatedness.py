@@ -25,4 +25,5 @@ def test_text():
 
 
 
-test_embedding()
+if __name__ == '__main__':
+    test_embedding()

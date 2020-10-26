@@ -32,7 +32,7 @@ def test_TFIDF():
 def test_Spacy():
     from sematch.nlp import SpaCyNLP
     sy = SpaCyNLP()
-    print sy.pos_tag(u'This is the second second document.')
+    print(sy.pos_tag(u'This is the second second document.'))
 
 def test_feature_extractor():
     from sematch.nlp import FeatureExtractor
@@ -47,7 +47,7 @@ def test_feature_extractor():
     candidates = list(itertools.chain.from_iterable(map(lambda x: x['candidate'], query)))
     set_candidates = list(set(candidates))
     for can in set_candidates[:10]:
-        print w_extractor.entity_word_features([can], features)
+        print(w_extractor.entity_word_features([can], features))
 
 
 def test_entity_feature():
@@ -59,8 +59,9 @@ def test_entity_feature():
     import itertools
     candidates = list(itertools.chain.from_iterable(map(lambda x:x['candidate'], question)))
     set_candidates = list(set(candidates))
-    print len(set_candidates)
+    print(len(set_candidates))
     EntityFeature.candidate_features(set_candidates, export_file='models/question_features.json')
 
 
-test_feature_extractor()
+if __name__ == '__main__':
+    test_feature_extractor()

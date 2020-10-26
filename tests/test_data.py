@@ -10,13 +10,15 @@ import pandas as pd
 # #
 import gdelt
 
-gd1 = gdelt.gdelt(version=1)
 
-results= gd1.Search('2016 Nov 01',table='gkg')
-print(len(results))
-print(results[:10])
+def test_gdelt():
+    gd1 = gdelt.gdelt(version=1)
+
+    results= gd1.Search('2016 Nov 01',table='gkg')
+    print(len(results))
+    print(results[:10])
 
 
-results = gd1.Search(['2016 Oct 31','2016 Nov 2'],coverage=True,table='events')
-print(len(results))
+    results = gd1.Search(['2016 Oct 31','2016 Nov 2'], coverage=True,table='events')
+    print(len(results))
 

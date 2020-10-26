@@ -42,18 +42,18 @@ class DataTransform:
 
 class DBpediaDataTransform(DataTransform):
 
-    def __init__(self):
-        self._ontology = DBpedia()
+    def __init__(self, *args, **kwargs):
+        self._ontology = DBpedia(*args, **kwargs)
 
     def transform(self):
-        nodes =  map(lambda x:x.toPython(), self._ontology.classes)
+        nodes =  list(map(lambda x:x.toPython(), self._ontology.classes))
         node_id = {n:i for i,n in enumerate(nodes)}
         labels = [self._ontology.token(value) for i,value in enumerate(self._ontology.classes)]
         edges = []
         for i, node in enumerate(nodes):
             children = self._ontology.subClass(node)
             children = [child for child in children if child in nodes]
-            children_ids = map(lambda x:node_id[x], children)
+            children_ids = list(map(lambda x:node_id[x], children))
             for child_id in children_ids:
                 edges.append((i, child_id))
         return nodes, labels, edges

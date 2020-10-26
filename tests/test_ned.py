@@ -3,7 +3,7 @@
 def test_name_dict():
     from sematch.nlp import NameDict
     name = NameDict.load()
-    print name.match('apple')
+    print(name.match('apple'))
 
 def test_embedding():
     from gensim.models.doc2vec import Doc2Vec
@@ -18,9 +18,9 @@ def test_evaluation():
     query = FileIO.read_json_file('dataset/ned/query_ned_cleaned.txt')
     question = FileIO.read_json_file('dataset/ned/question_ned_cleaned.txt')
     tweet = FileIO.read_json_file('dataset/ned/tweet_ned_cleaned.txt')
-    print len(query)
-    print len(question)
-    print len(tweet)
+    print(len(query))
+    print(len(question))
+    print(len(tweet))
 
 
 def test_query_ned():
@@ -38,17 +38,17 @@ def test_query_ned():
     rel = TextRelatedness()
     from sematch.semantic.similarity import WordNetSimilarity
     wns = WordNetSimilarity()
-    #print wns.word_similarity('cooling', 'air_conditioner', 'li')
+    #print(wns.word_similarity('cooling', 'air_conditioner', 'li'))
     #similarity = lambda x,y : rel.text_similarity(x,y, model='lsa')
 
     query = FileIO.read_json_file('dataset/ned/query_ned_cleaned.txt')
     query = [q for q in query if extractor.context_features(q['query'])]
-    print len(query)
+    print(len(query))
     import warnings
     warnings.filterwarnings("ignore")
     metrics = ['path', 'wup', 'res', 'lin', 'jcn', 'wpath']
     for m in metrics:
-        print m
+        print(m)
         similarity = lambda x, y: wns.word_similarity(x, y, m)
         for k in range(1, 21):
             gold = []
@@ -61,6 +61,7 @@ def test_query_ned():
             from sklearn.metrics import precision_recall_fscore_support
             #from sklearn.metrics import classification_report
             #print classification_report(gold, predict)
-            print precision_recall_fscore_support(gold, predict, average='weighted')[2]
+            print(precision_recall_fscore_support(gold, predict, average='weighted')[2])
 
-test_query_ned()
+if __name__ == '__main__':
+    test_query_ned()

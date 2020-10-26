@@ -1,8 +1,18 @@
 from setuptools import setup
+import io
+
+def parse_requirements(filename):
+    """ load requirements from a pip requirements file """
+    with io.open(filename, 'r') as f:
+        lineiter = list(line.strip() for line in f)
+    return [line for line in lineiter if line and not line.startswith("#")]
+
+install_reqs = parse_requirements("requirements.txt")
+test_reqs = parse_requirements("test-requirements.txt")
 
 setup(name = 'sematch',
       packages=['sematch','sematch.semantic'],
-      version = '1.0.4',
+      version = '1.0.5',
       description = 'Semantic similarity framework for knowledge graphs',
       long_description = open('README.md').read(),
       author = 'Ganggao Zhu',
@@ -42,6 +52,8 @@ setup(name = 'sematch',
                      'Intended Audience :: Science/Research',
                      'Operating System :: OS Independent',
                      'Programming Language :: Python :: 2.7',
+                     'Programming Language :: Python :: 3.8',
                      'Topic :: Software Development :: Libraries'],
-      install_requires=['scikit-learn>=0.17.1','networkx>=1.11','nltk>=3.2','rdflib>=4.0.1','SPARQLWrapper>=1.5.2'],
+      install_requires=install_reqs,
+      tests_require=test_reqs,
       )
