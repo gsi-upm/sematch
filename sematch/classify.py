@@ -43,7 +43,7 @@ def prepare_lexicon(process=True, dim=250, save=False):
 from gensim.models import Word2Vec
 from numpy import array, dot
 from gensim import matutils
-import collections
+import collections.abc
 import functools
 
 
@@ -53,7 +53,7 @@ class memoized(object):
         self.cache = {}
 
     def __call__(self, *args):
-        if not isinstance(args, collections.Hashable):
+        if not isinstance(args, collections.abc.Hashable):
             # uncacheable. a list, for instance.
             # better to not cache than blow up.
             return self.func(*args)
