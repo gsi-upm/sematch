@@ -165,7 +165,7 @@ class ConceptSimilarity:
         lcs_ic = 2.0 * lcs_ic
         if c1_ic == 0.0 or c2_ic == 0.0:
             return 0.0
-        return 1.0 / 1 + (c1_ic + c2_ic - lcs_ic)
+        return 1.0 / (1 + c1_ic + c2_ic - lcs_ic)
 
     def wpath(self, c1, c2, k=0.8):
         lcs = self.least_common_subsumer(c1, c2)
