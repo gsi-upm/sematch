@@ -23,6 +23,7 @@ def download():
     nltk.download('wordnet')
     nltk.download('wordnet_ic')
     nltk.download('omw')
+    nltk.download('omw-1.4')
     nltk.download('averaged_perceptron_tagger')
 
 if __name__ == '__main__':

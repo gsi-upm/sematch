@@ -62,10 +62,11 @@ class SpaCyNLP:
             import spacy #default english
             from numpy import dot
             from numpy.linalg import norm
-            self._nlp = spacy.load('en')
+            self._nlp = spacy.load('en_core_web_sm')
             self._vocab = list(set([w.orth_ for w in self._nlp.vocab if w.orth_.islower()]))
             self._cosine = lambda v1, v2: dot(v1, v2) / (norm(v1) * norm(v2))
-        except:
+        except Exception as ex:
+            print('Error loading spacy: ', ex)
             print('Install SpaCy. https://spacy.io/docs/usage/')
             import sys
             sys.exit()
@@ -112,8 +113,8 @@ class Extraction:
         tags = self._tagger(self._word_tokenize(sent))
         chunks = nltk.chunk.tree2conlltags(self._chunker.parse(tags))
         # join constituent chunk words into a single chunked phrase
-        return [' '.join(word for word, pos, chunk in group)
-                  for key, group in itertools.groupby(chunks, lambda word, pos, chunk: chunk != 'O') if key]
+        return [' '.join(word for (word, pos, chunk) in group)
+                  for key, group in itertools.groupby(chunks, lambda triple: triple[2] != 'O') if key]
 
     def extract_chunks_doc(self, text):
         """
@@ -223,14 +224,14 @@ class TFIDF:
         from sklearn.feature_extraction.text import TfidfVectorizer
         self._vectorizer = TfidfVectorizer(tokenizer=self._process)
         self._vectorizer.fit_transform(docs)
-        self._idf_dict = dict(zip(self._vectorizer.get_feature_names(), self._vectorizer.idf_))
+        self._idf_dict = dict(zip(self._vectorizer.get_feature_names_out(), self._vectorizer.idf_))
 
     def idf(self, word):
         return self._idf_dict[word] if word in self._idf_dict else None
 
     def tfidf(self, doc):
         doc_rep = self._vectorizer.transform([doc])
-        features = self._vectorizer.get_feature_names()
+        features = self._vectorizer.get_feature_names_out()
         return [(features[index], doc_rep[0, index]) for index in doc_rep.nonzero()[1]]
 
 class NameDict:

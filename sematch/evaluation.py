@@ -45,9 +45,9 @@ def generate_report(gold, predict, labels, detailed=True):
     :return: none
     """
     if detailed:
-        print('macro averge: %f' % precision_recall_fscore_support(gold, predict, average='macro'))
-        print('micro average: %f' % precision_recall_fscore_support(gold, predict, average='micro'))
-        print('weighted average: %f' % precision_recall_fscore_support(gold, predict, average='weighted'))
+        print(f'macro average: {precision_recall_fscore_support(gold, predict, average="macro")}')
+        print(f'micro average: {precision_recall_fscore_support(gold, predict, average="micro")}')
+        print(f'weighted average: {precision_recall_fscore_support(gold, predict, average="weighted")}')
     else:
         import warnings
         warnings.filterwarnings("ignore")

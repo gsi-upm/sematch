@@ -42,7 +42,7 @@ def test_feature_extractor():
     import itertools
     sy = SpaCyNLP()
     w_extractor = FeatureExtractor(sy.pos_tag)
-    features = EntityFeature.load(feature_dict_file='models/query_features.json')
+    features = EntityFeature.load(feature_dict_file='models/entity_features.json')
     query = FileIO.read_json_file('dataset/ned/query_ned_cleaned.txt')
     candidates = list(itertools.chain.from_iterable(map(lambda x: x['candidate'], query)))
     set_candidates = list(set(candidates))

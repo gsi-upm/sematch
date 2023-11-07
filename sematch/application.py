@@ -178,7 +178,7 @@ class SimClassifier:
         :return: weighted word similarity score between word and category
         """
         features, weights = zip(*self._feature_weights[category])
-        scores = map(lambda x: self._sim_metric(word, x), features)
+        scores = list(map(lambda x: self._sim_metric(word, x), features))
         return np.dot(np.array(scores), np.array(weights).transpose())
 
     def max_similarity(self, word, category):
@@ -292,7 +292,7 @@ class TextPreprocessor(BaseEstimator, TransformerMixin):
 
     def similarity(self, tokens, feature):
         sim = lambda x: self._word_sim(feature, x)
-        return max(map(sim, tokens) + [0.0])
+        return max(list(map(sim, tokens)) + [0.0])
 
     def unigram_features(self, tokens):
         words = set(tokens)

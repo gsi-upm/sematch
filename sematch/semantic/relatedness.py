@@ -134,7 +134,8 @@ class TextRelatedness:
             self._dict = corpora.Dictionary.load(FileIO.filename(DICT))
             self._tfidf = models.TfidfModel.load(FileIO.filename(TFIDF_MODEL))
             self._lsa = models.LsiModel.load(FileIO.filename(LSA_MODEL))
-        except:
+        except Exception as ex:
+            print('Error loading gensim: ', ex)
             print('Install gensim and prepare models data!')
             import sys
             sys.exit()

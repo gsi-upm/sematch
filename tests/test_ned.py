@@ -32,7 +32,7 @@ def test_query_ned():
     from sematch.nel import EntityDisambiguation
     import itertools
     sy = SpaCyNLP()
-    features = EntityFeature.load(feature_dict_file='models/query_features.json')
+    features = EntityFeature.load(feature_dict_file='models/entity_features.json')
     extractor = FeatureExtractor(features, sy.pos_tag)
     ned = EntityDisambiguation(extractor)
     rel = TextRelatedness()
